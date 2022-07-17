@@ -2,11 +2,13 @@ package solver;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.util.ArrayDeque;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Queue;
 import java.util.Set;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingDeque;
 
 import block.Block;
 import field.BlockSet;
@@ -16,20 +18,23 @@ import field.GameState;
 import field.Move;
 import game.Game;
 
-public class BreadthFirstSearch {
-    
-	// =========================================================================
+public class BFS_WithThreads {
+// =========================================================================
 	// ATTRIBUTES
 	// =========================================================================
 
     private boolean foundASolution = false;
     private GameState solution;
 
-    private final Queue<GameState> gameStateQueue;
+    private final BlockingQueue<GameState> gameStateQueue;
 
     private final Set<BlockSet> savedBlockSets;
 
     private final Game game;
+
+    // Thread variables
+    private static final int NTHREADS = 6;
+    private static final Executor exec = Executors.newFixedThreadPool(NTHREADS);
 
     // =========================================================================
 	// CONSTRUCTOR
@@ -39,11 +44,11 @@ public class BreadthFirstSearch {
      * TODO
      * @param gameNumber
      */
-    public BreadthFirstSearch(final int gameNumber) {
+    public BFS_WithThreads(final int gameNumber) {
 
-        this.savedBlockSets = new HashSet<>();
+        this.savedBlockSets = ConcurrentHashMap.newKeySet();
 
-        this.gameStateQueue = new ArrayDeque<>();
+        this.gameStateQueue = new LinkedBlockingDeque<>();
 
 		this.game = new Game(gameNumber);
 
@@ -128,18 +133,30 @@ public class BreadthFirstSearch {
             
         while (!this.foundASolution) {
 
-            // Deconstruct the next GameState Object
-            final GameState nextGameState = this.gameStateQueue.remove();
-            
-            // Call findNewMove to add GameStates to GameStateQueue
-            this.findNewMove(nextGameState);
-
-            // TODO: error handling
-            if (this.gameStateQueue.isEmpty()) {
-                System.out.println("No Solution Found!");
+            // Thread start
+            try {
+                final GameState nextGameState = this.gameStateQueue.take();
+                Runnable task = new Runnable() {
+                    public void run() {
+                        findNewMove(nextGameState);
+                    }
+                };
+                
+                exec.execute(task);
+            } catch (InterruptedException ie) {
+                System.err.println("Interrupted Expection Thrown!");    
                 return;
             }
+            // Thread end
+
+            // FIXME: how to check if there is no solution but withiout #isEmpty()
+            // TODO: error handling
+            // if (this.gameStateQueue.isEmpty()) {
+            //     System.out.println("No Solution Found!");
+            //     return;
+            // }
             // else {} TODO: what are the other cases to check for?
+
         }
 
         // Stop timer
@@ -147,7 +164,7 @@ public class BreadthFirstSearch {
         
         // print result
         System.out.println("END");
-        
+
         System.out.println("\nNumber of states saved:\n" + this.savedBlockSets.size());
 
         System.out.println("\nNumber of moves for the Solution:\n" + this.solution.moveList().size());
@@ -158,10 +175,9 @@ public class BreadthFirstSearch {
 
 		// Show solution
 		System.out.println("\nshow solution");
-		this.showSolution(this.solution.moveList());		// FIXME time delay
+		this.showSolution(this.solution.moveList());
 
         return;
-
     } // end solve()
 
     // =========================================================================
@@ -178,10 +194,10 @@ public class BreadthFirstSearch {
 	private void showSolution(final List<Move> moveList) {
 
 		int i = 0;
-
+        
         this.game.field().draw(1000);
-		
-        final Instant t = Instant.now();
+
+		final Instant t = Instant.now();
         
         // Starting position
         // System.out.println("\nState " + i + "/" + moveList.size());
@@ -203,4 +219,4 @@ public class BreadthFirstSearch {
         
     // =========================================================================
 
-}   // BreadthFirstSearch class
+}   // BreadthFirstSearch_WithThreads class

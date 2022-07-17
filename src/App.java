@@ -1,5 +1,6 @@
 import java.util.Scanner;
 
+import solver.BFS_WithThreads;
 import solver.BreadthFirstSearch;
 import solver.DepthFirstSearch;
 
@@ -10,8 +11,9 @@ public class App {
 		// System variables
 		// New Scanner
 		try (final Scanner scanner = new Scanner(System.in)) {
-			String type = "b";
-			int number = 5;
+			String type = "t";
+			int number = 12;
+			System.out.println("Game Number: " + number);	// TODO: delete?
 			int delay = 0;
 			boolean show = false;
 			
@@ -22,6 +24,11 @@ public class App {
 				case 'B':
 					new BreadthFirstSearch(number).solve();
 					break;
+				case 'T':
+					new BFS_WithThreads(number).solve();
+					break;
+				default:
+					System.err.println("Invalid input!");
 			}
 		}
 
@@ -51,12 +58,6 @@ public class App {
 		// 		show = sc.nextBoolean();
 		// 		break;
 
-		// }
-
-
-		// Close Scanner
-		// if (scanner != null) {
-		// 	scanner.close();
 		// }
 
 		return;

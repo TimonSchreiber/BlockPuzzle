@@ -33,7 +33,7 @@ public record Game(GameField field, int number) {
 		
 		Game.START_POSITION_LIST.get(this.number).forEach(blockInfo -> {
 			this.field.placeBlock(new Block(blockInfo));
-			this.field.draw(100);	// FIXME: make this a choice of the user -> if(...) {draw()}
+			// this.field.draw(100);	// FIXME: make this a choice of the user -> if(...) {draw()}
 			// or if(..) {delay = xxx}
 		});
 		

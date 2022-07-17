@@ -46,7 +46,7 @@ public class DepthFirstSearch {
 
 		this.savedBlockSets = new HashSet<>();
 
-		this.moveList = new LinkedList<>(); // TODO: this used to be new MoveList();
+		this.moveList = new LinkedList<>();
 
 		this.delay = delay;
 		this.show = show;
@@ -141,8 +141,11 @@ public class DepthFirstSearch {
 		final Duration d = Duration.between(t, Instant.now());
 
 		System.out.println("END");
+
 		System.out.println("\nNumber of states saved:\n" + this.savedBlockSets.size());
+
 		System.out.println("\nNumber of moves made:\n" + this.moveList.size());
+
 		System.out.println("\nTime to solve:\n"
 			+ d.toSecondsPart() + " seconds, "
 			+ d.toMillisPart() + " milliseconds");
