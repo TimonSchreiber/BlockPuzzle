@@ -11,8 +11,8 @@ public class App {
 		// System variables
 		// New Scanner
 		try (final Scanner scanner = new Scanner(System.in)) {
-			String type = "t";
-			int number = 12;
+			String type = "b";
+			int number = 10;
 			System.out.println("Game Number: " + number);	// TODO: delete?
 			int delay = 0;
 			boolean show = false;

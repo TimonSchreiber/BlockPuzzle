@@ -49,6 +49,9 @@ public record BlockSet(Set<Block> blocks) implements Iterable<Block> {
 	 * 					x- and y-coordinates; {@code false} otherwise
 	 */
 	public boolean isBlock(final Position position) {
+		// return this.blocks.stream()
+		// 		.anyMatch(block -> block.positionList().list().contains(position));
+
 		for (final Block block : this.blocks) {
 			if (block.positionList().list().contains(position)) {
 				return true;
@@ -63,6 +66,10 @@ public record BlockSet(Set<Block> blocks) implements Iterable<Block> {
 	 * @return
 	 */
 	public String getBlockName(final Position position) {
+		// return this.blocks.stream()
+		// 		.filter(block -> block.positionList().list().contains(position))
+		// 		.findAny().get().blockName();	// TODO: what happens if the Block is not found?
+
 		for (final Block block : this.blocks) {
 			if (block.positionList().list().contains(position)) {
 				return block.blockName();
@@ -71,13 +78,17 @@ public record BlockSet(Set<Block> blocks) implements Iterable<Block> {
 		return null;
 	}
 
-	/** TODO why return new Block()???
-	 * when this method is called a null check must be implemented?
+	/** TODO: try to avoid code duplication with the previous methods!
+	 * TODO: When this method is called a null check must be implemented?
 	 * 
 	 * @param blockName
 	 * @return
 	 */
 	public Block getBlock(final String name/* TODO: used to be Move move */) {
+		// return this.blocks.stream()
+		// 		.filter(block -> block.blockName().equals(name))
+		// 		.findAny().get();	// TODO: same as obove
+
 		for (final Block block : this.blocks) {
 			if (block.blockName().equals(name)) {
 				return block;

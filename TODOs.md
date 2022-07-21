@@ -11,3 +11,4 @@
  - [ ] Maybe change GameField.java so that it is only the field and the BlockSet gets passed to it (maybe make it a singleton)
  - [ ] Finish the 'Makefile', every package gets a Makefile and those get called in the src Makefile and so on...
  - [ ] Close Threads when finished
+ - [ ] Use streams() when looking for a Block in the BlockSet (it seams that streams are slower than for-each loop -> check that)
