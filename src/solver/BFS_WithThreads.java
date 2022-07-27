@@ -77,8 +77,7 @@ public class BFS_WithThreads {
                 final Move newMove = new Move(block.blockName(), direction);
 
                 /*
-                 * Check if nextMove is not a valid Move equal or the moveList
-                 * is not empty and is the previous Move reversed
+                 * Check if nextMove is not a valid Move
                  * -> next iteration
                  */
                 if (!gameField.isValidMove(newMove)
