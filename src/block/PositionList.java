@@ -9,12 +9,13 @@ import field.Directions;
 
 public record PositionList(List<Position> list) implements Iterable<Position>, Comparable<PositionList> {
 
-	// =========================================================================
+	// -------------------------------------------------------------------------
 	// CONSTRUCTORS
-	// =========================================================================
+	// -------------------------------------------------------------------------
 
 	/**
-	 * TODO
+	 * TODO: is needed for adding all the positions afterwards in the constructor below.
+	 * Maybe change, so that the Positions are added in the same line.
 	 */
 	public PositionList() {
 		this(new ArrayList<Position>());
@@ -56,9 +57,9 @@ public record PositionList(List<Position> list) implements Iterable<Position>, C
 
 	}
 
-	// =========================================================================
-	// MOVE-TOWARDS - METHOD
-	// =========================================================================
+	// -------------------------------------------------------------------------
+	// MOVE TOWARDS
+	// -------------------------------------------------------------------------
 
 	/**
 	 * TODO
@@ -68,6 +69,13 @@ public record PositionList(List<Position> list) implements Iterable<Position>, C
 	public void moveTowards(final Directions... directions) {
 		this.list.replaceAll(pos -> pos.moveTowards(directions));
 	}
+
+	// -------------------------------------------------------------------------
+	// FORWARDING - METHODS
+	// -------------------------------------------------------------------------
+
+	public boolean contains(final Position position) { return this.list.contains(position); }
+	public int size() { return this.list.size(); }
 
 	// =========================================================================
 	// INTERFACE - METHODS
@@ -90,7 +98,6 @@ public record PositionList(List<Position> list) implements Iterable<Position>, C
 	// -------------------------------------------------------------------------
 
 	/**
-	 * TODO: Why is PositionList comparable?
 	 *
 	 */
 	@Override

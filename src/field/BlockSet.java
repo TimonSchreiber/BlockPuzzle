@@ -12,9 +12,9 @@ public record BlockSet(Set<Block> blocks) implements Iterable<Block> {
 	// TODO:
 	// return new BlockSet(this.blocks) ???
 
-	// =========================================================================
+	// -------------------------------------------------------------------------
 	// CONSTRUCTORS
-	// =========================================================================
+	// -------------------------------------------------------------------------
 	
 	/**
 	 * Class constructor.
@@ -36,9 +36,9 @@ public record BlockSet(Set<Block> blocks) implements Iterable<Block> {
 		}
 	}
 
-	// =========================================================================
-	// GETTER - METHODS
-	// =========================================================================
+	// -------------------------------------------------------------------------
+	// GETTERS
+	// -------------------------------------------------------------------------
 
 	/** TODO
 	 * Checks if there is a Block in this {@code BlockSet} with the same
@@ -50,10 +50,10 @@ public record BlockSet(Set<Block> blocks) implements Iterable<Block> {
 	 */
 	public boolean isBlock(final Position position) {
 		// return this.blocks.stream()
-		// 		.anyMatch(block -> block.positionList().list().contains(position));
+		// 		.anyMatch(block -> block.containsPosition(position));
 
 		for (final Block block : this.blocks) {
-			if (block.positionList().list().contains(position)) {
+			if (block.containsPosition(position)) {
 				return true;
 			}
 		}
@@ -67,11 +67,11 @@ public record BlockSet(Set<Block> blocks) implements Iterable<Block> {
 	 */
 	public String getBlockName(final Position position) {
 		// return this.blocks.stream()
-		// 		.filter(block -> block.positionList().list().contains(position))
+		// 		.filter(block -> block.positionList().contains(position))
 		// 		.findAny().get().blockName();	// TODO: what happens if the Block is not found?
 
 		for (final Block block : this.blocks) {
-			if (block.positionList().list().contains(position)) {
+			if (block.containsPosition(position)) {
 				return block.blockName();
 			}
 		}
@@ -97,9 +97,9 @@ public record BlockSet(Set<Block> blocks) implements Iterable<Block> {
 		return null;
 	}
 	
-	// =========================================================================
-	//  MOVE - METHOD
-	// =========================================================================
+	// -------------------------------------------------------------------------
+	//  MOVE
+	// -------------------------------------------------------------------------
 	
 	/** TODO
 	 * 
@@ -115,8 +115,14 @@ public record BlockSet(Set<Block> blocks) implements Iterable<Block> {
 		return;
 	}
 
+	// -------------------------------------------------------------------------
+	// FORWARDING - METHODS
+	// -------------------------------------------------------------------------
+
+	public boolean add(final Block block) { return this.blocks.add(block); }
+
 	// =========================================================================
-	// INTERFACE - METHOD
+	// INTERFACE - METHODS
 	// =========================================================================
 	
 	// -------------------------------------------------------------------------

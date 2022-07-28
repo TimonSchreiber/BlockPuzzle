@@ -53,7 +53,7 @@ public class DepthFirstSearch {
 
 		this.game = new Game(gameNumber);
 
-		this.savedBlockSets.add(this.game.field().blocks());
+		this.savedBlockSets.add(this.game.blocks());
 	}
 
 	// =========================================================================
@@ -68,9 +68,9 @@ public class DepthFirstSearch {
 	 * 			{@code BlockSet} is found; {@code false} otherwise
 	 */
 	private boolean findNewMove() {
-		final GameField gameField = new GameField(this.game.field().blocks());
+		final GameField gameField = new GameField(this.game.blocks());
 
-		for (final Block block : this.game.field().blocks()) {
+		for (final Block block : this.game.blocks()) {
 
 			for (final Directions direction : Directions.values()) {
 
@@ -84,13 +84,13 @@ public class DepthFirstSearch {
 				// Check if it is an unknown BlockSet -> play this move on the GameField
 				if (!this.savedBlockSets.contains(gameField.blocks())) {
 
-					this.game.field().isValidMove(newMove);
+					this.game.isValidMove(newMove);
 
 					this.savedBlockSets.add(gameField.blocks());
 					this.moveList.add(newMove);
 
 					if (show)
-					this.game.field().draw(0);		// FIXME: this shows the GameField while it is solved delete for best time
+					this.game.draw(0);		// FIXME: this shows the GameField while it is solved delete for best time
 
 					// new Move found
 					return true;
@@ -119,7 +119,7 @@ public class DepthFirstSearch {
 		final Instant t = Instant.now();
 
 		// Check for game.field.isWon() to become true
-		while (!this.game.field().checkWinnigCondition()) {
+		while (!this.game.checkWinnigCondition()) {
 
 			// If isNewMove() is false, the last Move will be reversed
 			while (!this.findNewMove()) {
@@ -128,7 +128,7 @@ public class DepthFirstSearch {
 					System.out.println("Can't find a move.");
 					return;
 
-				} else if (this.game.field().isValidMove(((LinkedList<Move>) this.moveList).getLast().reverse())) {
+				} else if (this.game.isValidMove(((LinkedList<Move>) this.moveList).getLast().reverse())) {
 					((LinkedList<Move>) this.moveList).pollLast();
 
 				} else {
@@ -150,7 +150,7 @@ public class DepthFirstSearch {
 			+ d.toSecondsPart() + " seconds, "
 			+ d.toMillisPart() + " milliseconds");
 
-		this.game.field().draw(this.delay);	// TODO: wait two seconds before showing the solution
+		this.game.draw(this.delay);	// TODO: wait two seconds before showing the solution
 
 		// Show solution
 		System.out.println("\nshow solution");
@@ -171,7 +171,7 @@ public class DepthFirstSearch {
 		final Iterator<Move> iterator = ((LinkedList<Move>) this.moveList).descendingIterator();
 
 		while (iterator.hasNext()) {
-			this.game.field().isValidMove(iterator.next().reverse());
+			this.game.isValidMove(iterator.next().reverse());
 		}
 
 		return;
@@ -192,8 +192,8 @@ public class DepthFirstSearch {
 		final Instant t = Instant.now();
 		// int i = 1;
 		for (final Move move : this.moveList) {
-			this.game.field().isValidMove(move);
-			this.game.field().draw(1);
+			this.game.isValidMove(move);
+			this.game.draw(1);
 			// System.out.println("State " + i++ + "/" + this.moveList.size());
 		}
 

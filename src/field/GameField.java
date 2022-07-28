@@ -11,9 +11,9 @@ import block.PositionList;
 
 public final class GameField {
 
-	// =========================================================================
+	// -------------------------------------------------------------------------
 	// ATTRIBUTES
-	// =========================================================================
+	// -------------------------------------------------------------------------
 	
 	/** preset game values for max number of {@code Block}s */
 	// private static final int MAX_NUMBER_OF_BLOCKS = 14;
@@ -42,9 +42,9 @@ public final class GameField {
 	/** Canvas to draw the {@code GameField} on */
 	private Zeichenblatt canvas;
 
-	// =========================================================================
+	// -------------------------------------------------------------------------
 	// CONSTRUCTORS
-	// =========================================================================
+	// -------------------------------------------------------------------------
 
 	/**
 	 * Class constructor.
@@ -66,9 +66,9 @@ public final class GameField {
 		}
 	}
 
-	// =========================================================================
-	// GETTER - METHODS
-	// =========================================================================
+	// -------------------------------------------------------------------------
+	// GETTERS
+	// -------------------------------------------------------------------------
 
 	/** TODO: correct the javadoc (return, description, ...)
 	 * Checks if the {@code Block} satisfies the winning condition.
@@ -82,6 +82,11 @@ public final class GameField {
 	 * 					{@code false} otherwise.
 	 */
 	public boolean checkWinnigCondition(/* Block block */) {
+		return this.blockSet.getBlock("R1").positionList().equals(WINNING_SQUARES);
+		// TODO: maybe use forwarding here
+
+
+		// TODO: delte this old implementation
 		// int counter = 0;
 		
 		// for (Position pos : block.positionList()) {
@@ -94,8 +99,6 @@ public final class GameField {
 		// if (counter == this.WINNING_SQUARES.getSize()) {
 		// 	this.isWon = true;
 		// }
-
-		return this.blockSet.getBlock("R1").positionList().equals(WINNING_SQUARES);
 	}
 
 	/**
@@ -107,9 +110,9 @@ public final class GameField {
 		return new BlockSet(this.blockSet);
 	}
 
-	// =========================================================================
-	// PLACE-BLOCK - METHOD
-	// =========================================================================
+	// -------------------------------------------------------------------------
+	// PLACE BLOCK
+	// -------------------------------------------------------------------------
 
 	/**
 	 * Places a {@code Block} onto this {@code GameField}.
@@ -117,13 +120,13 @@ public final class GameField {
 	 * @param block		the {@code Block}
 	 */
 	public void placeBlock(final Block block) {
-		this.blockSet.blocks().add(block);
+		this.blockSet.add(block);
 		return;
 	}
 
-    // =========================================================================
-    // Is-IN-INTERVAL - METHOD
-    // =========================================================================
+    // -------------------------------------------------------------------------
+    // IS IN INTERVAL
+    // -------------------------------------------------------------------------
 
     /**
      * TODO:
@@ -139,11 +142,11 @@ public final class GameField {
 			&& (position.y() >= 0);
 	}
 
-	// =========================================================================
-	// IS-COLLISION-FREE - METHOD
-	// =========================================================================
+	// -------------------------------------------------------------------------
+	// IS COLLISION FREE
+	// -------------------------------------------------------------------------
 
-	/** FIXME: Guarding Clauses for the nested if-statements
+	/**
 	 * 
 	 * Checks if the {@code Move} can be performed or if this will result in an
 	 * illegal {@code GameField} by overlapping two (or more) {@code Block}s, or
@@ -169,7 +172,7 @@ public final class GameField {
 		// 	}
 		// });
 
-		// FIXME: why check every position on it's own and not all of them together?
+		// TODO: why check every position on it's own and not all of them together?
 		for (final Position position : newBlock.positionList()) {
 			final Position newPosition = position.moveTowards(move.direction());
 			
@@ -190,9 +193,9 @@ public final class GameField {
 		return true;
 	}
 
-	// =========================================================================
-	// IS-VALID-MOVE - METHOD
-	// =========================================================================
+	// -------------------------------------------------------------------------
+	// IS VALID MOVE
+	// -------------------------------------------------------------------------
 
 	/**
 	 * Checks if the {@code Block} defined by the {@code Move} can be moved into
@@ -212,11 +215,11 @@ public final class GameField {
 		return false;
 	}
 
-	// =========================================================================
-	// PRINT - METHOD
-	// =========================================================================
+	// -------------------------------------------------------------------------
+	// PRINT
+	// -------------------------------------------------------------------------
 
-	/**
+	/** TODO: is this one used? maybe keep it for debugging in the future
 	 * Prints the Name of each {@code Block} for each {@code Position} on the
 	 * Console and "__" if there is no {@code Block}.
 	 */
@@ -240,9 +243,9 @@ public final class GameField {
 		return;
 	}
 
-	// =========================================================================
-	// DRAW - METHODS
-	// =========================================================================
+	// -------------------------------------------------------------------------
+	// DRAW
+	// -------------------------------------------------------------------------
 
 	/**
 	 * Draws the {@code GameField} onto a {@code Zeichenblatt.java} with a

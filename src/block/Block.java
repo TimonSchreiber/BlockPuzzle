@@ -9,16 +9,18 @@ import field.Directions;
  */
 public record Block(String blockName, Color color, PositionList positionList) implements Comparable<Block> {
 
-	// =========================================================================
-	// ATTRIBUTES
-	// =========================================================================
+	// -------------------------------------------------------------------------
+	// STATIC ATTRIBUTE
+	// -------------------------------------------------------------------------
 	
+	// TODO: change the way a Block is created; take a name and or color infer the size
+	// and not a size and infer the name/color
 	/** static counter for different types of {@code Block}s */
 	private static final int[] BLOCK_COUNTER = new int[BlockTypes.getSize()];
 
-	// =========================================================================
+	// -------------------------------------------------------------------------
 	// CONSTRUCTORS
-	// =========================================================================
+	// -------------------------------------------------------------------------
 	
 	/**
 	 * Class constructor with size and {@code BlockName}.
@@ -43,12 +45,12 @@ public record Block(String blockName, Color color, PositionList positionList) im
 			block.color,
 			new PositionList());
 		
-		this.positionList.list().addAll(block.positionList.list());	// block.positionList
+		this.positionList.list().addAll(block.positionList.list());	// TODO: maybe add all positions in the constructor call above
 	}
 	
-	// =========================================================================
-	// CREATE-COLOR - METHOD
-	// =========================================================================
+	// -------------------------------------------------------------------------
+	// CREATE COLOR
+	// -------------------------------------------------------------------------
 	
 	/**
 	 * Creates the {@code Color} for the {@code Block} by repeatedly using
@@ -68,9 +70,9 @@ public record Block(String blockName, Color color, PositionList positionList) im
 		return tmpClr;
 	}
 
-	// =========================================================================
-	// MOVE - METHOD
-	// =========================================================================
+	// -------------------------------------------------------------------------
+	// MOVE TOWARDS
+	// -------------------------------------------------------------------------
 
 	/** TODO is void here OK? or do i need to return a new Block?
 	 * 
@@ -84,20 +86,15 @@ public record Block(String blockName, Color color, PositionList positionList) im
 		return;
 	}
 
-	// =========================================================================
-	// RESET-BLOCK-COUNTER - METHOD
-	// =========================================================================
+	// -------------------------------------------------------------------------
+	// FORWARDING - METHODS
+	// -------------------------------------------------------------------------
 
-	// FIXME: sofar not used
-	public void resetBlockNames() {
-		for (int i = 0; i < BlockTypes.getSize(); i++) {
-			Block.BLOCK_COUNTER[i] = 0;
-		}
-	}
+	public boolean containsPosition(final Position position) { return this.positionList.contains(position); }
 	
-	// =========================================================================
-	// EQUALS AND HASH-CODE - METHODS
-	// =========================================================================
+	// -------------------------------------------------------------------------
+	// EQUALS AND HASH-CODE
+	// -------------------------------------------------------------------------
 	
 	/** TODO
 	 * Overrides the equals method, so that neither the name, nor the color will
@@ -116,7 +113,7 @@ public record Block(String blockName, Color color, PositionList positionList) im
 		// Object must be Block at this point
 		Block other = (Block) obj;
 		
-		return	(this.positionList.list().size() == other.positionList.list().size())	// XXX
+		return	(this.positionList.size() == other.positionList.size())	// XXX
 //				((this.BLOCK_NAME == other.BLOCK_NAME)
 //					|| ((this.BLOCK_NAME != null)
 //						&& this.BLOCK_NAME.equals(other.BLOCK_NAME)))
@@ -136,7 +133,7 @@ public record Block(String blockName, Color color, PositionList positionList) im
 		final int PRIME = 31;
 		int hash = 7;
 		
-		hash = PRIME * hash + this.positionList.list().size();	// XXX
+		hash = PRIME * hash + this.positionList.size();	// XXX
 //		hash = PRIME * hash + ((this.BLOCK_NAME == null)
 //									? 0
 //									: this.BLOCK_NAME.hashCode());
@@ -151,7 +148,7 @@ public record Block(String blockName, Color color, PositionList positionList) im
 	}
 
 	// =========================================================================
-	// INTERFACE - METHOD
+	// INTERFACE - METHODS
 	// =========================================================================
 	
 	// -------------------------------------------------------------------------

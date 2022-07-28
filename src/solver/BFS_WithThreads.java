@@ -52,8 +52,8 @@ public class BFS_WithThreads {
 
 		this.game = new Game(gameNumber);
 
-        this.savedBlockSets.add(this.game.field().blocks());
-        this.gameStateQueue.add(new GameState(this.game.field().blocks()));
+        this.savedBlockSets.add(this.game.blocks());
+        this.gameStateQueue.add(new GameState(this.game.blocks()));
     }
 
 	// =========================================================================
@@ -194,17 +194,17 @@ public class BFS_WithThreads {
 
 		int i = 0;
         
-        this.game.field().draw(1000);
+        this.game.draw(1000);
 
 		final Instant t = Instant.now();
         
         // Starting position
         // System.out.println("\nState " + i + "/" + moveList.size());
-        // this.game.field().print();
+        // this.game.print();
 
 		for (final Move move : moveList) {
-			this.game.field().isValidMove(move);
-			this.game.field().draw(100);
+			this.game.isValidMove(move);
+			this.game.draw(100);
             System.out.println(++i + "/" + moveList.size() + ": " + move);
 		}
 

@@ -7,21 +7,25 @@ import java.util.List;
 import block.Block;
 import block.BlockInfo;
 import block.Position;
+import field.BlockSet;
 import field.Directions;
 import field.GameField;
+import field.Move;
 
 public record Game(GameField field, int number) {
 
-	// =========================================================================
+	// -------------------------------------------------------------------------
 	// ATTRIBUTES
-	// =========================================================================
+	// -------------------------------------------------------------------------
 	
 	/** List of a List of {@code BlockInfos} */
-	private static final List<List<BlockInfo>> START_POSITION_LIST = new ArrayList<>();
+	private static final
+		List<List<BlockInfo>> START_POSITION_LIST
+			= new ArrayList<>();
 
-	// =========================================================================
+	// -------------------------------------------------------------------------
 	// CONSTRUCTOR
-	// =========================================================================
+	// -------------------------------------------------------------------------
 	
 	/**
 	 * Class constructor with a gameNumber.
@@ -39,11 +43,21 @@ public record Game(GameField field, int number) {
 		
 		this.field.draw(1000);	// FIXME
 	}
+
+	// -------------------------------------------------------------------------
+	// FORWARDING - METHODS
+	// -------------------------------------------------------------------------
+
+	public boolean checkWinnigCondition() { return this.field.checkWinnigCondition(); }
+	public BlockSet blocks() { return this.blocks(); }
+	public boolean isValidMove(final Move move) { return this.field.isValidMove(move); }
+	public void print() { this.field.print(); }
+	public void draw(final int delay) { this.field.draw(delay); }
 	
-	// =========================================================================
+	// -------------------------------------------------------------------------
 	// STATIC-BLOCK
 	// https://trainyourprogrammer.de/java-254-holzblock-schiebe-spiel-das-gemeine-dutzend-.html
-	// =========================================================================
+	// -------------------------------------------------------------------------
 	
 	static {
 

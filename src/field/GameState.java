@@ -15,7 +15,7 @@ public record GameState(BlockSet blockSet, List<Move> moveList) {
     }
 
     // -------------------------------------------------------------------------
-    // DEEP-COPY-LIST - METHOD
+    // DEEP COPY LIST
     // -------------------------------------------------------------------------
 
     /**
