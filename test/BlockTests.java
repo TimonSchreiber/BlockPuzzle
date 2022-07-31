@@ -9,12 +9,12 @@ import block.BlockInfo;
 import block.Position;
 import block.PositionList;
 import field.Directions;
-import game.Game;
+import game.DirtyDozen;
 
 public class BlockTests {
 
     //==========================================================================
-    // Static Variables
+    // Variables
 
     /* Game 9 - 99 Moves
         * 
@@ -24,16 +24,16 @@ public class BlockTests {
         * B2 B2 Y1 Y1 Y2 __
         * B1 B1 Y1 Y2 Y2 __
         */
-    Game game = new Game(9);
+    DirtyDozen game = new DirtyDozen(9);
 
     //==========================================================================
-    // Block
+    // Tests
 
     @Test
     @DisplayName("Move Square down twice")
     public void moveTowards() {
 
-        Block actual = game.field().blocks().getBlock("G2");
+        Block actual = game.blocks().getBlock("G2");
         PositionList expected = new PositionList(new BlockInfo(new Position(5, 0), 1, null));
 
         actual.moveTowards(Directions.D, Directions.D);

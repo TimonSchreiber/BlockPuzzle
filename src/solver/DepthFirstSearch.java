@@ -13,198 +13,201 @@ import field.BlockSet;
 import field.Directions;
 import field.GameField;
 import field.Move;
-import game.Game;
+import game.DirtyDozen;
 
 public class DepthFirstSearch {
 
-	// =========================================================================
-	// ATTRIBUTES
-	// =========================================================================
+    // =========================================================================
+    // ATTRIBUTES
+    // =========================================================================
 
-	/** {@code HashSet} of {@code BlockSets} to save every unique state */
-	private final Set<BlockSet> savedBlockSets;
+    private final int delay;
+    private final boolean show;
 
-	/** {@code MoveList} to save every {@code Move} */
-	private final List<Move> moveList;	// TODO: changed this to LinkedList instead of MoveList
+    /** {@code HashSet} of {@code BlockSets} to save every unique state. */
+    private final Set<BlockSet> savedBlockSets;
 
-	/** the {@code Game} */
-	private final Game game;
+    /** {@code LinkedList} to save every {@code Move}. */
+    private final List<Move> moveList;
 
-	private final int delay;
-	private final boolean show;
+    /** the {@code Game} */
+    private final DirtyDozen game;
 
-	// =========================================================================
-	// CONSTRUCTOR
-	// =========================================================================
+    // =========================================================================
+    // CONSTRUCTOR
+    // =========================================================================
 
-	/**
-	 * Creates a new {@code GameSolver} for the starting Position gameID
-	 *
-	 * @param gameNumber	Starting Position
-	 */
-	public DepthFirstSearch(final int gameNumber, final int delay, final boolean show) {
+    /**
+     * Creates a new {@code GameSolver} for the starting Position gameID
+     *
+     * @param gameNumber    Starting Position
+     */
+    public DepthFirstSearch(final int gameNumber, final int delay, final boolean show) {
 
-		this.savedBlockSets = new HashSet<>();
+        this.delay = delay;
+        this.show = show;
 
-		this.moveList = new LinkedList<>();
+        this.savedBlockSets = new HashSet<>();
 
-		this.delay = delay;
-		this.show = show;
+        this.moveList = new LinkedList<>();
 
-		this.game = new Game(gameNumber);
+        this.game = new DirtyDozen(gameNumber);
 
-		this.savedBlockSets.add(this.game.blocks());
-	}
+        this.savedBlockSets.add(this.game.blocks());
+    }
 
-	// =========================================================================
-	// FIND-NEW-MOVE - METHOD
-	// =========================================================================
+    // =========================================================================
+    // FIND-NEW-MOVE - METHOD
+    // =========================================================================
 
-	/**
-	 * Makes a {@code Move} by going through every possible {@code BlockName}
-	 * and {@code Direction}.
-	 *
-	 * @return	{@code true} if a new {@code Move}, leading to a new
-	 * 			{@code BlockSet} is found; {@code false} otherwise
-	 */
-	private boolean findNewMove() {
-		final GameField gameField = new GameField(this.game.blocks());
+    /**
+     * Makes a {@code Move} by going through every possible {@code BlockName}
+     * and {@code Direction}.
+     *
+     * @return    {@code true} if a new {@code Move}, leading to a new
+     *             {@code BlockSet} is found; {@code false} otherwise
+     */
+    private boolean findNewMove() {
+        final GameField gameField = new GameField(this.game.blocks());
 
-		for (final Block block : this.game.blocks()) {
+        for (final Block block : this.game.blocks()) {
 
-			for (final Directions direction : Directions.values()) {
+            for (final Directions direction : Directions.values()) {
 
-				final Move newMove = new Move(block.blockName(), direction);
+                final Move newMove = new Move(block.blockName(), direction);
 
-				// Check if nextMove is not a valid Move -> next iteration
-				if (!gameField.isValidMove(newMove)) {
-					continue;
-				}
+                // Check if nextMove is not a valid Move -> next iteration
+                if (!gameField.isValidMove(newMove)) {
+                    continue;
+                }
 
-				// Check if it is an unknown BlockSet -> play this move on the GameField
-				if (!this.savedBlockSets.contains(gameField.blocks())) {
+                // Check if it is a known BlockSet -> next iteration
+                if (this.savedBlockSets.contains(gameField.blocks())) {
+                    // reverse the last Move to continue looking for new Moves
+                    gameField.isValidMove(newMove.reverse());
+                    continue;
+                }
 
-					this.game.isValidMove(newMove);
+                // -> play this move on the GameField
+                this.game.isValidMove(newMove);
 
-					this.savedBlockSets.add(gameField.blocks());
-					this.moveList.add(newMove);
+                this.savedBlockSets.add(gameField.blocks());
+                this.moveList.add(newMove);
 
-					if (show)
-					this.game.draw(0);		// FIXME: this shows the GameField while it is solved delete for best time
+                if (show) {
+                    this.game.draw(0);        // FIXME: this shows the GameField while it is solved delete for best time
+                }
 
-					// new Move found
-					return true;
+                // new Move found
+                return true;
 
-				// new BlockSet is already saved -> reverse newGameField
-				} else {
-					gameField.isValidMove(newMove.reverse());
-				}
-			}
-		}
-		// no new Move found
-		return false;
-	}
+            }    // end for loop Directions
+        }    // end for loop Blocks
 
-	// =========================================================================
-	// SOLVE - METHOD
-	// =========================================================================
+        // no new Move found
+        return false;
+    }
 
-	/**
-	 * Tries to solve the {@code BlockPuzzle}.
-	 */
-	public void solve() {
-		System.out.println("START\n");
+    // =========================================================================
+    // SOLVE - METHOD
+    // =========================================================================
 
-		// Start timer
-		final Instant t = Instant.now();
+    /**
+     * Tries to solve the {@code BlockPuzzle}.
+     */
+    public void solve() {
+        System.out.println("START\n");
 
-		// Check for game.field.isWon() to become true
-		while (!this.game.checkWinnigCondition()) {
+        // Start timer
+        final Instant t = Instant.now();
 
-			// If isNewMove() is false, the last Move will be reversed
-			while (!this.findNewMove()) {
+        // Check for game.field.isWon() to become true
+        while (!this.game.checkWinnigCondition()) {
 
-				if (this.moveList.isEmpty()) {		// TODO: changed from size() == 0 to List#isEmpty()
-					System.out.println("Can't find a move.");
-					return;
+            // If isNewMove() is false, the last Move will be reversed
+            while (!this.findNewMove()) {
 
-				} else if (this.game.isValidMove(((LinkedList<Move>) this.moveList).getLast().reverse())) {
-					((LinkedList<Move>) this.moveList).pollLast();
+                if (this.moveList.isEmpty()) {        // TODO: changed from size() == 0 to List#isEmpty()
+                    System.out.println("Can't find a move.");
+                    return;
 
-				} else {
-					System.out.println("Can't reverse last move.");
-					return;
-				}
-			}
-		}
-		// Stop timer
-		final Duration d = Duration.between(t, Instant.now());
+                } else if (this.game.isValidMove(((LinkedList<Move>) this.moveList).getLast().reverse())) {
+                    ((LinkedList<Move>) this.moveList).pollLast();
 
-		System.out.println("END");
+                } else {
+                    System.out.println("Can't reverse last move.");
+                    return;
+                }
+            }
+        }
+        // Stop timer
+        final Duration d = Duration.between(t, Instant.now());
 
-		System.out.println("\nNumber of states saved:\n" + this.savedBlockSets.size());
+        System.out.println("END");
 
-		System.out.println("\nNumber of moves made:\n" + this.moveList.size());
+        System.out.println("\nNumber of states saved:\n" + this.savedBlockSets.size());
 
-		System.out.println("\nTime to solve:\n"
-			+ d.toSecondsPart() + " seconds, "
-			+ d.toMillisPart() + " milliseconds");
+        System.out.println("\nNumber of moves made:\n" + this.moveList.size());
 
-		this.game.draw(this.delay);	// TODO: wait two seconds before showing the solution
+        System.out.println("\nTime to solve:\n"
+            + d.toSecondsPart() + " seconds, "
+            + d.toMillisPart() + " milliseconds");
 
-		// Show solution
-		System.out.println("\nshow solution");
-		this.reverseGame();
-		this.showSolution();		// FIXME time delay
+        this.game.draw(this.delay);    // TODO: wait two seconds before showing the solution
 
-		return;
-	}	// end solve()
+        // Show solution
+        System.out.println("\nshow solution");
+        this.reverseGame();
+        this.showSolution();        // FIXME time delay
 
-	// =========================================================================
-	// REVERSE-GAME - METHOD
-	// =========================================================================
+        return;
+    }    // end solve()
 
-	/** TODO
-	 * Reverses all Moves
-	 */
-	private void reverseGame() {
-		final Iterator<Move> iterator = ((LinkedList<Move>) this.moveList).descendingIterator();
+    // =========================================================================
+    // REVERSE-GAME - METHOD
+    // =========================================================================
 
-		while (iterator.hasNext()) {
-			this.game.isValidMove(iterator.next().reverse());
-		}
+    /** TODO
+     * Reverses all Moves
+     */
+    private void reverseGame() {
+        final Iterator<Move> iterator = ((LinkedList<Move>) this.moveList).descendingIterator();
 
-		return;
-	}
+        while (iterator.hasNext()) {
+            this.game.isValidMove(iterator.next().reverse());
+        }
 
-	// =========================================================================
-	// SHOW-SOLUTION - METHOD
-	// =========================================================================
+        return;
+    }
 
-	/** TODO:
-	 * Shows the Solution from Start to End with a time delay between two
-	 * {@code Move}s.
-	 *
-	 * @param delay		the time delay in milliseconds
-	 */
-	public void showSolution() {
+    // =========================================================================
+    // SHOW-SOLUTION - METHOD
+    // =========================================================================
 
-		final Instant t = Instant.now();
-		// int i = 1;
-		for (final Move move : this.moveList) {
-			this.game.isValidMove(move);
-			this.game.draw(1);
-			// System.out.println("State " + i++ + "/" + this.moveList.size());
-		}
+    /** TODO:
+     * Shows the Solution from Start to End with a time delay between two
+     * {@code Move}s.
+     *
+     * @param delay        the time delay in milliseconds
+     */
+    public void showSolution() {
 
-		final Duration d = Duration.between(t, Instant.now());
-		System.out.println("\nTime to show Solution:\n"
-			+ d.toSecondsPart() + " seconds, "
-			+ d.toMillisPart() + " milliseconds");
+        final Instant t = Instant.now();
+        // int i = 1;
+        for (final Move move : this.moveList) {
+            this.game.isValidMove(move);
+            this.game.draw(1);
+            // System.out.println("State " + i++ + "/" + this.moveList.size());
+        }
 
-		return;
-	}
+        final Duration d = Duration.between(t, Instant.now());
+        System.out.println("\nTime to show Solution:\n"
+            + d.toSecondsPart() + " seconds, "
+            + d.toMillisPart() + " milliseconds");
 
-	// =========================================================================
+        return;
+    }
+
+    // =========================================================================
 
 }   // class

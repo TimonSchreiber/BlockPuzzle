@@ -10,5 +10,5 @@ public record BlockInfo(Position position, int size, Directions direction) {
 
     // BlockInfo(Position position, String name, Direction direction)   (Alternative 1)
     // BlockInfo(PositionList positionList, String name)                (Alternative 2)
-    
+
 }   // BlockInfo record

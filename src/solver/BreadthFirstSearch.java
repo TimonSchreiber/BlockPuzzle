@@ -14,26 +14,27 @@ import field.Directions;
 import field.GameField;
 import field.GameState;
 import field.Move;
-import game.Game;
+import game.DirtyDozen;
 
 public class BreadthFirstSearch {
-    
-	// =========================================================================
-	// ATTRIBUTES
-	// =========================================================================
+
+    // =========================================================================
+    // ATTRIBUTES
+    // =========================================================================
 
     private boolean foundASolution = false;
-    private GameState solution;
 
     private final Queue<GameState> gameStateQueue;
 
     private final Set<BlockSet> savedBlockSets;
 
-    private final Game game;
+    private GameState solution;
+
+    private final DirtyDozen game;
 
     // =========================================================================
-	// CONSTRUCTOR
-	// =========================================================================
+    // CONSTRUCTOR
+    // =========================================================================
 
     /**
      * TODO
@@ -45,15 +46,15 @@ public class BreadthFirstSearch {
 
         this.gameStateQueue = new ArrayDeque<>();
 
-		this.game = new Game(gameNumber);
+        this.game = new DirtyDozen(gameNumber);
 
-        this.savedBlockSets.add(this.game.blocks());
+        this.savedBlockSets.add(new BlockSet(this.game.blocks()));
         this.gameStateQueue.add(new GameState(this.game.blocks()));
     }
 
-	// =========================================================================
-	// FIND-NEW-MOVE - METHOD
-	// =========================================================================
+    // =========================================================================
+    // FIND-NEW-MOVE - METHOD
+    // =========================================================================
 
     /**
      * TODO
@@ -63,7 +64,7 @@ public class BreadthFirstSearch {
 
         // Deconstruction
         final GameField gameField = new GameField(gameState.blockSet());
-        final List<Move> moveList = GameState.copyList(gameState.moveList());
+        final List<Move> moveList = GameState.copyList(gameState.moves());
 
         for (final Block block : gameField.blocks()) {
 
@@ -71,34 +72,28 @@ public class BreadthFirstSearch {
 
                 final Move newMove = new Move(block.blockName(), direction);
 
-                /*
-                 * Check if nextMove is not a valid Move equal or the moveList
-                 * is not empty and is the previous Move reversed
-                 * -> next iteration
-                 */
-                if (!gameField.isValidMove(newMove)
-                    /* || (!moveList.isEmpty() && newMove.equals(moveList.getLast().reverse())) */) {
+                // Check if nextMove is not a valid Move -> next iteration
+                if (!gameField.isValidMove(newMove)) {
                     continue;
                 }
-                
-                /*
-                 * Check if it is an unknown BlockSet
+
+                /* Check if it is an uknown BlockSet:
                  * -> copy MoveList and add new Move
                  * -> save the BlockSet
                  * -> create a new GameState and add it to the GameStateQueue
                  */
                 if (!this.savedBlockSets.contains(gameField.blocks())) {
-                    // Copy moveListand add newMOve
+
                     final List<Move> newMoveList = GameState.copyList(moveList);
                     newMoveList.add(newMove);
-                    
-                    this.savedBlockSets.add(gameField.blocks());
-                    this.gameStateQueue.add(new GameState(gameField.blocks(), newMoveList));    // TODO: maybe new GameState(new BlockSet(), ...)
-                    
+
+                    this.savedBlockSets.add(new BlockSet(gameField.blocks()));
+                    this.gameStateQueue.add(new GameState(gameField.blocks(), newMoveList));
+
                     // check if a Solution was found -> save the current GameState + MoveList and return
                     if (gameField.checkWinnigCondition()) {
                         this.foundASolution = true;
-                        this.solution = new GameState(gameField.blocks(), newMoveList);
+                        this.solution = new GameState(new BlockSet(gameField.blocks()), newMoveList);
                         return;
                     }
 
@@ -107,30 +102,31 @@ public class BreadthFirstSearch {
 
                 // reverse the last Move to continue looking for new Moves
                 gameField.isValidMove(newMove.reverse());
-            }
-        }
+
+            }    // end for loop Directions
+        }    // end for loop Blocks
 
         return;
     }
 
     // =========================================================================
-	// SOLVE - METHOD
-	// =========================================================================
+    // SOLVE - METHOD
+    // =========================================================================
 
     /**
      * Tries to solve the {@code BlockPuzzle}.
      */
     public void solve() {
         System.out.println("START\n");
-        
+
         // Start timer
         final Instant t = Instant.now();
-            
+
         while (!this.foundASolution) {
 
             // Deconstruct the next GameState Object
             final GameState nextGameState = this.gameStateQueue.remove();
-            
+
             // Call findNewMove to add GameStates to GameStateQueue
             this.findNewMove(nextGameState);
 
@@ -144,21 +140,21 @@ public class BreadthFirstSearch {
 
         // Stop timer
         final Duration d = Duration.between(t, Instant.now());
-        
+
         // print result
         System.out.println("END");
-        
+
         System.out.println("\nNumber of states saved:\n" + this.savedBlockSets.size());
 
-        System.out.println("\nNumber of moves for the Solution:\n" + this.solution.moveList().size());
+        System.out.println("\nNumber of moves for the Solution:\n" + this.solution.moves().size());
 
-		System.out.println("\nTime to solve:\n"
-			+ d.toSecondsPart() + " seconds, "
-			+ d.toMillisPart() + " milliseconds");
+        System.out.println("\nTime to solve:\n"
+            + d.toSecondsPart() + " seconds, "
+            + d.toMillisPart() + " milliseconds");
 
-		// Show solution
-		System.out.println("\nshow solution");
-		this.showSolution(this.solution.moveList());		// FIXME time delay
+        // Show solution
+        System.out.println("\nshow solution");
+        this.showSolution(this.solution.moves());        // FIXME time delay
 
         return;
 
@@ -168,39 +164,34 @@ public class BreadthFirstSearch {
     // SHOW-SOLUTION - METHOD
     // =========================================================================
 
-	/**
-     * TODO:
-	 * Shows the Solution from Start to End with a time delay between two
+    /**
+     * Shows the Solution from Start to End with a time delay between two
      * {@code Moves}.
-     * 
+     *
      * @param moveList      a List of the {@code Moves} to the solution
      */
-	private void showSolution(final List<Move> moveList) {
+    private void showSolution(final List<Move> moveList) {
 
-		int i = 0;
+        int i = 0;
 
         this.game.draw(1000);
-		
+
         final Instant t = Instant.now();
-        
-        // Starting position
-        // System.out.println("\nState " + i + "/" + moveList.size());
-        // this.game.print();
 
-		for (final Move move : moveList) {
-			this.game.isValidMove(move);
-			this.game.draw(100);
+        for (final Move move : moveList) {
+            this.game.isValidMove(move);
+            this.game.draw(100);
             System.out.println(++i + "/" + moveList.size() + ": " + move);
-		}
+        }
 
-		final Duration d = Duration.between(t, Instant.now());
-		System.out.println("\nTime to show Solution:\n"
+        final Duration d = Duration.between(t, Instant.now());
+        System.out.println("\nTime to show Solution:\n"
             + d.toSecondsPart() + " seconds, "
             + d.toMillisPart() + " milliseconds");
 
-		return;
-	}
-        
+        return;
+    }
+
     // =========================================================================
 
 }   // BreadthFirstSearch class

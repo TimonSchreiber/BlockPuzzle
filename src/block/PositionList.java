@@ -7,106 +7,157 @@ import java.util.List;
 
 import field.Directions;
 
-public record PositionList(List<Position> list) implements Iterable<Position>, Comparable<PositionList> {
+public final class PositionList implements Iterable<Position>, Comparable<PositionList> {
 
-	// -------------------------------------------------------------------------
-	// CONSTRUCTORS
-	// -------------------------------------------------------------------------
+    // -------------------------------------------------------------------------
+    // ATTRIBUTES
+    // -------------------------------------------------------------------------
 
-	/**
-	 * TODO: is needed for adding all the positions afterwards in the constructor below.
-	 * Maybe change, so that the Positions are added in the same line.
-	 */
-	public PositionList() {
-		this(new ArrayList<Position>());
-	}
+    private final List<Position> positions;
 
-	/**
-	 * TODO:
-	 * Class constructor form a {@code BlockInfo}.
-	 *
-	 * @param blockInfo
-	 */
-	public PositionList(final BlockInfo blockInfo) {
-		this();
+    // -------------------------------------------------------------------------
+    // CONSTRUCTORS
+    // -------------------------------------------------------------------------
 
-		switch (blockInfo.size()) {
-			case 4:
-				this.list.add(
-					blockInfo.position().moveTowards(
-						blockInfo.direction(),
-						blockInfo.direction().next()));
-				// falls through
-			case 3:
-				this.list.add(
-					blockInfo.position().moveTowards(
-						blockInfo.direction().next()));
-				// falls through
-			case 2:
-				this.list.add(
-					blockInfo.position().moveTowards(
-						blockInfo.direction()));
-				// falls through
-			default:
-				this.list.add(
-					blockInfo.position());
-				break;
-		}
+    /**
+     * TODO: Maybe put this into a static factory method? (single responsibility)
+     * Class constructor form a {@code BlockInfo}.
+     *
+     * @param blockInfo
+     */
+    public PositionList(final BlockInfo blockInfo) {
+        this.positions = new ArrayList<>();
 
-		Collections.sort(this.list);
+        switch (blockInfo.size()) {
+            case 4:
+                this.positions.add(
+                    blockInfo.position().moveTowards(
+                        blockInfo.direction(),
+                        blockInfo.direction().next()));
+                // falls through
+            case 3:
+                this.positions.add(
+                    blockInfo.position().moveTowards(
+                        blockInfo.direction().next()));
+                // falls through
+            case 2:
+                this.positions.add(
+                    blockInfo.position().moveTowards(
+                        blockInfo.direction()));
+                // falls through
+            default:
+                this.positions.add(
+                    blockInfo.position());
+                break;
+        }
 
-	}
+        Collections.sort(this.positions);
+    }
 
-	// -------------------------------------------------------------------------
-	// MOVE TOWARDS
-	// -------------------------------------------------------------------------
+    /**
+     * Copy constructor.
+     *
+     * @param positionList
+     */
+    public PositionList(final PositionList positionList) {
+        this.positions = new ArrayList<>();
+        for (final Position position : positionList) {
+            this.positions.add(new Position(position));
+        }
+    }
 
-	/**
-	 * TODO
-	 *
-	 * @param directions
-	 */
-	public void moveTowards(final Directions... directions) {
-		this.list.replaceAll(pos -> pos.moveTowards(directions));
-	}
+    // -------------------------------------------------------------------------
+    // MOVE TOWARDS
+    // -------------------------------------------------------------------------
 
-	// -------------------------------------------------------------------------
-	// FORWARDING - METHODS
-	// -------------------------------------------------------------------------
+    /**
+     * TODO
+     *
+     * @param directions
+     */
+    public void moveTowards(final Directions... directions) {
+        this.positions.replaceAll(pos -> pos.moveTowards(directions));
+    }
 
-	public boolean contains(final Position position) { return this.list.contains(position); }
-	public int size() { return this.list.size(); }
+    // -------------------------------------------------------------------------
+    // FORWARDING - METHODS
+    // -------------------------------------------------------------------------
 
-	// =========================================================================
-	// INTERFACE - METHODS
-	// =========================================================================
+    public boolean contains(final Position position) { return this.positions.contains(position); }
+    public boolean addAll(final PositionList positionList) { return this.positions.addAll(positionList.positions); }
+    public int size() { return this.positions.size(); }
 
-	// -------------------------------------------------------------------------
-	// ITERABLE
-	// -------------------------------------------------------------------------
+    // -------------------------------------------------------------------------
+    // EQUALS AND HASH-CODE
+    // -------------------------------------------------------------------------
 
-	/**
-	 * Returns an {@code Iterator} over all {@code Position}s.
-	 */
-	@Override
-	public Iterator<Position> iterator() {
-		return this.list.iterator();
-	}
+    /** TODO
+     * Overrides the equals method
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
 
-	// -------------------------------------------------------------------------
-	// COMPARABLE
-	// -------------------------------------------------------------------------
+        if ((obj == null) || (this.getClass() != obj.getClass())) {
+            return false;
+        }
 
-	/**
-	 *
-	 */
-	@Override
-	public int compareTo(PositionList other) {
-		return (this.list.size() != other.list.size())
-				? -Integer.compare(this.list.size(), other.list.size()) // larger Blocks before smaller Blocks
-				: this.list.get(0).compareTo(other.list.get(0));
-	}
+        // Object must be PositionList at this point
+        final PositionList other = (PositionList) obj;
 
-	// =========================================================================
+        return    ((this.positions == other.positions)
+                || ((this.positions != null)
+                    && this.positions.equals(other.positions)));
+    }
 
-}   // PositionList record
+    /** TODO
+     * Overrides the hashCode method to match the equals method.
+     */
+    @Override
+    public int hashCode() {
+        final int PRIME = 31;
+        int hash = 7;
+
+        hash = PRIME * hash + this.positions.size();
+        hash = PRIME * hash + ((this.positions == null)
+                                    ? 0
+                                    : this.positions.hashCode());
+
+        return hash;
+    }
+
+    // =========================================================================
+    // INTERFACE - METHODS
+    // =========================================================================
+
+    // -------------------------------------------------------------------------
+    // ITERABLE
+    // -------------------------------------------------------------------------
+
+    /**
+     * Returns an {@code Iterator} over all {@code Position}s.
+     */
+    @Override
+    public Iterator<Position> iterator() {
+        return this.positions.iterator();
+    }
+
+    // -------------------------------------------------------------------------
+    // COMPARABLE
+    // -------------------------------------------------------------------------
+
+    /**
+     *
+     */
+    @Override
+    public int compareTo(PositionList other) {
+        return (this.positions.size() != other.positions.size())
+                ? -Integer.compare(this.positions.size(), other.positions.size()) // larger Blocks before smaller Blocks
+                : this.positions.get(0).compareTo(other.positions.get(0));
+    }
+
+    // =========================================================================
+
+}   // PositionList class
