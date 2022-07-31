@@ -19,7 +19,7 @@ public final class RushHour {
     // -------------------------------------------------------------------------
 
     // TODO: 1# pass this into the GameField
-    private static final int SIZE = 6;
+    // private static final int SIZE = 6;
 
     /** List of a List of {@code BlockInfos} */
     private static final

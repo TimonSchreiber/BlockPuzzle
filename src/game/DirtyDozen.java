@@ -7,6 +7,7 @@ import java.util.List;
 import block.Block;
 import block.BlockInfo;
 import block.Position;
+// import block.PositionList;
 import field.BlockSet;
 import field.Directions;
 import field.GameField;
@@ -19,8 +20,17 @@ public final class DirtyDozen {
     // -------------------------------------------------------------------------
 
     // TODO: pass this into the GameField
-    private static final int HEIGHT = 5;
-    private static final int WIDTH = 6;
+    // private static final int HEIGHT = 5;
+    // private static final int WIDTH = 6;
+
+    /** Winning Positions {@code PositionList}*/
+    // private static final
+    // PositionList WINNING_SQUARES =
+    //     new PositionList(
+    //         new BlockInfo(
+    //             new Position(4, 0),
+    //             4,
+    //             Directions.U));
 
     /** List of a List of {@code BlockInfos} */
     private static final
