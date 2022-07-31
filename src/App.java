@@ -17,6 +17,8 @@ public class App {
             int delay = 0;
             boolean show = false;
 
+            // TODO: maybe create a Game instance here and pass it to the Solver
+
             switch (type.toUpperCase().charAt(0)) {
                 case 'D':
                     new DepthFirstSearch(number, delay, show).solve();
