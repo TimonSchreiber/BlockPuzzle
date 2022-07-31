@@ -7,16 +7,11 @@ import block.BlockInfo;
 import block.Position;
 import block.PositionList;
 
-// TODO: maybe make this a record as well?
-
 public final class GameField {
 
     // -------------------------------------------------------------------------
     // ATTRIBUTES
     // -------------------------------------------------------------------------
-
-    /** preset game values for max number of {@code Block}s */
-    // private static final int MAX_NUMBER_OF_BLOCKS = 14;
 
     /** Winning Positions {@code PositionList}*/
     private static final
