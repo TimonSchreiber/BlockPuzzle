@@ -62,9 +62,12 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
      */
     public PositionList(final List<Position> positions) {
         this.positions = new ArrayList<>();
+
         for (final Position position : positions) {
             this.positions.add(new Position(position));
         }
+
+        Collections.sort(this.positions);
     }
 
     /**
@@ -74,6 +77,7 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
      */
     public PositionList(final PositionList positionList) {
         this.positions = new ArrayList<>();
+        
         for (final Position position : positionList) {
             this.positions.add(new Position(position));
         }
