@@ -1,7 +1,7 @@
 package block;
 
 import field.Direction;
-
+// (String name, Color color, Position position, int size, Direction direction, MovePattern movePattern, bool isElbow, bool isMainBlock)
 public record BlockInfo(Position position, int size, Direction direction) {
     // TODO:
     // maybe change size to Name, have two constructors:
