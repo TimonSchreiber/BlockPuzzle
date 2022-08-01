@@ -38,8 +38,8 @@ public final class JumpingRabbits {
 
     /** List of a List of {@code BlockInfos} */
     private static final
-        List<List<BlockInfo>> START_POSITION_LIST
-            = new ArrayList<>();
+    List<List<BlockInfo>> START_POSITION_LIST = 
+        new ArrayList<>();
 
     // -------------------------------------------------------------------------
     // ATTRIBUTES
