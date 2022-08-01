@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import field.Directions;
+import field.Direction;
 
 public final class PositionList implements Iterable<Position>, Comparable<PositionList> {
 
@@ -55,6 +55,19 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
     }
 
     /**
+     * TODO: only added to create the PositionList form teh winning conditions.
+     * Class constrcutor form a {@code List} of {@code Positions}.
+     * 
+     * @param positions
+     */
+    public PositionList(final List<Position> positions) {
+        this.positions = new ArrayList<>();
+        for (final Position position : positions) {
+            this.positions.add(new Position(position));
+        }
+    }
+
+    /**
      * Copy constructor.
      *
      * @param positionList
@@ -75,7 +88,7 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
      *
      * @param directions
      */
-    public void moveTowards(final Directions... directions) {
+    public void moveTowards(final Direction... directions) {
         this.positions.replaceAll(pos -> pos.moveTowards(directions));
     }
 
@@ -107,7 +120,7 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
         // Object must be PositionList at this point
         final PositionList other = (PositionList) obj;
 
-        return    ((this.positions == other.positions)
+        return  ((this.positions == other.positions)
                 || ((this.positions != null)
                     && this.positions.equals(other.positions)));
     }
