@@ -1,6 +1,7 @@
 package field;
 
 import java.awt.Color;
+import java.util.List;
 
 import block.Block;
 import block.BlockInfo;
@@ -13,14 +14,21 @@ public final class GameField {
     // ATTRIBUTES
     // -------------------------------------------------------------------------
 
+    // -----
+    // TODO: move this section into the corresponding Game classes and pass it into the a GameField object.
+    // TODO: change name to something more generic but yet meaningful
+
     /** Winning Positions {@code PositionList}*/
     private static final
     PositionList WINNING_SQUARES =
         new PositionList(
-            new BlockInfo(
+            List.of(
                 new Position(4, 0),
-                4,
-                Directions.U));
+                new Position(5, 0),
+                new Position(4, 1),
+                new Position(5, 1)
+            )
+        );
 
     /** preset game values for height */
     private static final int HEIGHT = 5;
@@ -28,8 +36,7 @@ public final class GameField {
     /** preset game values for width */
     private static final int WIDTH = 6;
 
-    /** Changes to {@code true} if the victory condition is met */
-    // private boolean isWon;
+    // -----
 
     /** {@code BlockSet} to keep track of every {@code Block} */
     private final BlockSet blockSet;
@@ -73,24 +80,9 @@ public final class GameField {
      *
      * @return
      */
-    public boolean checkWinnigCondition(/* Block block */) {
+    public boolean checkWinnigCondition() {
         return this.blockSet.getBlock("R1").positionList().equals(WINNING_SQUARES);
         // TODO: maybe use forwarding here
-
-
-        // TODO: delte this old implementation
-        // int counter = 0;
-
-        // for (Position pos : block.positionList()) {
-        //     if (this.WINNING_SQUARES.contains(pos)) {
-        //         counter++;
-        //     }
-        // }
-
-        // // Do not set isWon BACK to false if this method is called for a "not won" game (--> parallel execution)
-        // if (counter == this.WINNING_SQUARES.getSize()) {
-        //     this.isWon = true;
-        // }
     }
 
     /**
