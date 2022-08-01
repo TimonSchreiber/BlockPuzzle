@@ -8,7 +8,7 @@ import block.Block;
 import block.BlockInfo;
 import block.Position;
 import field.BlockSet;
-import field.Directions;
+import field.Direction;
 import field.GameField;
 import field.Move;
 
@@ -19,7 +19,18 @@ public final class RushHour {
     // -------------------------------------------------------------------------
 
     // TODO: 1# pass this into the GameField
+    /** preset game values for size */
     // private static final int SIZE = 6;
+
+    /** Winning Positions {@code PositionList}*/
+    // private static final
+    // PositionList WINNING_SQUARES =
+    //     new PositionList(
+    //         List.of(
+    //             new Position(4, 3),
+    //             new Position(5, 3)
+    //         )
+    //     );
 
     /** List of a List of {@code BlockInfos} */
     private static final
@@ -73,33 +84,34 @@ public final class RushHour {
     // -------------------------------------------------------------------------
 
     static {
+        // TODO: INFO: for now the red car has a different name than the
+        // other cars of the same size.
+        // Can it still be in the first place? Maybe change the way Blocks are ordered
 
-        /* Game 0 - 13 Moves
+        // TODO: add a 3 long block to the BlockTypes
+
+        /* Game 0 - 26 Moves    // TODO: check the car names/car order
          *
-         * Y3 Y3 Y4 B1 B2 __
-         * Y3 Y4 Y4 B1 B2 __
-         * Y1 Y1 G5 G6 R1 R1
-         * Y1 Y2 G3 G4 R1 R1
-         * Y2 Y2 G1 G2 B3 B3
+         * Y1 __ __ B3 __ __
+         * Y1 __ __ B3 B5 B5
+         * Y1 R1 R1 B2 __ __
+         * __ __ Y2 B2 B4 B4
+         * __ __ Y2 B1 B1 B6
+         * __ __ Y2 __ __ B6
          */
 
         RushHour.START_POSITION_LIST.add(
             new ArrayList<>(
                 Arrays.asList(
-                    new BlockInfo(new Position(4, 2), 4, Directions.R),     // R4
-                    new BlockInfo(new Position(1, 0), 3, Directions.L),     // Y1
-                    new BlockInfo(new Position(0, 2), 3, Directions.R),     // Y2
-                    new BlockInfo(new Position(0, 4), 3, Directions.R),     // Y3
-                    new BlockInfo(new Position(2, 3), 3, Directions.L),     // Y4
-                    new BlockInfo(new Position(3, 3), 2, Directions.U),     // B1
-                    new BlockInfo(new Position(4, 3), 2, Directions.U),     // B2
-                    new BlockInfo(new Position(4, 0), 2, Directions.R),     // B3
-                    new BlockInfo(new Position(2, 0), 1, Directions.D),     // G1
-                    new BlockInfo(new Position(3, 0), 1, Directions.D),     // G2
-                    new BlockInfo(new Position(2, 1), 1, Directions.D),     // G3
-                    new BlockInfo(new Position(3, 1), 1, Directions.D),     // G4
-                    new BlockInfo(new Position(2, 2), 1, Directions.D),     // G5
-                    new BlockInfo(new Position(3, 2), 1, Directions.D)      // G6
+                    new BlockInfo(new Position(1, 3), 2, Direction.R),     // R1
+                    new BlockInfo(new Position(0, 3), 3, Direction.U),     // Y1   FIXME: for now not working: a Block of size 3 will be an elbow
+                    new BlockInfo(new Position(3, 0), 3, Direction.U),     // Y2
+                    new BlockInfo(new Position(3, 1), 2, Direction.R),     // B1
+                    new BlockInfo(new Position(3, 2), 2, Direction.U),     // B2
+                    new BlockInfo(new Position(3, 4), 2, Direction.U),     // B3
+                    new BlockInfo(new Position(4, 2), 2, Direction.R),     // B4
+                    new BlockInfo(new Position(4, 4), 2, Direction.R),     // B5
+                    new BlockInfo(new Position(5, 0), 2, Direction.U)      // B6
                     )
                 )
             );    // Game 0
