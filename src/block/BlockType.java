@@ -2,6 +2,7 @@ package block;
 
 import java.awt.Color;
 
+// TODO: is this enum really needed? Can the project be changed so that this class is superfluous?
 public enum BlockType {
 
     // -------------------------------------------------------------------------
