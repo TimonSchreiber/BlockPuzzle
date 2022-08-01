@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import block.BlockInfo;
 import block.Position;
 import block.PositionList;
-import field.Directions;
+import field.Direction;
 
 public class PositionListTests {
 
@@ -71,15 +71,15 @@ public class PositionListTests {
             new BlockInfo(
                 new Position(1, 1),
                 4,
-                Directions.D));
+                Direction.D));
 
         PositionList expected = new PositionList(
             new BlockInfo(
                 new Position(2, 2),
                 4,
-                Directions.D));
+                Direction.D));
 
-        actual.moveTowards(Directions.R, Directions.U);
+        actual.moveTowards(Direction.R, Direction.U);
 
         assertEquals(expected, actual);
     }
@@ -91,13 +91,13 @@ public class PositionListTests {
             new BlockInfo(
                 new Position(4, 1),
                 4,
-                Directions.D));
+                Direction.D));
 
         PositionList pl2 = new PositionList(
             new BlockInfo(
                 new Position(3, 2),
                 2,
-                Directions.R));
+                Direction.R));
 
                 assertEquals(-1, pl1.compareTo(pl2));
     }
@@ -109,13 +109,13 @@ public class PositionListTests {
             new BlockInfo(
                 new Position(4, 1),
                 4,
-                Directions.D));
+                Direction.D));
 
         PositionList pl2 = new PositionList(
             new BlockInfo(
                 new Position(3, 2),
                 4,
-                Directions.R));
+                Direction.R));
 
         assertEquals(-1, pl1.compareTo(pl2));
     }

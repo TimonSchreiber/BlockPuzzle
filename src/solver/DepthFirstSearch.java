@@ -10,7 +10,7 @@ import java.util.Set;
 
 import block.Block;
 import field.BlockSet;
-import field.Directions;
+import field.Direction;
 import field.GameField;
 import field.Move;
 import game.DirtyDozen;
@@ -72,7 +72,7 @@ public class DepthFirstSearch {
 
         for (final Block block : this.game.blocks()) {
 
-            for (final Directions direction : Directions.values()) {
+            for (final Direction direction : Direction.values()) {
 
                 final Move newMove = new Move(block.blockName(), direction);
 

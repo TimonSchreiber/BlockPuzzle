@@ -4,13 +4,13 @@ import org.junit.jupiter.api.Test;
 
 import block.BlockInfo;
 import block.Position;
-import field.Directions;
+import field.Direction;
 
 public class BlockInfoTests {
 
     @Test
     public void Test() {
-        BlockInfo bi = new BlockInfo(new Position(1, 1), 2, Directions.R);
+        BlockInfo bi = new BlockInfo(new Position(1, 1), 2, Direction.R);
 
         assertNotNull(bi);
     }

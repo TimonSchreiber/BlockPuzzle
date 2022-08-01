@@ -12,7 +12,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 import block.Block;
 import field.BlockSet;
-import field.Directions;
+import field.Direction;
 import field.GameField;
 import field.GameState;
 import field.Move;
@@ -73,7 +73,7 @@ public class BFS_WithThreads {
 
         for (final Block block : gameField.blocks()) {
 
-            for (final Directions direction : Directions.values()) {
+            for (final Direction direction : Direction.values()) {
 
                 final Move newMove = new Move(block.blockName(), direction);
 

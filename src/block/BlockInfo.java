@@ -1,8 +1,8 @@
 package block;
 
-import field.Directions;
+import field.Direction;
 
-public record BlockInfo(Position position, int size, Directions direction) {
+public record BlockInfo(Position position, int size, Direction direction) {
     // TODO:
     // maybe change size to Name, have two constructors:
     //      - one with name for StartingPositions

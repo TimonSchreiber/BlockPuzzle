@@ -1,6 +1,6 @@
 package block;
 
-import field.Directions;
+import field.Direction;
 
 public record Position(int x, int y) implements Comparable<Position> {
 
@@ -27,11 +27,11 @@ public record Position(int x, int y) implements Comparable<Position> {
      * @param directions
      * @return
      */
-    public Position moveTowards(final Directions... directions) {
+    public Position moveTowards(final Direction... directions) {
         int newX = this.x;
         int newY = this.y;
 
-        for (final Directions direction : directions) {
+        for (final Direction direction : directions) {
             switch (direction) {
                 case R: newX++; break;
                 case D: newY--; break;

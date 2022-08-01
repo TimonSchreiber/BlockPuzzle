@@ -4,7 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import block.Position;
-import field.Directions;
+import field.Direction;
 
 public class PositionTests {
 
@@ -14,7 +14,7 @@ public class PositionTests {
         Position actual = new Position(2, 3);
         Position expected = new Position(3, 4);
 
-        actual = actual.moveTowards(Directions.R, Directions.U);
+        actual = actual.moveTowards(Direction.R, Direction.U);
 
         assertEquals(expected, actual);
     }

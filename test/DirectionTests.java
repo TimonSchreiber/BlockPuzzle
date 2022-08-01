@@ -3,21 +3,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import field.Directions;
+import field.Direction;
 
 public class DirectionTests {
 
     @Test
     @DisplayName("getSize Should be 4")
     public void getSize() {
-        assertEquals(4, Directions.getSize());
+        assertEquals(4, Direction.getSize());
     }
 
     @Test
     @DisplayName("next Should return D When R")
     public void next() {
-        Directions actual = Directions.R;
-        Directions expected = Directions.D;
+        Direction actual = Direction.R;
+        Direction expected = Direction.D;
 
         actual = actual.next();
 
@@ -27,8 +27,8 @@ public class DirectionTests {
     @Test
     @DisplayName("reverse Should return D When U")
     public void reverse() {
-        Directions actual = Directions.U;
-        Directions expected = Directions.D;
+        Direction actual = Direction.U;
+        Direction expected = Direction.D;
 
         actual = actual.reverse();
 

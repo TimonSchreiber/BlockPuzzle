@@ -1,6 +1,6 @@
 package field;
 
-public record Move(String name, Directions direction) {
+public record Move(String name, Direction direction) {
 
     // -------------------------------------------------------------------------
     // CONSTRUCTOR

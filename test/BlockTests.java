@@ -8,7 +8,7 @@ import block.Block;
 import block.BlockInfo;
 import block.Position;
 import block.PositionList;
-import field.Directions;
+import field.Direction;
 import game.DirtyDozen;
 
 public class BlockTests {
@@ -36,7 +36,7 @@ public class BlockTests {
         Block actual = game.blocks().getBlock("G2");
         PositionList expected = new PositionList(new BlockInfo(new Position(5, 0), 1, null));
 
-        actual.moveTowards(Directions.D, Directions.D);
+        actual.moveTowards(Direction.D, Direction.D);
 
         assertEquals(expected, actual.positionList());
     }
@@ -48,13 +48,13 @@ public class BlockTests {
             new BlockInfo(
                 new Position(3, 2),
                 2,
-                Directions.D));
+                Direction.D));
 
         Block b2 = new Block(
             new BlockInfo(
                 new Position(3, 1),
                 2,
-                Directions.U));
+                Direction.U));
 
         assertEquals(b1, b2);
     }
@@ -66,10 +66,10 @@ public class BlockTests {
             new BlockInfo(
                 new Position(3, 2),
                 2,
-                Directions.D));
+                Direction.D));
         Block b2 = new Block(b1);
 
-        b1.moveTowards(Directions.D, Directions.L);
+        b1.moveTowards(Direction.D, Direction.L);
 
         assertNotEquals(b1, b2);
     }

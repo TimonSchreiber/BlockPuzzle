@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import org.junit.jupiter.api.Test;
 
-import block.BlockTypes;
+import block.BlockType;
 
 public class BlockTypesTests {
 
@@ -14,12 +14,12 @@ public class BlockTypesTests {
 
     @Test
     public void name_Square() {
-        assertEquals("G", BlockTypes.getName(1));
+        assertEquals("G", BlockType.getName(1));
     }
 
     @Test
     public void color_Square() {
-        assertEquals(Color.GREEN, BlockTypes.getColor(1));
+        assertEquals(Color.GREEN, BlockType.getColor(1));
     }
 
     // =========================================================================
@@ -28,12 +28,12 @@ public class BlockTypesTests {
 
     @Test
     public void name_Rectangle() {
-        assertEquals("B", BlockTypes.getName(2));
+        assertEquals("B", BlockType.getName(2));
     }
 
     @Test
     public void color_Rectangle() {
-        assertEquals(Color.BLUE, BlockTypes.getColor(2));
+        assertEquals(Color.BLUE, BlockType.getColor(2));
     }
 
     // =========================================================================
@@ -42,12 +42,12 @@ public class BlockTypesTests {
 
     @Test
     public void name_Elbow() {
-        assertEquals("Y", BlockTypes.getName(3));
+        assertEquals("Y", BlockType.getName(3));
     }
 
     @Test
     public void color_Elbow() {
-        assertEquals(Color.YELLOW, BlockTypes.getColor(3));
+        assertEquals(Color.YELLOW, BlockType.getColor(3));
     }
 
     // =========================================================================
@@ -56,11 +56,11 @@ public class BlockTypesTests {
 
     @Test
     public void name_LargeSquare() {
-        assertEquals("G", BlockTypes.getName(1));
+        assertEquals("G", BlockType.getName(1));
     }
 
     @Test
     public void color_LargeSquare() {
-        assertEquals(Color.RED, BlockTypes.getColor(4));
+        assertEquals(Color.RED, BlockType.getColor(4));
     }
 }

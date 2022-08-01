@@ -2,7 +2,7 @@ package block;
 
 import java.awt.Color;
 
-import field.Directions;
+import field.Direction;
 
 /**
  * TODO: maybe change the color creation, so that we get a name and create the color, and not a color and create the name
@@ -16,7 +16,7 @@ public final class Block implements Comparable<Block> {
     // TODO: change the way a Block is created; take a name and or color infer the size
     // and not a size and infer the name/color
     /** static counter for different types of {@code Block}s */
-    private static final int[] BLOCK_COUNTER = new int[BlockTypes.getSize()];
+    private static final int[] BLOCK_COUNTER = new int[BlockType.getSize()];
 
     // -------------------------------------------------------------------------
     // ATTRIBUTES
@@ -36,7 +36,7 @@ public final class Block implements Comparable<Block> {
      * @param blockInfo
      */
     public Block(final BlockInfo blockInfo) {
-        this.blockName = BlockTypes.getName(blockInfo.size())
+        this.blockName = BlockType.getName(blockInfo.size())
                         + ++Block.BLOCK_COUNTER[blockInfo.size() - 1];
         this.color = Block.createColor(blockInfo.size());
         this.positionList = new PositionList(blockInfo);
@@ -66,7 +66,7 @@ public final class Block implements Comparable<Block> {
      * @return        a darker {@code Color}
      */
     private static Color createColor(final int size) {
-        Color tmpClr = BlockTypes.getColor(size);
+        Color tmpClr = BlockType.getColor(size);
 
         for (int i = 1; i < Block.BLOCK_COUNTER[size - 1]; i++) {
             tmpClr = tmpClr.darker();
@@ -111,7 +111,7 @@ public final class Block implements Comparable<Block> {
      *
      * @param directions        the {@code Direction}s
      */
-    public void moveTowards(final Directions... directions) {
+    public void moveTowards(final Direction... directions) {
         this.positionList.moveTowards(directions);
         return;
     }
