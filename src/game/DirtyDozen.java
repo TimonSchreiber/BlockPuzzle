@@ -9,7 +9,7 @@ import block.BlockInfo;
 import block.Position;
 // import block.PositionList;
 import field.BlockSet;
-import field.Directions;
+import field.Direction;
 import field.GameField;
 import field.Move;
 
@@ -20,17 +20,22 @@ public final class DirtyDozen {
     // -------------------------------------------------------------------------
 
     // TODO: pass this into the GameField
+    /** preset game values for height */
     // private static final int HEIGHT = 5;
+    /** preset game values for width */
     // private static final int WIDTH = 6;
 
     /** Winning Positions {@code PositionList}*/
     // private static final
     // PositionList WINNING_SQUARES =
     //     new PositionList(
-    //         new BlockInfo(
+    //         List.of(
     //             new Position(4, 0),
-    //             4,
-    //             Directions.U));
+    //             new Position(5, 0),
+    //             new Position(4, 1),
+    //             new Position(5, 1)
+    //         )
+    //     );
 
     /** List of a List of {@code BlockInfos} */
     private static final
@@ -98,20 +103,20 @@ public final class DirtyDozen {
         DirtyDozen.START_POSITION_LIST.add(
             new ArrayList<>(
                 Arrays.asList(
-                    new BlockInfo(new Position(4, 2), 4, Directions.R),     // R4
-                    new BlockInfo(new Position(1, 0), 3, Directions.L),     // Y1
-                    new BlockInfo(new Position(0, 2), 3, Directions.R),     // Y2
-                    new BlockInfo(new Position(0, 4), 3, Directions.R),     // Y3
-                    new BlockInfo(new Position(2, 3), 3, Directions.L),     // Y4
-                    new BlockInfo(new Position(3, 3), 2, Directions.U),     // B1
-                    new BlockInfo(new Position(4, 3), 2, Directions.U),     // B2
-                    new BlockInfo(new Position(4, 0), 2, Directions.R),     // B3
-                    new BlockInfo(new Position(2, 0), 1, Directions.D),     // G1
-                    new BlockInfo(new Position(3, 0), 1, Directions.D),     // G2
-                    new BlockInfo(new Position(2, 1), 1, Directions.D),     // G3
-                    new BlockInfo(new Position(3, 1), 1, Directions.D),     // G4
-                    new BlockInfo(new Position(2, 2), 1, Directions.D),     // G5
-                    new BlockInfo(new Position(3, 2), 1, Directions.D)      // G6
+                    new BlockInfo(new Position(4, 2), 4, Direction.R),     // R1
+                    new BlockInfo(new Position(1, 0), 3, Direction.L),     // Y1
+                    new BlockInfo(new Position(0, 2), 3, Direction.R),     // Y2
+                    new BlockInfo(new Position(0, 4), 3, Direction.R),     // Y3
+                    new BlockInfo(new Position(2, 3), 3, Direction.L),     // Y4
+                    new BlockInfo(new Position(3, 3), 2, Direction.U),     // B1
+                    new BlockInfo(new Position(4, 3), 2, Direction.U),     // B2
+                    new BlockInfo(new Position(4, 0), 2, Direction.R),     // B3
+                    new BlockInfo(new Position(2, 0), 1, Direction.D),     // G1
+                    new BlockInfo(new Position(3, 0), 1, Direction.D),     // G2
+                    new BlockInfo(new Position(2, 1), 1, Direction.D),     // G3
+                    new BlockInfo(new Position(3, 1), 1, Direction.D),     // G4
+                    new BlockInfo(new Position(2, 2), 1, Direction.D),     // G5
+                    new BlockInfo(new Position(3, 2), 1, Direction.D)      // G6
                     )
                 )
             );    // Game 0
@@ -130,20 +135,20 @@ public final class DirtyDozen {
         DirtyDozen.START_POSITION_LIST.add(
             new ArrayList<>(
                 Arrays.asList(
-                    new BlockInfo(new Position(0, 4), 4, Directions.R),
-                    new BlockInfo(new Position(0, 1), 3, Directions.R),
-                    new BlockInfo(new Position(2, 0), 3, Directions.L),
-                    new BlockInfo(new Position(3, 1), 3, Directions.R),
-                    new BlockInfo(new Position(5, 0), 3, Directions.L),
-                    new BlockInfo(new Position(4, 2), 2, Directions.R),
-                    new BlockInfo(new Position(4, 3), 2, Directions.R),
-                    new BlockInfo(new Position(4, 4), 2, Directions.R),
-                    new BlockInfo(new Position(2, 2), 1, Directions.D),
-                    new BlockInfo(new Position(3, 2), 1, Directions.D),
-                    new BlockInfo(new Position(2, 3), 1, Directions.D),
-                    new BlockInfo(new Position(3, 3), 1, Directions.D),
-                    new BlockInfo(new Position(2, 4), 1, Directions.D),
-                    new BlockInfo(new Position(3, 4), 1, Directions.D)
+                    new BlockInfo(new Position(0, 4), 4, Direction.R),
+                    new BlockInfo(new Position(0, 1), 3, Direction.R),
+                    new BlockInfo(new Position(2, 0), 3, Direction.L),
+                    new BlockInfo(new Position(3, 1), 3, Direction.R),
+                    new BlockInfo(new Position(5, 0), 3, Direction.L),
+                    new BlockInfo(new Position(4, 2), 2, Direction.R),
+                    new BlockInfo(new Position(4, 3), 2, Direction.R),
+                    new BlockInfo(new Position(4, 4), 2, Direction.R),
+                    new BlockInfo(new Position(2, 2), 1, Direction.D),
+                    new BlockInfo(new Position(3, 2), 1, Direction.D),
+                    new BlockInfo(new Position(2, 3), 1, Direction.D),
+                    new BlockInfo(new Position(3, 3), 1, Direction.D),
+                    new BlockInfo(new Position(2, 4), 1, Direction.D),
+                    new BlockInfo(new Position(3, 4), 1, Direction.D)
                     )
                 )
             );    // Game 1
@@ -162,20 +167,20 @@ public final class DirtyDozen {
         DirtyDozen.START_POSITION_LIST.add(
             new ArrayList<>(
                 Arrays.asList(
-                    new BlockInfo(new Position(0, 4), 4, Directions.R),
-                    new BlockInfo(new Position(0, 1), 3, Directions.R),
-                    new BlockInfo(new Position(2, 0), 3, Directions.L),
-                    new BlockInfo(new Position(3, 1), 3, Directions.R),
-                    new BlockInfo(new Position(5, 0), 3, Directions.L),
-                    new BlockInfo(new Position(0, 2), 2, Directions.R),
-                    new BlockInfo(new Position(2, 2), 2, Directions.R),
-                    new BlockInfo(new Position(4, 2), 2, Directions.R),
-                    new BlockInfo(new Position(2, 3), 1, Directions.D),
-                    new BlockInfo(new Position(3, 3), 1, Directions.D),
-                    new BlockInfo(new Position(4, 3), 1, Directions.D),
-                    new BlockInfo(new Position(2, 4), 1, Directions.D),
-                    new BlockInfo(new Position(3, 4), 1, Directions.D),
-                    new BlockInfo(new Position(4, 4), 1, Directions.D)
+                    new BlockInfo(new Position(0, 4), 4, Direction.R),
+                    new BlockInfo(new Position(0, 1), 3, Direction.R),
+                    new BlockInfo(new Position(2, 0), 3, Direction.L),
+                    new BlockInfo(new Position(3, 1), 3, Direction.R),
+                    new BlockInfo(new Position(5, 0), 3, Direction.L),
+                    new BlockInfo(new Position(0, 2), 2, Direction.R),
+                    new BlockInfo(new Position(2, 2), 2, Direction.R),
+                    new BlockInfo(new Position(4, 2), 2, Direction.R),
+                    new BlockInfo(new Position(2, 3), 1, Direction.D),
+                    new BlockInfo(new Position(3, 3), 1, Direction.D),
+                    new BlockInfo(new Position(4, 3), 1, Direction.D),
+                    new BlockInfo(new Position(2, 4), 1, Direction.D),
+                    new BlockInfo(new Position(3, 4), 1, Direction.D),
+                    new BlockInfo(new Position(4, 4), 1, Direction.D)
                     )
                 )
             );    // Game 2
@@ -194,20 +199,20 @@ public final class DirtyDozen {
         DirtyDozen.START_POSITION_LIST.add(
             new ArrayList<>(
                 Arrays.asList(
-                    new BlockInfo(new Position(0, 4), 4, Directions.R),
-                    new BlockInfo(new Position(3, 2), 3, Directions.R),
-                    new BlockInfo(new Position(5, 1), 3, Directions.L),
-                    new BlockInfo(new Position(3, 4), 3, Directions.R),
-                    new BlockInfo(new Position(5, 3), 3, Directions.L),
-                    new BlockInfo(new Position(0, 0), 2, Directions.R),
-                    new BlockInfo(new Position(0, 1), 2, Directions.R),
-                    new BlockInfo(new Position(0, 2), 2, Directions.R),
-                    new BlockInfo(new Position(2, 0), 1, Directions.D),
-                    new BlockInfo(new Position(2, 1), 1, Directions.D),
-                    new BlockInfo(new Position(2, 2), 1, Directions.D),
-                    new BlockInfo(new Position(2, 3), 1, Directions.D),
-                    new BlockInfo(new Position(2, 4), 1, Directions.D),
-                    new BlockInfo(new Position(3, 0), 1, Directions.D)
+                    new BlockInfo(new Position(0, 4), 4, Direction.R),
+                    new BlockInfo(new Position(3, 2), 3, Direction.R),
+                    new BlockInfo(new Position(5, 1), 3, Direction.L),
+                    new BlockInfo(new Position(3, 4), 3, Direction.R),
+                    new BlockInfo(new Position(5, 3), 3, Direction.L),
+                    new BlockInfo(new Position(0, 0), 2, Direction.R),
+                    new BlockInfo(new Position(0, 1), 2, Direction.R),
+                    new BlockInfo(new Position(0, 2), 2, Direction.R),
+                    new BlockInfo(new Position(2, 0), 1, Direction.D),
+                    new BlockInfo(new Position(2, 1), 1, Direction.D),
+                    new BlockInfo(new Position(2, 2), 1, Direction.D),
+                    new BlockInfo(new Position(2, 3), 1, Direction.D),
+                    new BlockInfo(new Position(2, 4), 1, Direction.D),
+                    new BlockInfo(new Position(3, 0), 1, Direction.D)
                     )
                 )
             );    // Game 3
@@ -226,20 +231,20 @@ public final class DirtyDozen {
         DirtyDozen.START_POSITION_LIST.add(
             new ArrayList<>(
                 Arrays.asList(
-                    new BlockInfo(new Position(0, 4), 4, Directions.R),
-                    new BlockInfo(new Position(1, 0), 3, Directions.L),
-                    new BlockInfo(new Position(0, 2), 3, Directions.R),
-                    new BlockInfo(new Position(2, 4), 3, Directions.R),
-                    new BlockInfo(new Position(4, 3), 3, Directions.L),
-                    new BlockInfo(new Position(2, 0), 2, Directions.R),
-                    new BlockInfo(new Position(2, 1), 2, Directions.R),
-                    new BlockInfo(new Position(2, 2), 2, Directions.R),
-                    new BlockInfo(new Position(4, 0), 1, Directions.D),
-                    new BlockInfo(new Position(4, 1), 1, Directions.D),
-                    new BlockInfo(new Position(4, 2), 1, Directions.D),
-                    new BlockInfo(new Position(5, 2), 1, Directions.D),
-                    new BlockInfo(new Position(5, 3), 1, Directions.D),
-                    new BlockInfo(new Position(5, 4), 1, Directions.D)
+                    new BlockInfo(new Position(0, 4), 4, Direction.R),
+                    new BlockInfo(new Position(1, 0), 3, Direction.L),
+                    new BlockInfo(new Position(0, 2), 3, Direction.R),
+                    new BlockInfo(new Position(2, 4), 3, Direction.R),
+                    new BlockInfo(new Position(4, 3), 3, Direction.L),
+                    new BlockInfo(new Position(2, 0), 2, Direction.R),
+                    new BlockInfo(new Position(2, 1), 2, Direction.R),
+                    new BlockInfo(new Position(2, 2), 2, Direction.R),
+                    new BlockInfo(new Position(4, 0), 1, Direction.D),
+                    new BlockInfo(new Position(4, 1), 1, Direction.D),
+                    new BlockInfo(new Position(4, 2), 1, Direction.D),
+                    new BlockInfo(new Position(5, 2), 1, Direction.D),
+                    new BlockInfo(new Position(5, 3), 1, Direction.D),
+                    new BlockInfo(new Position(5, 4), 1, Direction.D)
                     )
                 )
             );    // Game 4
@@ -258,20 +263,20 @@ public final class DirtyDozen {
         DirtyDozen.START_POSITION_LIST.add(
             new ArrayList<>(
                 Arrays.asList(
-                    new BlockInfo(new Position(0, 4), 4, Directions.R),
-                    new BlockInfo(new Position(0, 1), 3, Directions.R),
-                    new BlockInfo(new Position(2, 0), 3, Directions.L),
-                    new BlockInfo(new Position(3, 1), 3, Directions.R),
-                    new BlockInfo(new Position(5, 0), 3, Directions.L),
-                    new BlockInfo(new Position(2, 2), 2, Directions.R),
-                    new BlockInfo(new Position(2, 3), 2, Directions.R),
-                    new BlockInfo(new Position(2, 4), 2, Directions.R),
-                    new BlockInfo(new Position(4, 2), 1, Directions.D),
-                    new BlockInfo(new Position(5, 2), 1, Directions.D),
-                    new BlockInfo(new Position(4, 3), 1, Directions.D),
-                    new BlockInfo(new Position(5, 3), 1, Directions.D),
-                    new BlockInfo(new Position(4, 4), 1, Directions.D),
-                    new BlockInfo(new Position(5, 4), 1, Directions.D)
+                    new BlockInfo(new Position(0, 4), 4, Direction.R),
+                    new BlockInfo(new Position(0, 1), 3, Direction.R),
+                    new BlockInfo(new Position(2, 0), 3, Direction.L),
+                    new BlockInfo(new Position(3, 1), 3, Direction.R),
+                    new BlockInfo(new Position(5, 0), 3, Direction.L),
+                    new BlockInfo(new Position(2, 2), 2, Direction.R),
+                    new BlockInfo(new Position(2, 3), 2, Direction.R),
+                    new BlockInfo(new Position(2, 4), 2, Direction.R),
+                    new BlockInfo(new Position(4, 2), 1, Direction.D),
+                    new BlockInfo(new Position(5, 2), 1, Direction.D),
+                    new BlockInfo(new Position(4, 3), 1, Direction.D),
+                    new BlockInfo(new Position(5, 3), 1, Direction.D),
+                    new BlockInfo(new Position(4, 4), 1, Direction.D),
+                    new BlockInfo(new Position(5, 4), 1, Direction.D)
                     )
                 )
             );    // Game 5
@@ -290,20 +295,20 @@ public final class DirtyDozen {
         DirtyDozen.START_POSITION_LIST.add(
             new ArrayList<>(
                 Arrays.asList(
-                    new BlockInfo(new Position(0, 4), 4, Directions.R),
-                    new BlockInfo(new Position(3, 0), 3, Directions.L),
-                    new BlockInfo(new Position(2, 2), 3, Directions.R),
-                    new BlockInfo(new Position(5, 0), 3, Directions.L),
-                    new BlockInfo(new Position(4, 2), 3, Directions.R),
-                    new BlockInfo(new Position(0, 0), 2, Directions.R),
-                    new BlockInfo(new Position(0, 1), 2, Directions.R),
-                    new BlockInfo(new Position(0, 2), 2, Directions.R),
-                    new BlockInfo(new Position(2, 3), 1, Directions.D),
-                    new BlockInfo(new Position(3, 3), 1, Directions.D),
-                    new BlockInfo(new Position(4, 3), 1, Directions.D),
-                    new BlockInfo(new Position(2, 4), 1, Directions.D),
-                    new BlockInfo(new Position(3, 4), 1, Directions.D),
-                    new BlockInfo(new Position(4, 4), 1, Directions.D)
+                    new BlockInfo(new Position(0, 4), 4, Direction.R),
+                    new BlockInfo(new Position(3, 0), 3, Direction.L),
+                    new BlockInfo(new Position(2, 2), 3, Direction.R),
+                    new BlockInfo(new Position(5, 0), 3, Direction.L),
+                    new BlockInfo(new Position(4, 2), 3, Direction.R),
+                    new BlockInfo(new Position(0, 0), 2, Direction.R),
+                    new BlockInfo(new Position(0, 1), 2, Direction.R),
+                    new BlockInfo(new Position(0, 2), 2, Direction.R),
+                    new BlockInfo(new Position(2, 3), 1, Direction.D),
+                    new BlockInfo(new Position(3, 3), 1, Direction.D),
+                    new BlockInfo(new Position(4, 3), 1, Direction.D),
+                    new BlockInfo(new Position(2, 4), 1, Direction.D),
+                    new BlockInfo(new Position(3, 4), 1, Direction.D),
+                    new BlockInfo(new Position(4, 4), 1, Direction.D)
                     )
                 )
             );    // Game 6
@@ -322,20 +327,20 @@ public final class DirtyDozen {
         DirtyDozen.START_POSITION_LIST.add(
             new ArrayList<>(
                 Arrays.asList(
-                    new BlockInfo(new Position(0, 4), 4, Directions.R),
-                    new BlockInfo(new Position(3, 1), 3, Directions.R),
-                    new BlockInfo(new Position(5, 0), 3, Directions.L),
-                    new BlockInfo(new Position(3, 4), 3, Directions.R),
-                    new BlockInfo(new Position(5, 3), 3, Directions.L),
-                    new BlockInfo(new Position(0, 0), 2, Directions.R),
-                    new BlockInfo(new Position(0, 1), 2, Directions.R),
-                    new BlockInfo(new Position(0, 2), 2, Directions.R),
-                    new BlockInfo(new Position(2, 0), 1, Directions.D),
-                    new BlockInfo(new Position(2, 1), 1, Directions.D),
-                    new BlockInfo(new Position(2, 2), 1, Directions.D),
-                    new BlockInfo(new Position(3, 2), 1, Directions.D),
-                    new BlockInfo(new Position(2, 3), 1, Directions.D),
-                    new BlockInfo(new Position(2, 4), 1, Directions.D)
+                    new BlockInfo(new Position(0, 4), 4, Direction.R),
+                    new BlockInfo(new Position(3, 1), 3, Direction.R),
+                    new BlockInfo(new Position(5, 0), 3, Direction.L),
+                    new BlockInfo(new Position(3, 4), 3, Direction.R),
+                    new BlockInfo(new Position(5, 3), 3, Direction.L),
+                    new BlockInfo(new Position(0, 0), 2, Direction.R),
+                    new BlockInfo(new Position(0, 1), 2, Direction.R),
+                    new BlockInfo(new Position(0, 2), 2, Direction.R),
+                    new BlockInfo(new Position(2, 0), 1, Direction.D),
+                    new BlockInfo(new Position(2, 1), 1, Direction.D),
+                    new BlockInfo(new Position(2, 2), 1, Direction.D),
+                    new BlockInfo(new Position(3, 2), 1, Direction.D),
+                    new BlockInfo(new Position(2, 3), 1, Direction.D),
+                    new BlockInfo(new Position(2, 4), 1, Direction.D)
                     )
                 )
             );    // Game 7
@@ -354,20 +359,20 @@ public final class DirtyDozen {
         DirtyDozen.START_POSITION_LIST.add(
             new ArrayList<>(
                 Arrays.asList(
-                    new BlockInfo(new Position(0, 4), 4, Directions.R),
-                    new BlockInfo(new Position(3, 4), 3, Directions.R),
-                    new BlockInfo(new Position(5, 0), 3, Directions.L),
-                    new BlockInfo(new Position(4, 2), 3, Directions.R),
-                    new BlockInfo(new Position(5, 3), 3, Directions.L),
-                    new BlockInfo(new Position(2, 0), 2, Directions.R),
-                    new BlockInfo(new Position(2, 1), 2, Directions.R),
-                    new BlockInfo(new Position(2, 2), 2, Directions.R),
-                    new BlockInfo(new Position(0, 0), 1, Directions.D),
-                    new BlockInfo(new Position(1, 0), 1, Directions.D),
-                    new BlockInfo(new Position(0, 1), 1, Directions.D),
-                    new BlockInfo(new Position(1, 1), 1, Directions.D),
-                    new BlockInfo(new Position(0, 2), 1, Directions.D),
-                    new BlockInfo(new Position(1, 2), 1, Directions.D)
+                    new BlockInfo(new Position(0, 4), 4, Direction.R),
+                    new BlockInfo(new Position(3, 4), 3, Direction.R),
+                    new BlockInfo(new Position(5, 0), 3, Direction.L),
+                    new BlockInfo(new Position(4, 2), 3, Direction.R),
+                    new BlockInfo(new Position(5, 3), 3, Direction.L),
+                    new BlockInfo(new Position(2, 0), 2, Direction.R),
+                    new BlockInfo(new Position(2, 1), 2, Direction.R),
+                    new BlockInfo(new Position(2, 2), 2, Direction.R),
+                    new BlockInfo(new Position(0, 0), 1, Direction.D),
+                    new BlockInfo(new Position(1, 0), 1, Direction.D),
+                    new BlockInfo(new Position(0, 1), 1, Direction.D),
+                    new BlockInfo(new Position(1, 1), 1, Direction.D),
+                    new BlockInfo(new Position(0, 2), 1, Direction.D),
+                    new BlockInfo(new Position(1, 2), 1, Direction.D)
                     )
                 )
             );    // Game 8
@@ -386,20 +391,20 @@ public final class DirtyDozen {
         DirtyDozen.START_POSITION_LIST.add(
             new ArrayList<>(
                 Arrays.asList(
-                    new BlockInfo(new Position(0, 4), 4, Directions.R),
-                    new BlockInfo(new Position(2, 1), 3, Directions.R),
-                    new BlockInfo(new Position(4, 0), 3, Directions.L),
-                    new BlockInfo(new Position(3, 2), 3, Directions.L),
-                    new BlockInfo(new Position(2, 4), 3, Directions.R),
-                    new BlockInfo(new Position(0, 0), 2, Directions.R),
-                    new BlockInfo(new Position(0, 1), 2, Directions.R),
-                    new BlockInfo(new Position(0, 2), 2, Directions.R),
-                    new BlockInfo(new Position(4, 2), 1, Directions.D),
-                    new BlockInfo(new Position(5, 2), 1, Directions.D),
-                    new BlockInfo(new Position(4, 3), 1, Directions.D),
-                    new BlockInfo(new Position(5, 3), 1, Directions.D),
-                    new BlockInfo(new Position(4, 4), 1, Directions.D),
-                    new BlockInfo(new Position(5, 4), 1, Directions.D)
+                    new BlockInfo(new Position(0, 4), 4, Direction.R),
+                    new BlockInfo(new Position(2, 1), 3, Direction.R),
+                    new BlockInfo(new Position(4, 0), 3, Direction.L),
+                    new BlockInfo(new Position(3, 2), 3, Direction.L),
+                    new BlockInfo(new Position(2, 4), 3, Direction.R),
+                    new BlockInfo(new Position(0, 0), 2, Direction.R),
+                    new BlockInfo(new Position(0, 1), 2, Direction.R),
+                    new BlockInfo(new Position(0, 2), 2, Direction.R),
+                    new BlockInfo(new Position(4, 2), 1, Direction.D),
+                    new BlockInfo(new Position(5, 2), 1, Direction.D),
+                    new BlockInfo(new Position(4, 3), 1, Direction.D),
+                    new BlockInfo(new Position(5, 3), 1, Direction.D),
+                    new BlockInfo(new Position(4, 4), 1, Direction.D),
+                    new BlockInfo(new Position(5, 4), 1, Direction.D)
                     )
                 )
             );    // Game 9
@@ -418,20 +423,20 @@ public final class DirtyDozen {
         DirtyDozen.START_POSITION_LIST.add(
             new ArrayList<>(
                 Arrays.asList(
-                    new BlockInfo(new Position(2, 1), 4, Directions.U),
-                    new BlockInfo(new Position(3, 4), 3, Directions.R),
-                    new BlockInfo(new Position(5, 0), 3, Directions.L),
-                    new BlockInfo(new Position(4, 2), 3, Directions.R),
-                    new BlockInfo(new Position(5, 3), 3, Directions.L),
-                    new BlockInfo(new Position(0, 0), 2, Directions.R),
-                    new BlockInfo(new Position(0, 1), 2, Directions.R),
-                    new BlockInfo(new Position(2, 0), 2, Directions.R),
-                    new BlockInfo(new Position(0, 2), 1, Directions.D),
-                    new BlockInfo(new Position(1, 2), 1, Directions.D),
-                    new BlockInfo(new Position(0, 3), 1, Directions.D),
-                    new BlockInfo(new Position(1, 3), 1, Directions.D),
-                    new BlockInfo(new Position(2, 3), 1, Directions.D),
-                    new BlockInfo(new Position(2, 4), 1, Directions.D)
+                    new BlockInfo(new Position(2, 1), 4, Direction.U),
+                    new BlockInfo(new Position(3, 4), 3, Direction.R),
+                    new BlockInfo(new Position(5, 0), 3, Direction.L),
+                    new BlockInfo(new Position(4, 2), 3, Direction.R),
+                    new BlockInfo(new Position(5, 3), 3, Direction.L),
+                    new BlockInfo(new Position(0, 0), 2, Direction.R),
+                    new BlockInfo(new Position(0, 1), 2, Direction.R),
+                    new BlockInfo(new Position(2, 0), 2, Direction.R),
+                    new BlockInfo(new Position(0, 2), 1, Direction.D),
+                    new BlockInfo(new Position(1, 2), 1, Direction.D),
+                    new BlockInfo(new Position(0, 3), 1, Direction.D),
+                    new BlockInfo(new Position(1, 3), 1, Direction.D),
+                    new BlockInfo(new Position(2, 3), 1, Direction.D),
+                    new BlockInfo(new Position(2, 4), 1, Direction.D)
                     )
                 )
             );    // Game 10
@@ -450,20 +455,20 @@ public final class DirtyDozen {
         DirtyDozen.START_POSITION_LIST.add(
             new ArrayList<>(
                 Arrays.asList(
-                    new BlockInfo(new Position(0, 4), 4, Directions.R),
-                    new BlockInfo(new Position(0, 1), 3, Directions.R),
-                    new BlockInfo(new Position(2, 0), 3, Directions.L),
-                    new BlockInfo(new Position(3, 4), 3, Directions.R),
-                    new BlockInfo(new Position(5, 2), 3, Directions.L),
-                    new BlockInfo(new Position(0, 2), 2, Directions.R),
-                    new BlockInfo(new Position(4, 0), 2, Directions.U),
-                    new BlockInfo(new Position(5, 0), 2, Directions.U),
-                    new BlockInfo(new Position(3, 0), 1, Directions.D),
-                    new BlockInfo(new Position(3, 1), 1, Directions.D),
-                    new BlockInfo(new Position(2, 2), 1, Directions.D),
-                    new BlockInfo(new Position(3, 2), 1, Directions.D),
-                    new BlockInfo(new Position(4, 3), 1, Directions.D),
-                    new BlockInfo(new Position(5, 4), 1, Directions.D)
+                    new BlockInfo(new Position(0, 4), 4, Direction.R),
+                    new BlockInfo(new Position(0, 1), 3, Direction.R),
+                    new BlockInfo(new Position(2, 0), 3, Direction.L),
+                    new BlockInfo(new Position(3, 4), 3, Direction.R),
+                    new BlockInfo(new Position(5, 2), 3, Direction.L),
+                    new BlockInfo(new Position(0, 2), 2, Direction.R),
+                    new BlockInfo(new Position(4, 0), 2, Direction.U),
+                    new BlockInfo(new Position(5, 0), 2, Direction.U),
+                    new BlockInfo(new Position(3, 0), 1, Direction.D),
+                    new BlockInfo(new Position(3, 1), 1, Direction.D),
+                    new BlockInfo(new Position(2, 2), 1, Direction.D),
+                    new BlockInfo(new Position(3, 2), 1, Direction.D),
+                    new BlockInfo(new Position(4, 3), 1, Direction.D),
+                    new BlockInfo(new Position(5, 4), 1, Direction.D)
                     )
                 )
             );    // Game 11
@@ -482,20 +487,20 @@ public final class DirtyDozen {
         DirtyDozen.START_POSITION_LIST.add(
             new ArrayList<>(
                 Arrays.asList(
-                    new BlockInfo(new Position(2, 1), 4, Directions.U),
-                    new BlockInfo(new Position(1, 4), 3, Directions.R),
-                    new BlockInfo(new Position(3, 3), 3, Directions.L),
-                    new BlockInfo(new Position(5, 0), 3, Directions.L),
-                    new BlockInfo(new Position(4, 4), 3, Directions.R),
-                    new BlockInfo(new Position(2, 0), 2, Directions.R),
-                    new BlockInfo(new Position(4, 1), 2, Directions.U),
-                    new BlockInfo(new Position(5, 2), 2, Directions.U),
-                    new BlockInfo(new Position(0, 0), 1, Directions.D),
-                    new BlockInfo(new Position(1, 0), 1, Directions.D),
-                    new BlockInfo(new Position(0, 1), 1, Directions.D),
-                    new BlockInfo(new Position(1, 1), 1, Directions.D),
-                    new BlockInfo(new Position(0, 2), 1, Directions.D),
-                    new BlockInfo(new Position(1, 2), 1, Directions.D)
+                    new BlockInfo(new Position(2, 1), 4, Direction.U),
+                    new BlockInfo(new Position(1, 4), 3, Direction.R),
+                    new BlockInfo(new Position(3, 3), 3, Direction.L),
+                    new BlockInfo(new Position(5, 0), 3, Direction.L),
+                    new BlockInfo(new Position(4, 4), 3, Direction.R),
+                    new BlockInfo(new Position(2, 0), 2, Direction.R),
+                    new BlockInfo(new Position(4, 1), 2, Direction.U),
+                    new BlockInfo(new Position(5, 2), 2, Direction.U),
+                    new BlockInfo(new Position(0, 0), 1, Direction.D),
+                    new BlockInfo(new Position(1, 0), 1, Direction.D),
+                    new BlockInfo(new Position(0, 1), 1, Direction.D),
+                    new BlockInfo(new Position(1, 1), 1, Direction.D),
+                    new BlockInfo(new Position(0, 2), 1, Direction.D),
+                    new BlockInfo(new Position(1, 2), 1, Direction.D)
                     )
                 )
             );    // Game 12
