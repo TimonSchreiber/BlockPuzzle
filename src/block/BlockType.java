@@ -2,7 +2,7 @@ package block;
 
 import java.awt.Color;
 
-public enum BlockTypes {
+public enum BlockType {
 
     // -------------------------------------------------------------------------
     // CONSTANTS
@@ -33,7 +33,7 @@ public enum BlockTypes {
      * @param name
      * @param color
      */
-    private BlockTypes(String name, Color color) {
+    private BlockType(String name, Color color) {
         this.NAME = name;
         this.COLOR = color;
     }
@@ -46,19 +46,19 @@ public enum BlockTypes {
      * Array of {@code BlockType}s with the value of every {@code BlockType}
      * constant.
      */
-    private static final BlockTypes[] VALUES = BlockTypes.values();
+    private static final BlockType[] VALUES = BlockType.values();
 
     // -------------------------------------------------------------------------
     // GETTERS
     // -------------------------------------------------------------------------
 
-    /**
+    /** // TODO: is thi used?
      * Gets the number of {@code BlockType} constants.
      *
      * @return    the number of {@code BlockType} constants
      */
     public static int getSize() {
-        return BlockTypes.VALUES.length;
+        return BlockType.VALUES.length;
     }
 
     /**
@@ -68,7 +68,7 @@ public enum BlockTypes {
      * @return
      */
     public static String getName(int blockSize) {
-        return BlockTypes.VALUES[blockSize - 1].NAME;
+        return BlockType.VALUES[blockSize - 1].NAME;
     }
 
     /** TODO
@@ -77,7 +77,7 @@ public enum BlockTypes {
      * @return
      */
     public static Color getColor(int blockSize) {
-        return BlockTypes.VALUES[blockSize - 1].COLOR;
+        return BlockType.VALUES[blockSize - 1].COLOR;
     }
 
     // =========================================================================
