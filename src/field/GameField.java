@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.util.List;
 
 import block.Block;
-import block.BlockInfo;
 import block.Position;
 import block.PositionList;
 
@@ -14,7 +13,8 @@ public final class GameField {
     // ATTRIBUTES
     // -------------------------------------------------------------------------
 
-    // -----
+    // ---------------
+
     // TODO: move this section into the corresponding Game classes and pass it into the a GameField object.
     // TODO: change name to something more generic but yet meaningful
 
@@ -36,7 +36,10 @@ public final class GameField {
     /** preset game values for width */
     private static final int WIDTH = 6;
 
-    // -----
+    // TODO: also define the neccessary properties of the canvas in the Gmae class
+    // e.g. Where the goal/target is
+
+    // ---------------
 
     /** {@code BlockSet} to keep track of every {@code Block} */
     private final BlockSet blockSet;
@@ -64,7 +67,7 @@ public final class GameField {
         this.blockSet = new BlockSet();
 
         for (final Block block : blockSet) {
-            this.placeBlock(new Block(block));
+            this.blockSet.add(new Block(block));
         }
     }
 
@@ -104,7 +107,7 @@ public final class GameField {
      * @param block     the {@code Block}
      */
     public void placeBlock(final Block block) {
-        this.blockSet.add(new Block(block));
+        this.blockSet.add(block);
         return;
     }
 
