@@ -1461,28 +1461,8 @@ public final class DirtyDozen {
 
         // ---------------------------------------------------------------------
 
-        // TODO: Maybe add more Games for testing/showing solutions
-        // (e.g. all green Blocks off to the top/left side)
-
     }   // static
 
     // =========================================================================
 
 }    // Dirty Dozen class
-
-// FIXME: delete if not used
-// Old Game 0
-// new BlockInfo(new Position(4, 2), 4, Direction.R),     // R1
-// new BlockInfo(new Position(1, 0), 3, Direction.L),     // Y1
-// new BlockInfo(new Position(0, 2), 3, Direction.R),     // Y2
-// new BlockInfo(new Position(0, 4), 3, Direction.R),     // Y3
-// new BlockInfo(new Position(2, 3), 3, Direction.L),     // Y4
-// new BlockInfo(new Position(3, 3), 2, Direction.U),     // B1
-// new BlockInfo(new Position(4, 3), 2, Direction.U),     // B2
-// new BlockInfo(new Position(4, 0), 2, Direction.R),     // B3
-// new BlockInfo(new Position(2, 0), 1, Direction.D),     // G1
-// new BlockInfo(new Position(3, 0), 1, Direction.D),     // G2
-// new BlockInfo(new Position(2, 1), 1, Direction.D),     // G3
-// new BlockInfo(new Position(3, 1), 1, Direction.D),     // G4
-// new BlockInfo(new Position(2, 2), 1, Direction.D),     // G5
-// new BlockInfo(new Position(3, 2), 1, Direction.D)      // G6
