@@ -1,5 +1,12 @@
 import java.util.Scanner;
+import java.awt.Color;
 
+import block.Block;
+import field.Direction;
+import field.MovePattern;
+import game.DirtyDozen;
+import game.JumpingRabbits;
+import game.RushHour;
 import solver.BFS_WithThreads;
 import solver.BreadthFirstSearch;
 import solver.DepthFirstSearch;
@@ -8,10 +15,28 @@ public class App {
 
     public static void main(String[] args) throws Exception {
 
+        // System.out.println("Yellow:\t\t" + Color.YELLOW);
+        // System.out.println("Yellow.D:\t" + Color.YELLOW.darker());
+        // System.out.println("Blue:\t\t" + Color.BLUE);
+        // System.out.println("Cyan:\t\t" + Color.CYAN);
+        // System.out.println("Magenta:\t" + Color.MAGENTA);
+        // System.out.println("Dark_G:\t\t" + Color.DARK_GRAY);
+        // System.out.println("Gray:\t\t" + Color.GRAY);
+        // System.out.println("Pink:\t\t" + Color.PINK);
+        // System.out.println("Pink.B\t" + Color.PINK.brighter());
+        // System.out.println("Pink.D\t" + Color.PINK.darker());
+        
+        // RushHour game = new RushHour(2);
+
+        // System.out.println("BlockSet:");
+        // for (Block block : game.blocks()) {
+        //     System.out.println(block.blockName());
+        // }
+
         // System variables
         // New Scanner
         try (final Scanner scanner = new Scanner(System.in)) {
-            String type = "b";
+            String type = "t";
             int number = 6;
             System.out.println("Game Number: " + number);     // TODO: delete?
             int delay = 0;
@@ -32,7 +57,9 @@ public class App {
                 default:
                     System.err.println("Invalid input!");
             }
-          }
+        }
+
+        // ---------------------------------------------------------------------
 
         // switch (args.length) {
         //      case 3:
