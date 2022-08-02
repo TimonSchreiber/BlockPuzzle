@@ -68,7 +68,8 @@ public class BreadthFirstSearch {
 
         for (final Block block : gameField.blocks()) {
 
-            for (final Direction direction : Direction.values()) {
+            // for (final Direction direction : Direction.values()) {   TODO: old form: delete of not needed.
+            for (final Direction direction : block.movePattern()) {
 
                 final Move newMove = new Move(block.blockName(), direction);
 

@@ -72,7 +72,8 @@ public class DepthFirstSearch {
 
         for (final Block block : this.game.blocks()) {
 
-            for (final Direction direction : Direction.values()) {
+            // for (final Direction direction : Direction.values()) {   TODO: old form: delete if not needed
+            for (final Direction direction : block.movePattern()) {
 
                 final Move newMove = new Move(block.blockName(), direction);
 
