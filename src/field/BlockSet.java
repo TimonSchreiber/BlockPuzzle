@@ -144,7 +144,7 @@ public final class BlockSet implements Iterable<Block> {
         // Object must be PositionList at this point
         final BlockSet other = (BlockSet) obj;
 
-        return    ((this.blocks == other.blocks)
+        return  ((this.blocks == other.blocks)
                 || ((this.blocks != null)
                     && this.blocks.equals(other.blocks)));
     }
@@ -157,7 +157,7 @@ public final class BlockSet implements Iterable<Block> {
         final int PRIME = 31;
         int hash = 7;
 
-        hash = PRIME * hash + this.blocks.size();
+        hash = PRIME * hash + Integer.hashCode(this.blocks.size());
         hash = PRIME * hash + ((this.blocks == null)
                                     ? 0
                                     : this.blocks.hashCode());
