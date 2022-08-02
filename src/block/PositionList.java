@@ -19,39 +19,50 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
     // CONSTRUCTORS
     // -------------------------------------------------------------------------
 
-    /**
+    /** Old constructor: when not needed -> delete
      * TODO: Maybe put this into a static factory method? (single responsibility)
      * Class constructor form a {@code BlockInfo}.
      *
-     * @param blockInfo
+     * @param positionsInfo
      */
-    public PositionList(final BlockInfo blockInfo) {
-        this.positions = new ArrayList<>();
+    // public PositionList(final PositionsInfo positionsInfo) {
+    //     this.positions = new ArrayList<>();
 
-        switch (blockInfo.size()) {
-            case 4:
-                this.positions.add(
-                    blockInfo.position().moveTowards(
-                        blockInfo.direction(),
-                        blockInfo.direction().next()));
-                // falls through
-            case 3:
-                this.positions.add(
-                    blockInfo.position().moveTowards(
-                        blockInfo.direction().next()));
-                // falls through
-            case 2:
-                this.positions.add(
-                    blockInfo.position().moveTowards(
-                        blockInfo.direction()));
-                // falls through
-            default:
-                this.positions.add(
-                    blockInfo.position());
-                break;
+    //     switch (positionsInfo.size()) {
+    //         case 4:
+    //             this.positions.add(
+    //                 positionsInfo.position().moveTowards(
+    //                     positionsInfo.direction(),
+    //                     positionsInfo.direction().next()));
+    //             // falls through
+    //         case 3:
+    //             this.positions.add(
+    //                 positionsInfo.position().moveTowards(
+    //                     positionsInfo.direction().next()));
+    //             // falls through
+    //         case 2:
+    //             this.positions.add(
+    //                 positionsInfo.position().moveTowards(
+    //                     positionsInfo.direction()));
+    //             // falls through
+    //         default:
+    //             this.positions.add(
+    //                 positionsInfo.position());
+    //             break;
+    //     }
+
+    //     Collections.sort(this.positions);
+    // }
+
+    /** TODO:
+     * 
+     */
+    public PositionList(final PositionsInfo positionsInfo) {
+        if (positionsInfo.isElbow()) {
+            this.positions = this.newElbow(positionsInfo);
+        } else {
+            this.positions = this.newLine(positionsInfo);
         }
-
-        Collections.sort(this.positions);
     }
 
     /**
@@ -81,6 +92,57 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
         for (final Position position : positionList) {
             this.positions.add(new Position(position));
         }
+    }
+
+    // -------------------------------------------------------------------------
+    // FACTORYS
+    // -------------------------------------------------------------------------
+
+    /** TODO:
+     * 
+     */
+    private List<Position> newLine(PositionsInfo positionsInfo) {
+        List<Position> tmpList = new ArrayList<>();
+        Position tmpPosition = positionsInfo.position();
+
+        for (int i = 0; i < positionsInfo.size(); ++i) {
+            tmpList.add(tmpPosition);
+            tmpPosition = tmpPosition.moveTowards(positionsInfo.direction());
+        }
+
+        Collections.sort(tmpList);
+        return tmpList;
+    }
+
+    /** TODO:
+     * 
+     */
+    private List<Position> newElbow(final PositionsInfo positionsInfo) {
+        List<Position> tmpList = new ArrayList<>();
+
+        switch (positionsInfo.size()) {
+            case 4:
+                tmpList.add(
+                    positionsInfo.position().moveTowards(
+                        positionsInfo.direction(),
+                        positionsInfo.direction().next()));
+                // falls through
+            case 3:
+                tmpList.add(
+                    positionsInfo.position().moveTowards(
+                        positionsInfo.direction().next()));
+                // falls through
+            default:
+                tmpList.add(
+                    positionsInfo.position().moveTowards(
+                        positionsInfo.direction()));
+                tmpList.add(
+                    positionsInfo.position());
+                break;
+        }
+
+        Collections.sort(tmpList);
+        return tmpList;
     }
 
     // -------------------------------------------------------------------------
@@ -137,7 +199,7 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
         final int PRIME = 31;
         int hash = 7;
 
-        hash = PRIME * hash + this.positions.size();
+        hash = PRIME * hash + Integer.hashCode(this.positions.size());
         hash = PRIME * hash + ((this.positions == null)
                                     ? 0
                                     : this.positions.hashCode());
@@ -154,7 +216,7 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
     // -------------------------------------------------------------------------
 
     /**
-     * Returns an {@code Iterator} over all {@code Position}s.
+     * Returns an {@code Iterator} over all {@code Positions}.
      */
     @Override
     public Iterator<Position> iterator() {
