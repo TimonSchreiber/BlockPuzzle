@@ -79,6 +79,53 @@ public final class GameState {
         return newMovesList;
     }
 
+    // -------------------------------------------------------------------------
+    // EQUALS AND HASH-CODE
+    // -------------------------------------------------------------------------
+
+    /**
+     * Overrides the equals method
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if ((obj == null) || (this.getClass() != obj.getClass())) {
+            return false;
+        }
+
+        // Object must be PositionList at this point
+        final GameState other = (GameState) obj;
+
+        return  ((this.blockSet == other.blockSet)
+                    || ((this.blockSet != null)
+                        && this.blockSet.equals(other.blockSet)))
+                && ((this.moves == other.moves)
+                    || ((this.moves != null)
+                        && this.moves.equals(other.moves)));
+    }
+
+    /** TODO
+     * Overrides the hashCode method to match the equals method.
+     */
+    @Override
+    public int hashCode() {
+        final int PRIME = 31;
+        int hash = 7;
+
+        hash = PRIME * hash + ((this.blockSet == null)
+                                    ? 0
+                                    : this.blockSet.hashCode());
+        hash = PRIME * hash + Integer.hashCode(this.moves.size());
+        hash = PRIME * hash + ((this.moves == null)
+                                    ? 0
+                                    : this.moves.hashCode());
+
+        return hash;
+    }
+
     // =========================================================================
 
 }   // GameState class
