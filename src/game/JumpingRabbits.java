@@ -146,7 +146,7 @@ public final class JumpingRabbits {
                     new BlockInfo(
                         R1,
                         RABBIT_1,
-                        MovePattern.allDirections,
+                        MovePattern.ALL_DIRECTIONS,
                         true,
                         new PositionsInfo(new Position(3, 2), 1, Direction.D, false)),
                     new BlockInfo(
@@ -188,7 +188,7 @@ public final class JumpingRabbits {
                     new BlockInfo(
                         R1,
                         RABBIT_1,
-                        MovePattern.allDirections,
+                        MovePattern.ALL_DIRECTIONS,
                         true,
                         new PositionsInfo(new Position(2, 3), 1, Direction.D, false)),
                     new BlockInfo(
@@ -236,13 +236,13 @@ public final class JumpingRabbits {
                         new BlockInfo(
                             R1,
                             RABBIT_1,
-                            MovePattern.allDirections,
+                            MovePattern.ALL_DIRECTIONS,
                             true,
                             new PositionsInfo(new Position(0, 1), 1, Direction.D, false)),
                         new BlockInfo(
                             R2,
                             RABBIT_2,
-                            MovePattern.allDirections,
+                            MovePattern.ALL_DIRECTIONS,
                             true,
                             new PositionsInfo(new Position(3, 1), 1, Direction.D, false)),
                         new BlockInfo(
@@ -296,7 +296,7 @@ public final class JumpingRabbits {
                         new BlockInfo(
                             R1,
                             RABBIT_1,
-                            MovePattern.allDirections,
+                            MovePattern.ALL_DIRECTIONS,
                             true,
                             new PositionsInfo(new Position(2, 0), 1, Direction.D, false)),
                         new BlockInfo(
@@ -350,19 +350,19 @@ public final class JumpingRabbits {
                         new BlockInfo(
                             R1,
                             RABBIT_1,
-                            MovePattern.allDirections,
+                            MovePattern.ALL_DIRECTIONS,
                             true,
                             new PositionsInfo(new Position(3, 0), 1, Direction.D, false)),
                         new BlockInfo(
                             R2,
                             RABBIT_2,
-                            MovePattern.allDirections,
+                            MovePattern.ALL_DIRECTIONS,
                             true,
                             new PositionsInfo(new Position(3, 3), 1, Direction.D, false)),
                         new BlockInfo(
                             R3,
                             RABBIT_3,
-                            MovePattern.allDirections,
+                            MovePattern.ALL_DIRECTIONS,
                             true,
                             new PositionsInfo(new Position(4, 4), 1, Direction.D, false)),
                         new BlockInfo(
@@ -410,25 +410,25 @@ public final class JumpingRabbits {
                         new BlockInfo(
                             R1,
                             RABBIT_1,
-                            MovePattern.allDirections,
+                            MovePattern.ALL_DIRECTIONS,
                             true,
                             new PositionsInfo(new Position(1, 0), 1, Direction.D, false)),
                         new BlockInfo(
                             R2,
                             RABBIT_2,
-                            MovePattern.allDirections,
+                            MovePattern.ALL_DIRECTIONS,
                             true,
                             new PositionsInfo(new Position(0, 2), 1, Direction.D, false)),
                         new BlockInfo(
                             R3,
                             RABBIT_3,
-                            MovePattern.allDirections,
+                            MovePattern.ALL_DIRECTIONS,
                             true,
                             new PositionsInfo(new Position(4, 2), 1, Direction.D, false)),
                         new BlockInfo(
                             R4,
                             RABBIT_4,
-                            MovePattern.allDirections,
+                            MovePattern.ALL_DIRECTIONS,
                             true,
                             new PositionsInfo(new Position(4, 4), 1, Direction.D, false)),
                         new BlockInfo(
