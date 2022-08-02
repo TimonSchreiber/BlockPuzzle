@@ -1,8 +1,17 @@
 package block;
 
-import field.Direction;
-// (String name, Color color, Position position, int size, Direction direction, MovePattern movePattern, bool isElbow, bool isMainBlock)
-public record BlockInfo(Position position, int size, Direction direction) {
+import java.awt.Color;
+
+// import field.Direction;
+import field.MovePattern;
+
+// --> old record fields <--
+// (Position position, int size, Direction direction)
+public record BlockInfo(String name,
+                        Color color,
+                        MovePattern movePattern,
+                        boolean isMainBlock,
+                        PositionsInfo positionsInfo) {
     // TODO:
     // maybe change size to Name, have two constructors:
     //      - one with name for StartingPositions
