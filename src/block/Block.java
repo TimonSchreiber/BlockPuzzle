@@ -3,6 +3,7 @@ package block;
 import java.awt.Color;
 
 import field.Direction;
+import field.MovePattern;
 
 /**
  * TODO: maybe change the color creation, so that we get a name and create the color, and not a color and create the name
@@ -16,15 +17,17 @@ public final class Block implements Comparable<Block> {
     // TODO: change the way a Block is created; take a name and or color infer the size
     // and not a size and infer the name/color
     /** static counter for different types of {@code Block}s */
-    private static final int[] BLOCK_COUNTER = new int[BlockType.getSize()];
+    // private static final int[] BLOCK_COUNTER = new int[BlockType.getSize()];
 
     // -------------------------------------------------------------------------
     // ATTRIBUTES
     // -------------------------------------------------------------------------
 
+    private final boolean isMainBlock;  // TODO: new field form BlockInfo; add to #equals()
     private final String blockName;
     private final Color color;
     private final PositionList positionList;
+    private final MovePattern movePattern;  // TODO: new field form BlockInfo; FIXME: Maybe add to #equals() und #hashCode()???
 
     // -------------------------------------------------------------------------
     // CONSTRUCTORS
@@ -35,11 +38,19 @@ public final class Block implements Comparable<Block> {
      *
      * @param blockInfo
      */
+    // public Block(final BlockInfo blockInfo) {
+    //     this.blockName = BlockType.getName(blockInfo.size())
+    //                     + ++Block.BLOCK_COUNTER[blockInfo.size() - 1];
+    //     this.color = Block.createColor(blockInfo.size());
+    //     this.positionList = new PositionList(blockInfo);
+    // }
+
     public Block(final BlockInfo blockInfo) {
-        this.blockName = BlockType.getName(blockInfo.size())
-                        + ++Block.BLOCK_COUNTER[blockInfo.size() - 1];
-        this.color = Block.createColor(blockInfo.size());
-        this.positionList = new PositionList(blockInfo);
+        this.isMainBlock = blockInfo.isMainBlock();
+        this.blockName = blockInfo.name();
+        this.color = blockInfo.color();
+        this.positionList = new PositionList(blockInfo.positionsInfo());
+        this.movePattern = blockInfo.movePattern();
     }
 
     /**
@@ -48,9 +59,11 @@ public final class Block implements Comparable<Block> {
      * @param block        the {@code Block}
      */
     public Block(final Block block) {
+        this.isMainBlock = block.isMainBlock;
         this.blockName = block.blockName;
         this.color = block.color;
         this.positionList = new PositionList(block.positionList);
+        this.movePattern = block.movePattern;
     }
 
     // -------------------------------------------------------------------------
@@ -58,6 +71,7 @@ public final class Block implements Comparable<Block> {
     // -------------------------------------------------------------------------
 
     /**
+     * TODO: deprecated?
      * Creates the {@code Color} for the {@code Block} by repeatedly using
      * {@link Color#darker()} for each {@code Block} of the same
      * {@code BlockType} that was already created.
@@ -65,39 +79,43 @@ public final class Block implements Comparable<Block> {
      * @param size    the size
      * @return        a darker {@code Color}
      */
-    private static Color createColor(final int size) {
-        Color tmpClr = BlockType.getColor(size);
+    // private static Color createColor(final int size) {
+    //     Color tmpClr = BlockType.getColor(size);
 
-        for (int i = 1; i < Block.BLOCK_COUNTER[size - 1]; i++) {
-            tmpClr = tmpClr.darker();
-        }
+    //     for (int i = 1; i < Block.BLOCK_COUNTER[size - 1]; i++) {
+    //         tmpClr = tmpClr.darker();
+    //     }
 
-        return tmpClr;
-    }
+    //     return tmpClr;
+    // }
 
     // -------------------------------------------------------------------------
     // GETTERS TODO: Can these methods be substituded with a frowarding method?
     // -------------------------------------------------------------------------
 
-    /**
+    /** TODO:
      * @return
      */
     public String blockName() {
         return this.blockName;
     }
 
-    /**
-     *
+    /** TODO:
      * @return
      */
     public Color color() {
         return new Color(this.color.getRGB());
     }
-    /**
+
+    /** TODO
      * @return
      */
     public PositionList positionList() {
         return new PositionList(this.positionList);
+    }
+
+    public MovePattern movePattern() {
+        return this.movePattern;
     }
 
     // -------------------------------------------------------------------------
@@ -143,7 +161,8 @@ public final class Block implements Comparable<Block> {
         // Object must be Block at this point
         Block other = (Block) obj;
 
-        return    (this.positionList.size() == other.positionList.size())
+        return  (this.isMainBlock == other.isMainBlock)     // TODO: added with new BlockInfo fields
+                && (this.positionList.size() == other.positionList.size())
                 && ((this.positionList == other.positionList)
                     || ((this.positionList != null)
                         && this.positionList.equals(other.positionList)));
@@ -157,7 +176,8 @@ public final class Block implements Comparable<Block> {
         final int PRIME = 31;
         int hash = 7;
 
-        hash = PRIME * hash + this.positionList.size();
+        hash = PRIME * hash + Boolean.hashCode(this.isMainBlock);
+        hash = PRIME * hash + Integer.hashCode(this.positionList.size());
         hash = PRIME * hash + ((this.positionList == null)
                                     ? 0
                                     : this.positionList.hashCode());
@@ -178,7 +198,10 @@ public final class Block implements Comparable<Block> {
      */
     @Override
     public int compareTo(Block other) {
-        return this.positionList.compareTo(other.positionList);
+        // TODO: used to be "return this.positionList.compareTo(other.positionList)"
+        return (this.isMainBlock != other.isMainBlock)
+                ? -Boolean.compare(this.isMainBlock, other.isMainBlock) // isMainBlock "first" (small compare value)
+                : this.positionList.compareTo(other.positionList);
     }
 
     // =========================================================================
