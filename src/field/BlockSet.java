@@ -104,7 +104,7 @@ public final class BlockSet implements Iterable<Block> {
     //  MOVE
     // -------------------------------------------------------------------------
 
-    /** TODO
+    /** FIXME: check if the move is allowed (aka block.movePattern.contains(move.direction()))
      *
      * @param move
      */
@@ -122,6 +122,7 @@ public final class BlockSet implements Iterable<Block> {
     // FORWARDING - METHODS
     // -------------------------------------------------------------------------
 
+    // TODO: maybe check if no Blocks overlapp???
     public boolean add(final Block block) { return this.blocks.add(block); }
 
     // -------------------------------------------------------------------------
