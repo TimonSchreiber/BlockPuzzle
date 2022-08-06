@@ -56,27 +56,24 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
 
     /** TODO:
      * 
+     * @param positionsInfo
      */
     public PositionList(final PositionsInfo positionsInfo) {
         if (positionsInfo.isElbow()) {
             this.positions = this.newElbow(positionsInfo);
         } else {
-            this.positions = this.newLine(positionsInfo);
+            this.positions = this.newRectangle(positionsInfo);
         }
     }
 
     /**
-     * TODO: only added to create the PositionList form teh winning conditions.
+     * TODO: only added to create the PositionList form the winning conditions.
      * Class constrcutor form a {@code List} of {@code Positions}.
      * 
      * @param positions
      */
     public PositionList(final List<Position> positions) {
-        this.positions = new ArrayList<>();
-
-        for (final Position position : positions) {
-            this.positions.add(new Position(position));
-        }
+        this.positions = new ArrayList<>(positions);
 
         Collections.sort(this.positions);
     }
@@ -101,8 +98,8 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
     /** TODO:
      * 
      */
-    private List<Position> newLine(PositionsInfo positionsInfo) {
-        List<Position> tmpList = new ArrayList<>();
+    private List<Position> newRectangle(PositionsInfo positionsInfo) {
+        final List<Position> tmpList = new ArrayList<>();
         Position tmpPosition = positionsInfo.position();
 
         for (int i = 0; i < positionsInfo.size(); ++i) {
@@ -118,21 +115,21 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
      * 
      */
     private List<Position> newElbow(final PositionsInfo positionsInfo) {
-        List<Position> tmpList = new ArrayList<>();
+        final List<Position> tmpList = new ArrayList<>();
 
         switch (positionsInfo.size()) {
-            case 4:
+            case 4:     // add the 'diagonal' Block
                 tmpList.add(
                     positionsInfo.position().moveTowards(
                         positionsInfo.direction(),
                         positionsInfo.direction().next()));
                 // falls through
-            case 3:
+            case 3:     // add the 'next' Block
                 tmpList.add(
                     positionsInfo.position().moveTowards(
                         positionsInfo.direction().next()));
                 // falls through
-            default:
+            default:    // add the 'direction' and 'this position' Block
                 tmpList.add(
                     positionsInfo.position().moveTowards(
                         positionsInfo.direction()));
@@ -163,7 +160,7 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
     // -------------------------------------------------------------------------
 
     public boolean contains(final Position position) { return this.positions.contains(position); }
-    public boolean addAll(final PositionList positionList) { return this.positions.addAll(positionList.positions); }
+    // public boolean addAll(final PositionList positionList) { return this.positions.addAll(positionList.positions); }    // TODO: not used!
     public int size() { return this.positions.size(); }
 
     // -------------------------------------------------------------------------
@@ -199,7 +196,6 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
         final int PRIME = 31;
         int hash = 7;
 
-        hash = PRIME * hash + Integer.hashCode(this.positions.size());
         hash = PRIME * hash + ((this.positions == null)
                                     ? 0
                                     : this.positions.hashCode());
