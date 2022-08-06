@@ -157,7 +157,6 @@ public final class BlockSet implements Iterable<Block> {
         final int PRIME = 31;
         int hash = 7;
 
-        hash = PRIME * hash + Integer.hashCode(this.blocks.size());
         hash = PRIME * hash + ((this.blocks == null)
                                     ? 0
                                     : this.blocks.hashCode());
