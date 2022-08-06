@@ -11,15 +11,6 @@ import field.MovePattern;
 public final class Block implements Comparable<Block> {
 
     // -------------------------------------------------------------------------
-    // STATIC ATTRIBUTES
-    // -------------------------------------------------------------------------
-
-    // TODO: change the way a Block is created; take a name and or color infer the size
-    // and not a size and infer the name/color
-    /** static counter for different types of {@code Block}s */
-    // private static final int[] BLOCK_COUNTER = new int[BlockType.getSize()];
-
-    // -------------------------------------------------------------------------
     // ATTRIBUTES
     // -------------------------------------------------------------------------
 
@@ -27,7 +18,7 @@ public final class Block implements Comparable<Block> {
     private final String blockName;
     private final Color color;
     private final PositionList positionList;
-    private final MovePattern movePattern;  // TODO: new field form BlockInfo; FIXME: Maybe add to #equals() und #hashCode()???
+    private final MovePattern movePattern;  // TODO: new field form BlockInfo // FIXME: Maybe add to #equals() und #hashCode()???
 
     // -------------------------------------------------------------------------
     // CONSTRUCTORS
@@ -67,29 +58,6 @@ public final class Block implements Comparable<Block> {
     }
 
     // -------------------------------------------------------------------------
-    // CREATE COLOR
-    // -------------------------------------------------------------------------
-
-    /**
-     * TODO: deprecated?
-     * Creates the {@code Color} for the {@code Block} by repeatedly using
-     * {@link Color#darker()} for each {@code Block} of the same
-     * {@code BlockType} that was already created.
-     *
-     * @param size    the size
-     * @return        a darker {@code Color}
-     */
-    // private static Color createColor(final int size) {
-    //     Color tmpClr = BlockType.getColor(size);
-
-    //     for (int i = 1; i < Block.BLOCK_COUNTER[size - 1]; i++) {
-    //         tmpClr = tmpClr.darker();
-    //     }
-
-    //     return tmpClr;
-    // }
-
-    // -------------------------------------------------------------------------
     // GETTERS TODO: Can these methods be substituded with a frowarding method?
     // -------------------------------------------------------------------------
 
@@ -117,28 +85,13 @@ public final class Block implements Comparable<Block> {
     public MovePattern movePattern() {
         return this.movePattern;
     }
-
-    // -------------------------------------------------------------------------
-    // MOVE TOWARDS
-    // -------------------------------------------------------------------------
-
-    /** TODO is void here OK? or do i need to return a new Block?
-     *
-     * Moves this {@code Block} by changing every {@code Position}
-     * to an adjacent coordinate.
-     *
-     * @param directions        the {@code Direction}s
-     */
-    public void moveTowards(final Direction... directions) {
-        this.positionList.moveTowards(directions);
-        return;
-    }
-
+    
     // -------------------------------------------------------------------------
     // FORWARDING - METHODS
     // -------------------------------------------------------------------------
-
+    
     public boolean containsPosition(final Position position) { return this.positionList.contains(position); }
+    public void moveTowards(final Direction... directions) { this.positionList.moveTowards(directions); }
 
     // -------------------------------------------------------------------------
     // EQUALS AND HASH-CODE
@@ -159,13 +112,15 @@ public final class Block implements Comparable<Block> {
         }
 
         // Object must be Block at this point
-        Block other = (Block) obj;
+        final Block other = (Block) obj;
 
-        return  (this.isMainBlock == other.isMainBlock)     // TODO: added with new BlockInfo fields
-                && (this.positionList.size() == other.positionList.size())
+        return  (this.isMainBlock == other.isMainBlock)     // TODO: added with new BlockInfo fields: check if it works
                 && ((this.positionList == other.positionList)
                     || ((this.positionList != null)
-                        && this.positionList.equals(other.positionList)));
+                        && this.positionList.equals(other.positionList)))
+                && ((this.movePattern == other.movePattern) // TODO: added with new BlockInfo fields: check if it works
+                    || ((this.movePattern != null)
+                        && this.movePattern.equals(other.movePattern)));
     }
 
     /**
@@ -177,10 +132,12 @@ public final class Block implements Comparable<Block> {
         int hash = 7;
 
         hash = PRIME * hash + Boolean.hashCode(this.isMainBlock);
-        hash = PRIME * hash + Integer.hashCode(this.positionList.size());
         hash = PRIME * hash + ((this.positionList == null)
                                     ? 0
                                     : this.positionList.hashCode());
+        hash = PRIME * hash + ((this.movePattern == null)   // TODO: added with new BlockInfo fields: check if it works
+                                    ? 0
+                                    : this.movePattern.hashCode());
 
         return hash;
     }
