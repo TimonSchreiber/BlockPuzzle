@@ -70,7 +70,7 @@ public final class MovePattern implements Iterable<Direction> {
 
 
     // -------------------------------------------------------------------------
-    // Two Steps in every possible and useful combination of Directions
+    // Two Steps in every possible (and useful) combination of Directions
     // TODO: Make this into a MovePattern.
     // not working because this is a'List of List of Directions' instead of a 'List of Directions'
 
@@ -94,6 +94,47 @@ public final class MovePattern implements Iterable<Direction> {
     //         List.of(Direction.U, Direction.L),
     //         List.of(Direction.U, Direction.U)
     //     );
+
+
+    // -------------------------------------------------------------------------
+    // EQUALS AND HASH-CODE
+    // -------------------------------------------------------------------------
+
+    /**
+     * Overrides the equals method.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if ((obj == null) || (this.getClass() != obj.getClass())) {
+            return false;
+        }
+
+        // Object must be Block at this point
+        MovePattern other = (MovePattern) obj;
+
+        return  ((this.directions == other.directions)
+                || ((this.directions != null)
+                    && this.directions.equals(other.directions)));
+    }
+
+    /**
+     * Overrides the hashCode method to match the equals method.
+     */
+    @Override
+    public int hashCode() {
+        final int PRIME = 31;
+        int hash = 7;
+
+        hash = PRIME * hash + ((this.directions == null)
+                                    ? 0
+                                    : this.directions.hashCode());
+
+        return hash;
+    }
 
     
     // =========================================================================
