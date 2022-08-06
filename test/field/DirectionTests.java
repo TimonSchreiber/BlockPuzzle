@@ -1,9 +1,8 @@
+package field;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import field.Direction;
 
 public class DirectionTests {
 
@@ -35,4 +34,4 @@ public class DirectionTests {
         assertEquals(expected, actual);
     }
     
-}
+}   // Direction Test class
