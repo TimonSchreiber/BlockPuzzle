@@ -1,11 +1,78 @@
 package field;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import block.Block;
+import block.BlockInfo;
+import block.Position;
+import block.PositionsInfo;
+
 public class GameStateTests {
+
+
+    /* Game 0 - 2 Moves
+     * Starter 1
+     * __ M2 M3 __ __
+     * __ __ __ M1 __
+     * __ __ __ R1 __
+     * __ __ __ __ __
+     * __ __ __ __ __
+     */
+    private final List<BlockInfo> startPosition =
+        new ArrayList<>(
+            List.of(
+                new BlockInfo(
+                    "R1",
+                    null,
+                    MovePattern.ALL_DIRECTIONS,
+                    true,
+                    new PositionsInfo(new Position(3, 2), 1, Direction.D, false)),
+                new BlockInfo(
+                    "M1",
+                    null,
+                    MovePattern.NO_DIRECTIONS,
+                    false,
+                    new PositionsInfo(new Position(3, 3), 1, Direction.D, false)),
+                new BlockInfo(
+                    "M2",
+                    null,
+                    MovePattern.NO_DIRECTIONS,
+                    false,
+                    new PositionsInfo(new Position(1, 4), 1, Direction.D, false)),
+                new BlockInfo(
+                    "M3",
+                    null,
+                    MovePattern.NO_DIRECTIONS,
+                    false,
+                    new PositionsInfo(new Position(2, 4), 1, Direction.D, false))
+                )
+            );
+
+    private GameState gameState;
+
+    @BeforeEach
+    public void setUp() {
+        BlockSet blockSet = new BlockSet();
+        startPosition.forEach(
+            blockInfo -> blockSet.add(new Block(blockInfo))
+        );
+        String R1 = "R1";
+        List<Move> moves =new ArrayList<>();
+        moves.add(new Move(R1, Direction.U));
+        moves.add(new Move(R1, Direction.R));
+        moves.add(new Move(R1, Direction.U));
+
+        gameState = new GameState(blockSet, moves);
+    }
 
     // -------------------------------------------------------------------------
     // Constructor
@@ -15,16 +82,43 @@ public class GameStateTests {
     // -------------------------------------------------------------------------
     // Getter
 
-    // -------------------------------------------------------------------------
-    // Forwarding
+    @Test
+    @DisplayName("Getters")
+    public void getters() {
+        BlockSet expectedBlockSet = new BlockSet();
+        startPosition.forEach(
+            blockInfo -> expectedBlockSet.add(new Block(blockInfo))
+        );
+        String R1 = "R1";
+        List<Move> expectedMoves =
+            List.of(
+                new Move(R1, Direction.U),
+                new Move(R1, Direction.R),
+                new Move(R1, Direction.U)
+            );
+
+        assertAll(
+            () -> assertEquals(expectedBlockSet, gameState.blockSet()),
+            () -> assertEquals(expectedMoves, gameState.moves())
+        );
+    }
 
     // -------------------------------------------------------------------------
-    // equals
+    // copy List
 
     @Test
-    @DisplayName("text here")
-    public void test() {
-        assertEquals("expected", "actual");
+    @DisplayName("static#copyList Should return a deep Copy of a List<Move>")
+    public void copyList() {
+        List<Move> moveList =new ArrayList<>();
+        moveList.add(new Move("R1", Direction.U));
+        moveList.add(new Move("R1", Direction.R));
+        moveList.add(new Move("R1", Direction.U));
+
+        List<Move> copyList = GameState.copyList(moveList);
+
+        moveList.add(new Move("R1", Direction.L));
+
+        assertNotEquals(moveList, copyList);
     }
 
 }   // Game State Test class
