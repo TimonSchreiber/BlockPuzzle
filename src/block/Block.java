@@ -62,6 +62,14 @@ public final class Block implements Comparable<Block> {
     // -------------------------------------------------------------------------
 
     /** TODO:
+     * 
+     * @return
+     */
+    public boolean isMainBlock() {
+        return this.isMainBlock;
+    }
+
+    /** TODO:
      * @return
      */
     public String blockName() {
@@ -97,12 +105,13 @@ public final class Block implements Comparable<Block> {
     // EQUALS AND HASH-CODE
     // -------------------------------------------------------------------------
 
-    /**
-     * Overrides the equals method, so that neither the name, nor the color will
-     * be used in the equals method.
+    /* (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     * 
+     * This method ignores the BlockName and the Color.
      */
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }
@@ -123,8 +132,10 @@ public final class Block implements Comparable<Block> {
                         && this.movePattern.equals(other.movePattern)));
     }
 
-    /**
-     * Overrides the hashCode method to match the equals method.
+    /* (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     * 
+     * This method ignores the BlockName and the Color.
      */
     @Override
     public int hashCode() {
@@ -142,6 +153,19 @@ public final class Block implements Comparable<Block> {
         return hash;
     }
 
+    // -------------------------------------------------------------------------
+    // TO STRING
+    // -------------------------------------------------------------------------
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "Block [blockName=" + blockName + ", color=" + color + ", isMainBlock=" + isMainBlock + ", movePattern="
+                + movePattern + ", positionList=" + positionList + "]";
+    }
+
     // =========================================================================
     // INTERFACE - METHODS
     // =========================================================================
@@ -154,7 +178,7 @@ public final class Block implements Comparable<Block> {
      *
      */
     @Override
-    public int compareTo(Block other) {
+    public int compareTo(final Block other) {
         // TODO: used to be "return this.positionList.compareTo(other.positionList)"
         return (this.isMainBlock != other.isMainBlock)
                 ? -Boolean.compare(this.isMainBlock, other.isMainBlock) // isMainBlock "first" (small compare value)
