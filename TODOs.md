@@ -2,7 +2,7 @@
 
  - [ ] The Games need to have one common interface or inherit form the same abstract class (for now the solver has only one specific 'Game')
 
- - [ ] Maybe implement a new class/record called 'WinCondition' to now where and how to win (squares and number of Blocks(Rabbits)).
+ - [ ] Maybe implement a new class/record called 'WinCondition' to know where and how to win (squares and number/names of Blocks(Rabbits)).
  - [ ] Check the #equals and #hashCode methods of PositionList and others if they are implemented correctly.
  - [ ] Maybe change GameField class so that it is only the field and the BlockSet gets passed to it (maybe make it a singleton)
  - [ ] Try find to find a way to move a "Block" twice before the next "Block" is tried. -> MovePattern.All_DIRECTIONS_PLUS
