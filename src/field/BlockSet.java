@@ -78,6 +78,7 @@ public final class BlockSet implements Iterable<Block> {
                 return block.blockName();
             }
         }
+        // TODO: make this an Optional (or does the Optional belong on the other side (where this method is called?))
         return null;
     }
 
@@ -97,7 +98,26 @@ public final class BlockSet implements Iterable<Block> {
                 return block;
             }
         }
+        // TODO: make this an Optional (or does the Optional belong on the other side (where this method is called?))
         return null;
+    }
+
+    /** TODO: can this get more efficient? this method needs to be called every time (a lot...)
+     *  TODO: check if this method is used.
+     * @return
+     */
+    public BlockSet getMainBlocks() {
+        final BlockSet mainBlocks = new BlockSet();
+        for (Block block : this.blocks) {
+            if (block.isMainBlock()) {
+                // TODO: Maybe use 'new Block(block)'
+                mainBlocks.add(block);
+            } else {
+                break;
+            }
+        }
+
+        return mainBlocks;
     }
 
     // -------------------------------------------------------------------------
@@ -129,8 +149,8 @@ public final class BlockSet implements Iterable<Block> {
     // EQUALS AND HASH-CODE
     // -------------------------------------------------------------------------
 
-    /**
-     * Overrides the equals method
+    /* (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
     public boolean equals(Object obj) {
@@ -150,8 +170,8 @@ public final class BlockSet implements Iterable<Block> {
                     && this.blocks.equals(other.blocks)));
     }
 
-    /** TODO
-     * Overrides the hashCode method to match the equals method.
+    /* (non-Javadoc)
+     * @see java.lang.Object#hashCode()
      */
     @Override
     public int hashCode() {
@@ -163,6 +183,18 @@ public final class BlockSet implements Iterable<Block> {
                                     : this.blocks.hashCode());
 
         return hash;
+    }
+
+    // -------------------------------------------------------------------------
+    // TO STRING
+    // -------------------------------------------------------------------------
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "BlockSet [blocks=" + blocks + "]";
     }
 
     // =========================================================================
