@@ -49,6 +49,7 @@ public class BlockTests {
         final MovePattern expectedMovePattern = MovePattern.ALL_DIRECTIONS;
 
         assertAll(
+            () -> assertTrue(actual.isMainBlock()),
             () -> assertEquals(expectedName, actual.blockName()),
             () -> assertEquals(expectedColor, actual.color()),
             () -> assertEquals(expectedPositions, actual.positionList()),
