@@ -83,8 +83,8 @@ public final class GameState {
     // EQUALS AND HASH-CODE
     // -------------------------------------------------------------------------
 
-    /**
-     * Overrides the equals method
+    /* (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
     public boolean equals(Object obj) {
@@ -107,8 +107,8 @@ public final class GameState {
                         && this.moves.equals(other.moves)));
     }
 
-    /** TODO
-     * Overrides the hashCode method to match the equals method.
+    /* (non-Javadoc)
+     * @see java.lang.Object#hashCode()
      */
     @Override
     public int hashCode() {
@@ -123,6 +123,18 @@ public final class GameState {
                                     : this.moves.hashCode());
 
         return hash;
+    }
+
+    // -------------------------------------------------------------------------
+    // TO STRING
+    // -------------------------------------------------------------------------
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "GameState [blockSet=" + blockSet + ", moves=" + moves + "]";
     }
 
     // =========================================================================

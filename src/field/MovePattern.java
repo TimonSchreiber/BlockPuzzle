@@ -19,7 +19,7 @@ public final class MovePattern implements Iterable<Direction> {
     /** TODO
      * Private constructor.
      */
-    private MovePattern(List<Direction> directions) {
+    private MovePattern(final List<Direction> directions) {
         this.directions = directions;
     }
 
@@ -100,8 +100,8 @@ public final class MovePattern implements Iterable<Direction> {
     // EQUALS AND HASH-CODE
     // -------------------------------------------------------------------------
 
-    /**
-     * Overrides the equals method.
+    /* (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
     public boolean equals(Object obj) {
@@ -121,8 +121,8 @@ public final class MovePattern implements Iterable<Direction> {
                     && this.directions.equals(other.directions)));
     }
 
-    /**
-     * Overrides the hashCode method to match the equals method.
+    /* (non-Javadoc)
+     * @see java.lang.Object#hashCode()
      */
     @Override
     public int hashCode() {
@@ -136,6 +136,17 @@ public final class MovePattern implements Iterable<Direction> {
         return hash;
     }
 
+    // -------------------------------------------------------------------------
+    // TO STRING
+    // -------------------------------------------------------------------------
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "MovePattern [directions=" + directions + "]";
+    }
     
     // =========================================================================
     // INTERFACE - METHODS

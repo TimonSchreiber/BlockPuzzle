@@ -167,8 +167,8 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
     // EQUALS AND HASH-CODE
     // -------------------------------------------------------------------------
 
-    /** TODO
-     * Overrides the equals method
+    /* (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
     public boolean equals(Object obj) {
@@ -188,8 +188,8 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
                     && this.positions.equals(other.positions)));
     }
 
-    /** TODO
-     * Overrides the hashCode method to match the equals method.
+    /* (non-Javadoc)
+     * @see java.lang.Object#hashCode()
      */
     @Override
     public int hashCode() {
@@ -201,6 +201,18 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
                                     : this.positions.hashCode());
 
         return hash;
+    }
+
+    // -------------------------------------------------------------------------
+    // TO STRING
+    // -------------------------------------------------------------------------
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "PositionList [positions=" + positions + "]";
     }
 
     // =========================================================================
