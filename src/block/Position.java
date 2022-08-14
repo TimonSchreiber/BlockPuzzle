@@ -22,10 +22,11 @@ public record Position(int x, int y) implements Comparable<Position> {
     // -------------------------------------------------------------------------
 
     /**
-     * TODO: add description
+     * Returns a new {@code Position} with changed x-, and y-values according to the
+     * {@code Directions} given as arguments.
      *
-     * @param directions
-     * @return
+     * @param directions    one or more {@code Directions}.
+     * @return              a new Position
      */
     public Position moveTowards(final Direction... directions) {
         int newX = this.x;
@@ -51,8 +52,9 @@ public record Position(int x, int y) implements Comparable<Position> {
     // COMPARABLE
     // -------------------------------------------------------------------------
 
-    /** TODO
-     *
+    /**
+     * Overrides the compareTo() method of the interface {@code comparable}.
+     * First the y-values are compared, then the x-values.
      */
     @Override
     public int compareTo(Position other) {
