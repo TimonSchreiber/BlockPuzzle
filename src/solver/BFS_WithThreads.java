@@ -13,25 +13,29 @@ import java.util.concurrent.LinkedBlockingDeque;
 import block.Block;
 import field.BlockSet;
 import field.Direction;
-import field.GameField;
 import field.GameState;
 import field.Move;
-import game.DirtyDozen;
+import game.Game;
 
 public class BFS_WithThreads {
 // =========================================================================
     // ATTRIBUTES
     // =========================================================================
 
+    /** TODO */
     private boolean foundASolution = false;
 
+    /** {@code LinkedBlocking Deque} of {@code GameStates} to queue the states. */
     private final BlockingQueue<GameState> gameStateQueue;
 
+    /** {@code ConcurrentHashSet} of {@code BlockSets} to save every unique state. */
     private final Set<BlockSet> savedBlockSets;
 
+    /** TODO */
     private GameState solution;
 
-    private final DirtyDozen game;
+    /** the {@code Game} */
+    private final Game game;
 
     // Thread variables
     private static final int NTHREADS = 6;
@@ -45,16 +49,17 @@ public class BFS_WithThreads {
      * TODO
      * @param gameNumber
      */
-    public BFS_WithThreads(final int gameNumber) {
+    public BFS_WithThreads(final Game game/* TODO: more arguments? */) {
 
         this.savedBlockSets = ConcurrentHashMap.newKeySet();
 
         this.gameStateQueue = new LinkedBlockingDeque<>();
 
-        this.game = new DirtyDozen(gameNumber);
+        this.game = game;
 
-        this.savedBlockSets.add(new BlockSet(this.game.blocks()));
-        this.gameStateQueue.add(new GameState(this.game.blocks()));
+        // TODO: is creating a new BlockSet neccessary? this is already a copy.
+        this.savedBlockSets.add(this.game.blockSet());
+        this.gameStateQueue.add(new GameState(this.game.blockSet()));
     }
 
     // =========================================================================
@@ -68,29 +73,17 @@ public class BFS_WithThreads {
     private void findNewMove(final GameState gameState) {
 
         // Deconstruction
-        final GameField gameField = new GameField(gameState.blockSet());
-        final List<Move> moveList = GameState.copyList(gameState.moves());
+        final BlockSet tmpBlockSet = gameState.blockSet();
+        final List<Move> tmpMoveList = GameState.copyList(gameState.moves());
 
-        for (final Block block : gameField.blocks()) {
+        for (final Block block : tmpBlockSet) {
 
-            // for (final Direction direction : Direction.values()) {   TODO: old form: delete if not needed
             for (final Direction direction : block.movePattern()) {
 
                 final Move newMove = new Move(block.blockName(), direction);
 
-                /*
-                 * Check if nextMove is not a valid Move
-                 * -> next iteration
-                 */
-                if (!gameField.isValidMove(newMove)
-                    /* || (!moveList.isEmpty() && newMove.equals(moveList.getLast().reverse())) */) {
-                    continue;
-                }
-
-                // Check if it is a known BlockSet -> next iteration
-                if (this.savedBlockSets.contains(gameField.blocks())) {
-                    // reverse the last Move to continue looking for new Moves
-                    gameField.isValidMove(newMove.reverse());
+                // Check if nextMove is not a valid Move -> next iteration
+                if (!this.game.isValidMove(tmpBlockSet, newMove)) {
                     continue;
                 }
 
@@ -99,29 +92,27 @@ public class BFS_WithThreads {
                  * -> save the BlockSet
                  * -> create a new GameState and add it to the GameStateQueue
                  */
-                if (!this.savedBlockSets.contains(gameField.blocks())) {
+                if (!this.savedBlockSets.contains(tmpBlockSet)) {
 
-                    final List<Move> newMoveList = GameState.copyList(moveList);
+                    final List<Move> newMoveList = GameState.copyList(tmpMoveList);
                     newMoveList.add(newMove);
 
-                    this.savedBlockSets.add(new BlockSet(gameField.blocks()));
-                    this.gameStateQueue.add(new GameState(gameField.blocks(), newMoveList));
+                    this.savedBlockSets.add(new BlockSet(tmpBlockSet));
+                    this.gameStateQueue.add(new GameState(tmpBlockSet, newMoveList));
 
                     // check if a Solution was found -> save the current GameState + MoveList and return
-                    if (gameField.checkWinnigCondition()) {
+                    if (this.game.checkWinCondition(tmpBlockSet)) {
                         this.foundASolution = true;
-                        this.solution = new GameState(new BlockSet(gameField.blocks()), newMoveList);
+                        this.solution = new GameState(new BlockSet(tmpBlockSet), newMoveList);
                         return;
                     }
-
-                    // TODO: is there a way to try the same Move again?
                 }
 
                 // reverse the last Move to continue looking for new Moves
-                gameField.isValidMove(newMove.reverse());
+                this.game.isValidMove(tmpBlockSet, newMove.reverse());
 
-            }    // end for loop Directions
-        }    // end for loop Blocks
+            }    // end for loop Direction
+        }    // end for loop Block
 
         return;
     }
@@ -149,16 +140,16 @@ public class BFS_WithThreads {
                         findNewMove(nextGameState);
                     }
                 };
-
                 exec.execute(task);
+
             } catch (InterruptedException ie) {
                 System.err.println("Interrupted Expection Thrown!");
                 return;
             }
             // Thread end
 
-            // FIXME: how to check if there is no solution but withiout #isEmpty()
             // TODO: error handling
+            // FIXME: how to check if there is no solution but without #isEmpty()
             // if (this.gameStateQueue.isEmpty()) {
             //     System.out.println("No Solution Found!");
             //     return;
@@ -186,13 +177,14 @@ public class BFS_WithThreads {
         this.showSolution(this.solution.moves());
 
         return;
+
     } // end solve()
 
     // =========================================================================
     // SHOW-SOLUTION - METHOD
     // =========================================================================
 
-    /**
+    /** TODO: maybe make this a method of Game? (for all Game classes)
      * Shows the Solution from Start to End with a time delay between two
      * {@code Moves}.
      *
@@ -222,4 +214,4 @@ public class BFS_WithThreads {
 
     // =========================================================================
 
-}   // BreadthFirstSearch_WithThreads class
+}   // Breadth First Search - With Threads class

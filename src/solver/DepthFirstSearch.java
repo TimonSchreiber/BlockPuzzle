@@ -11,9 +11,8 @@ import java.util.Set;
 import block.Block;
 import field.BlockSet;
 import field.Direction;
-import field.GameField;
 import field.Move;
-import game.DirtyDozen;
+import game.Game;
 
 public class DepthFirstSearch {
 
@@ -31,7 +30,7 @@ public class DepthFirstSearch {
     private final List<Move> moveList;
 
     /** the {@code Game} */
-    private final DirtyDozen game;
+    private final Game game;
 
     // =========================================================================
     // CONSTRUCTOR
@@ -42,7 +41,7 @@ public class DepthFirstSearch {
      *
      * @param gameNumber    Starting Position
      */
-    public DepthFirstSearch(final int gameNumber, final int delay, final boolean show) {
+    public DepthFirstSearch(final Game game, final int delay, final boolean show) {
 
         this.delay = delay;
         this.show = show;
@@ -51,9 +50,9 @@ public class DepthFirstSearch {
 
         this.moveList = new LinkedList<>();
 
-        this.game = new DirtyDozen(gameNumber);
+        this.game = game;
 
-        this.savedBlockSets.add(this.game.blocks());
+        this.savedBlockSets.add(this.game.blockSet());
     }
 
     // =========================================================================
@@ -68,31 +67,33 @@ public class DepthFirstSearch {
      *             {@code BlockSet} is found; {@code false} otherwise
      */
     private boolean findNewMove() {
-        final GameField gameField = new GameField(this.game.blocks());
+        final BlockSet tmpBlockSet = this.game.blockSet();
 
-        for (final Block block : this.game.blocks()) {
+        for (final Block block : tmpBlockSet) {
 
-            // for (final Direction direction : Direction.values()) {   TODO: old form: delete if not needed
             for (final Direction direction : block.movePattern()) {
 
                 final Move newMove = new Move(block.blockName(), direction);
 
                 // Check if nextMove is not a valid Move -> next iteration
-                if (!gameField.isValidMove(newMove)) {
+                if (!game.isValidMove(tmpBlockSet, newMove)) {
                     continue;
                 }
 
+                // XXX: this was changed from (tmpBlockSet) to (new BlockSet(tmpBlockSet)) 
+                // Why does it work now?
+
                 // Check if it is a known BlockSet -> next iteration
-                if (this.savedBlockSets.contains(gameField.blocks())) {
+                if (this.savedBlockSets.contains(new BlockSet(tmpBlockSet)/* <- why new BlockSet and not just 'tmpBlockSet'? */ )) {
                     // reverse the last Move to continue looking for new Moves
-                    gameField.isValidMove(newMove.reverse());
+                    game.isValidMove(tmpBlockSet, newMove.reverse());
                     continue;
                 }
 
                 // -> play this move on the GameField
                 this.game.isValidMove(newMove);
 
-                this.savedBlockSets.add(gameField.blocks());
+                this.savedBlockSets.add(new BlockSet(tmpBlockSet));
                 this.moveList.add(newMove);
 
                 if (show) {
@@ -102,8 +103,8 @@ public class DepthFirstSearch {
                 // new Move found
                 return true;
 
-            }    // end for loop Directions
-        }    // end for loop Blocks
+            }    // end for loop Direction
+        }    // end for loop Block
 
         // no new Move found
         return false;
@@ -123,12 +124,12 @@ public class DepthFirstSearch {
         final Instant t = Instant.now();
 
         // Check for game.field.isWon() to become true
-        while (!this.game.checkWinnigCondition()) {
+        while (!this.game.checkWinCondition()) {
 
             // If isNewMove() is false, the last Move will be reversed
             while (!this.findNewMove()) {
 
-                if (this.moveList.isEmpty()) {        // TODO: changed from size() == 0 to List#isEmpty()
+                if (this.moveList.isEmpty()) {
                     System.out.println("Can't find a move.");
                     return;
 
@@ -141,9 +142,11 @@ public class DepthFirstSearch {
                 }
             }
         }
+
         // Stop timer
         final Duration d = Duration.between(t, Instant.now());
 
+        // TODO: Maybe change this to a TextBlock """ {text} """ and only sysout once
         System.out.println("END");
 
         System.out.println("\nNumber of states saved:\n" + this.savedBlockSets.size());
@@ -185,7 +188,7 @@ public class DepthFirstSearch {
     // SHOW-SOLUTION - METHOD
     // =========================================================================
 
-    /** TODO:
+    /** TODO: maybe make this a method of Game? (for all Game classes)
      * Shows the Solution from Start to End with a time delay between two
      * {@code Move}s.
      *
@@ -193,12 +196,16 @@ public class DepthFirstSearch {
      */
     public void showSolution() {
 
+        int i = 0;
+
+        this.game.draw(1000);
+
         final Instant t = Instant.now();
-        // int i = 1;
+
         for (final Move move : this.moveList) {
             this.game.isValidMove(move);
-            this.game.draw(1);
-            // System.out.println("State " + i++ + "/" + this.moveList.size());
+            this.game.draw(100);
+            System.out.println(++i + "/" + moveList.size() + ": " + move);
         }
 
         final Duration d = Duration.between(t, Instant.now());
@@ -211,4 +218,4 @@ public class DepthFirstSearch {
 
     // =========================================================================
 
-}   // class
+}   // Depth First Search class

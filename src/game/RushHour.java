@@ -2,50 +2,45 @@ package game;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import block.Block;
 import block.BlockInfo;
 import block.Position;
+import block.PositionList;
 import block.PositionsInfo;
 import field.BlockSet;
 import field.Direction;
 import field.GameField;
-import field.Move;
 import field.MovePattern;
 
-public final class RushHour {
+public final class RushHour extends Game {
 
     // -------------------------------------------------------------------------
     // STATIC ATTRIBUTES
     // -------------------------------------------------------------------------
 
-    // TODO: 1# pass this into the GameField
-    /** preset game values for size */
-    // private static final int SIZE = 6;
+    /** Preset game values for size */
+    private static final int SIZE = 6;
 
-    /** Winning Positions {@code PositionList}*/
-    // private static final
-    // PositionList WINNING_SQUARES =
-    //     new PositionList(
-    //         List.of(
-    //             new Position(4, 3),
-    //             new Position(5, 3)
-    //         )
-    //     );
+    /** Preset win condition as a {@code PositionList}*/
+    private static final
+    PositionList WIN_CONDITION =
+        new PositionList(
+            List.of(
+                new Position(4, 3),
+                new Position(5, 3)
+            )
+        );
+
+    // TODO: Add a way to tell the canvas where to mark the border to show the win condition
+    /**  */
 
     /** List of a List of {@code BlockInfos} */
     private static final
     List<List<BlockInfo>> START_POSITION_LIST =
         new ArrayList<>();
-
-    // -------------------------------------------------------------------------
-    // ATTRIBUTES
-    // -------------------------------------------------------------------------
-
-    private final int gameNumber;
-    private final GameField gameField;  // Height=5; Width=5
+    // TODO: Maybe delete the "= ArrayList<>()" and use the static-Block to assign this List with List.of() (or Set.of(), Map.of())"
 
     // -------------------------------------------------------------------------
     // CONSTRUCTOR
@@ -57,30 +52,34 @@ public final class RushHour {
      * @param gameNumber    the gameNumber
      */
     public RushHour(final int gameNumber) {
-        this.gameNumber = gameNumber;
-        this.gameField = new GameField();
+        super(new BlockSet(), new GameField(SIZE, SIZE, WIN_CONDITION), gameNumber);
+    }
 
+    // -------------------------------------------------------------------------
+    // PARENT - METHODS
+    // -------------------------------------------------------------------------
+
+    @Override
+    protected void setUp(final int gameNumber) {
         RushHour.START_POSITION_LIST
-            .get(this.gameNumber)
+            .get(gameNumber)
             .forEach(blockInfo -> {
-                this.gameField.placeBlock(new Block(blockInfo));
-                // this.field.draw(100);    // FIXME: make this a choice of the user -> if(...) {draw()}
+                this.blockSet.add(new Block(blockInfo));
+                this.gameField.draw(this.blockSet, 100);    // FIXME: make this a choice of the user -> if(...) {draw()}
                 // or if(..) {delay = xxx}
             });
 
-        this.gameField.draw(1000);    // FIXME: delete?
+        this.gameField.draw(this.blockSet, 1000);    // FIXME: delete?
     }
 
     // -------------------------------------------------------------------------
     // FORWARDING - METHODS
     // -------------------------------------------------------------------------
 
-    public boolean checkWinnigCondition() { return this.gameField.checkWinnigCondition(); }
-    public boolean isValidMove(final Move move) { return this.gameField.isValidMove(move); }
-    public BlockSet blocks() { return this.gameField.blocks(); }
-
-    public void print() { this.gameField.print(); }
-    public void draw(final int delay) { this.gameField.draw(delay); }
+    // TODO: maybe override this method to accomodate for the way Rabbits move.
+    // public boolean isValidMove(final Move move) {
+    //     return this.gameField.isValidMove(this.blockSet, move);
+    // }
 
     // -------------------------------------------------------------------------
     // STATIC-BLOCK
@@ -123,13 +122,13 @@ public final class RushHour {
         /** Cars */
         final Color CAR_1 = new Color(  0,   0,   0);  // Black
         final Color CAR_2 = new Color(  0,   0, 178);  // Dark Blue
-        final Color CAR_3 = new Color(128, 128, 128);  // Gray
-        final Color CAR_4 = new Color( 64,  64,  64);  // Dark Gray
+        final Color CAR_3 = new Color(255, 200,   0);  // Orange
+        final Color CAR_4 = new Color(255, 140,   0);  // Dark Orange
         final Color CAR_5 = new Color(  0, 255,   0);  // Green
         final Color CAR_6 = new Color(  0, 178,   0);  // Dark Green
         // unlock when needed
-        // final Color CAR_7 = new Color(255, 200,   0);  // Orange
-        // final Color CAR_8 = new Color(255, 140,   0);  // Dark Orange
+        // final Color CAR_7 = new Color(128, 128, 128);  // Gray
+        // final Color CAR_8 = new Color( 64,  64,  64);  // Dark Gray
         // final Color CAR_9 = new Color(255, 175, 175);  // Pink
         // final Color CAR_A = new Color(255, 255,   0);  // Light Pink
         // final Color CAR_B = new Color(178, 178,   0);  // Dark Yellow
@@ -155,10 +154,9 @@ public final class RushHour {
          * C1 __ __ __ C2 C2
          * C1 __ T1 T1 T1 __
          */
-
         RushHour.START_POSITION_LIST.add(
             new ArrayList<>(
-                Arrays.asList(
+                List.of(
                     new BlockInfo(
                         R1,
                         RED_CAR,
@@ -220,10 +218,9 @@ public final class RushHour {
          * __ __ C2 __ __ C1
          * __ __ T1 T1 T1 C1
          */
-
         RushHour.START_POSITION_LIST.add(
             new ArrayList<>(
-                Arrays.asList(
+                List.of(
                     new BlockInfo(
                         R1,
                         RED_CAR,
@@ -285,10 +282,9 @@ public final class RushHour {
          * __ __ __ __ __ __
          * __ __ __ T1 T1 T1
          */
-
         RushHour.START_POSITION_LIST.add(
             new ArrayList<>(
-                Arrays.asList(
+                List.of(
                     new BlockInfo(
                         R1,
                         RED_CAR,
@@ -346,10 +342,9 @@ public final class RushHour {
          * C1 C1 T1 __ __ T3
          * __ __ T1 T2 T2 T2
          */
-
         RushHour.START_POSITION_LIST.add(
             new ArrayList<>(
-                Arrays.asList(
+                List.of(
                     new BlockInfo(
                         R1,
                         RED_CAR,

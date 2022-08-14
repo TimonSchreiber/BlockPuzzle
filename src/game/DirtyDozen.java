@@ -2,54 +2,49 @@ package game;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import block.Block;
 import block.BlockInfo;
 import block.Position;
+import block.PositionList;
 import block.PositionsInfo;
 import field.BlockSet;
 import field.Direction;
 import field.GameField;
-import field.Move;
 import field.MovePattern;
 
-public final class DirtyDozen {
+public final class DirtyDozen extends Game {
 
     // -------------------------------------------------------------------------
     // STATIC ATTRIBUTES
     // -------------------------------------------------------------------------
 
-    // TODO: pass this into the GameField
-    /** preset game values for height */
-    // private static final int HEIGHT = 5;
-    /** preset game values for width */
-    // private static final int WIDTH = 6;
+    /** Preset game values for height */
+    private static final int HEIGHT = 5;
+    /** Preset game values for width */
+    private static final int WIDTH = 6;
 
-    /** Winning Positions {@code PositionList}*/
-    // private static final
-    // PositionList WINNING_SQUARES =
-    //     new PositionList(
-    //         List.of(
-    //             new Position(4, 0),
-    //             new Position(5, 0),
-    //             new Position(4, 1),
-    //             new Position(5, 1)
-    //         )
-    //     );
+    /** Preset win condition as a {@code PositionList}*/
+    private static final
+    PositionList WIN_CONDITION =
+        new PositionList(
+            List.of(
+                new Position(4, 0),
+                new Position(5, 0),
+                new Position(4, 1),
+                new Position(5, 1)
+            )
+        );
+
+    // TODO: Add a way to tell the canvas where to mark the border to show the win condition
+    /**  */
 
     /** List of a List of {@code BlockInfos} */
     private static final
     List<List<BlockInfo>> START_POSITION_LIST =
         new ArrayList<>();
-
-    // -------------------------------------------------------------------------
-    // ATTRIBUTES
-    // -------------------------------------------------------------------------
-
-    private final int gameNumber;
-    private final GameField gameField;
+    // TODO: Maybe delete the "= ArrayList<>()" and use the static-Block to assign this List with List.of() (or Set.of(), Map.of())"
 
     // -------------------------------------------------------------------------
     // CONSTRUCTOR
@@ -61,30 +56,25 @@ public final class DirtyDozen {
      * @param gameNumber    the gameNumber
      */
     public DirtyDozen(final int gameNumber) {
-        this.gameNumber = gameNumber;
-        this.gameField = new GameField();
-
-        DirtyDozen.START_POSITION_LIST
-            .get(this.gameNumber)
-            .forEach(blockInfo -> {
-                this.gameField.placeBlock(new Block(blockInfo));
-                this.gameField.draw(500);    // FIXME: make this a choice of the user -> if(...) {draw()}
-                // or if(..) {delay = xxx}
-            });
-
-        this.gameField.draw(1000);    // FIXME: delete?
+        super(new BlockSet(), new GameField(HEIGHT, WIDTH, WIN_CONDITION), gameNumber);
     }
 
     // -------------------------------------------------------------------------
-    // FORWARDING - METHODS
+    // PARENT - METHODS
     // -------------------------------------------------------------------------
 
-    public boolean checkWinnigCondition() { return this.gameField.checkWinnigCondition(); }
-    public boolean isValidMove(final Move move) { return this.gameField.isValidMove(move); }
-    public BlockSet blocks() { return this.gameField.blocks(); }
+    @Override
+    protected void setUp(final int gameNumber) {
+        DirtyDozen.START_POSITION_LIST
+            .get(gameNumber)
+            .forEach(blockInfo -> {
+                this.blockSet.add(new Block(blockInfo));
+                this.gameField.draw(this.blockSet, 100);    // FIXME: make this a choice of the user -> if(...) {draw()}
+                // or if(..) {delay = xxx}
+            });
 
-    public void print() { this.gameField.print(); }
-    public void draw(final int delay) { this.gameField.draw(delay); }
+        this.gameField.draw(this.blockSet, 1000);    // FIXME: delete?
+    }
 
     // -------------------------------------------------------------------------
     // STATIC-BLOCK
@@ -134,6 +124,8 @@ public final class DirtyDozen {
 
         // ---------------------------------------------------------------------
         // GAMES
+        // TODO: Maybe use a List.of(), Set.of(), or Map.of() (Map.Entries()) to create an immutable List
+        // Map to get the game via the key
 
         /* Game 0 - 13 Moves
          *
@@ -143,97 +135,110 @@ public final class DirtyDozen {
          * Y2 Y1 G3 G4 R1 R1
          * Y1 Y1 G1 G2 B1 B1
          */
-
         DirtyDozen.START_POSITION_LIST.add(
             new ArrayList<>(
-                Arrays.asList(
+                List.of(
                     new BlockInfo(
                         R1,
                         BIG_SQUARE,
                         MovePattern.ALL_DIRECTIONS,
                         true,
-                        new PositionsInfo(new Position(4, 1), 4, Direction.U, true)),
+                        new PositionsInfo(new Position(4, 1), 4, Direction.U, true)
+                    ),
                     new BlockInfo(
                         Y1,
                         ELBOW_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(1, 0), 3, Direction.L, true)),
+                        new PositionsInfo(new Position(1, 0), 3, Direction.L, true)
+                    ),
                     new BlockInfo(
                         Y2,
                         ELBOW_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 2), 3, Direction.R, true)),
+                        new PositionsInfo(new Position(0, 2), 3, Direction.R, true)
+                    ),
                     new BlockInfo(
                         Y3,
                         ELBOW_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 4), 3, Direction.R, true)),
+                        new PositionsInfo(new Position(0, 4), 3, Direction.R, true)
+                    ),
                     new BlockInfo(
                         Y4,
                         ELBOW_4,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 3), 3, Direction.L, true)),
+                        new PositionsInfo(new Position(2, 3), 3, Direction.L, true)
+                    ),
                     new BlockInfo(
                         B1,
                         RECTANGLE_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 0), 2, Direction.R, false)),
+                        new PositionsInfo(new Position(4, 0), 2, Direction.R, false)
+                    ),
                     new BlockInfo(
                         B2,
                         RECTANGLE_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 3), 2, Direction.U, false)),
+                        new PositionsInfo(new Position(3, 3), 2, Direction.U, false)
+                    ),
                     new BlockInfo(
                         B3,
                         RECTANGLE_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 3), 2, Direction.U, false)),
+                        new PositionsInfo(new Position(4, 3), 2, Direction.U, false)
+                    ),
                     new BlockInfo(
                         G1,
                         SQUARE_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 0), 1, Direction.D, false)),
+                        new PositionsInfo(new Position(2, 0), 1, Direction.D, false)
+                    ),
                     new BlockInfo(
                         G2,
                         SQUARE_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 0), 1, Direction.D, false)),
+                        new PositionsInfo(new Position(3, 0), 1, Direction.D, false)
+                    ),
                     new BlockInfo(
                         G3,
                         SQUARE_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 1), 1, Direction.D, false)),
+                        new PositionsInfo(new Position(2, 1), 1, Direction.D, false)
+                    ),
                     new BlockInfo(
                         G4,
                         SQUARE_4,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 1), 1, Direction.D, false)),
+                        new PositionsInfo(new Position(3, 1), 1, Direction.D, false)
+                    ),
                     new BlockInfo(
                         G5,
                         SQUARE_5,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 2), 1, Direction.D, false)),
+                        new PositionsInfo(new Position(2, 2), 1, Direction.D, false)
+                    ),
                     new BlockInfo(
                         G6,
                         SQUARE_6,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 2), 1, Direction.D, false))
+                        new PositionsInfo(new Position(3, 2), 1, Direction.D, false)
                     )
                 )
-            );    // Game 0
+            )
+        );    // Game 0
 
         // ---------------------------------------------------------------------
 
@@ -245,10 +250,9 @@ public final class DirtyDozen {
          * Y1 Y1 Y2 Y3 Y3 Y4
          * Y1 Y2 Y2 Y3 Y4 Y4
          */
-
         DirtyDozen.START_POSITION_LIST.add(
             new ArrayList<>(
-                Arrays.asList(
+                List.of(
                     new BlockInfo(
                         R1,
                         BIG_SQUARE,
@@ -347,10 +351,9 @@ public final class DirtyDozen {
          * Y1 Y1 Y2 Y3 Y3 Y4
          * Y1 Y2 Y2 Y3 Y4 Y4
          */
-
         DirtyDozen.START_POSITION_LIST.add(
             new ArrayList<>(
-                Arrays.asList(
+                List.of(
                     new BlockInfo(
                         R1,
                         BIG_SQUARE,
@@ -449,10 +452,9 @@ public final class DirtyDozen {
          * B2 B2 G3 Y1 Y2 Y2
          * B1 B1 G1 G2 __ __
          */
-
         DirtyDozen.START_POSITION_LIST.add(
             new ArrayList<>(
-                Arrays.asList(
+                List.of(
                     new BlockInfo(
                         R1,
                         BIG_SQUARE,
@@ -551,10 +553,9 @@ public final class DirtyDozen {
          * Y2 Y1 B2 B2 G2 __
          * Y1 Y1 B1 B1 G1 __
          */
-
         DirtyDozen.START_POSITION_LIST.add(
             new ArrayList<>(
-                Arrays.asList(
+                List.of(
                     new BlockInfo(
                         R1,
                         BIG_SQUARE,
@@ -653,10 +654,9 @@ public final class DirtyDozen {
          * Y1 Y1 Y2 Y3 Y3 Y4
          * Y1 Y2 Y2 Y3 Y4 Y4
          */
-
         DirtyDozen.START_POSITION_LIST.add(
             new ArrayList<>(
-                Arrays.asList(
+                List.of(
                     new BlockInfo(
                         R1,
                         BIG_SQUARE,
@@ -755,10 +755,9 @@ public final class DirtyDozen {
          * B2 B2 Y3 Y1 Y4 Y2
          * B1 B1 Y1 Y1 Y2 Y2
          */
-
         DirtyDozen.START_POSITION_LIST.add(
             new ArrayList<>(
-                Arrays.asList(
+                List.of(
                     new BlockInfo(
                         R1,
                         BIG_SQUARE,
@@ -857,10 +856,9 @@ public final class DirtyDozen {
          * B2 B2 G2 Y1 Y1 Y2
          * B1 B1 G1 Y1 Y2 Y2
          */
-
         DirtyDozen.START_POSITION_LIST.add(
             new ArrayList<>(
-                Arrays.asList(
+                List.of(
                     new BlockInfo(
                         R1,
                         BIG_SQUARE,
@@ -959,10 +957,9 @@ public final class DirtyDozen {
          * G3 G4 B2 B2 Y2 Y1
          * G1 G2 B1 B1 Y1 Y1
          */
-
         DirtyDozen.START_POSITION_LIST.add(
             new ArrayList<>(
-                Arrays.asList(
+                List.of(
                     new BlockInfo(
                         R1,
                         BIG_SQUARE,
@@ -1061,10 +1058,9 @@ public final class DirtyDozen {
          * B2 B2 Y1 Y1 Y2 __
          * B1 B1 Y1 Y2 Y2 __
          */
-
         DirtyDozen.START_POSITION_LIST.add(
             new ArrayList<>(
-                Arrays.asList(
+                List.of(
                     new BlockInfo(
                         R1,
                         BIG_SQUARE,
@@ -1163,10 +1159,9 @@ public final class DirtyDozen {
          * B3 B3 R1 R1 Y2 Y1
          * B1 B1 B2 B2 Y1 Y1
          */
-
         DirtyDozen.START_POSITION_LIST.add(
             new ArrayList<>(
-                Arrays.asList(
+                List.of(
                     new BlockInfo(
                         R1,
                         BIG_SQUARE,
@@ -1265,10 +1260,9 @@ public final class DirtyDozen {
          * Y1 Y1 Y2 G2 B2 B2
          * Y1 Y2 Y2 G1 B2 B2
          */
-
         DirtyDozen.START_POSITION_LIST.add(
             new ArrayList<>(
-                Arrays.asList(
+                List.of(
                     new BlockInfo(
                         R1,
                         BIG_SQUARE,
@@ -1367,10 +1361,9 @@ public final class DirtyDozen {
          * G3 G4 R1 R1 B2 Y1
          * G1 G2 B1 B1 Y1 Y1
          */
-
         DirtyDozen.START_POSITION_LIST.add(
             new ArrayList<>(
-                Arrays.asList(
+                List.of(
                     new BlockInfo(
                         R1,
                         BIG_SQUARE,

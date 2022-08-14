@@ -2,53 +2,49 @@ package game;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import block.Block;
 import block.BlockInfo;
 import block.Position;
+import block.PositionList;
 import block.PositionsInfo;
 import field.BlockSet;
 import field.Direction;
 import field.GameField;
-import field.Move;
 import field.MovePattern;
 
-public final class JumpingRabbits {
+public final class JumpingRabbits extends Game {
 
     // -------------------------------------------------------------------------
     // STATIC ATTRIBUTES
     // -------------------------------------------------------------------------
 
-    // TODO: 1# pass this into the GameField
-    /** preset game values for size */
-    // private static final int SIZE = 5;
+    /** Preset game values for size */
+    private static final int SIZE = 5;
 
     // TODO: this winning positions only need to match partially (number of rabbits)
-    /** Winning Positions {@code PositionList}*/
-    // private static final
-    // PositionList WINNING_SQUARES =
-    //     new PositionList(
-    //         List.of(
-    //             new Position(0, 0),
-    //             new Position(0, 4),
-    //             new Position(2, 2),
-    //             new Position(4, 0),
-    //             new Position(4, 4)
-    //         )
-    //     );
+    /** Preset win condition as a {@code PositionList}*/
+    private static final
+    PositionList WIN_CONDITION =
+        new PositionList(
+            List.of(
+                new Position(0, 0),
+                new Position(0, 4),
+                new Position(2, 2),
+                new Position(4, 0),
+                new Position(4, 4)
+            )
+        );
+
+    // TODO: Add a way to tell the canvas where to mark the border to show the win condition
+    /**  */
 
     /** List of a List of {@code BlockInfos} */
     private static final
     List<List<BlockInfo>> START_POSITION_LIST =
         new ArrayList<>();
-
-    // -------------------------------------------------------------------------
-    // ATTRIBUTES
-    // -------------------------------------------------------------------------
-    private final int gameNumber;
-    private final GameField gameField;
+    // TODO: Maybe delete the "= ArrayList<>()" and use the static-Block to assign this List with List.of() (or Set.of(), Map.of())"
 
     // -------------------------------------------------------------------------
     // CONSTRUCTOR
@@ -60,30 +56,25 @@ public final class JumpingRabbits {
      * @param gameNumber    the gameNumber
      */
     public JumpingRabbits(final int gameNumber) {
-        this.gameNumber = gameNumber;
-        this.gameField = new GameField();
-
-        JumpingRabbits.START_POSITION_LIST
-            .get(this.gameNumber)
-            .forEach(blockInfo -> {
-                this.gameField.placeBlock(new Block(blockInfo));
-                // this.field.draw(100);    // FIXME: make this a choice of the user -> if(...) {draw()}
-                // or if(..) {delay = xxx}
-            });
-
-        this.gameField.draw(1000);    // FIXME: delete?
+        super(new BlockSet(), new GameField(SIZE, SIZE, WIN_CONDITION), gameNumber);
     }
 
     // -------------------------------------------------------------------------
-    // FORWARDING - METHODS
+    // PARENT - METHODS
     // -------------------------------------------------------------------------
 
-    public boolean checkWinnigCondition() { return this.gameField.checkWinnigCondition(); }
-    public boolean isValidMove(final Move move) { return this.gameField.isValidMove(move); }
-    public BlockSet blocks() { return this.gameField.blocks(); }
+    @Override
+    protected void setUp(final int gameNumber) {
+        JumpingRabbits.START_POSITION_LIST
+            .get(gameNumber)
+            .forEach(blockInfo -> {
+                this.blockSet.add(new Block(blockInfo));
+                this.gameField.draw(this.blockSet, 100);    // FIXME: make this a choice of the user -> if(...) {draw()}
+                // or if(..) {delay = xxx}
+            });
 
-    public void print() { this.gameField.print(); }
-    public void draw(final int delay) { this.gameField.draw(delay); }
+        this.gameField.draw(this.blockSet, 1000);    // FIXME: delete?
+    }
 
     // -------------------------------------------------------------------------
     // STATIC-BLOCK
@@ -139,10 +130,9 @@ public final class JumpingRabbits {
          * __ __ __ __ __
          * __ __ __ __ __
          */
-
         JumpingRabbits.START_POSITION_LIST.add(
             new ArrayList<>(
-                Arrays.asList(
+                List.of(
                     new BlockInfo(
                         R1,
                         RABBIT_1,
@@ -181,10 +171,9 @@ public final class JumpingRabbits {
          * __ __ __ __ __
          * __ __ __ __ __
          */
-
         JumpingRabbits.START_POSITION_LIST.add(
             new ArrayList<>(
-                Arrays.asList(
+                List.of(
                     new BlockInfo(
                         R1,
                         RABBIT_1,
@@ -219,247 +208,243 @@ public final class JumpingRabbits {
                 )
             );    // Game 1
 
-            // -----------------------------------------------------------------
+        // -----------------------------------------------------------------
 
-            /* Game 2 - 13 Moves
-             * Expert 35
-             * __ F1 __ F2 __
-             * __ F1 __ F2 M3
-             * __ __ __ __ M2
-             * R1 __ __ R2 __
-             * __ __ __ __ M1
-             */
-
-            JumpingRabbits.START_POSITION_LIST.add(
-                new ArrayList<>(
-                    Arrays.asList(
-                        new BlockInfo(
-                            R1,
-                            RABBIT_1,
-                            MovePattern.ALL_DIRECTIONS,
-                            true,
-                            new PositionsInfo(new Position(0, 1), 1, Direction.D, false)),
-                        new BlockInfo(
-                            R2,
-                            RABBIT_2,
-                            MovePattern.ALL_DIRECTIONS,
-                            true,
-                            new PositionsInfo(new Position(3, 1), 1, Direction.D, false)),
-                        new BlockInfo(
-                            F1,
-                            FOX_1,
-                            MovePattern.DOWN_UP_DIRECTIONS,
-                            false,
-                            new PositionsInfo(new Position(1, 3), 2, Direction.U, false)),
-                        new BlockInfo(
-                            F2,
-                            FOX_2,
-                            MovePattern.DOWN_UP_DIRECTIONS,
-                            false,
-                            new PositionsInfo(new Position(3, 3), 2, Direction.U, false)),
-                        new BlockInfo(
-                            M1,
-                            MUSHROOM_1,
-                            MovePattern.NO_DIRECTIONS,
-                            false,
-                            new PositionsInfo(new Position(4, 0), 1, Direction.D, false)),
-                        new BlockInfo(
-                            M2,
-                            MUSHROOM_2,
-                            MovePattern.NO_DIRECTIONS,
-                            false,
-                            new PositionsInfo(new Position(4, 2), 1, Direction.D, false)),
-                        new BlockInfo(
-                            M3,
-                            MUSHROOM_3,
-                            MovePattern.NO_DIRECTIONS,
-                            false,
-                            new PositionsInfo(new Position(4, 3), 1, Direction.D, false))
-                        )
+        /* Game 2 - 13 Moves
+            * Expert 35
+            * __ F1 __ F2 __
+            * __ F1 __ F2 M3
+            * __ __ __ __ M2
+            * R1 __ __ R2 __
+            * __ __ __ __ M1
+            */
+        JumpingRabbits.START_POSITION_LIST.add(
+            new ArrayList<>(
+                List.of(
+                    new BlockInfo(
+                        R1,
+                        RABBIT_1,
+                        MovePattern.ALL_DIRECTIONS,
+                        true,
+                        new PositionsInfo(new Position(0, 1), 1, Direction.D, false)),
+                    new BlockInfo(
+                        R2,
+                        RABBIT_2,
+                        MovePattern.ALL_DIRECTIONS,
+                        true,
+                        new PositionsInfo(new Position(3, 1), 1, Direction.D, false)),
+                    new BlockInfo(
+                        F1,
+                        FOX_1,
+                        MovePattern.DOWN_UP_DIRECTIONS,
+                        false,
+                        new PositionsInfo(new Position(1, 3), 2, Direction.U, false)),
+                    new BlockInfo(
+                        F2,
+                        FOX_2,
+                        MovePattern.DOWN_UP_DIRECTIONS,
+                        false,
+                        new PositionsInfo(new Position(3, 3), 2, Direction.U, false)),
+                    new BlockInfo(
+                        M1,
+                        MUSHROOM_1,
+                        MovePattern.NO_DIRECTIONS,
+                        false,
+                        new PositionsInfo(new Position(4, 0), 1, Direction.D, false)),
+                    new BlockInfo(
+                        M2,
+                        MUSHROOM_2,
+                        MovePattern.NO_DIRECTIONS,
+                        false,
+                        new PositionsInfo(new Position(4, 2), 1, Direction.D, false)),
+                    new BlockInfo(
+                        M3,
+                        MUSHROOM_3,
+                        MovePattern.NO_DIRECTIONS,
+                        false,
+                        new PositionsInfo(new Position(4, 3), 1, Direction.D, false))
                     )
-                );    // Game 2
+                )
+            );    // Game 2
 
-            // -----------------------------------------------------------------
+        // -----------------------------------------------------------------
 
-            /* Game 3 - 21 Moves
-             * Master 57
-             * __ F2 __ __ __
-             * M3 F2 __ __ __
-             * __ __ M2 __ __
-             * F1 F1 __ __ __
-             * M1 __ R1 __ __
-             */
-
-            JumpingRabbits.START_POSITION_LIST.add(
-                new ArrayList<>(
-                    Arrays.asList(
-                        new BlockInfo(
-                            R1,
-                            RABBIT_1,
-                            MovePattern.ALL_DIRECTIONS,
-                            true,
-                            new PositionsInfo(new Position(2, 0), 1, Direction.D, false)),
-                        new BlockInfo(
-                            F1,
-                            FOX_1,
-                            MovePattern.RIGHT_LEFT_DIRECTIONS,
-                            false,
-                            new PositionsInfo(new Position(0, 1), 2, Direction.R, false)),
-                        new BlockInfo(
-                            F2,
-                            FOX_2,
-                            MovePattern.DOWN_UP_DIRECTIONS,
-                            false,
-                            new PositionsInfo(new Position(1, 3), 2, Direction.U, false)),
-                        new BlockInfo(
-                            M1,
-                            MUSHROOM_1,
-                            MovePattern.NO_DIRECTIONS,
-                            false,
-                            new PositionsInfo(new Position(0, 0), 1, Direction.D, false)),
-                        new BlockInfo(
-                            M2,
-                            MUSHROOM_2,
-                            MovePattern.NO_DIRECTIONS,
-                            false,
-                            new PositionsInfo(new Position(2, 2), 1, Direction.D, false)),
-                        new BlockInfo(
-                            M3,
-                            MUSHROOM_3,
-                            MovePattern.NO_DIRECTIONS,
-                            false,
-                            new PositionsInfo(new Position(0, 3), 1, Direction.D, false))
-                        )
+        /* Game 3 - 21 Moves
+            * Master 57
+            * __ F2 __ __ __
+            * M3 F2 __ __ __
+            * __ __ M2 __ __
+            * F1 F1 __ __ __
+            * M1 __ R1 __ __
+            */
+        JumpingRabbits.START_POSITION_LIST.add(
+            new ArrayList<>(
+                List.of(
+                    new BlockInfo(
+                        R1,
+                        RABBIT_1,
+                        MovePattern.ALL_DIRECTIONS,
+                        true,
+                        new PositionsInfo(new Position(2, 0), 1, Direction.D, false)),
+                    new BlockInfo(
+                        F1,
+                        FOX_1,
+                        MovePattern.RIGHT_LEFT_DIRECTIONS,
+                        false,
+                        new PositionsInfo(new Position(0, 1), 2, Direction.R, false)),
+                    new BlockInfo(
+                        F2,
+                        FOX_2,
+                        MovePattern.DOWN_UP_DIRECTIONS,
+                        false,
+                        new PositionsInfo(new Position(1, 3), 2, Direction.U, false)),
+                    new BlockInfo(
+                        M1,
+                        MUSHROOM_1,
+                        MovePattern.NO_DIRECTIONS,
+                        false,
+                        new PositionsInfo(new Position(0, 0), 1, Direction.D, false)),
+                    new BlockInfo(
+                        M2,
+                        MUSHROOM_2,
+                        MovePattern.NO_DIRECTIONS,
+                        false,
+                        new PositionsInfo(new Position(2, 2), 1, Direction.D, false)),
+                    new BlockInfo(
+                        M3,
+                        MUSHROOM_3,
+                        MovePattern.NO_DIRECTIONS,
+                        false,
+                        new PositionsInfo(new Position(0, 3), 1, Direction.D, false))
                     )
-                );    // Game 3
+                )
+            );    // Game 3
 
-            // -----------------------------------------------------------------
+        // -----------------------------------------------------------------
 
-            /* Game 4 - 36 Moves
-             * Wizard 79
-             * __ __ __ __ R3
-             * F2 F2 __ R2 __
-             * __ F1 M2 __ __
-             * __ F1 __ __ __
-             * __ __ __ R1 M1
-             */
-
-            JumpingRabbits.START_POSITION_LIST.add(
-                new ArrayList<>(
-                    Arrays.asList(
-                        new BlockInfo(
-                            R1,
-                            RABBIT_1,
-                            MovePattern.ALL_DIRECTIONS,
-                            true,
-                            new PositionsInfo(new Position(3, 0), 1, Direction.D, false)),
-                        new BlockInfo(
-                            R2,
-                            RABBIT_2,
-                            MovePattern.ALL_DIRECTIONS,
-                            true,
-                            new PositionsInfo(new Position(3, 3), 1, Direction.D, false)),
-                        new BlockInfo(
-                            R3,
-                            RABBIT_3,
-                            MovePattern.ALL_DIRECTIONS,
-                            true,
-                            new PositionsInfo(new Position(4, 4), 1, Direction.D, false)),
-                        new BlockInfo(
-                            F1,
-                            FOX_1,
-                            MovePattern.DOWN_UP_DIRECTIONS,
-                            false,
-                            new PositionsInfo(new Position(1, 1), 2, Direction.U, false)),
-                        new BlockInfo(
-                            F2,
-                            FOX_2,
-                            MovePattern.RIGHT_LEFT_DIRECTIONS,
-                            false,
-                            new PositionsInfo(new Position(0, 3), 2, Direction.U, false)),
-                        new BlockInfo(
-                            M1,
-                            MUSHROOM_1,
-                            MovePattern.NO_DIRECTIONS,
-                            false,
-                            new PositionsInfo(new Position(4, 0), 1, Direction.D, false)),
-                        new BlockInfo(
-                            M2,
-                            MUSHROOM_2,
-                            MovePattern.NO_DIRECTIONS,
-                            false,
-                            new PositionsInfo(new Position(2, 2), 1, Direction.D, false))
-                        )
+        /* Game 4 - 36 Moves
+            * Wizard 79
+            * __ __ __ __ R3
+            * F2 F2 __ R2 __
+            * __ F1 M2 __ __
+            * __ F1 __ __ __
+            * __ __ __ R1 M1
+            */
+        JumpingRabbits.START_POSITION_LIST.add(
+            new ArrayList<>(
+                List.of(
+                    new BlockInfo(
+                        R1,
+                        RABBIT_1,
+                        MovePattern.ALL_DIRECTIONS,
+                        true,
+                        new PositionsInfo(new Position(3, 0), 1, Direction.D, false)),
+                    new BlockInfo(
+                        R2,
+                        RABBIT_2,
+                        MovePattern.ALL_DIRECTIONS,
+                        true,
+                        new PositionsInfo(new Position(3, 3), 1, Direction.D, false)),
+                    new BlockInfo(
+                        R3,
+                        RABBIT_3,
+                        MovePattern.ALL_DIRECTIONS,
+                        true,
+                        new PositionsInfo(new Position(4, 4), 1, Direction.D, false)),
+                    new BlockInfo(
+                        F1,
+                        FOX_1,
+                        MovePattern.DOWN_UP_DIRECTIONS,
+                        false,
+                        new PositionsInfo(new Position(1, 1), 2, Direction.U, false)),
+                    new BlockInfo(
+                        F2,
+                        FOX_2,
+                        MovePattern.RIGHT_LEFT_DIRECTIONS,
+                        false,
+                        new PositionsInfo(new Position(0, 3), 2, Direction.U, false)),
+                    new BlockInfo(
+                        M1,
+                        MUSHROOM_1,
+                        MovePattern.NO_DIRECTIONS,
+                        false,
+                        new PositionsInfo(new Position(4, 0), 1, Direction.D, false)),
+                    new BlockInfo(
+                        M2,
+                        MUSHROOM_2,
+                        MovePattern.NO_DIRECTIONS,
+                        false,
+                        new PositionsInfo(new Position(2, 2), 1, Direction.D, false))
                     )
-                );    // Game 4
+                )
+            );    // Game 4
 
-            // -----------------------------------------------------------------
+        // -----------------------------------------------------------------
 
-            /* Game 5 - 77 Moves
-             * Wizard 100
-             * __ M3 __ __ R4
-             * __ __ F1 F1 __
-             * R2 __ M2 __ R3
-             * __ __ __ __ M1
-             * __ R1 __ __ __
-             */
-
-            JumpingRabbits.START_POSITION_LIST.add(
-                new ArrayList<>(
-                    Arrays.asList(
-                        new BlockInfo(
-                            R1,
-                            RABBIT_1,
-                            MovePattern.ALL_DIRECTIONS,
-                            true,
-                            new PositionsInfo(new Position(1, 0), 1, Direction.D, false)),
-                        new BlockInfo(
-                            R2,
-                            RABBIT_2,
-                            MovePattern.ALL_DIRECTIONS,
-                            true,
-                            new PositionsInfo(new Position(0, 2), 1, Direction.D, false)),
-                        new BlockInfo(
-                            R3,
-                            RABBIT_3,
-                            MovePattern.ALL_DIRECTIONS,
-                            true,
-                            new PositionsInfo(new Position(4, 2), 1, Direction.D, false)),
-                        new BlockInfo(
-                            R4,
-                            RABBIT_4,
-                            MovePattern.ALL_DIRECTIONS,
-                            true,
-                            new PositionsInfo(new Position(4, 4), 1, Direction.D, false)),
-                        new BlockInfo(
-                            F1,
-                            FOX_1,
-                            MovePattern.RIGHT_LEFT_DIRECTIONS,
-                            false,
-                            new PositionsInfo(new Position(2, 3), 2, Direction.R, false)),
-                        new BlockInfo(
-                            M1,
-                            MUSHROOM_1,
-                            MovePattern.NO_DIRECTIONS,
-                            false,
-                            new PositionsInfo(new Position(4, 1), 1, Direction.D, false)),
-                        new BlockInfo(
-                            M2,
-                            MUSHROOM_2,
-                            MovePattern.NO_DIRECTIONS,
-                            false,
-                            new PositionsInfo(new Position(2, 2), 1, Direction.D, false)),
-                        new BlockInfo(
-                            M3,
-                            MUSHROOM_3,
-                            MovePattern.NO_DIRECTIONS,
-                            false,
-                            new PositionsInfo(new Position(1, 4), 1, Direction.D, false))
-                        )
+        /* Game 5 - 77 Moves
+            * Wizard 100
+            * __ M3 __ __ R4
+            * __ __ F1 F1 __
+            * R2 __ M2 __ R3
+            * __ __ __ __ M1
+            * __ R1 __ __ __
+            */
+        JumpingRabbits.START_POSITION_LIST.add(
+            new ArrayList<>(
+                List.of(
+                    new BlockInfo(
+                        R1,
+                        RABBIT_1,
+                        MovePattern.ALL_DIRECTIONS,
+                        true,
+                        new PositionsInfo(new Position(1, 0), 1, Direction.D, false)),
+                    new BlockInfo(
+                        R2,
+                        RABBIT_2,
+                        MovePattern.ALL_DIRECTIONS,
+                        true,
+                        new PositionsInfo(new Position(0, 2), 1, Direction.D, false)),
+                    new BlockInfo(
+                        R3,
+                        RABBIT_3,
+                        MovePattern.ALL_DIRECTIONS,
+                        true,
+                        new PositionsInfo(new Position(4, 2), 1, Direction.D, false)),
+                    new BlockInfo(
+                        R4,
+                        RABBIT_4,
+                        MovePattern.ALL_DIRECTIONS,
+                        true,
+                        new PositionsInfo(new Position(4, 4), 1, Direction.D, false)),
+                    new BlockInfo(
+                        F1,
+                        FOX_1,
+                        MovePattern.RIGHT_LEFT_DIRECTIONS,
+                        false,
+                        new PositionsInfo(new Position(2, 3), 2, Direction.R, false)),
+                    new BlockInfo(
+                        M1,
+                        MUSHROOM_1,
+                        MovePattern.NO_DIRECTIONS,
+                        false,
+                        new PositionsInfo(new Position(4, 1), 1, Direction.D, false)),
+                    new BlockInfo(
+                        M2,
+                        MUSHROOM_2,
+                        MovePattern.NO_DIRECTIONS,
+                        false,
+                        new PositionsInfo(new Position(2, 2), 1, Direction.D, false)),
+                    new BlockInfo(
+                        M3,
+                        MUSHROOM_3,
+                        MovePattern.NO_DIRECTIONS,
+                        false,
+                        new PositionsInfo(new Position(1, 4), 1, Direction.D, false))
                     )
-                );    // Game 5
+                )
+            );    // Game 5
 
-            // -----------------------------------------------------------------
+        // -----------------------------------------------------------------
 
     }   // static
 

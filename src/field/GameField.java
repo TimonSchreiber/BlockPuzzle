@@ -1,7 +1,7 @@
 package field;
 
 import java.awt.Color;
-import java.util.List;
+// import java.util.List;
 
 import block.Block;
 import block.Position;
@@ -13,36 +13,17 @@ public final class GameField {
     // ATTRIBUTES
     // -------------------------------------------------------------------------
 
-    // ---------------
-
-    // TODO: move this section into the corresponding Game classes and pass it into the a GameField object.
-    // TODO: change name to something more generic but yet meaningful
-
     /** Winning Positions {@code PositionList}*/
-    private static final
-    PositionList WINNING_SQUARES =
-        new PositionList(
-            List.of(
-                new Position(4, 0),
-                new Position(5, 0),
-                new Position(4, 1),
-                new Position(5, 1)
-            )
-        );
+    private final PositionList WIN_CONDITION;
 
-    /** preset game values for height */
-    private static final int HEIGHT = 5;
+    /** preset game values for this.HEIGHT */
+    private final int HEIGHT;
 
-    /** preset game values for width */
-    private static final int WIDTH = 6;
+    /** preset game values for this.WIDTH */
+    private final int WIDTH;
 
-    // TODO: also define the neccessary properties of the canvas in the Gmae class
+    // TODO: also define the neccessary properties of the canvas in the Game class
     // e.g. Where the goal/target is
-
-    // ---------------
-
-    /** {@code BlockSet} to keep track of every {@code Block} */
-    private final BlockSet blockSet;
 
     /** Canvas to draw the {@code GameField} on */
     private Zeichenblatt canvas;
@@ -54,28 +35,17 @@ public final class GameField {
     /**
      * Class constructor.
      */
-    public GameField() {
-        this.blockSet = new BlockSet();
-    }
-
-    /**
-     * Class constructor from a {@code BlockSet}.
-     *
-     * @param blockSet  the {@code BlockSet}
-     */
-    public GameField(final BlockSet blockSet) {
-        this.blockSet = new BlockSet();
-
-        for (final Block block : blockSet) {
-            this.blockSet.add(new Block(block));
-        }
+    public GameField(int height, int width, PositionList winCondition) {
+        this.HEIGHT = height;
+        this.WIDTH = width;
+        this.WIN_CONDITION = winCondition;
     }
 
     // -------------------------------------------------------------------------
     // GETTERS
     // -------------------------------------------------------------------------
 
-    /**
+    /** TODO: get a List of Blocks that need to match the winning condition, maybe also a number of rabbits (or 1 if not JumpingRabbits)
      * Checks if the {@code Block} satisfies the winning condition.
      *
      * {@code true} if the {@code LargeBlock} reached the winning Position
@@ -83,32 +53,24 @@ public final class GameField {
      *
      * @return
      */
-    public boolean checkWinnigCondition() {
-        return this.blockSet.getBlock("R1").positionList().equals(WINNING_SQUARES);
+    public boolean checkWinCondition(final BlockSet blockSet) {
+        /* 1st Idea how to make this work:
+         * int counter = 0;
+         * 
+         * for (Block block : blockSet.getMainBlocks()) {
+         *     for (Position position : block.positions()) {
+         *         if (this.WIN_CONDITION.contains(position)) { ++counter; }
+         *     }
+         * }
+         * return counter == this.WIN_CONDITION.size();
+         */
+
+        // TODO: "R1" will not always be the winnig Block (Jumping Rabits). Fix this!
+        return blockSet
+                .getBlock("R1")
+                .positionList()
+                .equals(this.WIN_CONDITION);
         // TODO: maybe use forwarding here
-    }
-
-    /**
-     * Gets a copy of the {@code BlockSet}.
-     *
-     * @return  the {@code BlockSet}
-     */
-    public BlockSet blocks() {
-        return new BlockSet(this.blockSet);
-    }
-
-    // -------------------------------------------------------------------------
-    // PLACE BLOCK
-    // -------------------------------------------------------------------------
-
-    /**
-     * Places a {@code Block} onto this {@code GameField}.
-     *
-     * @param block     the {@code Block}
-     */
-    public void placeBlock(final Block block) {
-        this.blockSet.add(block);
-        return;
     }
 
     // -------------------------------------------------------------------------
@@ -122,18 +84,17 @@ public final class GameField {
      * @return
      */
     private boolean isInInterval(final Position position) {
-        return    (position.x() < WIDTH)
-                    && (position.x() >= 0)
-                && (position.y() < HEIGHT)
-                    && (position.y() >= 0);
+        return     (position.x() < this.WIDTH)
+                && (position.x() >= 0)
+                && (position.y() < this.HEIGHT)
+                && (position.y() >= 0);
     }
 
     // -------------------------------------------------------------------------
     // IS COLLISION FREE
     // -------------------------------------------------------------------------
 
-    /**
-     *
+    /** TODO: make this work with Rabbits
      * Checks if the {@code Move} can be performed or if this will result in an
      * illegal {@code GameField} by overlapping two (or more) {@code Block}s, or
      * by leaving the boundaries of this {@code GameField}.
@@ -142,36 +103,24 @@ public final class GameField {
      * @return        {@code true} if this {@code Move} can be made, {@code false}
      *                otherwise.
      */
-    private boolean isCollisionFree(final Move move) {
-        final Block newBlock = new Block(this.blockSet.getBlock(move.name()));
-
-        // newBlock.positionList().moveTowards(move.direction());
-        // newBlock.positionList().forEach(position -> {
-        //     // Checks if the new Position is inside the GameField
-        //     if (!this.isInInterval(position)) {
-        //         newBlock = null;
-        //     }
-
-        //     // Checks if it is the same Block as the one about to be moved
-        //     if (!this.blockSet.getBlockName(position).equals(newBlock.blockName())) {
-        //         collisionFree = false;
-        //     }
-        // });
+    private boolean isCollisionFree(final BlockSet blockSet, final Move move) {
+        final Block newBlock = new Block(blockSet.getBlock(move.name()));
 
         // TODO: why check every position on it's own and not all of them together?
         for (final Position position : newBlock.positionList()) {
-            final Position newPosition = position.moveTowards(move.direction());
+            final Position tmpPosition = position.moveTowards(move.direction());
 
             // Checks if the new Position is outside the GameField
-            if (!this.isInInterval(newPosition)) {
+            if (!this.isInInterval(tmpPosition)) {
                 return false;   // outside GameField
             }
 
             // Checks if there is already a Block at this Positions
             // If yes, check if it does not have the same name
-            if (this.blockSet.isBlock(newPosition) &&
-                !this.blockSet.getBlockName(newPosition).equals(newBlock.blockName())) {
-                return false;   // collides with a another Block
+            if (blockSet.isBlock(tmpPosition) &&
+                !blockSet.getBlockName(tmpPosition).equals(newBlock.blockName())) {
+                // TODO: Maybe extract the conditions onto variables to make it more readable.
+                return false;   // collides with another Block
             }
         }
 
@@ -191,9 +140,9 @@ public final class GameField {
      * @return      {@code true} if the {@code Move} was successful,
      *              {@code false} otherwise.
      */
-    public boolean isValidMove(final Move move) {
-        if (this.isCollisionFree(move)) {
-            this.blockSet.makeMove(move);
+    public boolean isValidMove(final BlockSet blockSet, final Move move) {
+        if (this.isCollisionFree(blockSet, move)) {
+            blockSet.makeMove(move);
             return true;
         }
 
@@ -208,16 +157,16 @@ public final class GameField {
      * Prints the Name of each {@code Block} for each {@code Position} on the
      * Console and "__" if there is no {@code Block}.
      */
-    public void print() {
-        for (int i = (HEIGHT - 1); i >= 0; i--) {
+    public void print(final BlockSet blockSet) {
+        for (int i = (this.HEIGHT - 1); i >= 0; i--) {
 
-            for (int j = 0; j < WIDTH; j++) {
+            for (int j = 0; j < this.WIDTH; j++) {
 
                 final Position position = new Position(j, i);
                 System.out.print(" ");
 
-                if (this.blockSet.isBlock(position)) {
-                    System.out.print(this.blockSet.getBlockName(position));
+                if (blockSet.isBlock(position)) {
+                    System.out.print(blockSet.getBlockName(position));
                 } else {
                     System.out.print("__");
                 }
@@ -238,7 +187,7 @@ public final class GameField {
      *
      * @param delay     The time delay
      */
-    public void draw(final int delay) {
+    public void draw(final BlockSet blockSet, final int delay) {
         final int SIZE = 64;
         final int ONE = 1;
 
@@ -247,13 +196,13 @@ public final class GameField {
         // new Zeichenblatt.java
         if (this.canvas == null) {
             this.canvas = new Zeichenblatt(
-                                    (WIDTH  + ONE) * SIZE,
-                                    (HEIGHT + ONE) * SIZE);
+                                    (this.WIDTH  + ONE) * SIZE,
+                                    (this.HEIGHT + ONE) * SIZE);
             this.canvas.benutzerkoordinaten(
                                         0.0,
                                         0.0,
-                                        WIDTH  + ONE,
-                                        HEIGHT + ONE);
+                                        this.WIDTH  + ONE,
+                                        this.HEIGHT + ONE);
         } else {
             this.canvas.loeschen();
         }
@@ -261,12 +210,12 @@ public final class GameField {
         // draw light grey square (outline)
         this.canvas.setVordergrundFarbe(Color.lightGray);
         this.canvas.rechteck(
-                        WIDTH  + ONE,
-                        HEIGHT + ONE);
+                        this.WIDTH  + ONE,
+                        this.HEIGHT + ONE);
 
         // draw red square in the bottom right corner (marks goal)
         this.canvas.setVordergrundFarbe(Color.red);
-        for (final Position position : WINNING_SQUARES) {
+        for (final Position position : this.WIN_CONDITION) {
             this.canvas.rechteck(
                             position.x() + OFFSET,
                             position.y(),
@@ -279,11 +228,11 @@ public final class GameField {
         this.canvas.rechteck(
                         OFFSET,
                         OFFSET,
-                        WIDTH,
-                        HEIGHT);
+                        this.WIDTH,
+                        this.HEIGHT);
 
         // draw each {@code Block}
-        for (final Block block : this.blockSet) {
+        for (final Block block : blockSet) {
             for (final Position position : block.positionList()) {
                 this.canvas.setVordergrundFarbe(block.color());
                 this.canvas.rechteck(
