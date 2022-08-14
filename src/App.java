@@ -1,10 +1,6 @@
 import java.util.Scanner;
-import java.awt.Color;
-
-import block.Block;
-import field.Direction;
-import field.MovePattern;
 import game.DirtyDozen;
+import game.Game;
 import game.JumpingRabbits;
 import game.RushHour;
 import solver.BFS_WithThreads;
@@ -15,44 +11,45 @@ public class App {
 
     public static void main(String[] args) throws Exception {
 
-        // System.out.println("Yellow:\t\t" + Color.YELLOW);
-        // System.out.println("Yellow.D:\t" + Color.YELLOW.darker());
-        // System.out.println("Blue:\t\t" + Color.BLUE);
-        // System.out.println("Cyan:\t\t" + Color.CYAN);
-        // System.out.println("Magenta:\t" + Color.MAGENTA);
-        // System.out.println("Dark_G:\t\t" + Color.DARK_GRAY);
-        // System.out.println("Gray:\t\t" + Color.GRAY);
-        // System.out.println("Pink:\t\t" + Color.PINK);
-        // System.out.println("Pink.B\t" + Color.PINK.brighter());
-        // System.out.println("Pink.D\t" + Color.PINK.darker());
-        
-        // RushHour game = new RushHour(2);
-
-        // System.out.println("BlockSet:");
-        // for (Block block : game.blocks()) {
-        //     System.out.println(block.blockName());
-        // }
-
-        // System variables
-        // New Scanner
         try (final Scanner scanner = new Scanner(System.in)) {
-            String type = "t";
-            int number = 6;
-            System.out.println("Game Number: " + number);     // TODO: delete?
+            String gameType = "DirtyDozen";  // D=DirtyDozen; J=HumpingRabbits; R=RushHour
+            String solvType = "Breadth";  // D=Depth; B=Breadth; T=Threads
+            int number = 12;
+
+            System.out.println("Game Number: " + number);
+
             int delay = 0;
             boolean show = false;
 
+            Game game;
+
+            switch (gameType.toUpperCase().charAt(0)) {
+                case 'D':
+                    game = new DirtyDozen(number);
+                    break;
+                case 'J':
+                    game = new JumpingRabbits(number);
+                    break;
+                case 'R':
+                    game = new RushHour(number);
+                    break;
+                default:
+                    game = new DirtyDozen(number);  // TODO: what to do in the default case?
+                    break;
+
+            }
+
             // TODO: maybe create a Game instance here and pass it to the Solver
 
-            switch (type.toUpperCase().charAt(0)) {
+            switch (solvType.toUpperCase().charAt(0)) {
                 case 'D':
-                    new DepthFirstSearch(number, delay, show).solve();
+                    new DepthFirstSearch(game, delay, show).solve();
                     break;
                 case 'B':
-                    new BreadthFirstSearch(number).solve();
+                    new BreadthFirstSearch(game).solve();
                     break;
                 case 'T':
-                    new BFS_WithThreads(number).solve();
+                    new BFS_WithThreads(game).solve();
                     break;
                 default:
                     System.err.println("Invalid input!");
