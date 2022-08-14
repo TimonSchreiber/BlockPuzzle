@@ -2,6 +2,9 @@ package block;
 
 import field.Direction;
 
+/**
+ * Represents a pair of x- and y-values.
+ */
 public record Position(int x, int y) implements Comparable<Position> {
 
     // -------------------------------------------------------------------------
