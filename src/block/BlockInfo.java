@@ -12,4 +12,4 @@ public record BlockInfo(String name,
                         MovePattern movePattern,
                         boolean isMainBlock,
                         PositionsInfo positionsInfo) {
-}   // BlockInfo record
+}   // Block Info record
