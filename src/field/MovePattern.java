@@ -3,31 +3,34 @@ package field;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Stores the Directions a Block can Move.
+ */
 public final class MovePattern implements Iterable<Direction> {
 
     // -------------------------------------------------------------------------
-    // STATIC ATTRIBUTES
+    // ATTRIBUTES
     // -------------------------------------------------------------------------
 
-    /** {@code List} of {@code Directions} */
-    private final List<Direction> directions;
+    /** List of Directions. */
+    private final List<Direction> movePattern;
 
     // -------------------------------------------------------------------------
     // CONSTRUCTOR
     // -------------------------------------------------------------------------
 
-    /** TODO
+    /**
      * Private constructor.
      */
     private MovePattern(final List<Direction> directions) {
-        this.directions = directions;
+        this.movePattern = directions;
     }
 
 
     // -------------------------------------------------------------------------
     // INSTANCES
     // -------------------------------------------------------------------------
-    
+
     /** Empty Direction List */
     public static final
     MovePattern NO_DIRECTIONS =
@@ -44,7 +47,7 @@ public final class MovePattern implements Iterable<Direction> {
             Direction.U
             )
         );
-        
+
     /** Only Right and Left Directions */
     public static final
     MovePattern RIGHT_LEFT_DIRECTIONS =
@@ -54,7 +57,7 @@ public final class MovePattern implements Iterable<Direction> {
                 Direction.L
             )
         );
-        
+
     /** Right, Down, Left, and Up */
     public static final
     MovePattern ALL_DIRECTIONS =
@@ -109,16 +112,16 @@ public final class MovePattern implements Iterable<Direction> {
             return true;
         }
 
-        if ((obj == null) || (this.getClass() != obj.getClass())) {
+        if ((obj == null) || (getClass() != obj.getClass())) {
             return false;
         }
 
-        // Object must be Block at this point
+        // Object must be MovePattern at this point
         MovePattern other = (MovePattern) obj;
 
-        return  ((this.directions == other.directions)
-                || ((this.directions != null)
-                    && this.directions.equals(other.directions)));
+        return  ((movePattern == other.movePattern)
+                || ((movePattern != null)
+                    && movePattern.equals(other.movePattern)));
     }
 
     /* (non-Javadoc)
@@ -129,7 +132,7 @@ public final class MovePattern implements Iterable<Direction> {
         final int PRIME = 31;
         int hash = 7;
 
-        hash = PRIME * hash + ((this.directions == null) ? 0 : this.directions.hashCode());
+        hash = PRIME * hash + ((movePattern == null) ? 0 : movePattern.hashCode());
 
         return hash;
     }
@@ -143,9 +146,9 @@ public final class MovePattern implements Iterable<Direction> {
      */
     @Override
     public String toString() {
-        return "MovePattern [directions=" + directions + "]";
+        return "MovePattern [directions=" + movePattern + "]";
     }
-    
+
     // =========================================================================
     // INTERFACE - METHODS
     // =========================================================================
@@ -159,7 +162,7 @@ public final class MovePattern implements Iterable<Direction> {
      */
     @Override
     public Iterator<Direction> iterator() {
-        return this.directions.iterator();
+        return movePattern.iterator();
     }
 
     // =========================================================================

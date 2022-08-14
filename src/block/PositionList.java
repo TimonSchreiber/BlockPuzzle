@@ -8,7 +8,7 @@ import java.util.List;
 import field.Direction;
 
 /**
- * Wraper around an ArrayList of Positions.
+ * Wrapper around an ArrayList of Positions.
  */
 public final class PositionList implements Iterable<Position>, Comparable<PositionList> {
 
@@ -17,7 +17,7 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
     // -------------------------------------------------------------------------
 
     /** ArrayList of Positions */
-    private final List<Position> positions;
+    private final List<Position> positionList;
 
     // -------------------------------------------------------------------------
     // CONSTRUCTORS
@@ -31,9 +31,9 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
      */
     public PositionList(final PositionsInfo positionsInfo) {
         if (positionsInfo.isElbow()) {
-            this.positions = this.newElbow(positionsInfo);
+            positionList = newElbow(positionsInfo);
         } else {
-            this.positions = this.newRectangle(positionsInfo);
+            positionList = newRectangle(positionsInfo);
         }
     }
 
@@ -43,10 +43,10 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
      * @param positions     A List of Positions
      */
     public PositionList(final List<Position> positions) {
-        this.positions = new ArrayList<>(positions);
+        this.positionList = new ArrayList<>(positions);
 
         // make sure this List is sorted.
-        Collections.sort(this.positions);
+        Collections.sort(this.positionList);
     }
 
     /**
@@ -55,10 +55,10 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
      * @param positionList  A PositionList
      */
     public PositionList(final PositionList positionList) {
-        this.positions = new ArrayList<>();
+        this.positionList = new ArrayList<>();
 
         for (final Position position : positionList) {
-            this.positions.add(new Position(position));
+            this.positionList.add(new Position(position));
         }
     }
 
@@ -129,7 +129,7 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
      * @param directions    One or more Directions.
      */
     public void moveTowards(final Direction... directions) {
-        this.positions.replaceAll(pos -> pos.moveTowards(directions));
+        positionList.replaceAll(pos -> pos.moveTowards(directions));
     }
 
     // -------------------------------------------------------------------------
@@ -145,7 +145,7 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
      * @see java.util.List#contains(Object)
      */
     public boolean contains(final Position position) {
-        return this.positions.contains(position);
+        return positionList.contains(position);
     }
 
     /**
@@ -155,7 +155,7 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
      * @see java.util.List#size()
      */
     public int size() {
-        return this.positions.size();
+        return positionList.size();
     }
 
     // -------------------------------------------------------------------------
@@ -171,16 +171,16 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
             return true;
         }
 
-        if ((obj == null) || (this.getClass() != obj.getClass())) {
+        if ((obj == null) || (getClass() != obj.getClass())) {
             return false;
         }
 
         // Object must be PositionList at this point
         final PositionList other = (PositionList) obj;
 
-        return  ((this.positions == other.positions)
-                || ((this.positions != null)
-                    && this.positions.equals(other.positions)));
+        return  ((positionList == other.positionList)
+                || ((positionList != null)
+                    && positionList.equals(other.positionList)));
     }
 
     /* (non-Javadoc)
@@ -191,7 +191,7 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
         final int PRIME = 31;
         int hash = 7;
 
-        hash = PRIME * hash + ((this.positions == null) ? 0 : this.positions.hashCode());
+        hash = PRIME * hash + ((positionList == null) ? 0 : positionList.hashCode());
 
         return hash;
     }
@@ -205,7 +205,7 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
      */
     @Override
     public String toString() {
-        return "PositionList [positions=" + positions + "]";
+        return "PositionList [positions=" + positionList + "]";
     }
 
     // =========================================================================
@@ -217,11 +217,11 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
     // -------------------------------------------------------------------------
 
     /**
-     * Returns an {@code Iterator} over all {@code Positions}.
+     * Returns an Iterator over all Positions.
      */
     @Override
     public Iterator<Position> iterator() {
-        return this.positions.iterator();
+        return positionList.iterator();
     }
 
     // -------------------------------------------------------------------------
@@ -229,13 +229,14 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
     // -------------------------------------------------------------------------
 
     /**
-     *
+     * Compares two PositionLists. First compares the size (larger Lists before
+     * smaller ones), and then compares the first Position in each List.
      */
     @Override
     public int compareTo(PositionList other) {
-        return (this.positions.size() != other.positions.size())
-                ? -Integer.compare(this.positions.size(), other.positions.size()) // larger Blocks before smaller Blocks
-                : this.positions.get(0).compareTo(other.positions.get(0));
+        return (positionList.size() != other.positionList.size())
+                ? -Integer.compare(positionList.size(), other.positionList.size())
+                : positionList.get(0).compareTo(other.positionList.get(0));
     }
 
     // =========================================================================

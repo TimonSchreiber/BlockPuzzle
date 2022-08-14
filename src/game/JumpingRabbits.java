@@ -24,7 +24,7 @@ public final class JumpingRabbits extends Game {
     private static final int SIZE = 5;
 
     // TODO: this winning positions only need to match partially (number of rabbits)
-    /** Preset win condition as a {@code PositionList}*/
+    /** Preset win condition as a PositionList */
     private static final
     PositionList WIN_CONDITION =
         new PositionList(
@@ -56,7 +56,11 @@ public final class JumpingRabbits extends Game {
      * @param gameNumber    the gameNumber
      */
     public JumpingRabbits(final int gameNumber) {
-        super(new BlockSet(), new GameField(SIZE, SIZE, WIN_CONDITION), gameNumber);
+        super(
+            new BlockSet(),
+            new GameField(SIZE, SIZE, WIN_CONDITION),
+            gameNumber
+        );
     }
 
     // -------------------------------------------------------------------------
@@ -65,15 +69,15 @@ public final class JumpingRabbits extends Game {
 
     @Override
     protected void setUp(final int gameNumber) {
-        JumpingRabbits.START_POSITION_LIST
+        START_POSITION_LIST
             .get(gameNumber)
             .forEach(blockInfo -> {
-                this.blockSet.add(new Block(blockInfo));
-                this.gameField.draw(this.blockSet, 100);    // FIXME: make this a choice of the user -> if(...) {draw()}
+                blockSet.add(new Block(blockInfo));
+                gameField.draw(blockSet, 100);    // FIXME: make this a choice of the user -> if(...) {draw()}
                 // or if(..) {delay = xxx}
             });
 
-        this.gameField.draw(this.blockSet, 1000);    // FIXME: delete?
+        gameField.draw(blockSet, 1000);    // FIXME: delete?
     }
 
     // -------------------------------------------------------------------------
@@ -130,7 +134,7 @@ public final class JumpingRabbits extends Game {
          * __ __ __ __ __
          * __ __ __ __ __
          */
-        JumpingRabbits.START_POSITION_LIST.add(
+        START_POSITION_LIST.add(
             new ArrayList<>(
                 List.of(
                     new BlockInfo(
@@ -157,9 +161,9 @@ public final class JumpingRabbits extends Game {
                         MovePattern.NO_DIRECTIONS,
                         false,
                         new PositionsInfo(new Position(2, 4), 1, Direction.D, false))
-                    )
                 )
-            );    // Game 0
+            )
+        );    // Game 0
 
         // ---------------------------------------------------------------------
 
@@ -171,7 +175,7 @@ public final class JumpingRabbits extends Game {
          * __ __ __ __ __
          * __ __ __ __ __
          */
-        JumpingRabbits.START_POSITION_LIST.add(
+        START_POSITION_LIST.add(
             new ArrayList<>(
                 List.of(
                     new BlockInfo(
@@ -204,9 +208,9 @@ public final class JumpingRabbits extends Game {
                         MovePattern.NO_DIRECTIONS,
                         false,
                         new PositionsInfo(new Position(3, 4), 1, Direction.D, false))
-                    )
                 )
-            );    // Game 1
+            )
+        );    // Game 1
 
         // -----------------------------------------------------------------
 
@@ -218,7 +222,7 @@ public final class JumpingRabbits extends Game {
             * R1 __ __ R2 __
             * __ __ __ __ M1
             */
-        JumpingRabbits.START_POSITION_LIST.add(
+        START_POSITION_LIST.add(
             new ArrayList<>(
                 List.of(
                     new BlockInfo(
@@ -263,9 +267,9 @@ public final class JumpingRabbits extends Game {
                         MovePattern.NO_DIRECTIONS,
                         false,
                         new PositionsInfo(new Position(4, 3), 1, Direction.D, false))
-                    )
                 )
-            );    // Game 2
+            )
+        );    // Game 2
 
         // -----------------------------------------------------------------
 
@@ -277,7 +281,7 @@ public final class JumpingRabbits extends Game {
             * F1 F1 __ __ __
             * M1 __ R1 __ __
             */
-        JumpingRabbits.START_POSITION_LIST.add(
+        START_POSITION_LIST.add(
             new ArrayList<>(
                 List.of(
                     new BlockInfo(
@@ -316,9 +320,9 @@ public final class JumpingRabbits extends Game {
                         MovePattern.NO_DIRECTIONS,
                         false,
                         new PositionsInfo(new Position(0, 3), 1, Direction.D, false))
-                    )
                 )
-            );    // Game 3
+            )
+        );    // Game 3
 
         // -----------------------------------------------------------------
 
@@ -330,7 +334,7 @@ public final class JumpingRabbits extends Game {
             * __ F1 __ __ __
             * __ __ __ R1 M1
             */
-        JumpingRabbits.START_POSITION_LIST.add(
+        START_POSITION_LIST.add(
             new ArrayList<>(
                 List.of(
                     new BlockInfo(
@@ -375,9 +379,9 @@ public final class JumpingRabbits extends Game {
                         MovePattern.NO_DIRECTIONS,
                         false,
                         new PositionsInfo(new Position(2, 2), 1, Direction.D, false))
-                    )
                 )
-            );    // Game 4
+            )
+        );    // Game 4
 
         // -----------------------------------------------------------------
 
@@ -389,7 +393,7 @@ public final class JumpingRabbits extends Game {
             * __ __ __ __ M1
             * __ R1 __ __ __
             */
-        JumpingRabbits.START_POSITION_LIST.add(
+        START_POSITION_LIST.add(
             new ArrayList<>(
                 List.of(
                     new BlockInfo(
@@ -440,9 +444,9 @@ public final class JumpingRabbits extends Game {
                         MovePattern.NO_DIRECTIONS,
                         false,
                         new PositionsInfo(new Position(1, 4), 1, Direction.D, false))
-                    )
                 )
-            );    // Game 5
+            )
+        );    // Game 5
 
         // -----------------------------------------------------------------
 

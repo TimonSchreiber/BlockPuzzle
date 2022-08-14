@@ -32,8 +32,8 @@ public record Position(int x, int y) implements Comparable<Position> {
      * @return              a new Position
      */
     public Position moveTowards(final Direction... directions) {
-        int newX = this.x;
-        int newY = this.y;
+        int newX = x;
+        int newY = y;
 
         for (final Direction direction : directions) {
             switch (direction) {
@@ -61,9 +61,9 @@ public record Position(int x, int y) implements Comparable<Position> {
      */
     @Override
     public int compareTo(Position other) {
-        return (this.y != other.y)
-            ? Integer.compare(this.y, other.y)
-            : Integer.compare(this.x, other.x);
+        return (y != other.y)
+            ? Integer.compare(y, other.y)
+            : Integer.compare(x, other.x);
     }
 
     // =========================================================================

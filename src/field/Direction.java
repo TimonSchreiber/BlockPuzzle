@@ -1,50 +1,43 @@
 package field;
 
+/**
+ * An Enum holding and ordering all the Directions in a 2D-Plane.
+ */
 public enum Direction {
 
     // -------------------------------------------------------------------------
     // CONSTANTS
     // -------------------------------------------------------------------------
 
-    R,    // x + 1
-    D,    // y - 1
-    L,    // x - 1
-    U;    // y + 1
+    /** x + 1 */
+    R,
+    /** y - 1 */
+    D,
+    /** x - 1 */
+    L,
+    /** y + 1 */
+    U;
 
     // -------------------------------------------------------------------------
     // ATTRIBUTES
     // -------------------------------------------------------------------------
 
     /**
-     * Array of <code>Direction</code>s with the value of every
-     * <code>Direction</code> constant.
+     * Array of Directions with the value of every Direction constant.
      */
     private static Direction[] VALUES = Direction.values();
-
-    // -------------------------------------------------------------------------
-    // GETTERS
-    // -------------------------------------------------------------------------
-
-    /**
-     * Gets the number of <code>Direction</code> constants.
-     *
-     * @return    the number of <code>Direction</code> constants
-     */
-    public static int getSize() {
-        return Direction.VALUES.length;
-    }
 
     // -------------------------------------------------------------------------
     // NEXT
     // -------------------------------------------------------------------------
 
     /**
-     * Returns the next <code>Direction</code> constant.
+     * Returns the next Direction constant.
      *
-     * @return    the next <code>Direction</code> constant
+     * @return    the next Direction constant
      */
     public Direction next() {
-        return Direction.VALUES[(this.ordinal() + 1) % Direction.VALUES.length];
+        return Direction.VALUES[(ordinal() + 1) % Direction.VALUES.length];
     }
 
     // -------------------------------------------------------------------------
@@ -52,14 +45,14 @@ public enum Direction {
     // -------------------------------------------------------------------------
 
     /**
-     * Returns the opposite <code>Direction</code> constant.
+     * Returns the opposite Direction constant.
      *
-     * @return    the opposite <code>Direction</code> constant
+     * @return    the opposite Direction constant
      */
     public Direction reverse() {
-        return Direction.VALUES[(this.ordinal() + 2) % Direction.VALUES.length];
+        return Direction.VALUES[(ordinal() + 2) % Direction.VALUES.length];
     }
 
     // =========================================================================
 
-}   // Directions enum
+}   // Direction enum

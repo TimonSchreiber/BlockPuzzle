@@ -5,14 +5,17 @@ import field.GameField;
 import field.Move;
 
 // TODO: make this class 'sealed'?
-public /* sealed */ abstract class Game 
+public /* sealed */ abstract class Game
     /* permits DirtyDozen, JumpingRabbits, RushHour */ {
 
     // -------------------------------------------------------------------------
     // ATTRIBUTES
     // -------------------------------------------------------------------------
 
+    /** A BlockSet. */
     protected final BlockSet blockSet;
+
+    /** A GameField to play on. */
     protected final GameField gameField;
 
     // -------------------------------------------------------------------------
@@ -27,6 +30,7 @@ public /* sealed */ abstract class Game
     protected Game(final BlockSet blockSet, final GameField gameField, final int gameNumber) {
         this.blockSet = blockSet;
         this.gameField = gameField;
+
         this.setUp(gameNumber);
     }
 
@@ -34,64 +38,74 @@ public /* sealed */ abstract class Game
     // GETTERS
     // -------------------------------------------------------------------------
 
+    /**
+     * Returns a new BlockSet.
+     *
+     * @return  The BlockSet
+     */
     public BlockSet blockSet() {
-        return new BlockSet(this.blockSet);
+        return new BlockSet(blockSet);
     }
 
     // -------------------------------------------------------------------------
     // ABSTRACT METHODS
     // -------------------------------------------------------------------------
 
+    /**
+     * Loads a specific BlockSet into this Game.
+     *
+     * @param gameNumber    The Game specifier.
+     */
     protected abstract void setUp(final int gameNumber);
 
     // -------------------------------------------------------------------------
     // FORWARDING - METHODS
     // -------------------------------------------------------------------------
-
+    // TODO:
     // check this BlockSet
     public boolean checkWinCondition() {
-        return this.gameField.checkWinCondition(this.blockSet);
+        return gameField.checkWinCondition(blockSet);
     }
 
     // check a BlockSet
     public boolean checkWinCondition(final BlockSet blockSet) {
-        return this.gameField.checkWinCondition(blockSet);
+        return gameField.checkWinCondition(blockSet);
     }
 
     // ----------------
 
     // move this BlockSet
     public boolean isValidMove(final Move move) {
-        return this.gameField.isValidMove(this.blockSet, move);
+        return gameField.isValidMove(blockSet, move);
     }
 
     // move a BlockSet
     public boolean isValidMove(final BlockSet blockSet, final Move move) {
-        return this.gameField.isValidMove(blockSet, move);
+        return gameField.isValidMove(blockSet, move);
     }
 
     // ----------------
 
     // print this BlockSet
     public void print() {
-        this.gameField.print(this.blockSet);
+        gameField.print(blockSet);
     }
 
     // print a BlockSet
     public void print(final BlockSet blockSet) {
-        this.gameField.print(blockSet);
+        gameField.print(blockSet);
     }
-    
+
     // ----------------
 
     // draw this BlockSet
     public void draw(final int delay) {
-        this.gameField.draw(this.blockSet, delay);
+        gameField.draw(blockSet, delay);
     }
 
     // Draw a BlockSet
     public void draw(final BlockSet blockSet, final int delay) {
-        this.gameField.draw(blockSet, delay);
+        gameField.draw(blockSet, delay);
     }
 
     // =========================================================================

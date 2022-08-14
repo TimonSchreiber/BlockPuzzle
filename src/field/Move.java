@@ -1,5 +1,8 @@
 package field;
 
+/**
+ * Holds a name (of a Block) and a Direction.
+ */
 public record Move(String name, Direction direction) {
 
     // -------------------------------------------------------------------------
@@ -8,7 +11,7 @@ public record Move(String name, Direction direction) {
 
     /**
      * Copy constructor.
-     * 
+     *
      * @param move
      */
     public Move(Move move) {
@@ -20,13 +23,12 @@ public record Move(String name, Direction direction) {
     // -------------------------------------------------------------------------
 
     /**
-     * Gets a new {@code Move} with the reversed {@code Direction} of
-     * this {@code Move}.
-     * 
-     * @return    the new {@code Move} with reversed {@code Direction}
+     * Gets a new Move with the reversed Direction of this Move.
+     *
+     * @return    The new Move with reversed Directions.
      */
     public Move reverse() {
-        return new Move(this.name, this.direction.reverse());
+        return new Move(name, direction.reverse());
     }
 
     // =========================================================================

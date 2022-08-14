@@ -39,11 +39,11 @@ public final class Block implements Comparable<Block> {
      * @param blockInfo     The BlockInfo
      */
     public Block(final BlockInfo blockInfo) {
-        this.isMainBlock = blockInfo.isMainBlock();
-        this.blockName = blockInfo.name();
-        this.color = blockInfo.color();
-        this.positionList = new PositionList(blockInfo.positionsInfo());
-        this.movePattern = blockInfo.movePattern();
+        this.isMainBlock    = blockInfo.isMainBlock();
+        this.blockName      = blockInfo.name();
+        this.color          = blockInfo.color();
+        this.positionList   = new PositionList(blockInfo.positionsInfo());
+        this.movePattern    = blockInfo.movePattern();
     }
 
     /**
@@ -52,11 +52,11 @@ public final class Block implements Comparable<Block> {
      * @param block        the Block
      */
     public Block(final Block block) {
-        this.isMainBlock = block.isMainBlock;
-        this.blockName = block.blockName;
-        this.color = block.color;
-        this.positionList = new PositionList(block.positionList);
-        this.movePattern = block.movePattern;
+        this.isMainBlock    = block.isMainBlock;
+        this.blockName      = block.blockName;
+        this.color          = block.color;
+        this.positionList   = new PositionList(block.positionList);
+        this.movePattern    = block.movePattern;
     }
 
     // -------------------------------------------------------------------------
@@ -70,7 +70,7 @@ public final class Block implements Comparable<Block> {
      *          otherwise.
      */
     public boolean isMainBlock() {
-        return this.isMainBlock;
+        return isMainBlock;
     }
 
     /**
@@ -79,7 +79,7 @@ public final class Block implements Comparable<Block> {
      * @return  A String with this BlockName
      */
     public String blockName() {
-        return this.blockName;
+        return blockName;
     }
 
     /**
@@ -88,7 +88,7 @@ public final class Block implements Comparable<Block> {
      * @return  The Color
      */
     public Color color() {
-        return this.color;
+        return color;
     }
 
     /**
@@ -97,7 +97,7 @@ public final class Block implements Comparable<Block> {
      * @return  The PositionList of this Block
      */
     public PositionList positionList() {
-        return new PositionList(this.positionList);
+        return new PositionList(positionList);
     }
 
     /**
@@ -106,7 +106,7 @@ public final class Block implements Comparable<Block> {
      * @return  The MovePattern
      */
     public MovePattern movePattern() {
-        return this.movePattern;
+        return movePattern;
     }
 
     // -------------------------------------------------------------------------
@@ -121,7 +121,7 @@ public final class Block implements Comparable<Block> {
      *          Position, {@code false} otehrwise.
      */
     public boolean containsPosition(final Position position) {
-        return this.positionList.contains(position);
+        return positionList.contains(position);
     }
 
     /**
@@ -131,7 +131,7 @@ public final class Block implements Comparable<Block> {
      * @param directions    One or more Directions this Block moves towards.
      */
     public void moveTowards(final Direction... directions) {
-        this.positionList.moveTowards(directions);
+        positionList.moveTowards(directions);
     }
 
     // -------------------------------------------------------------------------
@@ -149,20 +149,20 @@ public final class Block implements Comparable<Block> {
             return true;
         }
 
-        if ((obj == null) || (this.getClass() != obj.getClass())) {
+        if ((obj == null) || (getClass() != obj.getClass())) {
             return false;
         }
 
         // Object must be Block at this point
         final Block other = (Block) obj;
 
-        return  (this.isMainBlock == other.isMainBlock)
-                && ((this.positionList == other.positionList)
-                    || ((this.positionList != null)
-                        && this.positionList.equals(other.positionList)))
-                && ((this.movePattern == other.movePattern)
-                    || ((this.movePattern != null)
-                        && this.movePattern.equals(other.movePattern)));
+        return  (isMainBlock == other.isMainBlock)
+                && ((positionList == other.positionList)
+                    || ((positionList != null)
+                        && positionList.equals(other.positionList)))
+                && ((movePattern == other.movePattern)
+                    || ((movePattern != null)
+                        && movePattern.equals(other.movePattern)));
     }
 
     /* (non-Javadoc)
@@ -175,9 +175,9 @@ public final class Block implements Comparable<Block> {
         final int PRIME = 31;
         int hash = 7;
 
-        hash = PRIME * hash + Boolean.hashCode(this.isMainBlock);
-        hash = PRIME * hash + ((this.positionList == null) ? 0 : this.positionList.hashCode());
-        hash = PRIME * hash + ((this.movePattern == null) ? 0 : this.movePattern.hashCode());
+        hash = PRIME * hash + Boolean.hashCode(isMainBlock);
+        hash = PRIME * hash + ((positionList == null) ? 0 : positionList.hashCode());
+        hash = PRIME * hash + ((movePattern == null) ? 0 : movePattern.hashCode());
 
         return hash;
     }
@@ -191,8 +191,11 @@ public final class Block implements Comparable<Block> {
      */
     @Override
     public String toString() {
-        return "Block [blockName=" + blockName + ", color=" + color + ", isMainBlock=" + isMainBlock + ", movePattern="
-                + movePattern + ", positionList=" + positionList + "]";
+        return "Block [blockName=" + blockName
+                + ", color=" + color
+                + ", isMainBlock=" + isMainBlock
+                + ", movePattern=" + movePattern
+                + ", positionList=" + positionList + "]";
     }
 
     // =========================================================================
@@ -209,9 +212,9 @@ public final class Block implements Comparable<Block> {
      */
     @Override
     public int compareTo(final Block other) {
-        return (this.isMainBlock != other.isMainBlock)
-                ? -Boolean.compare(this.isMainBlock, other.isMainBlock)
-                : this.positionList.compareTo(other.positionList);
+        return (isMainBlock != other.isMainBlock)
+                ? -Boolean.compare(isMainBlock, other.isMainBlock)
+                : positionList.compareTo(other.positionList);
     }
 
     // =========================================================================

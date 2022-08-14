@@ -1,15 +1,22 @@
 package field;
 
-// import java.util.Iterator;   // TODO: needed? check #copyList() method
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Holds a BlockSet and a List of Moves which led to this BlockSet
+ * configuration.
+ */
 public final class GameState {
 
     // -------------------------------------------------------------------------
     // ATTRIBUTES
     // -------------------------------------------------------------------------
+
+    /** The BlockSet */
     private final BlockSet blockSet;
+
+    /** A LinkedList of Moves */
     private final List<Move> moves;
 
     // -------------------------------------------------------------------------
@@ -17,8 +24,9 @@ public final class GameState {
     // -------------------------------------------------------------------------
 
     /**
-     * Class constructor with empty {@code moves}.
-     * @param blockSet
+     * Class constructor copying a BlockSet and creating an empty List of Moves.
+     *
+     * @param blockSet  The BlockSet.
      */
     public GameState(final BlockSet blockSet) {
         this.blockSet = new BlockSet(blockSet);
@@ -26,8 +34,10 @@ public final class GameState {
     }
 
     /**
-     * Class constructor with {@code moves}.
-     * @param blockSet
+     * Class constructor copying a BlockSet and a List of Moves.
+     *
+     * @param blockSet  The BlockSet
+     * @param moves     The List of Moves
      */
     public GameState(final BlockSet blockSet, final List<Move> moves) {
         this.blockSet = new BlockSet(blockSet);
@@ -41,42 +51,48 @@ public final class GameState {
     // GETTERS
     // -------------------------------------------------------------------------
 
+    /**
+     * Returns the BlockSet.
+     *
+     * @return  The BlockSet
+     */
     public BlockSet blockSet() {
-        return new BlockSet(this.blockSet);
+        return new BlockSet(blockSet);
     }
 
+    /**
+     * Returns a new List of Moves.
+     *
+     * @return  A new List with a copy of every Move.
+     */
     public List<Move> moves() {
         final List<Move> tmpList = new LinkedList<>();
-        for (final Move move : this.moves) {
+        for (final Move move : moves) {
             tmpList.add(new Move(move));
         }
         return tmpList;
     }
 
     // -------------------------------------------------------------------------
-    // STATIC DEEP COPY LIST
+    // STATIC ADD BLOCK TO NEW LIST
     // -------------------------------------------------------------------------
 
     /**
-     * TODO: for-each loop or iterator with while?
+     * Creates a copy of this
      *
      * @param moves
      * @return
      */
-    public static List<Move> copyList(final List<Move> moves) {
-        final List<Move> newMovesList = new LinkedList<>();
-        // final Iterator<Move> iterator = list.iterator();
+    public static List<Move> addMoveToNewList(final List<Move> moves, final Move newMove) {
+        final List<Move> tmpList = new LinkedList<>();
 
         for (final Move move : moves) {
-            newMovesList.add(new Move(move));
+            tmpList.add(new Move(move));
         }
 
-        // while (iterator.hasNext()) {
-        //     final Move tmp = iterator.next();
-        //     newList.add(new Move(tmp.name(), tmp.direction()));
-        // }
+        tmpList.add(new Move(newMove));
 
-        return newMovesList;
+        return tmpList;
     }
 
     // -------------------------------------------------------------------------
@@ -92,19 +108,19 @@ public final class GameState {
             return true;
         }
 
-        if ((obj == null) || (this.getClass() != obj.getClass())) {
+        if ((obj == null) || (getClass() != obj.getClass())) {
             return false;
         }
 
         // Object must be PositionList at this point
         final GameState other = (GameState) obj;
 
-        return  ((this.blockSet == other.blockSet)
-                    || ((this.blockSet != null)
-                        && this.blockSet.equals(other.blockSet)))
-                && ((this.moves == other.moves)
-                    || ((this.moves != null)
-                        && this.moves.equals(other.moves)));
+        return  ((blockSet == other.blockSet)
+                    || ((blockSet != null)
+                        && blockSet.equals(other.blockSet)))
+                && ((moves == other.moves)
+                    || ((moves != null)
+                        && moves.equals(other.moves)));
     }
 
     /* (non-Javadoc)
@@ -115,8 +131,8 @@ public final class GameState {
         final int PRIME = 31;
         int hash = 7;
 
-        hash = PRIME * hash + ((this.blockSet == null) ? 0 : this.blockSet.hashCode());
-        hash = PRIME * hash + ((this.moves == null) ? 0 : this.moves.hashCode());
+        hash = PRIME * hash + ((blockSet == null) ? 0 : blockSet.hashCode());
+        hash = PRIME * hash + ((moves == null) ? 0 : moves.hashCode());
 
         return hash;
     }

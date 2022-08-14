@@ -15,25 +15,28 @@ import field.GameState;
 import field.Move;
 import game.Game;
 
+/**
+ * Class for solving a Logic Puzzle with the BreadthFirstSearch method.
+ */
 public class BreadthFirstSearch {
 
-    // =========================================================================
+    // -------------------------------------------------------------------------
     // ATTRIBUTES
-    // =========================================================================
+    // -------------------------------------------------------------------------
 
-    /** TODO */
+    /** If a solution is found. */
     private boolean foundASolution = false;
 
-    /** {@code ArrayDeque} of {@code GameStates} to queue the states. */
+    /** ArrayDeque of GameStates to queue the states. */
     private final Queue<GameState> gameStateQueue;
 
-    /** {@code HashSet} of {@code BlockSets} to save every unique state. */
+    /** HashSet of BlockSets to save every unique state. */
     private final Set<BlockSet> savedBlockSets;
 
-    /** TODO */
+    /** GameState for saving the final solution. */
     private GameState solution;
 
-    /** the {@code Game} */
+    /** The Game */
     private final Game game;
 
     // =========================================================================
@@ -52,8 +55,8 @@ public class BreadthFirstSearch {
 
         this.game = game;
 
-        this.savedBlockSets.add(this.game.blockSet());
-        this.gameStateQueue.add(new GameState(this.game.blockSet()));
+        this.savedBlockSets.add(game.blockSet());
+        this.gameStateQueue.add(new GameState(game.blockSet()));
     }
 
     // =========================================================================
@@ -68,7 +71,7 @@ public class BreadthFirstSearch {
 
         // Deconstruction
         final BlockSet tmpBlockSet = gameState.blockSet();
-        final List<Move> tmpMoveList = GameState.copyList(gameState.moves());
+        final List<Move> tmpMoveList = gameState.moves();
 
         for (final Block block : tmpBlockSet) {
 
@@ -77,7 +80,7 @@ public class BreadthFirstSearch {
                 final Move newMove = new Move(block.blockName(), direction);
 
                 // Check if nextMove is not a valid Move -> next iteration
-                if (!this.game.isValidMove(tmpBlockSet, newMove)) {
+                if (!game.isValidMove(tmpBlockSet, newMove)) {
                     continue;
                 }
 
@@ -86,24 +89,23 @@ public class BreadthFirstSearch {
                  * -> save the BlockSet
                  * -> create a new GameState and add it to the GameStateQueue
                  */
-                if (!this.savedBlockSets.contains(new BlockSet(tmpBlockSet))) {
+                if (!savedBlockSets.contains(new BlockSet(tmpBlockSet))) {
 
-                    final List<Move> newMoveList = GameState.copyList(tmpMoveList);
-                    newMoveList.add(newMove);
+                    final List<Move> newMoveList = GameState.addMoveToNewList(tmpMoveList, newMove);
 
-                    this.savedBlockSets.add(new BlockSet(tmpBlockSet));
-                    this.gameStateQueue.add(new GameState(tmpBlockSet, newMoveList));
+                    savedBlockSets.add(new BlockSet(tmpBlockSet));
+                    gameStateQueue.add(new GameState(tmpBlockSet, newMoveList));
 
                     // check if a Solution was found -> save the current GameState + MoveList and return
-                    if (this.game.checkWinCondition(tmpBlockSet)) {
-                        this.foundASolution = true;
-                        this.solution = new GameState(new BlockSet(tmpBlockSet), newMoveList);
+                    if (game.checkWinCondition(tmpBlockSet)) {
+                        foundASolution = true;
+                        solution = new GameState(new BlockSet(tmpBlockSet), newMoveList);
                         return;
                     }
                 }
 
                 // reverse the last Move to continue looking for new Moves
-                this.game.isValidMove(tmpBlockSet, newMove.reverse());
+                game.isValidMove(tmpBlockSet, newMove.reverse());
 
             }    // end for loop Direction
         }    // end for loop Block
@@ -124,16 +126,16 @@ public class BreadthFirstSearch {
         // Start timer
         final Instant t = Instant.now();
 
-        while (!this.foundASolution) {
+        while (!foundASolution) {
 
             // Get the first GameState in the Queue
-            final GameState nextGameState = this.gameStateQueue.remove();
+            final GameState nextGameState = gameStateQueue.remove();
 
             // Call findNewMove to add GameStates to GameStateQueue
-            this.findNewMove(nextGameState);
+            findNewMove(nextGameState);
 
             // TODO: error handling
-            if (this.gameStateQueue.isEmpty()) {
+            if (gameStateQueue.isEmpty()) {
                 System.out.println("No Solution Found!");
                 return;
             }
@@ -146,9 +148,9 @@ public class BreadthFirstSearch {
         // print result
         System.out.println("END");
 
-        System.out.println("\nNumber of states saved:\n" + this.savedBlockSets.size());
+        System.out.println("\nNumber of states saved:\n" + savedBlockSets.size());
 
-        System.out.println("\nNumber of moves for the Solution:\n" + this.solution.moves().size());
+        System.out.println("\nNumber of moves for the Solution:\n" + solution.moves().size());
 
         System.out.println("\nTime to solve:\n"
             + d.toSecondsPart() + " seconds, "
@@ -156,7 +158,7 @@ public class BreadthFirstSearch {
 
         // Show solution
         System.out.println("\nshow solution");
-        this.showSolution(this.solution.moves());        // FIXME time delay
+        showSolution(solution.moves());        // FIXME time delay
 
         return;
 
@@ -176,13 +178,13 @@ public class BreadthFirstSearch {
 
         int i = 0;
 
-        this.game.draw(1000);
+        game.draw(1000);
 
         final Instant t = Instant.now();
 
         for (final Move move : moveList) {
-            this.game.isValidMove(move);
-            this.game.draw(100);
+            game.isValidMove(move);
+            game.draw(100);
             System.out.println(++i + "/" + moveList.size() + ": " + move);
         }
 

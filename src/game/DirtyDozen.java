@@ -25,7 +25,7 @@ public final class DirtyDozen extends Game {
     /** Preset game values for width */
     private static final int WIDTH = 6;
 
-    /** Preset win condition as a {@code PositionList}*/
+    /** Preset win condition as a PositionList */
     private static final
     PositionList WIN_CONDITION =
         new PositionList(
@@ -40,7 +40,7 @@ public final class DirtyDozen extends Game {
     // TODO: Add a way to tell the canvas where to mark the border to show the win condition
     /**  */
 
-    /** List of a List of {@code BlockInfos} */
+    /** List of a List of BlockInfos */
     private static final
     List<List<BlockInfo>> START_POSITION_LIST =
         new ArrayList<>();
@@ -56,7 +56,11 @@ public final class DirtyDozen extends Game {
      * @param gameNumber    the gameNumber
      */
     public DirtyDozen(final int gameNumber) {
-        super(new BlockSet(), new GameField(HEIGHT, WIDTH, WIN_CONDITION), gameNumber);
+        super(
+            new BlockSet(),
+            new GameField(HEIGHT, WIDTH, WIN_CONDITION),
+            gameNumber
+        );
     }
 
     // -------------------------------------------------------------------------
@@ -65,15 +69,15 @@ public final class DirtyDozen extends Game {
 
     @Override
     protected void setUp(final int gameNumber) {
-        DirtyDozen.START_POSITION_LIST
+        START_POSITION_LIST
             .get(gameNumber)
             .forEach(blockInfo -> {
-                this.blockSet.add(new Block(blockInfo));
-                this.gameField.draw(this.blockSet, 100);    // FIXME: make this a choice of the user -> if(...) {draw()}
+                blockSet.add(new Block(blockInfo));
+                gameField.draw(blockSet, 100);    // FIXME: make this a choice of the user -> if(...) {draw()}
                 // or if(..) {delay = xxx}
             });
 
-        this.gameField.draw(this.blockSet, 1000);    // FIXME: delete?
+        gameField.draw(blockSet, 1000);    // FIXME: delete?
     }
 
     // -------------------------------------------------------------------------
@@ -135,7 +139,7 @@ public final class DirtyDozen extends Game {
          * Y2 Y1 G3 G4 R1 R1
          * Y1 Y1 G1 G2 B1 B1
          */
-        DirtyDozen.START_POSITION_LIST.add(
+        START_POSITION_LIST.add(
             new ArrayList<>(
                 List.of(
                     new BlockInfo(
@@ -250,7 +254,7 @@ public final class DirtyDozen extends Game {
          * Y1 Y1 Y2 Y3 Y3 Y4
          * Y1 Y2 Y2 Y3 Y4 Y4
          */
-        DirtyDozen.START_POSITION_LIST.add(
+        START_POSITION_LIST.add(
             new ArrayList<>(
                 List.of(
                     new BlockInfo(
@@ -337,9 +341,9 @@ public final class DirtyDozen extends Game {
                         MovePattern.ALL_DIRECTIONS,
                         false,
                         new PositionsInfo(new Position(3, 4), 1, Direction.D, false))
-                    )
                 )
-            );    // Game 1
+            )
+        );    // Game 1
 
         // ---------------------------------------------------------------------
 
@@ -351,7 +355,7 @@ public final class DirtyDozen extends Game {
          * Y1 Y1 Y2 Y3 Y3 Y4
          * Y1 Y2 Y2 Y3 Y4 Y4
          */
-        DirtyDozen.START_POSITION_LIST.add(
+        START_POSITION_LIST.add(
             new ArrayList<>(
                 List.of(
                     new BlockInfo(
@@ -438,9 +442,9 @@ public final class DirtyDozen extends Game {
                         MovePattern.ALL_DIRECTIONS,
                         false,
                         new PositionsInfo(new Position(4, 4), 1, Direction.D, false))
-                    )
                 )
-            );    // Game 2
+            )
+        );    // Game 2
 
         // ---------------------------------------------------------------------
 
@@ -452,7 +456,7 @@ public final class DirtyDozen extends Game {
          * B2 B2 G3 Y1 Y2 Y2
          * B1 B1 G1 G2 __ __
          */
-        DirtyDozen.START_POSITION_LIST.add(
+        START_POSITION_LIST.add(
             new ArrayList<>(
                 List.of(
                     new BlockInfo(
@@ -539,9 +543,9 @@ public final class DirtyDozen extends Game {
                         MovePattern.ALL_DIRECTIONS,
                         false,
                         new PositionsInfo(new Position(2, 4), 1, Direction.D, false))
-                    )
                 )
-            );    // Game 3
+            )
+        );    // Game 3
 
         // ---------------------------------------------------------------------
 
@@ -553,7 +557,7 @@ public final class DirtyDozen extends Game {
          * Y2 Y1 B2 B2 G2 __
          * Y1 Y1 B1 B1 G1 __
          */
-        DirtyDozen.START_POSITION_LIST.add(
+        START_POSITION_LIST.add(
             new ArrayList<>(
                 List.of(
                     new BlockInfo(
@@ -640,9 +644,9 @@ public final class DirtyDozen extends Game {
                         MovePattern.ALL_DIRECTIONS,
                         false,
                         new PositionsInfo(new Position(5, 4), 1, Direction.D, false))
-                    )
                 )
-            );    // Game 4
+            )
+        );    // Game 4
 
         // ---------------------------------------------------------------------
 
@@ -654,7 +658,7 @@ public final class DirtyDozen extends Game {
          * Y1 Y1 Y2 Y3 Y3 Y4
          * Y1 Y2 Y2 Y3 Y4 Y4
          */
-        DirtyDozen.START_POSITION_LIST.add(
+        START_POSITION_LIST.add(
             new ArrayList<>(
                 List.of(
                     new BlockInfo(
@@ -741,9 +745,9 @@ public final class DirtyDozen extends Game {
                         MovePattern.ALL_DIRECTIONS,
                         false,
                         new PositionsInfo(new Position(5, 4), 1, Direction.D, false))
-                    )
                 )
-            );    // Game 5
+            )
+        );    // Game 5
 
         // ---------------------------------------------------------------------
 
@@ -755,7 +759,7 @@ public final class DirtyDozen extends Game {
          * B2 B2 Y3 Y1 Y4 Y2
          * B1 B1 Y1 Y1 Y2 Y2
          */
-        DirtyDozen.START_POSITION_LIST.add(
+        START_POSITION_LIST.add(
             new ArrayList<>(
                 List.of(
                     new BlockInfo(
@@ -842,9 +846,9 @@ public final class DirtyDozen extends Game {
                         MovePattern.ALL_DIRECTIONS,
                         false,
                         new PositionsInfo(new Position(4, 4), 1, Direction.D, false))
-                    )
                 )
-            );    // Game 6
+            )
+        );    // Game 6
 
         // ---------------------------------------------------------------------
 
@@ -856,7 +860,7 @@ public final class DirtyDozen extends Game {
          * B2 B2 G2 Y1 Y1 Y2
          * B1 B1 G1 Y1 Y2 Y2
          */
-        DirtyDozen.START_POSITION_LIST.add(
+        START_POSITION_LIST.add(
             new ArrayList<>(
                 List.of(
                     new BlockInfo(
@@ -943,9 +947,9 @@ public final class DirtyDozen extends Game {
                         MovePattern.ALL_DIRECTIONS,
                         false,
                         new PositionsInfo(new Position(2, 4), 1, Direction.D, false))
-                    )
                 )
-            );    // Game 7
+            )
+        );    // Game 7
 
         // ---------------------------------------------------------------------
 
@@ -957,7 +961,7 @@ public final class DirtyDozen extends Game {
          * G3 G4 B2 B2 Y2 Y1
          * G1 G2 B1 B1 Y1 Y1
          */
-        DirtyDozen.START_POSITION_LIST.add(
+        START_POSITION_LIST.add(
             new ArrayList<>(
                 List.of(
                     new BlockInfo(
@@ -1044,9 +1048,9 @@ public final class DirtyDozen extends Game {
                         MovePattern.ALL_DIRECTIONS,
                         false,
                         new PositionsInfo(new Position(1, 2), 1, Direction.D, false))
-                    )
                 )
-            );    // Game 8
+            )
+        );    // Game 8
 
         // ---------------------------------------------------------------------
 
@@ -1058,7 +1062,7 @@ public final class DirtyDozen extends Game {
          * B2 B2 Y1 Y1 Y2 __
          * B1 B1 Y1 Y2 Y2 __
          */
-        DirtyDozen.START_POSITION_LIST.add(
+        START_POSITION_LIST.add(
             new ArrayList<>(
                 List.of(
                     new BlockInfo(
@@ -1145,9 +1149,9 @@ public final class DirtyDozen extends Game {
                         MovePattern.ALL_DIRECTIONS,
                         false,
                         new PositionsInfo(new Position(5, 4), 1, Direction.D, false))
-                    )
                 )
-            );    // Game 9
+            )
+        );    // Game 9
 
         // ---------------------------------------------------------------------
 
@@ -1159,7 +1163,7 @@ public final class DirtyDozen extends Game {
          * B3 B3 R1 R1 Y2 Y1
          * B1 B1 B2 B2 Y1 Y1
          */
-        DirtyDozen.START_POSITION_LIST.add(
+        START_POSITION_LIST.add(
             new ArrayList<>(
                 List.of(
                     new BlockInfo(
@@ -1246,9 +1250,9 @@ public final class DirtyDozen extends Game {
                         MovePattern.ALL_DIRECTIONS,
                         false,
                         new PositionsInfo(new Position(2, 4), 1, Direction.D, false))
-                    )
                 )
-            );    // Game 10
+            )
+        );    // Game 10
 
         // ---------------------------------------------------------------------
 
@@ -1260,7 +1264,7 @@ public final class DirtyDozen extends Game {
          * Y1 Y1 Y2 G2 B2 B2
          * Y1 Y2 Y2 G1 B2 B2
          */
-        DirtyDozen.START_POSITION_LIST.add(
+        START_POSITION_LIST.add(
             new ArrayList<>(
                 List.of(
                     new BlockInfo(
@@ -1347,9 +1351,9 @@ public final class DirtyDozen extends Game {
                         MovePattern.ALL_DIRECTIONS,
                         false,
                         new PositionsInfo(new Position(5, 4), 1, Direction.D, false))
-                    )
                 )
-            );    // Game 11
+            )
+        );    // Game 11
 
         // ---------------------------------------------------------------------
 
@@ -1361,7 +1365,7 @@ public final class DirtyDozen extends Game {
          * G3 G4 R1 R1 B2 Y1
          * G1 G2 B1 B1 Y1 Y1
          */
-        DirtyDozen.START_POSITION_LIST.add(
+        START_POSITION_LIST.add(
             new ArrayList<>(
                 List.of(
                     new BlockInfo(
@@ -1448,9 +1452,9 @@ public final class DirtyDozen extends Game {
                         MovePattern.ALL_DIRECTIONS,
                         false,
                         new PositionsInfo(new Position(1, 2), 1, Direction.D, false))
-                    )
                 )
-            );    // Game 12
+            )
+        );    // Game 12
 
         // ---------------------------------------------------------------------
 

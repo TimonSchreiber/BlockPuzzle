@@ -23,7 +23,7 @@ public final class RushHour extends Game {
     /** Preset game values for size */
     private static final int SIZE = 6;
 
-    /** Preset win condition as a {@code PositionList}*/
+    /** Preset win condition as a PositionList */
     private static final
     PositionList WIN_CONDITION =
         new PositionList(
@@ -52,7 +52,11 @@ public final class RushHour extends Game {
      * @param gameNumber    the gameNumber
      */
     public RushHour(final int gameNumber) {
-        super(new BlockSet(), new GameField(SIZE, SIZE, WIN_CONDITION), gameNumber);
+        super(
+            new BlockSet(),
+            new GameField(SIZE, SIZE, WIN_CONDITION),
+            gameNumber
+        );
     }
 
     // -------------------------------------------------------------------------
@@ -61,15 +65,15 @@ public final class RushHour extends Game {
 
     @Override
     protected void setUp(final int gameNumber) {
-        RushHour.START_POSITION_LIST
+        START_POSITION_LIST
             .get(gameNumber)
             .forEach(blockInfo -> {
-                this.blockSet.add(new Block(blockInfo));
-                this.gameField.draw(this.blockSet, 100);    // FIXME: make this a choice of the user -> if(...) {draw()}
+                blockSet.add(new Block(blockInfo));
+                gameField.draw(blockSet, 100);    // FIXME: make this a choice of the user -> if(...) {draw()}
                 // or if(..) {delay = xxx}
             });
 
-        this.gameField.draw(this.blockSet, 1000);    // FIXME: delete?
+        gameField.draw(blockSet, 1000);    // FIXME: delete?
     }
 
     // -------------------------------------------------------------------------
@@ -78,7 +82,7 @@ public final class RushHour extends Game {
 
     // TODO: maybe override this method to accomodate for the way Rabbits move.
     // public boolean isValidMove(final Move move) {
-    //     return this.gameField.isValidMove(this.blockSet, move);
+    //     return gameField.isValidMove(blockSet, move);
     // }
 
     // -------------------------------------------------------------------------
@@ -154,7 +158,7 @@ public final class RushHour extends Game {
          * C1 __ __ __ C2 C2
          * C1 __ T1 T1 T1 __
          */
-        RushHour.START_POSITION_LIST.add(
+        START_POSITION_LIST.add(
             new ArrayList<>(
                 List.of(
                     new BlockInfo(
@@ -205,9 +209,11 @@ public final class RushHour extends Game {
                         MovePattern.DOWN_UP_DIRECTIONS,
                         false,
                         new PositionsInfo(new Position(5, 3), 3, Direction.U, false))
-                    )
                 )
-            );    // Game 0
+            )
+        );    // Game 0
+
+        // ---------------------------------------------------------------------
 
         /* Game 1 - XX Moves
          * Intermediate 11
@@ -218,7 +224,7 @@ public final class RushHour extends Game {
          * __ __ C2 __ __ C1
          * __ __ T1 T1 T1 C1
          */
-        RushHour.START_POSITION_LIST.add(
+        START_POSITION_LIST.add(
             new ArrayList<>(
                 List.of(
                     new BlockInfo(
@@ -269,9 +275,11 @@ public final class RushHour extends Game {
                         MovePattern.DOWN_UP_DIRECTIONS,
                         false,
                         new PositionsInfo(new Position(3, 3), 3, Direction.U, false))
-                    )
                 )
-            );    // Game 1
+            )
+        );    // Game 1
+
+        // ---------------------------------------------------------------------
 
         /* Game 2 - XX Moves
          * Advanced 21
@@ -282,7 +290,7 @@ public final class RushHour extends Game {
          * __ __ __ __ __ __
          * __ __ __ T1 T1 T1
          */
-        RushHour.START_POSITION_LIST.add(
+        START_POSITION_LIST.add(
             new ArrayList<>(
                 List.of(
                     new BlockInfo(
@@ -327,9 +335,9 @@ public final class RushHour extends Game {
                         MovePattern.DOWN_UP_DIRECTIONS,
                         false,
                         new PositionsInfo(new Position(3, 3), 3, Direction.U, false))
-                    )
                 )
-            );    // Game 2
+            )
+        );    // Game 2
 
         // ---------------------------------------------------------------------
 
@@ -342,7 +350,7 @@ public final class RushHour extends Game {
          * C1 C1 T1 __ __ T3
          * __ __ T1 T2 T2 T2
          */
-        RushHour.START_POSITION_LIST.add(
+        START_POSITION_LIST.add(
             new ArrayList<>(
                 List.of(
                     new BlockInfo(
@@ -411,9 +419,9 @@ public final class RushHour extends Game {
                         MovePattern.RIGHT_LEFT_DIRECTIONS,
                         false,
                         new PositionsInfo(new Position(3, 5), 3, Direction.R, false))
-                    )
                 )
-            );    // Game 3
+            )
+        );    // Game 3
 
         // ---------------------------------------------------------------------
 

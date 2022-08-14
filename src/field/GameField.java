@@ -1,31 +1,33 @@
 package field;
 
 import java.awt.Color;
-// import java.util.List;
 
 import block.Block;
 import block.Position;
 import block.PositionList;
 
+/**
+ * Simulates a GameField with a width and height.
+ */
 public final class GameField {
 
     // -------------------------------------------------------------------------
     // ATTRIBUTES
     // -------------------------------------------------------------------------
 
-    /** Winning Positions {@code PositionList}*/
+    /** Winning PositionList */
     private final PositionList WIN_CONDITION;
 
-    /** preset game values for this.HEIGHT */
+    /** Height of this GameField */
     private final int HEIGHT;
 
-    /** preset game values for this.WIDTH */
+    /**Width of this GameField */
     private final int WIDTH;
 
     // TODO: also define the neccessary properties of the canvas in the Game class
     // e.g. Where the goal/target is
 
-    /** Canvas to draw the {@code GameField} on */
+    /** Canvas to draw this GameField on */
     private Zeichenblatt canvas;
 
     // -------------------------------------------------------------------------
@@ -59,17 +61,17 @@ public final class GameField {
          * 
          * for (Block block : blockSet.getMainBlocks()) {
          *     for (Position position : block.positions()) {
-         *         if (this.WIN_CONDITION.contains(position)) { ++counter; }
+         *         if (WIN_CONDITION.contains(position)) { ++counter; }
          *     }
          * }
-         * return counter == this.WIN_CONDITION.size();
+         * return counter == WIN_CONDITION.size();
          */
 
         // TODO: "R1" will not always be the winnig Block (Jumping Rabits). Fix this!
         return blockSet
                 .getBlock("R1")
                 .positionList()
-                .equals(this.WIN_CONDITION);
+                .equals(WIN_CONDITION);
         // TODO: maybe use forwarding here
     }
 
@@ -78,15 +80,17 @@ public final class GameField {
     // -------------------------------------------------------------------------
 
     /**
-     * TODO:
+     * Checks if the specified Position is inside the dimensions of this
+     * GameField.
      *
-     * @param position
-     * @return
+     * @param position  The Position to be checked.
+     * @return          {@code true} if the Position is inside this GameField,
+     *                  {@code false} otherwise.
      */
     private boolean isInInterval(final Position position) {
-        return     (position.x() < this.WIDTH)
+        return     (position.x() < WIDTH)
                 && (position.x() >= 0)
-                && (position.y() < this.HEIGHT)
+                && (position.y() < HEIGHT)
                 && (position.y() >= 0);
     }
 
@@ -111,7 +115,7 @@ public final class GameField {
             final Position tmpPosition = position.moveTowards(move.direction());
 
             // Checks if the new Position is outside the GameField
-            if (!this.isInInterval(tmpPosition)) {
+            if (!isInInterval(tmpPosition)) {
                 return false;   // outside GameField
             }
 
@@ -141,7 +145,7 @@ public final class GameField {
      *              {@code false} otherwise.
      */
     public boolean isValidMove(final BlockSet blockSet, final Move move) {
-        if (this.isCollisionFree(blockSet, move)) {
+        if (isCollisionFree(blockSet, move)) {
             blockSet.makeMove(move);
             return true;
         }
@@ -158,9 +162,9 @@ public final class GameField {
      * Console and "__" if there is no {@code Block}.
      */
     public void print(final BlockSet blockSet) {
-        for (int i = (this.HEIGHT - 1); i >= 0; i--) {
+        for (int i = (HEIGHT - 1); i >= 0; i--) {
 
-            for (int j = 0; j < this.WIDTH; j++) {
+            for (int j = 0; j < WIDTH; j++) {
 
                 final Position position = new Position(j, i);
                 System.out.print(" ");
@@ -194,29 +198,29 @@ public final class GameField {
         final double OFFSET = 0.5;
 
         // new Zeichenblatt.java
-        if (this.canvas == null) {
-            this.canvas = new Zeichenblatt(
-                                    (this.WIDTH  + ONE) * SIZE,
-                                    (this.HEIGHT + ONE) * SIZE);
-            this.canvas.benutzerkoordinaten(
+        if (canvas == null) {
+            canvas = new Zeichenblatt(
+                                    (WIDTH  + ONE) * SIZE,
+                                    (HEIGHT + ONE) * SIZE);
+            canvas.benutzerkoordinaten(
                                         0.0,
                                         0.0,
-                                        this.WIDTH  + ONE,
-                                        this.HEIGHT + ONE);
+                                        WIDTH  + ONE,
+                                        HEIGHT + ONE);
         } else {
-            this.canvas.loeschen();
+            canvas.loeschen();
         }
 
         // draw light grey square (outline)
-        this.canvas.setVordergrundFarbe(Color.lightGray);
-        this.canvas.rechteck(
-                        this.WIDTH  + ONE,
-                        this.HEIGHT + ONE);
+        canvas.setVordergrundFarbe(Color.lightGray);
+        canvas.rechteck(
+                        WIDTH  + ONE,
+                        HEIGHT + ONE);
 
         // draw red square in the bottom right corner (marks goal)
-        this.canvas.setVordergrundFarbe(Color.red);
-        for (final Position position : this.WIN_CONDITION) {
-            this.canvas.rechteck(
+        canvas.setVordergrundFarbe(Color.red);
+        for (final Position position : WIN_CONDITION) {
+            canvas.rechteck(
                             position.x() + OFFSET,
                             position.y(),
                             ONE + OFFSET,
@@ -224,18 +228,18 @@ public final class GameField {
         }
 
         // draw white center square (the game field)
-        this.canvas.setVordergrundFarbe(Color.white);
-        this.canvas.rechteck(
+        canvas.setVordergrundFarbe(Color.white);
+        canvas.rechteck(
                         OFFSET,
                         OFFSET,
-                        this.WIDTH,
-                        this.HEIGHT);
+                        WIDTH,
+                        HEIGHT);
 
         // draw each {@code Block}
         for (final Block block : blockSet) {
             for (final Position position : block.positionList()) {
-                this.canvas.setVordergrundFarbe(block.color());
-                this.canvas.rechteck(
+                canvas.setVordergrundFarbe(block.color());
+                canvas.rechteck(
                                 position.x() + OFFSET,
                                 position.y() + OFFSET,
                                 ONE,
@@ -244,10 +248,10 @@ public final class GameField {
         }
 
         // show
-        this.canvas.anzeigen();
+        canvas.anzeigen();
 
         // pause
-        this.canvas.pause(delay);
+        canvas.pause(delay);
 
         return;
     }

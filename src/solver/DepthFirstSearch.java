@@ -16,25 +16,25 @@ import game.Game;
 
 public class DepthFirstSearch {
 
-    // =========================================================================
+    // -------------------------------------------------------------------------
     // ATTRIBUTES
-    // =========================================================================
+    // -------------------------------------------------------------------------
 
     private final int delay;
     private final boolean show;
 
-    /** {@code HashSet} of {@code BlockSets} to save every unique state. */
+    /** HashSet of BlockSets to save every unique state. */
     private final Set<BlockSet> savedBlockSets;
 
-    /** {@code LinkedList} to save every {@code Move}. */
+    /** LinkedList to save every Move. */
     private final List<Move> moveList;
 
-    /** the {@code Game} */
+    /** the Game */
     private final Game game;
 
-    // =========================================================================
+    // -------------------------------------------------------------------------
     // CONSTRUCTOR
-    // =========================================================================
+    // -------------------------------------------------------------------------
 
     /**
      * Creates a new {@code GameSolver} for the starting Position gameID
@@ -52,12 +52,12 @@ public class DepthFirstSearch {
 
         this.game = game;
 
-        this.savedBlockSets.add(this.game.blockSet());
+        this.savedBlockSets.add(game.blockSet());
     }
 
-    // =========================================================================
-    // FIND-NEW-MOVE - METHOD
-    // =========================================================================
+    // -------------------------------------------------------------------------
+    // FIND NEW MOVE
+    // -------------------------------------------------------------------------
 
     /**
      * Makes a {@code Move} by going through every possible {@code BlockName}
@@ -67,7 +67,7 @@ public class DepthFirstSearch {
      *             {@code BlockSet} is found; {@code false} otherwise
      */
     private boolean findNewMove() {
-        final BlockSet tmpBlockSet = this.game.blockSet();
+        final BlockSet tmpBlockSet = game.blockSet();
 
         for (final Block block : tmpBlockSet) {
 
@@ -84,20 +84,20 @@ public class DepthFirstSearch {
                 // Why does it work now?
 
                 // Check if it is a known BlockSet -> next iteration
-                if (this.savedBlockSets.contains(new BlockSet(tmpBlockSet)/* <- why new BlockSet and not just 'tmpBlockSet'? */ )) {
+                if (savedBlockSets.contains(new BlockSet(tmpBlockSet)/* <- why new BlockSet and not just 'tmpBlockSet'? */ )) {
                     // reverse the last Move to continue looking for new Moves
                     game.isValidMove(tmpBlockSet, newMove.reverse());
                     continue;
                 }
 
                 // -> play this move on the GameField
-                this.game.isValidMove(newMove);
+                game.isValidMove(newMove);
 
-                this.savedBlockSets.add(new BlockSet(tmpBlockSet));
-                this.moveList.add(newMove);
+                savedBlockSets.add(new BlockSet(tmpBlockSet));
+                moveList.add(newMove);
 
                 if (show) {
-                    this.game.draw(0);        // FIXME: this shows the GameField while it is solved delete for best time
+                    game.draw(0);        // FIXME: this shows the GameField while it is solved delete for best time
                 }
 
                 // new Move found
@@ -110,9 +110,9 @@ public class DepthFirstSearch {
         return false;
     }
 
-    // =========================================================================
-    // SOLVE - METHOD
-    // =========================================================================
+    // -------------------------------------------------------------------------
+    // SOLVE
+    // -------------------------------------------------------------------------
 
     /**
      * Tries to solve the {@code BlockPuzzle}.
@@ -124,17 +124,17 @@ public class DepthFirstSearch {
         final Instant t = Instant.now();
 
         // Check for game.field.isWon() to become true
-        while (!this.game.checkWinCondition()) {
+        while (!game.checkWinCondition()) {
 
             // If isNewMove() is false, the last Move will be reversed
-            while (!this.findNewMove()) {
+            while (!findNewMove()) {
 
-                if (this.moveList.isEmpty()) {
+                if (moveList.isEmpty()) {
                     System.out.println("Can't find a move.");
                     return;
 
-                } else if (this.game.isValidMove(((LinkedList<Move>) this.moveList).getLast().reverse())) {
-                    ((LinkedList<Move>) this.moveList).pollLast();
+                } else if (game.isValidMove(((LinkedList<Move>) moveList).getLast().reverse())) {
+                    ((LinkedList<Move>) moveList).pollLast();
 
                 } else {
                     System.out.println("Can't reverse last move.");
@@ -149,44 +149,44 @@ public class DepthFirstSearch {
         // TODO: Maybe change this to a TextBlock """ {text} """ and only sysout once
         System.out.println("END");
 
-        System.out.println("\nNumber of states saved:\n" + this.savedBlockSets.size());
+        System.out.println("\nNumber of states saved:\n" + savedBlockSets.size());
 
-        System.out.println("\nNumber of moves made:\n" + this.moveList.size());
+        System.out.println("\nNumber of moves made:\n" + moveList.size());
 
         System.out.println("\nTime to solve:\n"
             + d.toSecondsPart() + " seconds, "
             + d.toMillisPart() + " milliseconds");
 
-        this.game.draw(this.delay);    // TODO: wait two seconds before showing the solution
+        game.draw(delay);    // TODO: wait two seconds before showing the solution
 
         // Show solution
         System.out.println("\nshow solution");
-        this.reverseGame();
-        this.showSolution();        // FIXME time delay
+        reverseGame();
+        showSolution();        // FIXME time delay
 
         return;
     }    // end solve()
 
-    // =========================================================================
-    // REVERSE-GAME - METHOD
-    // =========================================================================
+    // -------------------------------------------------------------------------
+    // REVERSE GAME
+    // -------------------------------------------------------------------------
 
     /** TODO
      * Reverses all Moves
      */
     private void reverseGame() {
-        final Iterator<Move> iterator = ((LinkedList<Move>) this.moveList).descendingIterator();
+        final Iterator<Move> iterator = ((LinkedList<Move>) moveList).descendingIterator();
 
         while (iterator.hasNext()) {
-            this.game.isValidMove(iterator.next().reverse());
+            game.isValidMove(iterator.next().reverse());
         }
 
         return;
     }
 
-    // =========================================================================
-    // SHOW-SOLUTION - METHOD
-    // =========================================================================
+    // -------------------------------------------------------------------------
+    // SHOW SOLUTION
+    // -------------------------------------------------------------------------
 
     /** TODO: maybe make this a method of Game? (for all Game classes)
      * Shows the Solution from Start to End with a time delay between two
@@ -198,13 +198,13 @@ public class DepthFirstSearch {
 
         int i = 0;
 
-        this.game.draw(1000);
+        game.draw(1000);
 
         final Instant t = Instant.now();
 
-        for (final Move move : this.moveList) {
-            this.game.isValidMove(move);
-            this.game.draw(100);
+        for (final Move move : moveList) {
+            game.isValidMove(move);
+            game.draw(100);
             System.out.println(++i + "/" + moveList.size() + ": " + move);
         }
 
