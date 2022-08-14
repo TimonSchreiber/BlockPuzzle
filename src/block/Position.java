@@ -58,9 +58,9 @@ public record Position(int x, int y) implements Comparable<Position> {
      */
     @Override
     public int compareTo(Position other) {
-        return (this.y == other.y)
-            ? Integer.compare(this.x, other.x)
-            : Integer.compare(this.y, other.y);
+        return (this.y != other.y)
+            ? Integer.compare(this.y, other.y)
+            : Integer.compare(this.x, other.x);
     }
 
     // =========================================================================
