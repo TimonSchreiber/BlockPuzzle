@@ -2,7 +2,6 @@ package field;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,18 +106,30 @@ public class GameStateTests {
     // copy List
 
     @Test
-    @DisplayName("static#copyList Should return a deep Copy of a List<Move>")
-    public void copyList() {
-        List<Move> moveList =new ArrayList<>();
-        moveList.add(new Move("R1", Direction.U));
-        moveList.add(new Move("R1", Direction.R));
-        moveList.add(new Move("R1", Direction.U));
+    @DisplayName("Adds a new Move to a copy of a List")
+    public void addMoveToNewList() {
+        final String R1 = "R1";
+        final Move newMove = new Move(R1, Direction.R);
 
-        List<Move> copyList = GameState.copyList(moveList);
+        List<Move> actual =
+            List.of(
+                new Move(R1, Direction.U),
+                new Move(R1, Direction.R),
+                new Move(R1, Direction.U)
+            );
 
-        moveList.add(new Move("R1", Direction.L));
+        final List<Move> expected =
+            List.of(
+                new Move(R1, Direction.U),
+                new Move(R1, Direction.R),
+                new Move(R1, Direction.U),
+                new Move(R1, Direction.R)
+            );
 
-        assertNotEquals(moveList, copyList);
+        
+        actual = GameState.addMoveToNewList(actual, newMove);
+
+        assertEquals(expected, actual);
     }
 
 }   // Game State Test class
