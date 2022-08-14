@@ -5,6 +5,9 @@ import java.awt.Color;
 import field.Direction;
 import field.MovePattern;
 
+/**
+ * Immutable class representing a Block on a 2D-Plane.
+ */
 public final class Block implements Comparable<Block> {
 
     // -------------------------------------------------------------------------
@@ -32,7 +35,7 @@ public final class Block implements Comparable<Block> {
 
     /**
      * Class constructor from a BlockInfo record.
-     * 
+     *
      * @param blockInfo     The BlockInfo
      */
     public Block(final BlockInfo blockInfo) {
@@ -62,7 +65,7 @@ public final class Block implements Comparable<Block> {
 
     /**
      * Returns the boolean isMainBlock field of this Block.
-     * 
+     *
      * @return  {@code true} if this Block is a MainBlock, {@code false}
      *          otherwise.
      */
@@ -72,7 +75,7 @@ public final class Block implements Comparable<Block> {
 
     /**
      * Returns a String with the name of this Block.
-     * 
+     *
      * @return  A String with this BlockName
      */
     public String blockName() {
@@ -81,7 +84,7 @@ public final class Block implements Comparable<Block> {
 
     /**
      * Returns the Color of this Block.
-     * 
+     *
      * @return  The Color
      */
     public Color color() {
@@ -90,7 +93,7 @@ public final class Block implements Comparable<Block> {
 
     /**
      * Returns a new PositionList equals to the PositionList of this Block.
-     * 
+     *
      * @return  The PositionList of this Block
      */
     public PositionList positionList() {
@@ -99,20 +102,20 @@ public final class Block implements Comparable<Block> {
 
     /**
      * Returns the MovePattern of this Block.
-     * 
+     *
      * @return  The MovePattern
      */
     public MovePattern movePattern() {
         return this.movePattern;
     }
-    
+
     // -------------------------------------------------------------------------
     // FORWARDING - METHODS
     // -------------------------------------------------------------------------
-    
+
     /**
      * Checks if this Block occupies the Position.
-     * 
+     *
      * @param position  The Position
      * @return  {@code true} if the PositionList of this Block contains the
      *          Position, {@code false} otehrwise.
@@ -124,7 +127,7 @@ public final class Block implements Comparable<Block> {
     /**
      * Changes every Position in the PositionList of this
      * Block.
-     * 
+     *
      * @param directions    One or more Directions this Block moves towards.
      */
     public void moveTowards(final Direction... directions) {
@@ -137,7 +140,7 @@ public final class Block implements Comparable<Block> {
 
     /* (non-Javadoc)
      * @see java.lang.Object#equals(java.lang.Object)
-     * 
+     *
      * This method ignores the String BlockName and the Color.
      */
     @Override
@@ -164,7 +167,7 @@ public final class Block implements Comparable<Block> {
 
     /* (non-Javadoc)
      * @see java.lang.Object#hashCode()
-     * 
+     *
      * This method ignores the String BlockName and the Color.
      */
     @Override
