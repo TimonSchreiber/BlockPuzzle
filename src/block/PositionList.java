@@ -7,56 +7,27 @@ import java.util.List;
 
 import field.Direction;
 
+/**
+ * Wraper around an ArrayList of Positions.
+ */
 public final class PositionList implements Iterable<Position>, Comparable<PositionList> {
 
     // -------------------------------------------------------------------------
     // ATTRIBUTES
     // -------------------------------------------------------------------------
 
+    /** ArrayList of Positions */
     private final List<Position> positions;
 
     // -------------------------------------------------------------------------
     // CONSTRUCTORS
     // -------------------------------------------------------------------------
 
-    /** Old constructor: when not needed -> delete
-     * TODO: Maybe put this into a static factory method? (single responsibility)
-     * Class constructor form a {@code BlockInfo}.
+    /**
+     * Class constructor from a PosittionsInfo object. Delegates
+     * the construction to one of two private factory methods.
      *
-     * @param positionsInfo
-     */
-    // public PositionList(final PositionsInfo positionsInfo) {
-    //     this.positions = new ArrayList<>();
-
-    //     switch (positionsInfo.size()) {
-    //         case 4:
-    //             this.positions.add(
-    //                 positionsInfo.position().moveTowards(
-    //                     positionsInfo.direction(),
-    //                     positionsInfo.direction().next()));
-    //             // falls through
-    //         case 3:
-    //             this.positions.add(
-    //                 positionsInfo.position().moveTowards(
-    //                     positionsInfo.direction().next()));
-    //             // falls through
-    //         case 2:
-    //             this.positions.add(
-    //                 positionsInfo.position().moveTowards(
-    //                     positionsInfo.direction()));
-    //             // falls through
-    //         default:
-    //             this.positions.add(
-    //                 positionsInfo.position());
-    //             break;
-    //     }
-
-    //     Collections.sort(this.positions);
-    // }
-
-    /** TODO:
-     * 
-     * @param positionsInfo
+     * @param positionsInfo     The PositionsInfo
      */
     public PositionList(final PositionsInfo positionsInfo) {
         if (positionsInfo.isElbow()) {
@@ -67,25 +38,25 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
     }
 
     /**
-     * TODO: only added to create the PositionList form the winning conditions.
-     * Class constrcutor form a {@code List} of {@code Positions}.
-     * 
-     * @param positions
+     * Class constrcutor form a List of Positions.
+     *
+     * @param positions     A List of Positions
      */
     public PositionList(final List<Position> positions) {
         this.positions = new ArrayList<>(positions);
 
+        // make sure this List is sorted.
         Collections.sort(this.positions);
     }
 
     /**
      * Copy constructor.
      *
-     * @param positionList
+     * @param positionList  A PositionList
      */
     public PositionList(final PositionList positionList) {
         this.positions = new ArrayList<>();
-        
+
         for (final Position position : positionList) {
             this.positions.add(new Position(position));
         }
@@ -95,8 +66,8 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
     // FACTORYS
     // -------------------------------------------------------------------------
 
-    /** TODO:
-     * 
+    /**
+     * Returns a new List of Positions where all Positions form a straight line.
      */
     private List<Position> newRectangle(PositionsInfo positionsInfo) {
         final List<Position> tmpList = new ArrayList<>();
@@ -107,12 +78,15 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
             tmpPosition = tmpPosition.moveTowards(positionsInfo.direction());
         }
 
+        // make sure the List is sorted.
         Collections.sort(tmpList);
+
         return tmpList;
     }
 
-    /** TODO:
-     * 
+    /**
+     * Returns a new List of Positions where the Positions form a shape that
+     * bends like a L or a big square.
      */
     private List<Position> newElbow(final PositionsInfo positionsInfo) {
         final List<Position> tmpList = new ArrayList<>();
@@ -138,7 +112,9 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
                 break;
         }
 
+        // make sure the List is sorted.
         Collections.sort(tmpList);
+
         return tmpList;
     }
 
@@ -147,14 +123,13 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
     // -------------------------------------------------------------------------
 
     /**
-     * TODO
+     * Replaces every Position in this List with a new Position resulting from
+     * moving it towards the specified Directions.
      *
-     * @param directions
+     * @param directions    One or more Directions.
      */
     public void moveTowards(final Direction... directions) {
         this.positions.replaceAll(pos -> pos.moveTowards(directions));
-        // this.positions.replaceAll(Position::moveTowards);
-        // TODO: can this become a method-reference (?)
     }
 
     // -------------------------------------------------------------------------
@@ -162,17 +137,22 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
     // -------------------------------------------------------------------------
 
     /**
-     * TODO:
-     * @param position
-     * @return
+     * Forwards to the {@link List#contains(Position)} method.
+     *
+     * @param position  Positions whose presence is to be tested.
+     * @return  {@code true} if this PositionList contains the Position,
+     *          {@code false} otherwise.
+     * @see java.util.List#contains(Object)
      */
     public boolean contains(final Position position) {
         return this.positions.contains(position);
     }
 
     /**
-     * TODO:
-     * @return
+     * Frowards to the {@link List#size()} method.
+     *
+     * @return  the number of Positions in this PositionList.
+     * @see java.util.List#size()
      */
     public int size() {
         return this.positions.size();
