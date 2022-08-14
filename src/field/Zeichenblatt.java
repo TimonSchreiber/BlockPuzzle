@@ -201,7 +201,6 @@ public class Zeichenblatt {
      public void pause(int delay) {
           anzeigen();
           try {
-               // Thread.currentThread().sleep(delay); TODO: this is the original line, not the ine below.
                Thread.sleep(delay);
             } catch (InterruptedException e) { }
      }
