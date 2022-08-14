@@ -55,9 +55,10 @@ public class BlockSetTests {
                     MovePattern.NO_DIRECTIONS,
                     false,
                     new PositionsInfo(new Position(2, 4), 1, Direction.D, false))
-                )
-            );
-    private BlockSet blockSet;
+            )
+        );
+
+        private BlockSet blockSet;
 
     @BeforeEach
     public void setUp() {
@@ -143,11 +144,31 @@ public class BlockSetTests {
     @Test
     @DisplayName("getBlock Should return null if there is no Block with the blockName")
     public void getBlock_incorrectBlockName() {
-
         final String blockName = "T2";
         final Block block = blockSet.getBlock(blockName);
 
         assertNull(block);
+    }
+
+    @Test
+    @DisplayName("getMainBlocks Should return a new(?) BlockSet with all the MainBlocks")
+    public void getMainBlocks() {
+        final BlockSet actual = blockSet.getMainBlocks();
+        final BlockSet expected = new BlockSet();
+        expected.add(
+            new Block(
+                new BlockInfo(
+                    "R1",
+                    null,
+                    MovePattern.ALL_DIRECTIONS,
+                    true,
+                    new PositionsInfo(
+                        new Position(3, 2),
+                        1,
+                        Direction.D,
+                        false))));
+
+        assertEquals(expected, actual);
     }
 
     // -------------------------------------------------------------------------

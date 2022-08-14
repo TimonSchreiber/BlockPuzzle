@@ -54,8 +54,8 @@ public class GameStateTests {
                     MovePattern.NO_DIRECTIONS,
                     false,
                     new PositionsInfo(new Position(2, 4), 1, Direction.D, false))
-                )
-            );
+            )
+        );
 
     private GameState gameState;
 
