@@ -7,12 +7,6 @@ import org.junit.jupiter.api.Test;
 public class DirectionTests {
 
     @Test
-    @DisplayName("getSize Should be 4")
-    public void getSize() {
-        assertEquals(4, Direction.getSize());
-    }
-
-    @Test
     @DisplayName("next Should return D When R")
     public void next() {
         Direction actual = Direction.R;
