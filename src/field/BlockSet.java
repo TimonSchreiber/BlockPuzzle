@@ -142,8 +142,10 @@ public final class BlockSet implements Iterable<Block> {
     // FORWARDING - METHODS
     // -------------------------------------------------------------------------
 
-    // TODO: maybe check if no Blocks overlapp???
-    public boolean add(final Block block) { return this.blocks.add(block); }
+    // TODO: maybe check if no Blocks overlapp? is 'new Block()' neccessary?
+    public boolean add(final Block block) {
+        return this.blocks.add(new Block(block));
+    }
 
     // -------------------------------------------------------------------------
     // EQUALS AND HASH-CODE
@@ -178,9 +180,7 @@ public final class BlockSet implements Iterable<Block> {
         final int PRIME = 31;
         int hash = 7;
 
-        hash = PRIME * hash + ((this.blocks == null)
-                                    ? 0
-                                    : this.blocks.hashCode());
+        hash = PRIME * hash + ((this.blocks == null) ? 0 : this.blocks.hashCode());
 
         return hash;
     }

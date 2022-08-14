@@ -115,12 +115,8 @@ public final class GameState {
         final int PRIME = 31;
         int hash = 7;
 
-        hash = PRIME * hash + ((this.blockSet == null)
-                                    ? 0
-                                    : this.blockSet.hashCode());
-        hash = PRIME * hash + ((this.moves == null)
-                                    ? 0
-                                    : this.moves.hashCode());
+        hash = PRIME * hash + ((this.blockSet == null) ? 0 : this.blockSet.hashCode());
+        hash = PRIME * hash + ((this.moves == null) ? 0 : this.moves.hashCode());
 
         return hash;
     }

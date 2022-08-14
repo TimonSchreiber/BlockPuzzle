@@ -153,15 +153,30 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
      */
     public void moveTowards(final Direction... directions) {
         this.positions.replaceAll(pos -> pos.moveTowards(directions));
+        // this.positions.replaceAll(Position::moveTowards);
+        // TODO: can this become a method-reference (?)
     }
 
     // -------------------------------------------------------------------------
     // FORWARDING - METHODS
     // -------------------------------------------------------------------------
 
-    public boolean contains(final Position position) { return this.positions.contains(position); }
-    // public boolean addAll(final PositionList positionList) { return this.positions.addAll(positionList.positions); }    // TODO: not used!
-    public int size() { return this.positions.size(); }
+    /**
+     * TODO:
+     * @param position
+     * @return
+     */
+    public boolean contains(final Position position) {
+        return this.positions.contains(position);
+    }
+
+    /**
+     * TODO:
+     * @return
+     */
+    public int size() {
+        return this.positions.size();
+    }
 
     // -------------------------------------------------------------------------
     // EQUALS AND HASH-CODE
@@ -196,9 +211,7 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
         final int PRIME = 31;
         int hash = 7;
 
-        hash = PRIME * hash + ((this.positions == null)
-                                    ? 0
-                                    : this.positions.hashCode());
+        hash = PRIME * hash + ((this.positions == null) ? 0 : this.positions.hashCode());
 
         return hash;
     }

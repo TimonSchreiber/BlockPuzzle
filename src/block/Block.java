@@ -98,8 +98,22 @@ public final class Block implements Comparable<Block> {
     // FORWARDING - METHODS
     // -------------------------------------------------------------------------
     
-    public boolean containsPosition(final Position position) { return this.positionList.contains(position); }
-    public void moveTowards(final Direction... directions) { this.positionList.moveTowards(directions); }
+    /**
+     * TODO:
+     * @param position
+     * @return
+     */
+    public boolean containsPosition(final Position position) {
+        return this.positionList.contains(position);
+    }
+
+    /**
+     * TODO:
+     * @param directions
+     */
+    public void moveTowards(final Direction... directions) {
+        this.positionList.moveTowards(directions);
+    }
 
     // -------------------------------------------------------------------------
     // EQUALS AND HASH-CODE
@@ -108,7 +122,7 @@ public final class Block implements Comparable<Block> {
     /* (non-Javadoc)
      * @see java.lang.Object#equals(java.lang.Object)
      * 
-     * This method ignores the BlockName and the Color.
+     * This method ignores the String BlockName and the Color.
      */
     @Override
     public boolean equals(final Object obj) {
@@ -135,7 +149,7 @@ public final class Block implements Comparable<Block> {
     /* (non-Javadoc)
      * @see java.lang.Object#hashCode()
      * 
-     * This method ignores the BlockName and the Color.
+     * This method ignores the String BlockName and the Color.
      */
     @Override
     public int hashCode() {
@@ -143,12 +157,8 @@ public final class Block implements Comparable<Block> {
         int hash = 7;
 
         hash = PRIME * hash + Boolean.hashCode(this.isMainBlock);
-        hash = PRIME * hash + ((this.positionList == null)
-                                    ? 0
-                                    : this.positionList.hashCode());
-        hash = PRIME * hash + ((this.movePattern == null)   // TODO: added with new BlockInfo fields: check if it works
-                                    ? 0
-                                    : this.movePattern.hashCode());
+        hash = PRIME * hash + ((this.positionList == null) ? 0 : this.positionList.hashCode());
+        hash = PRIME * hash + ((this.movePattern == null) ? 0 : this.movePattern.hashCode());
 
         return hash;
     }
