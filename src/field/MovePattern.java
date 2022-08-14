@@ -129,9 +129,7 @@ public final class MovePattern implements Iterable<Direction> {
         final int PRIME = 31;
         int hash = 7;
 
-        hash = PRIME * hash + ((this.directions == null)
-                                    ? 0
-                                    : this.directions.hashCode());
+        hash = PRIME * hash + ((this.directions == null) ? 0 : this.directions.hashCode());
 
         return hash;
     }
