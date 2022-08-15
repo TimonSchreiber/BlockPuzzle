@@ -52,23 +52,25 @@ public final class GameField {
      *          defined by WIN_CONDITION, {@code false} otherwise.
      */
     public boolean checkWinCondition(final BlockSet blockSet) {
-        /* 1st Idea how to make this work:
-         * int counter = 0;
-         *
-         * for (Block block : blockSet.getMainBlocks()) {
-         *     for (Position position : block.positions()) {
-         *         if (WIN_CONDITION.contains(position)) { ++counter; }
-         *     }
-         * }
-         * return counter == WIN_CONDITION.size();
-         */
+        // 1st Idea how to make this work:
+        // Get every Blocks PositionList and check if they are contained in the WinCondition.
+        // If not, return false, if the end of the outer loop is reached return true.
+        for (Block block : blockSet.getMainBlocks()) {
+            for (Position position : block.positionList()) {
+                if (!WIN_CONDITION.contains(position)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+        
 
-        // TODO: "R1" will not always be the winnig Block (Jumping Rabits). Fix this!
-        return blockSet
-                .getBlock("R1")
-                .positionList()
-                .equals(WIN_CONDITION);
-        // TODO: maybe use forwarding here
+        // "R1" will not always be the winnig Block (Jumping Rabits). Fix this!
+        // return blockSet
+        //         .getBlock("R1")
+        //         .positionList()
+        //         .equals(WIN_CONDITION);
+        // Maybe use forwarding here?
     }
 
     // -------------------------------------------------------------------------
