@@ -86,15 +86,17 @@ public /* sealed */ abstract class Game
 
     // ----------------
 
+    // not used, but might be useful
     // print this BlockSet
-    public void print() {
-        gameField.print(blockSet);
-    }
+    // public void print() {
+    //     gameField.print(blockSet);
+    // }
 
+    // not used
     // print a BlockSet
-    public void print(final BlockSet blockSet) {
-        gameField.print(blockSet);
-    }
+    // public void print(final BlockSet blockSet) {
+    //     gameField.print(blockSet);
+    // }
 
     // ----------------
 
@@ -103,10 +105,11 @@ public /* sealed */ abstract class Game
         gameField.draw(blockSet, delay);
     }
 
+    // not used
     // Draw a BlockSet
-    public void draw(final BlockSet blockSet, final int delay) {
-        gameField.draw(blockSet, delay);
-    }
+    // public void draw(final BlockSet blockSet, final int delay) {
+    //     gameField.draw(blockSet, delay);
+    // }
 
     // =========================================================================
 
