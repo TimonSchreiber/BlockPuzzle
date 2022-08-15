@@ -12,9 +12,9 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         try (final Scanner scanner = new Scanner(System.in)) {
-            String gameType = "DirtyDozen";  // D=DirtyDozen; J=HumpingRabbits; R=RushHour
+            String gameType = "RushHour";  // D=DirtyDozen; J=HumpingRabbits; R=RushHour
             String solvType = "Breadth";  // D=Depth; B=Breadth; T=Threads
-            int number = 12;
+            int number = 3;
 
             System.out.println("Game Number: " + number);
 
