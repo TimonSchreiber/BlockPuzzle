@@ -3,6 +3,7 @@ package field;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.awt.Color;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -23,6 +24,17 @@ public class GameFieldTests {
     public void setUp() {
         final int height = 5;
         final int width = 5;
+        final CanvasInfo canvasInfo =
+        new CanvasInfo(
+            Color.LIGHT_GRAY,
+            Color.WHITE,
+            Color.RED,
+            List.of(
+                // bottom right around the center of the GameField
+                new Rectangle(4.5, 0.0, 2.5, 0.5),  // bottom
+                new Rectangle(6.5, 0.5, 0.5, 2.0)   // right
+            )
+        );
         final PositionList winCondition =
             new PositionList(
                 List.of(
@@ -30,7 +42,7 @@ public class GameFieldTests {
                     new Position(1, 0)
                 )
             );
-        gameField = new GameField(height, width, winCondition);
+        gameField = new GameField(height, width, winCondition, canvasInfo);
     }
 
     // -------------------------------------------------------------------------
