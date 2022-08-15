@@ -12,48 +12,29 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         try (final Scanner scanner = new Scanner(System.in)) {
-            String gameType = "D";  // D=DirtyDozen; J=HumpingRabbits; R=RushHour
-            String solvType = "Breadth";  // D=Depth; B=Breadth; T=Threads
-            int number = 3;
+            String gameType = "J";  // D=DirtyDozen; J=HumpingRabbits; R=RushHour
+            String solvType = "B";  // D=Depth; B=Breadth; T=Threads
+            int gameNumber = 5;
 
-            System.out.println("Game Number: " + number);
+            System.out.println("Game Number: " + gameNumber);
 
             int delay = 0;
             boolean show = false;
 
-            Game game;
-
-            switch (gameType.toUpperCase().charAt(0)) {
-            case 'D':
-                game = new DirtyDozen(number);
-                break;
-            case 'J':
-                game = new JumpingRabbits(number);
-                break;
-            case 'R':
-                game = new RushHour(number);
-                break;
-            default:
-                game = new DirtyDozen(number);  // TODO: what to do in the default case?
-                break;
-            }
-
-            // TODO: maybe create a Game instance here and pass it to the Solver
+            Game game =
+                switch (gameType.toUpperCase().charAt(0)) {
+                    case 'D'    -> new DirtyDozen(gameNumber);
+                    case 'J'    -> new JumpingRabbits(gameNumber);
+                    case 'R'    -> new RushHour(gameNumber);
+                    default     -> throw new IllegalStateException("Invalid GameType: " + gameType);
+                };
 
             switch (solvType.toUpperCase().charAt(0)) {
-            case 'D':
-                new DepthFirstSearch(game, delay, show).solve();
-                break;
-            case 'B':
-                new BreadthFirstSearch(game).solve();
-                break;
-            case 'T':
-                new BFS_WithThreads(game).solve();
-                break;
-            default:
-                System.err.println("Invalid input!");
-                break;
-            }
+                case 'D'    -> new DepthFirstSearch(game, delay, show).solve();
+                case 'B'    -> new BreadthFirstSearch(game).solve();
+                case 'T'    -> new BFS_WithThreads(game).solve();
+                default     -> throw new IllegalStateException("Invalid SolveType: " + solvType);
+            };
         }
 
         // ---------------------------------------------------------------------
