@@ -1,7 +1,5 @@
 package field;
 
-import java.awt.Color;
-
 import block.Block;
 import block.Position;
 import block.PositionList;
@@ -15,17 +13,16 @@ public final class GameField {
     // ATTRIBUTES
     // -------------------------------------------------------------------------
 
-    /** Winning PositionList */
-    private final PositionList WIN_CONDITION;
-
     /** Height of this GameField */
     private final int HEIGHT;
 
     /**Width of this GameField */
     private final int WIDTH;
 
-    // TODO: also define the neccessary properties of the canvas in the Game class
-    // e.g. Where the goal/target is
+    private final CanvasInfo CANVAS_INFO;
+
+    /** Winning PositionList */
+    private final PositionList WIN_CONDITION;
 
     /** Canvas to draw this GameField on */
     private Zeichenblatt canvas;
@@ -37,10 +34,11 @@ public final class GameField {
     /**
      * Class constructor.
      */
-    public GameField(int height, int width, PositionList winCondition) {
-        this.HEIGHT = height;
-        this.WIDTH = width;
-        this.WIN_CONDITION = winCondition;
+    public GameField(int height, int width, PositionList winCondition, CanvasInfo canvasInfo) {
+        this.HEIGHT         = height;
+        this.WIDTH          = width;
+        this.WIN_CONDITION  = winCondition;
+        this.CANVAS_INFO    = canvasInfo;
     }
 
     // -------------------------------------------------------------------------
@@ -212,31 +210,31 @@ public final class GameField {
         }
 
         // draw light grey square (outline)
-        canvas.setVordergrundFarbe(Color.LIGHT_GRAY);
+        canvas.setVordergrundFarbe(CANVAS_INFO.outsideColor());
         canvas.rechteck(
             WIDTH  + ONE,
             HEIGHT + ONE
         );
 
-        // draw red square in the bottom right corner (marks goal)
-        canvas.setVordergrundFarbe(Color.RED);
-        for (final Position position : WIN_CONDITION) {
-            canvas.rechteck(
-                position.x() + OFFSET,
-                position.y(),
-                ONE + OFFSET,
-                ONE + OFFSET
-            );
-        }
-
         // draw white center square (the game field)
-        canvas.setVordergrundFarbe(Color.WHITE);
+        canvas.setVordergrundFarbe(CANVAS_INFO.insideColor());
         canvas.rechteck(
             OFFSET,
             OFFSET,
             WIDTH,
             HEIGHT
         );
+
+        // draw red square in the bottom right corner (marks goal)
+        canvas.setVordergrundFarbe(CANVAS_INFO.winColor());
+        for (final Rectangle rectangle : CANVAS_INFO.winArea()) {
+            canvas.rechteck(
+                rectangle.minX(),
+                rectangle.minY(),
+                rectangle.width(),
+                rectangle.height()
+            );
+        }
 
         // draw each Block
         for (final Block block : blockSet) {
