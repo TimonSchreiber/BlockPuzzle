@@ -1,8 +1,8 @@
 package game;
 
 import java.awt.Color;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import block.Block;
 import block.BlockInfo;
@@ -42,9 +42,7 @@ public final class DirtyDozen extends Game {
 
     /** List of a List of BlockInfos */
     private static final
-    List<List<BlockInfo>> START_POSITION_LIST =
-        new ArrayList<>();
-    // TODO: Maybe delete the "= ArrayList<>()" and use the static-Block to assign this List with List.of() (or Set.of(), Map.of())"
+    Map<Integer, List<BlockInfo>> START_POSITION_MAP;
 
     // -------------------------------------------------------------------------
     // CONSTRUCTOR
@@ -69,7 +67,7 @@ public final class DirtyDozen extends Game {
 
     @Override
     protected void setUp(final int gameNumber) {
-        START_POSITION_LIST
+        START_POSITION_MAP
             .get(gameNumber)
             .forEach(blockInfo -> {
                 blockSet.add(new Block(blockInfo));
@@ -124,23 +122,23 @@ public final class DirtyDozen extends Game {
         final Color SQUARE_6    = new Color(  0,  42,   0);
 
         // ---------------------------------------------------------------------
-        // TODO: POSITIONS?
+        // TODO: Positions?
 
         // ---------------------------------------------------------------------
         // GAMES
-        // TODO: Maybe use a List.of(), Set.of(), or Map.of() (Map.Entries()) to create an immutable List
-        // Map to get the game via the key
 
-        /* Game 0 - 13 Moves
-         *
-         * Y3 Y3 Y4 B2 B3 __
-         * Y3 Y4 Y4 B2 B3 __
-         * Y2 Y2 G5 G6 R1 R1
-         * Y2 Y1 G3 G4 R1 R1
-         * Y1 Y1 G1 G2 B1 B1
-         */
-        START_POSITION_LIST.add(
-            new ArrayList<>(
+        START_POSITION_MAP =
+        Map.ofEntries(
+            Map.entry(
+            /* Game 0 - 13 Moves
+             *
+             * Y3 Y3 Y4 B2 B3 __
+             * Y3 Y4 Y4 B2 B3 __
+             * Y2 Y2 G5 G6 R1 R1
+             * Y2 Y1 G3 G4 R1 R1
+             * Y1 Y1 G1 G2 B1 B1
+             */
+                0,
                 List.of(
                     new BlockInfo(
                         R1,
@@ -241,21 +239,17 @@ public final class DirtyDozen extends Game {
                         new PositionsInfo(new Position(3, 2), 1, Direction.D, false)
                     )
                 )
-            )
-        );    // Game 0
-
-        // ---------------------------------------------------------------------
-
-        /* Game 1 - 43 Moves
-         *
-         * R1 R1 G5 G6 B3 B3
-         * R1 R1 G3 G4 B2 B2
-         * __ __ G1 G2 B1 B1
-         * Y1 Y1 Y2 Y3 Y3 Y4
-         * Y1 Y2 Y2 Y3 Y4 Y4
-         */
-        START_POSITION_LIST.add(
-            new ArrayList<>(
+            ),
+            Map.entry(
+            /* Game 1 - 43 Moves
+             *
+             * R1 R1 G5 G6 B3 B3
+             * R1 R1 G3 G4 B2 B2
+             * __ __ G1 G2 B1 B1
+             * Y1 Y1 Y2 Y3 Y3 Y4
+             * Y1 Y2 Y2 Y3 Y4 Y4
+             */
+                1,
                 List.of(
                     new BlockInfo(
                         R1,
@@ -342,21 +336,17 @@ public final class DirtyDozen extends Game {
                         false,
                         new PositionsInfo(new Position(3, 4), 1, Direction.D, false))
                 )
-            )
-        );    // Game 1
-
-        // ---------------------------------------------------------------------
-
-        /* Game 2 - 52 Moves
-         *
-         * R1 R1 G4 G5 G6 __
-         * R1 R1 G1 G2 G3 __
-         * B1 B1 B2 B2 B3 B3
-         * Y1 Y1 Y2 Y3 Y3 Y4
-         * Y1 Y2 Y2 Y3 Y4 Y4
-         */
-        START_POSITION_LIST.add(
-            new ArrayList<>(
+            ),
+            Map.entry(
+            /* Game 2 - 52 Moves
+             *
+             * R1 R1 G4 G5 G6 __
+             * R1 R1 G1 G2 G3 __
+             * B1 B1 B2 B2 B3 B3
+             * Y1 Y1 Y2 Y3 Y3 Y4
+             * Y1 Y2 Y2 Y3 Y4 Y4
+             */
+                2,
                 List.of(
                     new BlockInfo(
                         R1,
@@ -443,21 +433,17 @@ public final class DirtyDozen extends Game {
                         false,
                         new PositionsInfo(new Position(4, 4), 1, Direction.D, false))
                 )
-            )
-        );    // Game 2
-
-        // ---------------------------------------------------------------------
-
-        /* Game 3 - 58 Moves
-         *
-         * R1 R1 G6 Y3 Y3 Y4
-         * R1 R1 G5 Y3 Y4 Y4
-         * B3 B3 G4 Y1 Y1 Y2
-         * B2 B2 G3 Y1 Y2 Y2
-         * B1 B1 G1 G2 __ __
-         */
-        START_POSITION_LIST.add(
-            new ArrayList<>(
+            ),
+            Map.entry(
+            /* Game 3 - 58 Moves
+             *
+             * R1 R1 G6 Y3 Y3 Y4
+             * R1 R1 G5 Y3 Y4 Y4
+             * B3 B3 G4 Y1 Y1 Y2
+             * B2 B2 G3 Y1 Y2 Y2
+             * B1 B1 G1 G2 __ __
+             */
+                3,
                 List.of(
                     new BlockInfo(
                         R1,
@@ -544,21 +530,17 @@ public final class DirtyDozen extends Game {
                         false,
                         new PositionsInfo(new Position(2, 4), 1, Direction.D, false))
                 )
-            )
-        );    // Game 3
-
-        // ---------------------------------------------------------------------
-
-        /* Game 4 - 60 Moves
-         *
-         * R1 R1 Y3 Y3 Y4 G6
-         * R1 R1 Y3 Y4 Y4 G5
-         * Y2 Y2 B3 B3 G3 G4
-         * Y2 Y1 B2 B2 G2 __
-         * Y1 Y1 B1 B1 G1 __
-         */
-        START_POSITION_LIST.add(
-            new ArrayList<>(
+            ),
+            Map.entry(
+            /* Game 4 - 60 Moves
+             *
+             * R1 R1 Y3 Y3 Y4 G6
+             * R1 R1 Y3 Y4 Y4 G5
+             * Y2 Y2 B3 B3 G3 G4
+             * Y2 Y1 B2 B2 G2 __
+             * Y1 Y1 B1 B1 G1 __
+             */
+                4,
                 List.of(
                     new BlockInfo(
                         R1,
@@ -645,21 +627,17 @@ public final class DirtyDozen extends Game {
                         false,
                         new PositionsInfo(new Position(5, 4), 1, Direction.D, false))
                 )
-            )
-        );    // Game 4
-
-        // ---------------------------------------------------------------------
-
-        /* Game 5 - 64 Moves
-         *
-         * R1 R1 B3 B3 G5 G6
-         * R1 R1 B2 B2 G4 G4
-         * __ __ B1 B1 G1 G2
-         * Y1 Y1 Y2 Y3 Y3 Y4
-         * Y1 Y2 Y2 Y3 Y4 Y4
-         */
-        START_POSITION_LIST.add(
-            new ArrayList<>(
+            ),
+            Map.entry(
+            /* Game 5 - 64 Moves
+             *
+             * R1 R1 B3 B3 G5 G6
+             * R1 R1 B2 B2 G4 G4
+             * __ __ B1 B1 G1 G2
+             * Y1 Y1 Y2 Y3 Y3 Y4
+             * Y1 Y2 Y2 Y3 Y4 Y4
+             */
+                5,
                 List.of(
                     new BlockInfo(
                         R1,
@@ -746,21 +724,17 @@ public final class DirtyDozen extends Game {
                         false,
                         new PositionsInfo(new Position(5, 4), 1, Direction.D, false))
                 )
-            )
-        );    // Game 5
-
-        // ---------------------------------------------------------------------
-
-        /* Game 6 - 75 Moves
-         *
-         * R1 R1 G4 G5 G6 __
-         * R1 R1 G1 G2 G3 __
-         * B3 B3 Y3 Y3 Y4 Y4
-         * B2 B2 Y3 Y1 Y4 Y2
-         * B1 B1 Y1 Y1 Y2 Y2
-         */
-        START_POSITION_LIST.add(
-            new ArrayList<>(
+            ),
+            Map.entry(
+            /* Game 6 - 75 Moves
+             *
+             * R1 R1 G4 G5 G6 __
+             * R1 R1 G1 G2 G3 __
+             * B3 B3 Y3 Y3 Y4 Y4
+             * B2 B2 Y3 Y1 Y4 Y2
+             * B1 B1 Y1 Y1 Y2 Y2
+             */
+                6,
                 List.of(
                     new BlockInfo(
                         R1,
@@ -847,21 +821,17 @@ public final class DirtyDozen extends Game {
                         false,
                         new PositionsInfo(new Position(4, 4), 1, Direction.D, false))
                 )
-            )
-        );    // Game 6
-
-        // ---------------------------------------------------------------------
-
-        /* Game 7 - 76 Moves
-         *
-         * R1 R1 G6 Y3 Y3 Y4
-         * R1 R1 G5 Y3 Y4 Y4
-         * B3 B3 G3 G4 __ __
-         * B2 B2 G2 Y1 Y1 Y2
-         * B1 B1 G1 Y1 Y2 Y2
-         */
-        START_POSITION_LIST.add(
-            new ArrayList<>(
+            ),
+            Map.entry(
+            /* Game 7 - 76 Moves
+             *
+             * R1 R1 G6 Y3 Y3 Y4
+             * R1 R1 G5 Y3 Y4 Y4
+             * B3 B3 G3 G4 __ __
+             * B2 B2 G2 Y1 Y1 Y2
+             * B1 B1 G1 Y1 Y2 Y2
+             */
+                7,
                 List.of(
                     new BlockInfo(
                         R1,
@@ -948,21 +918,17 @@ public final class DirtyDozen extends Game {
                         false,
                         new PositionsInfo(new Position(2, 4), 1, Direction.D, false))
                 )
-            )
-        );    // Game 7
-
-        // ---------------------------------------------------------------------
-
-        /* Game 8 - 80 Moves
-         *
-         * R1 R1 __ Y3 Y3 Y4
-         * R1 R1 __ Y3 Y4 Y4
-         * G5 G6 B3 B3 Y2 Y2
-         * G3 G4 B2 B2 Y2 Y1
-         * G1 G2 B1 B1 Y1 Y1
-         */
-        START_POSITION_LIST.add(
-            new ArrayList<>(
+            ),
+            Map.entry(
+            /* Game 8 - 80 Moves
+             *
+             * R1 R1 __ Y3 Y3 Y4
+             * R1 R1 __ Y3 Y4 Y4
+             * G5 G6 B3 B3 Y2 Y2
+             * G3 G4 B2 B2 Y2 Y1
+             * G1 G2 B1 B1 Y1 Y1
+             */
+                8,
                 List.of(
                     new BlockInfo(
                         R1,
@@ -1049,21 +1015,17 @@ public final class DirtyDozen extends Game {
                         false,
                         new PositionsInfo(new Position(1, 2), 1, Direction.D, false))
                 )
-            )
-        );    // Game 8
-
-        // ---------------------------------------------------------------------
-
-        /* Game 9 - 99 Moves
-         *
-         * R1 R1 Y4 Y4 G5 G6
-         * R1 R1 Y4 Y3 G3 G4
-         * B3 B3 Y3 Y3 G1 G2
-         * B2 B2 Y1 Y1 Y2 __
-         * B1 B1 Y1 Y2 Y2 __
-         */
-        START_POSITION_LIST.add(
-            new ArrayList<>(
+            ),
+            Map.entry(
+            /* Game 9 - 99 Moves
+             *
+             * R1 R1 Y4 Y4 G5 G6
+             * R1 R1 Y4 Y3 G3 G4
+             * B3 B3 Y3 Y3 G1 G2
+             * B2 B2 Y1 Y1 Y2 __
+             * B1 B1 Y1 Y2 Y2 __
+             */
+                9,
                 List.of(
                     new BlockInfo(
                         R1,
@@ -1150,21 +1112,17 @@ public final class DirtyDozen extends Game {
                         false,
                         new PositionsInfo(new Position(5, 4), 1, Direction.D, false))
                 )
-            )
-        );    // Game 9
-
-        // ---------------------------------------------------------------------
-
-        /* Game 10 - 128 Moves
-         *
-         * __ __ G6 Y3 Y3 Y4
-         * G3 G4 G5 Y3 Y4 Y4
-         * G1 G2 R1 R1 Y2 Y2
-         * B3 B3 R1 R1 Y2 Y1
-         * B1 B1 B2 B2 Y1 Y1
-         */
-        START_POSITION_LIST.add(
-            new ArrayList<>(
+            ),
+            Map.entry(
+            /* Game 10 - 128 Moves
+             *
+             * __ __ G6 Y3 Y3 Y4
+             * G3 G4 G5 Y3 Y4 Y4
+             * G1 G2 R1 R1 Y2 Y2
+             * B3 B3 R1 R1 Y2 Y1
+             * B1 B1 B2 B2 Y1 Y1
+             */
+                10,
                 List.of(
                     new BlockInfo(
                         R1,
@@ -1251,21 +1209,17 @@ public final class DirtyDozen extends Game {
                         false,
                         new PositionsInfo(new Position(2, 4), 1, Direction.D, false))
                 )
-            )
-        );    // Game 10
-
-        // ---------------------------------------------------------------------
-
-        /* Game 11 - 132 Moves
-         *
-         * R1 R1 __ Y4 Y4 G6
-         * R1 R1 __ Y4 G5 Y3
-         * B4 B4 G3 G4 Y3 Y3
-         * Y1 Y1 Y2 G2 B2 B2
-         * Y1 Y2 Y2 G1 B2 B2
-         */
-        START_POSITION_LIST.add(
-            new ArrayList<>(
+            ),
+            Map.entry(
+            /* Game 11 - 132 Moves
+             *
+             * R1 R1 __ Y4 Y4 G6
+             * R1 R1 __ Y4 G5 Y3
+             * B4 B4 G3 G4 Y3 Y3
+             * Y1 Y1 Y2 G2 B2 B2
+             * Y1 Y2 Y2 G1 B2 B2
+             */
+                11,
                 List.of(
                     new BlockInfo(
                         R1,
@@ -1352,21 +1306,17 @@ public final class DirtyDozen extends Game {
                         false,
                         new PositionsInfo(new Position(5, 4), 1, Direction.D, false))
                 )
-            )
-        );    // Game 11
-
-        // ---------------------------------------------------------------------
-
-        /* Game 12 - 263 Moves
-         *
-         * __ Y2 Y2 Y3 Y4 Y4
-         * __ Y2 Y3 Y3 Y4 B3
-         * G5 G6 R1 R1 B2 B3
-         * G3 G4 R1 R1 B2 Y1
-         * G1 G2 B1 B1 Y1 Y1
-         */
-        START_POSITION_LIST.add(
-            new ArrayList<>(
+            ),
+            Map.entry(
+            /* Game 12 - 263 Moves
+             *
+             * __ Y2 Y2 Y3 Y4 Y4
+             * __ Y2 Y3 Y3 Y4 B3
+             * G5 G6 R1 R1 B2 B3
+             * G3 G4 R1 R1 B2 Y1
+             * G1 G2 B1 B1 Y1 Y1
+             */
+                12,
                 List.of(
                     new BlockInfo(
                         R1,
@@ -1454,7 +1404,7 @@ public final class DirtyDozen extends Game {
                         new PositionsInfo(new Position(1, 2), 1, Direction.D, false))
                 )
             )
-        );    // Game 12
+        );
 
         // ---------------------------------------------------------------------
 

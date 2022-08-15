@@ -1,8 +1,8 @@
 package game;
 
 import java.awt.Color;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import block.Block;
 import block.BlockInfo;
@@ -40,11 +40,9 @@ public final class JumpingRabbits extends Game {
     // TODO: Add a way to tell the canvas where to mark the border to show the win condition
     /**  */
 
-    /** List of a List of {@code BlockInfos} */
+    /** List of a List of BlockInfos */
     private static final
-    List<List<BlockInfo>> START_POSITION_LIST =
-        new ArrayList<>();
-    // TODO: Maybe delete the "= ArrayList<>()" and use the static-Block to assign this List with List.of() (or Set.of(), Map.of())"
+    Map<Integer, List<BlockInfo>> START_POSITION_MAP;
 
     // -------------------------------------------------------------------------
     // CONSTRUCTOR
@@ -69,7 +67,7 @@ public final class JumpingRabbits extends Game {
 
     @Override
     protected void setUp(final int gameNumber) {
-        START_POSITION_LIST
+        START_POSITION_MAP
             .get(gameNumber)
             .forEach(blockInfo -> {
                 blockSet.add(new Block(blockInfo));
@@ -121,21 +119,23 @@ public final class JumpingRabbits extends Game {
         final Color MUSHROOM_3  = new Color(124,   0,   0);
 
         // ---------------------------------------------------------------------
-        // TODO: POSITIONS?
+        // TODO: static final positions?
 
         // ---------------------------------------------------------------------
         // GAMES
 
-        /* Game 0 - 2 Moves
-         * Starter 1
-         * __ M2 M3 __ __
-         * __ __ __ M1 __
-         * __ __ __ R1 __
-         * __ __ __ __ __
-         * __ __ __ __ __
-         */
-        START_POSITION_LIST.add(
-            new ArrayList<>(
+        START_POSITION_MAP =
+        Map.ofEntries(
+            Map.entry(
+            /* Game 0 - 2 Moves
+             * Starter 1
+             * __ M2 M3 __ __
+             * __ __ __ M1 __
+             * __ __ __ R1 __
+             * __ __ __ __ __
+             * __ __ __ __ __
+             */
+                0,
                 List.of(
                     new BlockInfo(
                         R1,
@@ -162,21 +162,17 @@ public final class JumpingRabbits extends Game {
                         false,
                         new PositionsInfo(new Position(2, 4), 1, Direction.D, false))
                 )
-            )
-        );    // Game 0
-
-        // ---------------------------------------------------------------------
-
-        /* Game 1 - 4 Moves
-         * Junior 13
-         * __ __ __ M3 __
-         * __ M2 R1 F1 F1
-         * __ __ M1 __ __
-         * __ __ __ __ __
-         * __ __ __ __ __
-         */
-        START_POSITION_LIST.add(
-            new ArrayList<>(
+            ),
+            Map.entry(
+            /* Game 1 - 4 Moves
+             * Junior 13
+             * __ __ __ M3 __
+             * __ M2 R1 F1 F1
+             * __ __ M1 __ __
+             * __ __ __ __ __
+             * __ __ __ __ __
+             */
+                1,
                 List.of(
                     new BlockInfo(
                         R1,
@@ -209,21 +205,17 @@ public final class JumpingRabbits extends Game {
                         false,
                         new PositionsInfo(new Position(3, 4), 1, Direction.D, false))
                 )
-            )
-        );    // Game 1
-
-        // -----------------------------------------------------------------
-
-        /* Game 2 - 13 Moves
-            * Expert 35
-            * __ F1 __ F2 __
-            * __ F1 __ F2 M3
-            * __ __ __ __ M2
-            * R1 __ __ R2 __
-            * __ __ __ __ M1
-            */
-        START_POSITION_LIST.add(
-            new ArrayList<>(
+            ),
+            Map.entry(
+            /* Game 2 - 13 Moves
+             * Expert 35
+             * __ F1 __ F2 __
+             * __ F1 __ F2 M3
+             * __ __ __ __ M2
+             * R1 __ __ R2 __
+             * __ __ __ __ M1
+             */
+                2,
                 List.of(
                     new BlockInfo(
                         R1,
@@ -268,21 +260,17 @@ public final class JumpingRabbits extends Game {
                         false,
                         new PositionsInfo(new Position(4, 3), 1, Direction.D, false))
                 )
-            )
-        );    // Game 2
-
-        // -----------------------------------------------------------------
-
-        /* Game 3 - 21 Moves
-            * Master 57
-            * __ F2 __ __ __
-            * M3 F2 __ __ __
-            * __ __ M2 __ __
-            * F1 F1 __ __ __
-            * M1 __ R1 __ __
-            */
-        START_POSITION_LIST.add(
-            new ArrayList<>(
+            ),
+            Map.entry(
+            /* Game 3 - 21 Moves
+             * Master 57
+             * __ F2 __ __ __
+             * M3 F2 __ __ __
+             * __ __ M2 __ __
+             * F1 F1 __ __ __
+             * M1 __ R1 __ __
+             */
+                3,
                 List.of(
                     new BlockInfo(
                         R1,
@@ -321,21 +309,17 @@ public final class JumpingRabbits extends Game {
                         false,
                         new PositionsInfo(new Position(0, 3), 1, Direction.D, false))
                 )
-            )
-        );    // Game 3
-
-        // -----------------------------------------------------------------
-
-        /* Game 4 - 36 Moves
-            * Wizard 79
-            * __ __ __ __ R3
-            * F2 F2 __ R2 __
-            * __ F1 M2 __ __
-            * __ F1 __ __ __
-            * __ __ __ R1 M1
-            */
-        START_POSITION_LIST.add(
-            new ArrayList<>(
+            ),
+            Map.entry(
+            /* Game 4 - 36 Moves
+             * Wizard 79
+             * __ __ __ __ R3
+             * F2 F2 __ R2 __
+             * __ F1 M2 __ __
+             * __ F1 __ __ __
+             * __ __ __ R1 M1
+             */
+                4,
                 List.of(
                     new BlockInfo(
                         R1,
@@ -380,21 +364,17 @@ public final class JumpingRabbits extends Game {
                         false,
                         new PositionsInfo(new Position(2, 2), 1, Direction.D, false))
                 )
-            )
-        );    // Game 4
-
-        // -----------------------------------------------------------------
-
-        /* Game 5 - 77 Moves
-            * Wizard 100
-            * __ M3 __ __ R4
-            * __ __ F1 F1 __
-            * R2 __ M2 __ R3
-            * __ __ __ __ M1
-            * __ R1 __ __ __
-            */
-        START_POSITION_LIST.add(
-            new ArrayList<>(
+            ),
+            Map.entry(
+            /* Game 5 - 77 Moves
+             * Wizard 100
+             * __ M3 __ __ R4
+             * __ __ F1 F1 __
+             * R2 __ M2 __ R3
+             * __ __ __ __ M1
+             * __ R1 __ __ __
+             */
+                5,
                 List.of(
                     new BlockInfo(
                         R1,
@@ -446,9 +426,7 @@ public final class JumpingRabbits extends Game {
                         new PositionsInfo(new Position(1, 4), 1, Direction.D, false))
                 )
             )
-        );    // Game 5
-
-        // -----------------------------------------------------------------
+        );
 
     }   // static
 

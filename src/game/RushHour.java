@@ -1,8 +1,8 @@
 package game;
 
 import java.awt.Color;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import block.Block;
 import block.BlockInfo;
@@ -38,9 +38,7 @@ public final class RushHour extends Game {
 
     /** List of a List of {@code BlockInfos} */
     private static final
-    List<List<BlockInfo>> START_POSITION_LIST =
-        new ArrayList<>();
-    // TODO: Maybe delete the "= ArrayList<>()" and use the static-Block to assign this List with List.of() (or Set.of(), Map.of())"
+    Map<Integer, List<BlockInfo>> START_POSITION_MAP;
 
     // -------------------------------------------------------------------------
     // CONSTRUCTOR
@@ -65,7 +63,7 @@ public final class RushHour extends Game {
 
     @Override
     protected void setUp(final int gameNumber) {
-        START_POSITION_LIST
+        START_POSITION_MAP
             .get(gameNumber)
             .forEach(blockInfo -> {
                 blockSet.add(new Block(blockInfo));
@@ -125,7 +123,7 @@ public final class RushHour extends Game {
 
         /** Cars */
         final Color CAR_1 = new Color(  0,   0,   0);  // Black
-        final Color CAR_2 = new Color(  0,   0, 178);  // Dark Blue
+        final Color CAR_2 = new Color(  0, 178, 178);  // Dark Blue
         final Color CAR_3 = new Color(255, 200,   0);  // Orange
         final Color CAR_4 = new Color(255, 140,   0);  // Dark Orange
         final Color CAR_5 = new Color(  0, 255,   0);  // Green
@@ -144,22 +142,24 @@ public final class RushHour extends Game {
         final Color TRUCK_4 = new Color(255,   0, 255); // Magenta
 
         // ---------------------------------------------------------------------
-        // TODO: POSITIONS?
+        // TODO: Positions?
 
         // ---------------------------------------------------------------------
         // GAMES
 
-        /* Game 0 - 16? Moves
-         * Beginner 1
-         * C3 C3 __ __ __ T4
-         * T2 __ __ T3 __ T4
-         * T2 R1 R1 T3 __ T4
-         * T2 __ __ T3 __ __
-         * C1 __ __ __ C2 C2
-         * C1 __ T1 T1 T1 __
-         */
-        START_POSITION_LIST.add(
-            new ArrayList<>(
+        START_POSITION_MAP =
+        Map.ofEntries(
+            Map.entry(
+            /* Game 0 - 16 Moves
+             * Beginner 1
+             * C3 C3 __ __ __ T4
+             * T2 __ __ T3 __ T4
+             * T2 R1 R1 T3 __ T4
+             * T2 __ __ T3 __ __
+             * C1 __ __ __ C2 C2
+             * C1 __ T1 T1 T1 __
+             */
+                0,
                 List.of(
                     new BlockInfo(
                         R1,
@@ -210,22 +210,18 @@ public final class RushHour extends Game {
                         false,
                         new PositionsInfo(new Position(5, 3), 3, Direction.U, false))
                 )
-            )
-        );    // Game 0
-
-        // ---------------------------------------------------------------------
-
-        /* Game 1 - XX Moves
-         * Intermediate 11
-         * T3 C3 C3 T4 __ __
-         * T3 __ __ T4 __ __
-         * T3 R1 R1 T4 __ __
-         * __ __ C2 T2 T2 T2
-         * __ __ C2 __ __ C1
-         * __ __ T1 T1 T1 C1
-         */
-        START_POSITION_LIST.add(
-            new ArrayList<>(
+            ),
+            Map.entry(
+            /* Game 1 - 56 Moves
+             * Intermediate 11
+             * T3 C3 C3 T4 __ __
+             * T3 __ __ T4 __ __
+             * T3 R1 R1 T4 __ __
+             * __ __ C2 T2 T2 T2
+             * __ __ C2 __ __ C1
+             * __ __ T1 T1 T1 C1
+             */
+                1,
                 List.of(
                     new BlockInfo(
                         R1,
@@ -276,22 +272,18 @@ public final class RushHour extends Game {
                         false,
                         new PositionsInfo(new Position(3, 3), 3, Direction.U, false))
                 )
-            )
-        );    // Game 1
-
-        // ---------------------------------------------------------------------
-
-        /* Game 2 - XX Moves
-         * Advanced 21
-         * C2 C2 C1 T4 __ __
-         * T2 __ C1 T4 __ __
-         * T2 R1 R1 T4 __ __
-         * T2 T3 T3 T3 __ __
-         * __ __ __ __ __ __
-         * __ __ __ T1 T1 T1
-         */
-        START_POSITION_LIST.add(
-            new ArrayList<>(
+            ),
+            Map.entry(
+            /* Game 2 - 49 Moves
+             * Advanced 21
+             * C2 C2 C1 T4 __ __
+             * T2 __ C1 T4 __ __
+             * T2 R1 R1 T4 __ __
+             * T2 T3 T3 T3 __ __
+             * __ __ __ __ __ __
+             * __ __ __ T1 T1 T1
+             */
+                2,
                 List.of(
                     new BlockInfo(
                         R1,
@@ -336,22 +328,18 @@ public final class RushHour extends Game {
                         false,
                         new PositionsInfo(new Position(3, 3), 3, Direction.U, false))
                 )
-            )
-        );    // Game 2
-
-        // ---------------------------------------------------------------------
-
-        /* Game 3 - XX Moves
-         * Expert 31
-         * C6 C6 __ T4 T4 T4
-         * __ __ __ C4 C5 C5
-         * C2 R1 R1 C4 __ T3
-         * C2 __ T1 C3 C3 T3
-         * C1 C1 T1 __ __ T3
-         * __ __ T1 T2 T2 T2
-         */
-        START_POSITION_LIST.add(
-            new ArrayList<>(
+            ),
+            Map.entry(
+            /* Game 3 - 69 Moves
+             * Expert 31
+             * C6 C6 __ T4 T4 T4
+             * __ __ __ C4 C5 C5
+             * C2 R1 R1 C4 __ T3
+             * C2 __ T1 C3 C3 T3
+             * C1 C1 T1 __ __ T3
+             * __ __ T1 T2 T2 T2
+             */
+                3,
                 List.of(
                     new BlockInfo(
                         R1,
@@ -421,9 +409,7 @@ public final class RushHour extends Game {
                         new PositionsInfo(new Position(3, 5), 3, Direction.R, false))
                 )
             )
-        );    // Game 3
-
-        // ---------------------------------------------------------------------
+        );
 
     }   // static
 
