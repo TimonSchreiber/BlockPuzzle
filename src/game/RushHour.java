@@ -13,6 +13,8 @@ import field.BlockSet;
 import field.Direction;
 import field.GameField;
 import field.MovePattern;
+import field.Rectangle;
+import field.CanvasInfo;
 
 public final class RushHour extends Game {
 
@@ -33,8 +35,18 @@ public final class RushHour extends Game {
             )
         );
 
-    // TODO: Add a way to tell the canvas where to mark the border to show the win condition
-    /**  */
+    /** Describes how to draw the canvas. */
+    private static final
+    CanvasInfo CANVAS_INFO =
+        new CanvasInfo(
+            Color.LIGHT_GRAY,
+            Color.WHITE,
+            Color.RED,
+            List.of(
+                // middle right outside the center of the GameField
+                new Rectangle(6.5, 3.5, 0.5, 1.0)
+            )
+        );
 
     /** Map of a List of BlockInfos */
     private static final
@@ -52,7 +64,7 @@ public final class RushHour extends Game {
     public RushHour(final int gameNumber) {
         super(
             new BlockSet(),
-            new GameField(SIZE, SIZE, WIN_CONDITION),
+            new GameField(SIZE, SIZE, WIN_CONDITION, CANVAS_INFO),
             gameNumber
         );
     }

@@ -13,6 +13,8 @@ import field.BlockSet;
 import field.Direction;
 import field.GameField;
 import field.MovePattern;
+import field.Rectangle;
+import field.CanvasInfo;
 
 public final class JumpingRabbits extends Game {
 
@@ -37,8 +39,36 @@ public final class JumpingRabbits extends Game {
             )
         );
 
-    // TODO: Add a way to tell the canvas where to mark the border to show the win condition
-    /**  */
+    /** Describes how to draw the canvas. */
+    private static final
+    CanvasInfo CANVAS_INFO =
+        new CanvasInfo(
+            new Color(139,  69,  19),   // saddlebrown
+            Color.GREEN.darker(),
+            new Color(205, 133,  63),   // peru
+            List.of(
+                // outside the center of the GamField
+                // bottom left
+                new Rectangle(0.0, 0.0, 1.5, 0.5),  // bottom
+                new Rectangle(0.0, 0.5, 0.5, 1.0),  // left
+                // bottom right
+                new Rectangle(4.5, 0.0, 1.5, 0.5),  // bottom
+                new Rectangle(5.5, 0.5, 0.5, 1.0),  // right
+                // top left
+                new Rectangle(0.0, 5.5, 1.5, 0.5),  // top
+                new Rectangle(0.0, 4.5, 0.5, 1.0),  // left
+                // top right
+                new Rectangle(4.5, 5.5, 1.5, 0.5),  // top
+                new Rectangle(5.5, 4.5, 0.5, 1.0),  // right
+
+                // in the middle
+                new Rectangle(2.375, 2.375, 1.25, 1.25)
+            )
+        );
+
+    // TODO: make the middle one visible.
+    // Maybe create the white field first, and then draw more elegantly the winAreas.
+
 
     /** Map of a List of BlockInfos */
     private static final
@@ -56,7 +86,7 @@ public final class JumpingRabbits extends Game {
     public JumpingRabbits(final int gameNumber) {
         super(
             new BlockSet(),
-            new GameField(SIZE, SIZE, WIN_CONDITION),
+            new GameField(SIZE, SIZE, WIN_CONDITION, CANVAS_INFO),
             gameNumber
         );
     }

@@ -13,6 +13,8 @@ import field.BlockSet;
 import field.Direction;
 import field.GameField;
 import field.MovePattern;
+import field.Rectangle;
+import field.CanvasInfo;
 
 public final class DirtyDozen extends Game {
 
@@ -38,8 +40,19 @@ public final class DirtyDozen extends Game {
             )
         );
 
-    // TODO: Add a way to tell the canvas where to mark the border to show the win condition
-    /**  */
+    /** Describes how to draw the canvas. */
+    private static final
+    CanvasInfo CANVAS_INFO =
+        new CanvasInfo(
+            Color.LIGHT_GRAY,
+            Color.WHITE,
+            Color.RED,
+            List.of(
+                // bottom right around the center of the GameField
+                new Rectangle(4.5, 0.0, 2.5, 0.5),  // bottom
+                new Rectangle(6.5, 0.5, 0.5, 2.0)   // right
+            )
+        );
 
     /** Map of a List of BlockInfos */
     private static final
@@ -57,7 +70,7 @@ public final class DirtyDozen extends Game {
     public DirtyDozen(final int gameNumber) {
         super(
             new BlockSet(),
-            new GameField(HEIGHT, WIDTH, WIN_CONDITION),
+            new GameField(HEIGHT, WIDTH, WIN_CONDITION, CANVAS_INFO),
             gameNumber
         );
     }
