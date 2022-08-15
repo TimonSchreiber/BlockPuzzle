@@ -29,8 +29,8 @@ public final class GameState {
      * @param blockSet  The BlockSet.
      */
     public GameState(final BlockSet blockSet) {
-        this.blockSet = new BlockSet(blockSet);
-        this.moves = new LinkedList<>();
+        this.blockSet   = new BlockSet(blockSet);
+        this.moves      = new LinkedList<>();
     }
 
     /**
@@ -40,8 +40,9 @@ public final class GameState {
      * @param moves     The List of Moves
      */
     public GameState(final BlockSet blockSet, final List<Move> moves) {
-        this.blockSet = new BlockSet(blockSet);
-        this.moves = new LinkedList<>();
+        this.blockSet   = new BlockSet(blockSet);
+        this.moves      = new LinkedList<>();
+        
         for (final Move move : moves) {
             this.moves.add(new Move(move));
         }

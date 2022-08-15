@@ -110,7 +110,9 @@ public final class BlockSet implements Iterable<Block> {
 
     /** TODO: can this get more efficient? this method needs to be called every time (a lot...)
      *  TODO: check if this method is used.
-     * @return
+     * Returns a BlockSet containing all the MainBlocks.
+     * 
+     * @return  A BlockSet with onl y MainBlocks
      */
     public BlockSet getMainBlocks() {
         final BlockSet mainBlocks = new BlockSet();

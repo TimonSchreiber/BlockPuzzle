@@ -3,7 +3,10 @@ package field;
 /**
  * Holds a name (of a Block) and a Direction.
  */
-public record Move(String name, Direction direction) {
+public record Move(
+    String name,
+    Direction direction
+) {
 
     // -------------------------------------------------------------------------
     // CONSTRUCTOR
