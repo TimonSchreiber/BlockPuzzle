@@ -70,10 +70,10 @@ public final class JumpingRabbits extends Game {
         );
 
     // TODO: make the middle one visible.
-    // Maybe create the white field first, and then draw more elegantly the winAreas.
+    // Maybe create the white center field first, and then draw more elegantly the winAreas.
 
 
-    /** Map of a List of BlockInfos */
+    /** Map of a List of BlockInfos. */
     private static final
     Map<Integer, List<BlockInfo>> START_POSITION_MAP;
 
@@ -95,7 +95,7 @@ public final class JumpingRabbits extends Game {
     }
 
     // -------------------------------------------------------------------------
-    // PARENT - METHODS
+    // SET UP
     // -------------------------------------------------------------------------
 
     @Override
@@ -113,16 +113,65 @@ public final class JumpingRabbits extends Game {
         gameField.draw(blockSet, 1000);    // FIXME: delete?
     }
 
-    // TODO: override this method. Make this one call the other one?
+    // -------------------------------------------------------------------------
+    // IS VALID MOVE
+    // -------------------------------------------------------------------------
+
+    // TODO: finish this method.
+    // Delegate to the method below.
     @Override
     public boolean isValidMove(final Move move) {
-        return gameField.isValidMove(blockSet, move);
+        return isValidMove(blockSet, move);
     }
 
-    // TODO: override this method.
+    // If the Block is a mainBlock (aka Rabbit) it needs to jump over another
+    // Block to move.
     @Override
     public boolean isValidMove(final BlockSet blockSet, final Move move) {
-        return gameField.isValidMove(blockSet, move);
+
+        // check if the normal way to move can be applied
+        // -> forward to gameField.isValidMove()
+        if (!blockSet.getBlock(move.name()).isMainBlock()) {
+            return gameField.isValidMove(blockSet, move);
+        }
+
+        // check if there is no Block next to this one to jump over
+        // -> return false
+        if (gameField.isCollisionFree(blockSet, move)) {
+            return false;
+        }
+
+        // count how far the rabbit needs to jump
+        int counter = 0;
+        Position tmpPosition = null;
+        final PositionList tmpPositionList = blockSet.getBlock(move.name()).positionList();
+
+        for (final Position position : tmpPositionList) {
+            // there is only one Position in this ^ List (Rabbits have a size of 1)
+            tmpPosition = new Position(position);
+
+            do {
+                // move to the next Position
+                tmpPosition = tmpPosition.moveTowards(move.direction());
+
+                //count one up
+                ++counter;
+            } while (gameField.isInInterval(tmpPosition) && blockSet.isBlock(tmpPosition));
+
+        }
+
+        // check if the while loop aborted because an empty Position was found,
+        // or because the GameField border was left.
+        if ((tmpPosition != null) && !gameField.isInInterval(tmpPosition)) {
+            return false;
+        }
+
+        // skip over all the Blocks in between
+        for (int i = 0; i < counter; ++i) {
+            blockSet.makeMove(move);
+        }
+
+        return true;
     }
 
     // -------------------------------------------------------------------------
@@ -159,11 +208,11 @@ public final class JumpingRabbits extends Game {
         final Color RABBIT_4    = new Color(  0,   0,   0); // Black
 
         final Color FOX_1       = new Color(255, 200,   0); // ORANGE
-        final Color FOX_2       = new Color(255, 140,   0);
+        final Color FOX_2       = new Color(255, 200,   0); // 255, 140
 
         final Color MUSHROOM_1  = new Color(255,   0,   0); // RED
-        final Color MUSHROOM_2  = new Color(178,   0,   0);
-        final Color MUSHROOM_3  = new Color(124,   0,   0);
+        final Color MUSHROOM_2  = new Color(255,   0,   0); // 178
+        final Color MUSHROOM_3  = new Color(255,   0,   0); // 124
 
         // ---------------------------------------------------------------------
         // TODO: static final positions?
@@ -397,7 +446,7 @@ public final class JumpingRabbits extends Game {
                         FOX_2,
                         MovePattern.RIGHT_LEFT_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 3), 2, Direction.U, false)),
+                        new PositionsInfo(new Position(0, 3), 2, Direction.R, false)),
                     new BlockInfo(
                         M1,
                         MUSHROOM_1,
