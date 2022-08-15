@@ -86,13 +86,13 @@ public /* sealed */ abstract class Game
 
     // ----------------
 
-    // not used, but might be useful
+    // TODO: used for debugging?
     // print this BlockSet
-    // public void print() {
-    //     gameField.print(blockSet);
-    // }
+    public void print() {
+        gameField.print(blockSet);
+    }
 
-    // not used
+    // TODO: not used
     // print a BlockSet
     // public void print(final BlockSet blockSet) {
     //     gameField.print(blockSet);
