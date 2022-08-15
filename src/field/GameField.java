@@ -85,7 +85,7 @@ public final class GameField {
      * @return          {@code true} if the Position is inside this GameField,
      *                  {@code false} otherwise.
      */
-    private boolean isInInterval(final Position position) {
+    public boolean isInInterval(final Position position) {
         return     (position.x() < WIDTH)
                 && (position.x() >= 0)
                 && (position.y() < HEIGHT)
@@ -105,11 +105,11 @@ public final class GameField {
      * @return        {@code true} if this Move can be made, {@code false}
      *                otherwise.
      */
-    private boolean isCollisionFree(final BlockSet blockSet, final Move move) {
-        final Block newBlock = new Block(blockSet.getBlock(move.name()));
+    public boolean isCollisionFree(final BlockSet blockSet, final Move move) {
+        final Block tmpBlock = new Block(blockSet.getBlock(move.name()));
 
         // TODO: why check every position on it's own and not all of them together?
-        for (final Position position : newBlock.positionList()) {
+        for (final Position position : tmpBlock.positionList()) {
             final Position tmpPosition = position.moveTowards(move.direction());
 
             // Checks if the new Position is outside the GameField
@@ -120,8 +120,8 @@ public final class GameField {
             // Checks if there is already a Block at this Positions
             // If yes, check if it does not have the same name
             if (blockSet.isBlock(tmpPosition) &&
-                !blockSet.getBlockName(tmpPosition).equals(newBlock.blockName())) {
-                // TODO: Maybe extract the conditions onto variables to make it more readable.
+                !blockSet.getBlockName(tmpPosition).equals(tmpBlock.blockName())) {
+                // TODO: Maybe extract the conditions into variables to make it more readable.
                 return false;   // collides with another Block
             }
         }
