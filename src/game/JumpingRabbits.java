@@ -12,6 +12,7 @@ import block.PositionsInfo;
 import field.BlockSet;
 import field.Direction;
 import field.GameField;
+import field.Move;
 import field.MovePattern;
 import field.Rectangle;
 import field.CanvasInfo;
@@ -39,6 +40,8 @@ public final class JumpingRabbits extends Game {
             )
         );
 
+    // TODO: make the corner spots also around the field itself like the middle one,
+    // and not like a L-shape.
     /** Describes how to draw the canvas. */
     private static final
     CanvasInfo CANVAS_INFO =
@@ -108,6 +111,18 @@ public final class JumpingRabbits extends Game {
             );
 
         gameField.draw(blockSet, 1000);    // FIXME: delete?
+    }
+
+    // TODO: override this method. Make this one call the other one?
+    @Override
+    public boolean isValidMove(final Move move) {
+        return gameField.isValidMove(blockSet, move);
+    }
+
+    // TODO: override this method.
+    @Override
+    public boolean isValidMove(final BlockSet blockSet, final Move move) {
+        return gameField.isValidMove(blockSet, move);
     }
 
     // -------------------------------------------------------------------------
