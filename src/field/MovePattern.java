@@ -159,6 +159,8 @@ public final class MovePattern implements Iterable<Direction> {
 
     /**
      * Returns an {@code Iterator} over all Directions.
+     * 
+     * @see java.util.List#iterator()
      */
     @Override
     public Iterator<Direction> iterator() {

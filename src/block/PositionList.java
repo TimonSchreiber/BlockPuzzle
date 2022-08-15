@@ -218,6 +218,8 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
 
     /**
      * Returns an Iterator over all Positions.
+     * 
+     * @see java.util.List#iterator()
      */
     @Override
     public Iterator<Position> iterator() {

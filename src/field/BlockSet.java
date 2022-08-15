@@ -213,6 +213,8 @@ public final class BlockSet implements Iterable<Block> {
 
     /**
      * Returns an Iterator over all Blocks.
+     * 
+     * @see java.util.Set#iterator()
      */
     @Override
     public Iterator<Block> iterator() {
