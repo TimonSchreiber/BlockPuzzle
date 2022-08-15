@@ -70,7 +70,7 @@ public final class RushHour extends Game {
     }
 
     // -------------------------------------------------------------------------
-    // PARENT - METHODS
+    // SET UP
     // -------------------------------------------------------------------------
 
     @Override
@@ -87,15 +87,6 @@ public final class RushHour extends Game {
 
         gameField.draw(blockSet, 1000);    // FIXME: delete?
     }
-
-    // -------------------------------------------------------------------------
-    // FORWARDING - METHODS
-    // -------------------------------------------------------------------------
-
-    // TODO: maybe override this method to accomodate for the way Rabbits move.
-    // public boolean isValidMove(final Move move) {
-    //     return gameField.isValidMove(blockSet, move);
-    // }
 
     // -------------------------------------------------------------------------
     // STATIC-BLOCK
