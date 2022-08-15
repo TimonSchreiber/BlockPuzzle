@@ -29,6 +29,8 @@ public class App {
                     default     -> throw new IllegalStateException("Invalid GameType: " + gameType);
                 };
 
+            game.print();
+
             switch (solvType.toUpperCase().charAt(0)) {
                 case 'D'    -> new DepthFirstSearch(game, delay, show).solve();
                 case 'B'    -> new BreadthFirstSearch(game).solve();
