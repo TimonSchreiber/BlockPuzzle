@@ -37,7 +37,7 @@ public class DepthFirstSearch {
     // -------------------------------------------------------------------------
 
     /**
-     * Creates a new {@code GameSolver} for the starting Position gameID
+     * Creates a new GameSolver for the starting Position gameID.
      *
      * @param gameNumber    Starting Position
      */
@@ -60,11 +60,10 @@ public class DepthFirstSearch {
     // -------------------------------------------------------------------------
 
     /**
-     * Makes a {@code Move} by going through every possible {@code BlockName}
-     * and {@code Direction}.
+     * Makes a Move by going through every possible BlockName and Direction.
      *
-     * @return    {@code true} if a new {@code Move}, leading to a new
-     *             {@code BlockSet} is found; {@code false} otherwise
+     * @return  {@code true} if a new Move, leading to a new BlockSet is
+     *          found, {@code false} otherwise
      */
     private boolean findNewMove() {
         final BlockSet tmpBlockSet = game.blockSet();
@@ -115,7 +114,7 @@ public class DepthFirstSearch {
     // -------------------------------------------------------------------------
 
     /**
-     * Tries to solve the {@code BlockPuzzle}.
+     * Tries to solve the BlockPuzzle.
      */
     public void solve() {
         System.out.println("START\n");
@@ -190,7 +189,7 @@ public class DepthFirstSearch {
 
     /** TODO: maybe make this a method of Game? (for all Game classes)
      * Shows the Solution from Start to End with a time delay between two
-     * {@code Move}s.
+     * Moves.
      *
      * @param delay        the time delay in milliseconds
      */

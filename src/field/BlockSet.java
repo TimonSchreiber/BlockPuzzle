@@ -16,6 +16,7 @@ public final class BlockSet implements Iterable<Block> {
     // ATTRIBUTES
     // -------------------------------------------------------------------------
 
+    // TODO: maybe this should be a HashMap of BlockName and Block?
     /** TreeSet of Blocks. */
     private final Set<Block> blockSet;
 
@@ -33,7 +34,7 @@ public final class BlockSet implements Iterable<Block> {
     /**
      * Copy constructor.
      *
-     * @param blockSet    the {@code BlockSet}
+     * @param blockSet    the BlockSet
      */
     public BlockSet(final BlockSet blockSet) {
         this.blockSet = new TreeSet<>();

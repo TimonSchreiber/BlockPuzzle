@@ -36,7 +36,7 @@ public final class RushHour extends Game {
     // TODO: Add a way to tell the canvas where to mark the border to show the win condition
     /**  */
 
-    /** List of a List of {@code BlockInfos} */
+    /** Map of a List of BlockInfos */
     private static final
     Map<Integer, List<BlockInfo>> START_POSITION_MAP;
 
@@ -65,11 +65,13 @@ public final class RushHour extends Game {
     protected void setUp(final int gameNumber) {
         START_POSITION_MAP
             .get(gameNumber)
-            .forEach(blockInfo -> {
-                blockSet.add(new Block(blockInfo));
-                gameField.draw(blockSet, 100);    // FIXME: make this a choice of the user -> if(...) {draw()}
-                // or if(..) {delay = xxx}
-            });
+            .forEach(
+                blockInfo -> {
+                    blockSet.add(new Block(blockInfo));
+                    gameField.draw(blockSet, 100);    // FIXME: make this a choice of the user -> if(...) {draw()}
+                    // or if(..) {delay = xxx}
+                }
+            );
 
         gameField.draw(blockSet, 1000);    // FIXME: delete?
     }

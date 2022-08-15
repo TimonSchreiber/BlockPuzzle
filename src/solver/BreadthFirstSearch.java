@@ -118,7 +118,7 @@ public class BreadthFirstSearch {
     // =========================================================================
 
     /**
-     * Tries to solve the {@code BlockPuzzle}.
+     * Tries to solve the BlockPuzzle.
      */
     public void solve() {
         System.out.println("START\n");
@@ -169,10 +169,9 @@ public class BreadthFirstSearch {
     // =========================================================================
 
     /** TODO: maybe make this a method of Game? (for all Game classes)
-     * Shows the Solution from Start to End with a time delay between two
-     * {@code Moves}.
+     * Shows the Solution from Start to End with a time delay between two Moves.
      *
-     * @param moveList      a List of the {@code Moves} to the solution
+     * @param moveList      a List of the Moves to the solution
      */
     private void showSolution(final List<Move> moveList) {
 

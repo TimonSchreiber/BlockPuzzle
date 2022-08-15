@@ -25,10 +25,10 @@ public record Position(int x, int y) implements Comparable<Position> {
     // -------------------------------------------------------------------------
 
     /**
-     * Returns a new {@code Position} with changed x-, and y-values according to the
-     * {@code Directions} given as arguments.
+     * Returns a new Position with changed x-, and y-values according to the
+     * Directions given as arguments.
      *
-     * @param directions    one or more {@code Directions}.
+     * @param directions    one or more Directions
      * @return              a new Position
      */
     public Position moveTowards(final Direction... directions) {
