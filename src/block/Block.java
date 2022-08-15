@@ -92,7 +92,7 @@ public final class Block implements Comparable<Block> {
     }
 
     /**
-     * Returns a new PositionList equals to the PositionList of this Block.
+     * Returns a new PositionList equal to the PositionList of this Block.
      *
      * @return  The PositionList of this Block
      */
