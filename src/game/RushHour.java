@@ -137,7 +137,7 @@ public final class RushHour extends Game {
 
         /** Cars */
         final Color CAR_1 = new Color(  0,   0,   0);  // Black
-        final Color CAR_2 = new Color(  0, 178, 178);  // Dark Blue
+        final Color CAR_2 = new Color(  0, 178, 178);  // Dark Cyan
         final Color CAR_3 = new Color(255, 200,   0);  // Orange
         final Color CAR_4 = new Color(255, 140,   0);  // Dark Orange
         final Color CAR_5 = new Color(  0, 255,   0);  // Green
