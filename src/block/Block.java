@@ -131,7 +131,13 @@ public final class Block implements Comparable<Block> {
      * @param directions    One or more Directions this Block moves towards.
      */
     public void moveTowards(final Direction... directions) {
+        if (!movePattern.containsAll(directions)){
+            return;
+        }
+
         positionList.moveTowards(directions);
+
+        return;
     }
 
     // -------------------------------------------------------------------------
