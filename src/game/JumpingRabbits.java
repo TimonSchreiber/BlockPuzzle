@@ -17,6 +17,9 @@ import field.MovePattern;
 import field.Rectangle;
 import field.CanvasInfo;
 
+/**
+ * TODO
+ */
 public final class JumpingRabbits extends Game {
 
     // -------------------------------------------------------------------------
@@ -26,7 +29,6 @@ public final class JumpingRabbits extends Game {
     /** Preset game values for size */
     private static final int SIZE = 5;
 
-    // TODO: this winning positions only need to match partially (number of rabbits)
     /** Preset win condition as a PositionList */
     private static final
     PositionList WIN_CONDITION =
@@ -40,38 +42,26 @@ public final class JumpingRabbits extends Game {
             )
         );
 
-    // TODO: make the corner spots also around the field itself like the middle one,
-    // and not like a L-shape.
     /** Describes how to draw the canvas. */
     private static final
     CanvasInfo CANVAS_INFO =
         new CanvasInfo(
             new Color(139,  69,  19),   // saddlebrown
-            Color.GREEN.darker(),
+            new Color(  0, 178,   0),   // dark green
             new Color(205, 133,  63),   // peru
             List.of(
-                // outside the center of the GamField
                 // bottom left
-                new Rectangle(0.0, 0.0, 1.5, 0.5),  // bottom
-                new Rectangle(0.0, 0.5, 0.5, 1.0),  // left
+                new Rectangle(0.375, 0.375, 1.25, 1.25),
                 // bottom right
-                new Rectangle(4.5, 0.0, 1.5, 0.5),  // bottom
-                new Rectangle(5.5, 0.5, 0.5, 1.0),  // right
-                // top left
-                new Rectangle(0.0, 5.5, 1.5, 0.5),  // top
-                new Rectangle(0.0, 4.5, 0.5, 1.0),  // left
-                // top right
-                new Rectangle(4.5, 5.5, 1.5, 0.5),  // top
-                new Rectangle(5.5, 4.5, 0.5, 1.0),  // right
-
+                new Rectangle(4.375, 0.375, 1.25, 1.25),
                 // in the middle
-                new Rectangle(2.375, 2.375, 1.25, 1.25)
+                new Rectangle(2.375, 2.375, 1.25, 1.25),
+                // top left
+                new Rectangle(0.375, 4.375, 1.25, 1.25),
+                // top right
+                new Rectangle(4.375, 4.375, 1.25, 1.25)
             )
         );
-
-    // TODO: make the middle one visible.
-    // Maybe create the white center field first, and then draw more elegantly the winAreas.
-
 
     /** Map of a List of BlockInfos. */
     private static final
@@ -117,7 +107,6 @@ public final class JumpingRabbits extends Game {
     // IS VALID MOVE
     // -------------------------------------------------------------------------
 
-    // TODO: finish this method.
     // Delegate to the method below.
     @Override
     public boolean isValidMove(final Move move) {
@@ -177,7 +166,6 @@ public final class JumpingRabbits extends Game {
     // -------------------------------------------------------------------------
     // STATIC-BLOCK
     // -------------------------------------------------------------------------
-    // TODO: how to differentiate between Mushrooms and Rabbits?
 
     static {
 
@@ -202,17 +190,17 @@ public final class JumpingRabbits extends Game {
         // ---------------------------------------------------------------------
         // COLORS
 
-        final Color RABBIT_1    = new Color( 64,  64,  64); // Dark Grey
-        final Color RABBIT_2    = new Color(255, 255,   0); // Yellow
+        final Color RABBIT_1    = new Color(255,   0, 255); // Magenta
+        final Color RABBIT_2    = new Color(  0,   0, 255); // Blue
         final Color RABBIT_3    = new Color(192, 192, 192); // Light Gray
-        final Color RABBIT_4    = new Color(  0,   0,   0); // Black
+        final Color RABBIT_4    = new Color(  0, 255, 255); // Cyan
 
         final Color FOX_1       = new Color(255, 200,   0); // ORANGE
-        final Color FOX_2       = new Color(255, 200,   0); // 255, 140
+        final Color FOX_2       = new Color(255, 140,   0); // used to be (255, 140)
 
         final Color MUSHROOM_1  = new Color(255,   0,   0); // RED
-        final Color MUSHROOM_2  = new Color(255,   0,   0); // 178
-        final Color MUSHROOM_3  = new Color(255,   0,   0); // 124
+        final Color MUSHROOM_2  = new Color(178,   0,   0); // used to be (178)
+        final Color MUSHROOM_3  = new Color(124,   0,   0); // used to be (124)
 
         // ---------------------------------------------------------------------
         // TODO: static final positions?
