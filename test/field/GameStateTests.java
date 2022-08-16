@@ -74,11 +74,6 @@ public class GameStateTests {
     }
 
     // -------------------------------------------------------------------------
-    // Constructor
-
-    // TODO: Tests here ?
-
-    // -------------------------------------------------------------------------
     // Getter
 
     @Test
@@ -126,7 +121,7 @@ public class GameStateTests {
                 new Move(R1, Direction.R)
             );
 
-        
+
         actual = GameState.addMoveToNewList(actual, newMove);
 
         assertEquals(expected, actual);

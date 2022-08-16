@@ -58,7 +58,7 @@ public class BlockSetTests {
             )
         );
 
-        private BlockSet blockSet;
+    private BlockSet blockSet;
 
     @BeforeEach
     public void setUp() {
@@ -71,15 +71,14 @@ public class BlockSetTests {
     // -------------------------------------------------------------------------
     // Constructor
 
-    // TODO: This test will fail when rabbits learn how to move (see test below)
     @Test
     @DisplayName("The copy constructor should return a deep copy")
     public void newBlockSetCreatesADeepCopy() {
         final BlockSet expected = new BlockSet(blockSet);
+        final BlockSet actual = new BlockSet(expected);
 
-        final Move move = new Move("R1", Direction.D);
-        blockSet.makeMove(move);
-        final BlockSet actual = new BlockSet(blockSet);
+        final Move move = new Move("R1", Direction.U);
+        actual.makeMove(move);
 
         assertNotEquals(expected, actual);
     }
@@ -174,8 +173,6 @@ public class BlockSetTests {
     // -------------------------------------------------------------------------
     // Move
 
-    // FIXME: this Test will fail, once the Rabbits move the way they are supposed to do.
-    // Change move.Direction to 'U' and position to (3, 4)
     @Test
     @DisplayName("Move the correct Block into the correct Direction")
     public void makeMoveWithValidBlock() {

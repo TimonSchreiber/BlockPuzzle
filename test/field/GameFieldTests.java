@@ -82,7 +82,7 @@ public class GameFieldTests {
                     "R1",
                     null,
                     null,
-                    false,
+                    true,
                     new PositionsInfo(
                         new Position(1, 0),
                         2,
@@ -108,7 +108,7 @@ public class GameFieldTests {
                 new BlockInfo(
                     "R1",
                     null,
-                    null,
+                    MovePattern.ALL_DIRECTIONS,
                     false,
                     new PositionsInfo(
                         new Position(0, 0),
@@ -124,7 +124,7 @@ public class GameFieldTests {
                 new BlockInfo(
                     "R2",
                     null,
-                    null,
+                    MovePattern.ALL_DIRECTIONS,
                     false,
                     new PositionsInfo(
                         new Position(0, 1),
@@ -179,6 +179,38 @@ public class GameFieldTests {
         assertFalse(gameField.isValidMove(blockSet, new Move("R1", Direction.U)));
     }
 
-    // TODO: can I test game draw() method, or one of the otehr private methods (isInIntervall or isCollisionFree)?
+    // -------------------------------------------------------------------------
+    // Is In Intervall 
+
+    @Test
+    @DisplayName("isInIntervall should return true when the Position is inside the GameField.")
+    public void isInInterval_true() {
+        final Position position = new Position(3, 2);
+
+        assertTrue(gameField.isInInterval(position));
+    }
+
+    @Test
+    @DisplayName("isInIntervall should return false when the Position is outside the GameField.")
+    public void isInInterval_false() {
+        final Position position = new Position(6, 2);
+
+        assertFalse(gameField.isInInterval(position));
+    }
+
+    // -------------------------------------------------------------------------
+    // IS COLLISION FREE
+
+    @Test
+    @DisplayName("isCollisionFree true")
+    public void isCollisionFree_true() {
+        // TODO
+    }
+
+    @Test
+    @DisplayName("isCollisionFree false")
+    public void isCollisionFree_false() {
+        // TODO
+    }
 
 }   // Game Field Test class
