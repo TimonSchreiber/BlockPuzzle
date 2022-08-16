@@ -16,6 +16,9 @@ import field.MovePattern;
 import field.Rectangle;
 import field.CanvasInfo;
 
+/**
+ * TODO
+ */
 public final class RushHour extends Game {
 
     // -------------------------------------------------------------------------

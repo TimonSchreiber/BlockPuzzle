@@ -48,7 +48,7 @@ public final class BlockSet implements Iterable<Block> {
     // GETTERS
     // -------------------------------------------------------------------------
 
-    /** TODO
+    /**
      * Checks if there is a Block in this BlockSet with the same x- and
      * y-coordinates as one of its Blocks.
      *
@@ -68,57 +68,59 @@ public final class BlockSet implements Iterable<Block> {
         return false;
     }
 
-    /** TODO when this method is called a null check must be implemented?
+    /**
+     * Returns the Name of the Block with this Position.
      *
-     * @param position
-     * @return
+     * @param position  The Position
+     * @return          The name of the Block if there is one at this Position,
+     *                  {@code null} otherwise.
      */
     public String getBlockName(final Position position) {
         // return this.blocks.stream()
         //         .filter(block -> block.positionList().contains(position))
         //         .findAny().get().blockName();
-        // TODO: what happens if the Block is not found?
 
         for (final Block block : blockSet) {
             if (block.containsPosition(position)) {
                 return block.blockName();
             }
         }
-        // TODO: make this an Optional (or does the Optional belong on the other side (where this method is called?))
+        // TODO: Do i need to use an Optional<Block> when this method is called?
         return null;
     }
 
-    /** TODO: try to avoid code duplication with the previous methods!
-     * TODO: When this method is called a null check must be implemented?
+    /**
+     * Returns the Block with the specified name.
      *
-     * @param blockName
-     * @return
+     * @param blockName     Name of the Block.
+     * @return              The Block with the specified name, or {@code null}
+     *                      if the Block does not exist.
      */
-    public Block getBlock(final String name/* TODO: used to be Move move */) {
+    public Block getBlock(final String name) {
         // return this.blocks.stream()
         //         .filter(block -> block.blockName().equals(name))
-        //         .findAny().get();    // TODO: same as obove
+        //         .findAny().get();
 
         for (final Block block : blockSet) {
             if (block.blockName().equals(name)) {
                 return block;
             }
         }
-        // TODO: make this an Optional (or does the Optional belong on the other side (where this method is called?))
+        // TODO: Do i need to use an Optional<Block> when this method is called?
         return null;
     }
 
-    /** TODO: can this get more efficient? this method needs to be called every time (a lot...)
-     *  TODO: check if this method is used.
+    /**
      * Returns a BlockSet containing all the MainBlocks.
-     * 
-     * @return  A BlockSet with onl y MainBlocks
+     *
+     * @return  A BlockSet with only MainBlocks
      */
     public BlockSet getMainBlocks() {
         final BlockSet mainBlocks = new BlockSet();
+
         for (Block block : blockSet) {
+
             if (block.isMainBlock()) {
-                // TODO: Maybe use 'new Block(block)'
                 mainBlocks.add(block);
             } else {
                 break;
@@ -132,9 +134,10 @@ public final class BlockSet implements Iterable<Block> {
     //  MOVE
     // -------------------------------------------------------------------------
 
-    /** FIXME: check if the move is allowed (aka block.movePattern.contains(move.direction()))
-     *
-     * @param move
+    /**
+     * Moves the Block specified by the Move object in this BlockSet.
+     * 
+     * @param move  The Move to make
      */
     public void makeMove(final Move move) {
         for (final Block block : blockSet) {
@@ -150,7 +153,7 @@ public final class BlockSet implements Iterable<Block> {
     // FORWARDING - METHODS
     // -------------------------------------------------------------------------
 
-    // TODO: maybe check if no Blocks overlapp? is 'new Block()' neccessary?
+    // TODO: maybe check if no Blocks overlapp?
     public boolean add(final Block block) {
         return blockSet.add(new Block(block));
     }
@@ -215,7 +218,7 @@ public final class BlockSet implements Iterable<Block> {
 
     /**
      * Returns an Iterator over all Blocks.
-     * 
+     *
      * @see java.util.Set#iterator()
      */
     @Override

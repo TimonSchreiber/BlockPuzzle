@@ -46,13 +46,14 @@ public class BFS_WithThreads {
     private static final int NTHREADS = 6;
     private static final Executor exec = Executors.newFixedThreadPool(NTHREADS);
 
-    // =========================================================================
+    // -------------------------------------------------------------------------
     // CONSTRUCTOR
-    // =========================================================================
+    // -------------------------------------------------------------------------
 
     /**
-     * TODO
-     * @param gameNumber
+     * Class constructor with a Game Object.
+     *
+     * @param game  The Game
      */
     public BFS_WithThreads(final Game game/* TODO: more arguments? */) {
 
@@ -62,18 +63,19 @@ public class BFS_WithThreads {
 
         this.game = game;
 
-        // TODO: is creating a new BlockSet neccessary? this is already a copy.
         this.savedBlockSets.add(game.blockSet());
         this.gameStateQueue.add(new GameState(game.blockSet()));
     }
 
-    // =========================================================================
-    // FIND-NEW-MOVE - METHOD
-    // =========================================================================
+    // -------------------------------------------------------------------------
+    // FIND NEW MOVE
+    // -------------------------------------------------------------------------
 
     /**
-     * TODO
-     * @param gameState
+     * Find all the possible Moves of this GameState which will not lead to a
+     * know BlockSet and add them to the Queue.
+     *
+     * @param gameState     The GameState
      */
     private void findNewMove(final GameState gameState) {
 
@@ -121,9 +123,9 @@ public class BFS_WithThreads {
         return;
     }
 
-    // =========================================================================
-    // SOLVE - METHOD
-    // =========================================================================
+    // -------------------------------------------------------------------------
+    // SOLVE
+    // -------------------------------------------------------------------------
 
     /**
      * Tries to solve the BlockPuzzle.
@@ -184,9 +186,9 @@ public class BFS_WithThreads {
 
     } // end solve()
 
-    // =========================================================================
-    // SHOW-SOLUTION - METHOD
-    // =========================================================================
+    // -------------------------------------------------------------------------
+    // SHOW SOLUTION
+    // -------------------------------------------------------------------------
 
     /** TODO: maybe make this a method of Game? (for all Game classes)
      * Shows the Solution from Start to End with a time delay between two Moves.

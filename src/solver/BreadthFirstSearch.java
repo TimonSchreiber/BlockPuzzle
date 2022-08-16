@@ -44,8 +44,9 @@ public class BreadthFirstSearch {
     // =========================================================================
 
     /**
-     * TODO
-     * @param gameNumber
+     * Class constructor woth a Game object.
+     *
+     * @param game  The Game
      */
     public BreadthFirstSearch(final Game game/* TODO: more arguments? */) {
 
@@ -64,8 +65,10 @@ public class BreadthFirstSearch {
     // =========================================================================
 
     /**
-     * TODO
-     * @param gameState
+     * Find all the possible Moves of this GameState which will not lead to a
+     * know BlockSet and add them to the Queue.
+     *
+     * @param gameState     The GameState
      */
     private void findNewMove(final GameState gameState) {
 
@@ -134,7 +137,7 @@ public class BreadthFirstSearch {
             // Call findNewMove to add GameStates to GameStateQueue
             findNewMove(nextGameState);
 
-            // TODO: error handling
+            // error handling
             if (gameStateQueue.isEmpty()) {
                 System.out.println("No Solution Found!");
                 return;

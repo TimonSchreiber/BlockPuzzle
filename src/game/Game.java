@@ -4,9 +4,11 @@ import field.BlockSet;
 import field.GameField;
 import field.Move;
 
-// TODO: make this class 'sealed'?
-public /* sealed */ abstract class Game
-    /* permits DirtyDozen, JumpingRabbits, RushHour */ {
+/**
+ * An abstract sealed class for defining what a Game is.
+ */
+public sealed abstract class Game
+    permits DirtyDozen, JumpingRabbits, RushHour {
 
     // -------------------------------------------------------------------------
     // ATTRIBUTES
@@ -61,6 +63,10 @@ public /* sealed */ abstract class Game
     // -------------------------------------------------------------------------
     // FORWARDING - METHODS
     // -------------------------------------------------------------------------
+
+    // ----------------
+    // check win condition
+
     // TODO:
     // check this BlockSet
     public boolean checkWinCondition() {
@@ -73,6 +79,7 @@ public /* sealed */ abstract class Game
     }
 
     // ----------------
+    // is valid move
 
     // move this BlockSet
     public boolean isValidMove(final Move move) {
@@ -85,6 +92,7 @@ public /* sealed */ abstract class Game
     }
 
     // ----------------
+    // print / draw
 
     // TODO: used for debugging?
     // print this BlockSet
@@ -92,24 +100,10 @@ public /* sealed */ abstract class Game
         gameField.print(blockSet);
     }
 
-    // TODO: not used
-    // print a BlockSet
-    // public void print(final BlockSet blockSet) {
-    //     gameField.print(blockSet);
-    // }
-
-    // ----------------
-
     // draw this BlockSet
     public void draw(final int delay) {
         gameField.draw(blockSet, delay);
     }
-
-    // not used
-    // Draw a BlockSet
-    // public void draw(final BlockSet blockSet, final int delay) {
-    //     gameField.draw(blockSet, delay);
-    // }
 
     // =========================================================================
 

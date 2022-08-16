@@ -145,7 +145,6 @@ public class DepthFirstSearch {
         // Stop timer
         final Duration d = Duration.between(t, Instant.now());
 
-        // TODO: Maybe change this to a TextBlock """ {text} """ and only sysout once
         System.out.println("END");
 
         System.out.println("\nNumber of states saved:\n" + savedBlockSets.size());
@@ -170,8 +169,8 @@ public class DepthFirstSearch {
     // REVERSE GAME
     // -------------------------------------------------------------------------
 
-    /** TODO
-     * Reverses all Moves
+    /**
+     * Reverses the Game to its Starting Position.
      */
     private void reverseGame() {
         final Iterator<Move> iterator = ((LinkedList<Move>) moveList).descendingIterator();
