@@ -1,6 +1,7 @@
 # TODOs
 
  - [ ] Try find to find a way to move a "Block" twice before the next "Block" is tried. -> MovePattern.All_DIRECTIONS_PLUS with Arrays of Directions?
+ - [ ] Add a 'manual mode'.
 
  - [ ] Check when and where to create copies (Foo newFoo = new Foo(foo)), maybe the "receiving"-end does not also need to create a copy?
  - [ ] Save the StartingPosition in a JSON-File and extract the data in the Game classes.
