@@ -1,7 +1,3 @@
-/**
- * TODO:
- */
-
 import java.util.Scanner;
 import game.DirtyDozen;
 import game.Game;
@@ -11,6 +7,23 @@ import solver.BFS_WithThreads;
 import solver.BreadthFirstSearch;
 import solver.DepthFirstSearch;
 
+/**
+ * This App provides three different Logic-Puzzles and also three different
+ * ways for solving.
+ * 
+ * Puzzles:
+ *  - DirtyDozen
+ *  - JumpinRabbits
+ *  - RushHour
+ * 
+ * solving methods:
+ *  - Depth First Search
+ *  - Breadth First Search
+ *  - Breadth first Search with Threads
+ * 
+ * @version     1.1     16 Aug 2022
+ * @author      Timon Schreiber
+ */
 public class App {
 
     public static void main(String[] args) throws Exception {
