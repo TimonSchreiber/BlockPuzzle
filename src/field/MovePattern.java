@@ -73,31 +73,58 @@ public final class MovePattern implements Iterable<Direction> {
 
 
     // -------------------------------------------------------------------------
-    // Two Steps in every possible (and useful) combination of Directions
+    // Two Steps in every possible (and useful) combination of Directions.
     // TODO: Make this into a MovePattern.
-    // not working because this is a'List of List of Directions' instead of a 'List of Directions'
+    // not working because MovePattern is a 'List of Directions' and not a 'List of Direction Arrays'.
 
     // public static final
     // List<List<Direction>> ALL_DIRECTIONS_PLUS =
     //     List.of(
-    //         List.of(Direction.R),
-    //         List.of(Direction.D),
-    //         List.of(Direction.L),
-    //         List.of(Direction.U),
-    //         List.of(Direction.R, Direction.R),
-    //         List.of(Direction.R, Direction.D),
-    //         List.of(Direction.R, Direction.U),
-    //         List.of(Direction.D, Direction.R),
-    //         List.of(Direction.D, Direction.D),
-    //         List.of(Direction.D, Direction.L),
-    //         List.of(Direction.L, Direction.D),
-    //         List.of(Direction.L, Direction.L),
-    //         List.of(Direction.L, Direction.U),
-    //         List.of(Direction.U, Direction.R),
-    //         List.of(Direction.U, Direction.L),
-    //         List.of(Direction.U, Direction.U)
+    //         new Direction[]{Direction.R},
+    //         new Direction[]{Direction.D},
+    //         new Direction[]{Direction.L},
+    //         new Direction[]{Direction.U},
+    //         new Direction[]{Direction.R, Direction.R},
+    //         new Direction[]{Direction.R, Direction.D},
+    //         new Direction[]{Direction.R, Direction.U},
+    //         new Direction[]{Direction.D, Direction.R},
+    //         new Direction[]{Direction.D, Direction.D},
+    //         new Direction[]{Direction.D, Direction.L},
+    //         new Direction[]{Direction.L, Direction.D},
+    //         new Direction[]{Direction.L, Direction.L},
+    //         new Direction[]{Direction.L, Direction.U},
+    //         new Direction[]{Direction.U, Direction.R},
+    //         new Direction[]{Direction.U, Direction.L},
+    //         new Direction[]{Direction.U, Direction.U}
     //     );
 
+
+    // -------------------------------------------------------------------------
+    // FORWARDING METHODS
+    // -------------------------------------------------------------------------
+
+    /**
+     * Ckecks if this MovePattern contains the specified Direction.
+     * 
+     * @param direction     The Direction whose presence is to be tested.
+     * @return              {@code true} if this MovePattern contains the
+     *                      specified Direction, {@code false} otherwise.
+     */
+    
+    public boolean contains(Direction direction) {
+        return movePattern.contains(direction);
+    }
+
+    /**
+     * Checks if this MovePattern conatins all the specified Directions.
+     * 
+     * @param directions    The Directions whose presence is to be tested.
+     * @return              {@code true} if this MovePattern conatins all the
+     *                      specified Directions, {@code false} otherwise.
+     */
+    public boolean containsAll(Direction... directions) {
+        return movePattern.containsAll(List.of(directions));
+    }
 
     // -------------------------------------------------------------------------
     // EQUALS AND HASH-CODE
@@ -159,7 +186,7 @@ public final class MovePattern implements Iterable<Direction> {
 
     /**
      * Returns an Iterator over all Directions.
-     * 
+     *
      * @see java.util.List#iterator()
      */
     @Override
