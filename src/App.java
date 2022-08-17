@@ -21,6 +21,7 @@ import solver.ManualMode;
  *  - Depth First Search
  *  - Breadth First Search
  *  - Breadth first Search with Threads
+ *  - Manual Mode
  * 
  * @version     1.1     16 Aug 2022
  * @author      Timon Schreiber
