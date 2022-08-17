@@ -37,20 +37,22 @@ public class DepthFirstSearch {
     // -------------------------------------------------------------------------
 
     /**
-     * Creates a new GameSolver for the starting Position gameID.
-     *
-     * @param gameNumber    Starting Position
+     * Class constructor.
+     * 
+     * @param game      The Game
+     * @param delay     Time delay
+     * @param show      show the moves while they are played
      */
     public DepthFirstSearch(final Game game, final int delay, final boolean show) {
 
-        this.delay = delay;
-        this.show = show;
+        this.delay          = delay;
+        this.show           = show;
 
         this.savedBlockSets = new HashSet<>();
 
-        this.moveList = new LinkedList<>();
+        this.moveList       = new LinkedList<>();
 
-        this.game = game;
+        this.game           = game;
 
         this.savedBlockSets.add(game.blockSet());
     }

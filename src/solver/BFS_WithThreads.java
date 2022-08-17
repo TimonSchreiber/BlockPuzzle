@@ -61,7 +61,7 @@ public class BFS_WithThreads {
 
         this.gameStateQueue = new LinkedBlockingDeque<>();
 
-        this.game = game;
+        this.game           = game;
 
         this.savedBlockSets.add(game.blockSet());
         this.gameStateQueue.add(new GameState(game.blockSet()));

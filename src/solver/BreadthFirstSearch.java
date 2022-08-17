@@ -44,7 +44,7 @@ public class BreadthFirstSearch {
     // -------------------------------------------------------------------------
 
     /**
-     * Class constructor woth a Game object.
+     * Class constructor with a Game object.
      *
      * @param game  The Game
      */
@@ -54,7 +54,7 @@ public class BreadthFirstSearch {
 
         this.gameStateQueue = new ArrayDeque<>();
 
-        this.game = game;
+        this.game           = game;
 
         this.savedBlockSets.add(game.blockSet());
         this.gameStateQueue.add(new GameState(game.blockSet()));
