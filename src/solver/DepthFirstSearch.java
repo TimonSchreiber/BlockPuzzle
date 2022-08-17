@@ -79,11 +79,8 @@ public class DepthFirstSearch {
                     continue;
                 }
 
-                // XXX: this was changed from (tmpBlockSet) to (new BlockSet(tmpBlockSet))
-                // Why does it work now?
-
                 // Check if it is a known BlockSet -> next iteration
-                if (savedBlockSets.contains(new BlockSet(tmpBlockSet)/* <- why new BlockSet and not just 'tmpBlockSet'? */ )) {
+                if (savedBlockSets.contains(new BlockSet(tmpBlockSet))) {   // TODO: why new BlockSet() and not just 'tmpBlockSet'? 
                     // reverse the last Move to continue looking for new Moves
                     game.isValidMove(tmpBlockSet, newMove.reverse());
                     continue;
