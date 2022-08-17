@@ -223,6 +223,4 @@ public final class Block implements Comparable<Block> {
                 : positionList.compareTo(other.positionList);
     }
 
-    // =========================================================================
-
 }    // Block class

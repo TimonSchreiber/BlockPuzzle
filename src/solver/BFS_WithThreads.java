@@ -217,6 +217,4 @@ public class BFS_WithThreads {
         return;
     }
 
-    // =========================================================================
-
 }   // Breadth First Search - With Threads class

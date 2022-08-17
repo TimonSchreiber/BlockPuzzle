@@ -261,6 +261,4 @@ public final class GameField {
         return;
     }
 
-    // =========================================================================
-
 }   // Game Field class

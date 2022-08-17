@@ -66,6 +66,4 @@ public record Position(int x, int y) implements Comparable<Position> {
             : Integer.compare(x, other.x);
     }
 
-    // =========================================================================
-
 }   // Position record

@@ -1465,6 +1465,4 @@ public final class DirtyDozen extends Game {
 
     }   // static
 
-    // =========================================================================
-
 }    // Dirty Dozen class

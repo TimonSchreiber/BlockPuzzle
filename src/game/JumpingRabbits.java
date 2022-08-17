@@ -547,6 +547,4 @@ public final class JumpingRabbits extends Game {
 
     }   // static
 
-    // =========================================================================
-
 }   // Jumping Rabbits class

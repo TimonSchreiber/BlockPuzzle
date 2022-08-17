@@ -447,6 +447,4 @@ public final class RushHour extends Game {
 
     }   // static
 
-    // =========================================================================
-
 }   // Rush Hour class

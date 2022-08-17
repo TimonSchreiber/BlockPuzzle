@@ -241,6 +241,4 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
                 : positionList.get(0).compareTo(other.positionList.get(0));
     }
 
-    // =========================================================================
-
 }   // PositionList class

@@ -225,6 +225,4 @@ public final class BlockSet implements Iterable<Block> {
         return blockSet.iterator();
     }
 
-    // =========================================================================
-
 }   // BlockSet class

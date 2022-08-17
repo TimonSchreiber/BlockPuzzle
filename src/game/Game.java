@@ -105,6 +105,4 @@ public sealed abstract class Game
         gameField.draw(blockSet, delay);
     }
 
-    // =========================================================================
-
 }   // Game abstract class

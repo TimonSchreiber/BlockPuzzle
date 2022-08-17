@@ -214,6 +214,4 @@ public class DepthFirstSearch {
         return;
     }
 
-    // =========================================================================
-
 }   // Depth First Search class

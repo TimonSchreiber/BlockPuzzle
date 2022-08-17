@@ -53,6 +53,4 @@ public enum Direction {
         return Direction.VALUES[(ordinal() + 2) % Direction.VALUES.length];
     }
 
-    // =========================================================================
-
 }   // Direction enum

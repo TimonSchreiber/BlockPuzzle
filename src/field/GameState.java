@@ -150,6 +150,4 @@ public final class GameState {
         return "GameState [blockSet=" + blockSet + ", moves=" + moves + "]";
     }
 
-    // =========================================================================
-
 }   // GameState class

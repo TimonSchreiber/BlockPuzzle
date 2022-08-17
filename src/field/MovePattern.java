@@ -194,6 +194,4 @@ public final class MovePattern implements Iterable<Direction> {
         return movePattern.iterator();
     }
 
-    // =========================================================================
-
 }   // Move Pattern class
