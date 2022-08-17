@@ -1,5 +1,7 @@
 package game;
 
+import java.util.List;
+
 import field.BlockSet;
 import field.GameField;
 import field.Move;
@@ -59,6 +61,31 @@ public sealed abstract class Game
      * @param gameNumber    The Game specifier.
      */
     protected abstract void setUp(final int gameNumber);
+
+
+    // -------------------------------------------------------------------------
+    // SHOW SOLUTION
+    // -------------------------------------------------------------------------
+    
+    /**
+     * Shows the Solution from Start to End with a time delay between two Moves.
+     *
+     * @param moveList      a List of the Moves to the solution
+     */
+    public void showSolution(final List<Move> moveList) {
+
+        int i = 0;
+
+        draw(1000);
+
+        for (final Move move : moveList) {
+            isValidMove(move);
+            draw(200);  // TODO: delay
+            System.out.println(++i + "/" + moveList.size() + ": " + move);
+        }
+
+        return;
+    }
 
     // -------------------------------------------------------------------------
     // FORWARDING - METHODS

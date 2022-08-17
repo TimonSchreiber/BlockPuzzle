@@ -143,7 +143,7 @@ public class BreadthFirstSearch {
                 return;
             }
             // else {} TODO: what are the other cases to check for?
-        }
+        }   // end while loop
 
         // Stop timer
         final Duration d = Duration.between(t, Instant.now());
@@ -161,41 +161,10 @@ public class BreadthFirstSearch {
 
         // Show solution
         System.out.println("\nshow solution");
-        showSolution(solution.moves());        // FIXME time delay
+        game.showSolution(solution.moves());
 
         return;
 
-    } // end solve()
-
-    // -------------------------------------------------------------------------
-    // SHOW SOLUTION
-    // -------------------------------------------------------------------------
-
-    /** TODO: maybe make this a method of Game? (for all Game classes)
-     * Shows the Solution from Start to End with a time delay between two Moves.
-     *
-     * @param moveList      a List of the Moves to the solution
-     */
-    private void showSolution(final List<Move> moveList) {
-
-        int i = 0;
-
-        game.draw(1000);
-
-        final Instant t = Instant.now();
-
-        for (final Move move : moveList) {
-            game.isValidMove(move);
-            game.draw(100);
-            System.out.println(++i + "/" + moveList.size() + ": " + move);
-        }
-
-        final Duration d = Duration.between(t, Instant.now());
-        System.out.println("\nTime to show Solution:\n"
-            + d.toSecondsPart() + " seconds, "
-            + d.toMillisPart() + " milliseconds");
-
-        return;
     }
 
 }   // Breadth First Search class

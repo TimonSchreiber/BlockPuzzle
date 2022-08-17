@@ -79,7 +79,7 @@ public class DepthFirstSearch {
                     continue;
                 }
 
-                // XXX: this was changed from (tmpBlockSet) to (new BlockSet(tmpBlockSet)) 
+                // XXX: this was changed from (tmpBlockSet) to (new BlockSet(tmpBlockSet))
                 // Why does it work now?
 
                 // Check if it is a known BlockSet -> next iteration
@@ -139,8 +139,9 @@ public class DepthFirstSearch {
                     System.out.println("Can't reverse last move.");
                     return;
                 }
-            }
-        }
+            }   // end inner while loop
+
+        }   // end outer while loop
 
         // Stop timer
         final Duration d = Duration.between(t, Instant.now());
@@ -160,10 +161,10 @@ public class DepthFirstSearch {
         // Show solution
         System.out.println("\nshow solution");
         reverseGame();
-        showSolution();        // FIXME time delay
+        game.showSolution(moveList);
 
         return;
-    }    // end solve()
+    }
 
     // -------------------------------------------------------------------------
     // REVERSE GAME
@@ -178,38 +179,6 @@ public class DepthFirstSearch {
         while (iterator.hasNext()) {
             game.isValidMove(iterator.next().reverse());
         }
-
-        return;
-    }
-
-    // -------------------------------------------------------------------------
-    // SHOW SOLUTION
-    // -------------------------------------------------------------------------
-
-    /** TODO: maybe make this a method of Game? (for all Game classes)
-     * Shows the Solution from Start to End with a time delay between two
-     * Moves.
-     *
-     * @param delay        the time delay in milliseconds
-     */
-    public void showSolution() {
-
-        int i = 0;
-
-        game.draw(1000);
-
-        final Instant t = Instant.now();
-
-        for (final Move move : moveList) {
-            game.isValidMove(move);
-            game.draw(100);
-            System.out.println(++i + "/" + moveList.size() + ": " + move);
-        }
-
-        final Duration d = Duration.between(t, Instant.now());
-        System.out.println("\nTime to show Solution:\n"
-            + d.toSecondsPart() + " seconds, "
-            + d.toMillisPart() + " milliseconds");
 
         return;
     }
