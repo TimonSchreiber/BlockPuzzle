@@ -16,7 +16,7 @@ public record Position(int x, int y) implements Comparable<Position> {
      *
      * @param position
      */
-    public Position (Position position) {
+    public Position(Position position) {
         this(position.x, position.y);
     }
 
@@ -32,19 +32,19 @@ public record Position(int x, int y) implements Comparable<Position> {
      * @return              a new Position
      */
     public Position moveTowards(final Direction... directions) {
-        int newX = x;
-        int newY = y;
+        int x = this.x;
+        int y = this.y;
 
         for (final Direction direction : directions) {
             switch (direction) {
-                case R: newX++; break;
-                case D: newY--; break;
-                case L: newX--; break;
-                case U: newY++; break;
+                case R: ++x; break;
+                case D: --y; break;
+                case L: --x; break;
+                case U: ++y; break;
             }
         }
 
-        return new Position(newX, newY);
+        return new Position(x, y);
     }
 
     // =========================================================================
