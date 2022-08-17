@@ -108,6 +108,8 @@ public final class ManualMode {
 
 
         }   // end while loop
+
+        return;
     }
 
     // -------------------------------------------------------------------------
