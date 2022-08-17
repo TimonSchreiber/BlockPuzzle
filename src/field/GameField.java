@@ -52,9 +52,11 @@ public final class GameField {
      *          defined by WIN_CONDITION, {@code false} otherwise.
      */
     public boolean checkWinCondition(final BlockSet blockSet) {
-        // 1st Idea how to make this work:
-        // Get every Blocks PositionList and check if they are contained in the WinCondition.
-        // If not, return false. If the end of the outer loop is reached return true.
+        /* 
+         * Get every MainBlocks PositionList and check if every Position is in
+         * the WinCondition. If not, return false.
+         * If the end of the outer loop is reached return true.
+         */
         for (Block block : blockSet.getMainBlocks()) {
 
             for (Position position : block.positionList()) {
@@ -96,9 +98,10 @@ public final class GameField {
      * BlockSet by overlapping two (or more) Blocks, or by leaving the
      * boundaries of this GameField.
      *
-     * @param move    the Move
-     * @return        {@code true} if this Move can be made, {@code false}
-     *                otherwise.
+     * @param blockSet  The BlockSet
+     * @param move      The Move
+     * @return          {@code true} if this Move can be made, {@code false}
+     *                  otherwise.
      */
     public boolean isCollisionFree(final BlockSet blockSet, final Move move) {
         final Block tmpBlock = blockSet.getBlock(move.name());
@@ -119,15 +122,13 @@ public final class GameField {
 
             // Checks if there is already a Block at this Positions
             // If yes, check if it does not have the same name
-            if (
-                blockSet.isBlock(tmpPosition)
-                && !blockSet.getBlockName(tmpPosition).equals(tmpBlock.blockName())
-            ) {
+            if (blockSet.isBlock(tmpPosition)
+                && !blockSet.getBlockName(tmpPosition).equals(tmpBlock.blockName())) {
                 return false;   // collides with another Block
             }
         }
 
-        // inside GameField and no Collision with another Block
+        // inside GameField and no collision with another Block.
         return true;
     }
 
@@ -139,9 +140,10 @@ public final class GameField {
      * Checks if the Block specified by the Move can be moved into the Direction
      * of the Move.
      *
-     * @param move  the Move
-     * @return      {@code true} if the Move was successful, {@code false}
-     *              otherwise.
+     * @param blockSet  The BlockSet
+     * @param move      The Move
+     * @return          {@code true} if the Move was successful, {@code false}
+     *                  otherwise.
      */
     public boolean isValidMove(final BlockSet blockSet, final Move move) {
         if (isCollisionFree(blockSet, move)) {

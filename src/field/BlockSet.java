@@ -91,9 +91,9 @@ public final class BlockSet implements Iterable<Block> {
     /**
      * Returns the Block with the specified name.
      *
-     * @param blockName     Name of the Block.
-     * @return              The Block with the specified name, or {@code null}
-     *                      if the Block does not exist.
+     * @param name  Name of the Block.
+     * @return      The Block with the specified name, or {@code null} if the
+     *              Block does not exist.
      */
     public Block getBlock(final String name) {
         // return this.blocks.stream()

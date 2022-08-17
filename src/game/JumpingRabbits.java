@@ -42,7 +42,7 @@ public final class JumpingRabbits extends Game {
             )
         );
 
-    /** Describes how to draw the canvas. */
+    /** Canvas Info */
     private static final
     CanvasInfo CANVAS_INFO =
         new CanvasInfo(

@@ -68,14 +68,16 @@ public final class GameState {
      */
     public List<Move> moves() {
         final List<Move> tmpList = new LinkedList<>();
+
         for (final Move move : moves) {
             tmpList.add(new Move(move));
         }
+
         return tmpList;
     }
 
     // -------------------------------------------------------------------------
-    // STATIC ADD BLOCK TO NEW LIST
+    // ADD BLOCK TO NEW LIST
     // -------------------------------------------------------------------------
 
     /**
