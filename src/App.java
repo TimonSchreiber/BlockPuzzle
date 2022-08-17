@@ -31,7 +31,7 @@ public class App {
         try (final Scanner scanner = new Scanner(System.in)) {
             String gameType = "J";  // D=DirtyDozen; J=HumpingRabbits; R=RushHour
             String solvType = "B";  // D=Depth; B=Breadth; T=Threads
-            int gameNumber = 3;
+            int gameNumber = 5;
 
             System.out.println("Game Number: " + gameNumber);
 
