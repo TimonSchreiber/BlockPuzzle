@@ -70,6 +70,7 @@ public final class ManualMode {
                 case "CLEAR":   clear(); continue;
                 case "UNDO":    undo(); continue;
                 case "REDO":    redo(); continue;
+                // maybe add a 'repeat' case so that the suer does not have to write the same move again.
                 default:        break;
             }
 

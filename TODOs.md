@@ -1,14 +1,14 @@
 # TODOs
 
  - [ ] Try find to find a way to move a "Block" twice before the next "Block" is tried. -> MovePattern.All_DIRECTIONS_PLUS with Arrays of Directions?
- - [ ] Add a 'manual mode'.
 
- - [ ] Check when and where to create copies (Foo newFoo = new Foo(foo)), maybe the "receiving"-end does not also need to create a copy?
+ - [ ] Go over all 'TODO', 'FIXME', and 'XXX' in the src-folders.
  - [ ] Save the StartingPosition in a JSON-File and extract the data in the Game classes.
  - [ ] Finish the 'Makefile', every package gets a Makefile and those get called in the src Makefile and so on...
  - [ ] Close Threads when finished.
- - [ ] Go over all 'TODO', 'FIXME', and 'XXX' in the src-folders.
 
+ - [X] Add a 'manual mode'.
+ - [X] Check when and where to create copies (Foo newFoo = new Foo(foo)), maybe the "receiving"-end does not also need to create a copy?
  - [X] Make the Rabbits of 'Jumping Rabbits' jump over objects.
  - [X] Fix 'GameField#checkWinCondition()' to check more than one block (JumpingRabbits has up to 4 rabbits).
  - [X] Maybe implement a new class/record called 'WinCondition' to know where and how to win (squares and number/names of Blocks(Rabbits)).
