@@ -201,21 +201,6 @@ public class PositionListTests {
         assertTrue(pl.contains(p));
     }
 
-    @Test
-    public void getSize() {
-        final int size = 4;
-        final PositionList pl =
-            new PositionList(
-                new PositionsInfo(
-                    new Position(0, 3),
-                    4,
-                    Direction.U,
-                    true
-                ));
-
-        assertEquals(size, pl.size());
-    }
-
     // -------------------------------------------------------------------------
     // compare
 

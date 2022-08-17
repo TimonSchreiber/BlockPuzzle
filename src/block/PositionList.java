@@ -148,16 +148,6 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
         return positionList.contains(position);
     }
 
-    /**
-     * Frowards to the {@link List#size()} method.
-     *
-     * @return  the number of Positions in this PositionList.
-     * @see java.util.List#size()
-     */
-    public int size() {
-        return positionList.size();
-    }
-
     // -------------------------------------------------------------------------
     // EQUALS AND HASH-CODE
     // -------------------------------------------------------------------------

@@ -104,18 +104,6 @@ public final class MovePattern implements Iterable<Direction> {
     // -------------------------------------------------------------------------
 
     /**
-     * Ckecks if this MovePattern contains the specified Direction.
-     * 
-     * @param direction     The Direction whose presence is to be tested.
-     * @return              {@code true} if this MovePattern contains the
-     *                      specified Direction, {@code false} otherwise.
-     */
-    
-    public boolean contains(Direction direction) {
-        return movePattern.contains(direction);
-    }
-
-    /**
      * Checks if this MovePattern conatins all the specified Directions.
      * 
      * @param directions    The Directions whose presence is to be tested.
