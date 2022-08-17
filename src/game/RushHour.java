@@ -17,7 +17,7 @@ import field.Rectangle;
 import field.CanvasInfo;
 
 /**
- * TODO
+ * The Game RushHour.
  */
 public final class RushHour extends Game {
 

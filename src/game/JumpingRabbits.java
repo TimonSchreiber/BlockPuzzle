@@ -18,7 +18,7 @@ import field.Rectangle;
 import field.CanvasInfo;
 
 /**
- * TODO
+ * The Game Jumping Rabbits.
  */
 public final class JumpingRabbits extends Game {
 

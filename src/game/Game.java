@@ -67,7 +67,6 @@ public sealed abstract class Game
     // ----------------
     // check win condition
 
-    // TODO:
     // check this BlockSet
     public boolean checkWinCondition() {
         return gameField.checkWinCondition(blockSet);
@@ -94,7 +93,6 @@ public sealed abstract class Game
     // ----------------
     // print / draw
 
-    // TODO: used for debugging?
     // print this BlockSet
     public void print() {
         gameField.print(blockSet);
