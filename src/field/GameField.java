@@ -101,7 +101,13 @@ public final class GameField {
      *                otherwise.
      */
     public boolean isCollisionFree(final BlockSet blockSet, final Move move) {
-        final Block tmpBlock = new Block(blockSet.getBlock(move.name()));
+        final Block tmpBlock = blockSet.getBlock(move.name());
+
+        // check if the Move is valid.
+        if (tmpBlock == null) {
+            System.err.println("Invalid BlockName: " + move);
+            return false;
+        }
 
         for (final Position position : tmpBlock.positionList()) {
             final Position tmpPosition = position.moveTowards(move.direction());
