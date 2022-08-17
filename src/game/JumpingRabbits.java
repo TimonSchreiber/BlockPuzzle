@@ -196,10 +196,10 @@ public final class JumpingRabbits extends Game {
         // ---------------------------------------------------------------------
         // COLORS
 
-        final Color RABBIT_1    = new Color(255,   0, 255); // Magenta
-        final Color RABBIT_2    = new Color(  0,   0, 255); // Blue
-        final Color RABBIT_3    = new Color(192, 192, 192); // Light Gray
-        final Color RABBIT_4    = new Color(  0, 255, 255); // Cyan
+        final Color RABBIT_1    = new Color(  0,   0, 255); // Blue
+        final Color RABBIT_2    = new Color(192, 192, 192); // Light Gray
+        final Color RABBIT_3    = new Color(  0, 255, 255); // Cyan
+        final Color RABBIT_4    = new Color(255,   0, 255); // Magenta
 
         final Color FOX_1       = new Color(255, 200,   0); // ORANGE
         final Color FOX_2       = new Color(255, 140,   0); // used to be (255, 140)
