@@ -3,7 +3,6 @@ package field;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -27,34 +26,32 @@ public class GameStateTests {
      * __ __ __ __ __
      */
     private final List<BlockInfo> startPosition =
-        new ArrayList<>(
-            List.of(
-                new BlockInfo(
-                    "R1",
-                    null,
-                    MovePattern.ALL_DIRECTIONS,
-                    true,
-                    new PositionsInfo(new Position(3, 2), 1, Direction.D, false)),
-                new BlockInfo(
-                    "M1",
-                    null,
-                    MovePattern.NO_DIRECTIONS,
-                    false,
-                    new PositionsInfo(new Position(3, 3), 1, Direction.D, false)),
-                new BlockInfo(
-                    "M2",
-                    null,
-                    MovePattern.NO_DIRECTIONS,
-                    false,
-                    new PositionsInfo(new Position(1, 4), 1, Direction.D, false)),
-                new BlockInfo(
-                    "M3",
-                    null,
-                    MovePattern.NO_DIRECTIONS,
-                    false,
-                    new PositionsInfo(new Position(2, 4), 1, Direction.D, false))
-            )
-        );
+        List.of(
+            new BlockInfo(
+                "R1",
+                null,
+                MovePattern.ALL_DIRECTIONS,
+                true,
+                new PositionsInfo(new Position(3, 2), 1, Direction.D, false)),
+            new BlockInfo(
+                "M1",
+                null,
+                MovePattern.NO_DIRECTIONS,
+                false,
+                new PositionsInfo(new Position(3, 3), 1, Direction.D, false)),
+            new BlockInfo(
+                "M2",
+                null,
+                MovePattern.NO_DIRECTIONS,
+                false,
+                new PositionsInfo(new Position(1, 4), 1, Direction.D, false)),
+            new BlockInfo(
+                "M3",
+                null,
+                MovePattern.NO_DIRECTIONS,
+                false,
+                new PositionsInfo(new Position(2, 4), 1, Direction.D, false))
+    );
 
     private GameState gameState;
 
@@ -65,10 +62,12 @@ public class GameStateTests {
             blockInfo -> blockSet.add(new Block(blockInfo))
         );
         String R1 = "R1";
-        List<Move> moves =new ArrayList<>();
-        moves.add(new Move(R1, Direction.U));
-        moves.add(new Move(R1, Direction.R));
-        moves.add(new Move(R1, Direction.U));
+        List<Move> moves =
+            List.of(
+                new Move(R1, Direction.U),
+                new Move(R1, Direction.R),
+                new Move(R1, Direction.U)
+            );
 
         gameState = new GameState(blockSet, moves);
     }
