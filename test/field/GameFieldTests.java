@@ -204,13 +204,81 @@ public class GameFieldTests {
     @Test
     @DisplayName("isCollisionFree true")
     public void isCollisionFree_true() {
-        // TODO
+        final BlockSet blockSet = new BlockSet();
+        blockSet.add(
+            new Block(
+                new BlockInfo(
+                    "R1",
+                    null,
+                    null,
+                    false,
+                    new PositionsInfo(
+                        new Position(0, 0),
+                        2,
+                        Direction.R,
+                        false
+                    )
+                )
+            )
+        );
+        blockSet.add(
+            new Block(
+                new BlockInfo(
+                    "R2",
+                    null,
+                    null,
+                    false,
+                    new PositionsInfo(
+                        new Position(0, 1),
+                        2,
+                        Direction.R,
+                        false
+                    )
+                )
+            )
+        );
+
+        assertTrue(gameField.isCollisionFree(blockSet, new Move("R1", Direction.R)));
     }
 
     @Test
     @DisplayName("isCollisionFree false")
     public void isCollisionFree_false() {
-        // TODO
+        final BlockSet blockSet = new BlockSet();
+        blockSet.add(
+            new Block(
+                new BlockInfo(
+                    "R1",
+                    null,
+                    null,
+                    false,
+                    new PositionsInfo(
+                        new Position(0, 0),
+                        2,
+                        Direction.R,
+                        false
+                    )
+                )
+            )
+        );
+        blockSet.add(
+            new Block(
+                new BlockInfo(
+                    "R2",
+                    null,
+                    null,
+                    false,
+                    new PositionsInfo(
+                        new Position(0, 1),
+                        2,
+                        Direction.R,
+                        false
+                    )
+                )
+            )
+        );
+
+        assertFalse(gameField.isCollisionFree(blockSet, new Move("R1", Direction.U)));
     }
 
 }   // Game Field Test class
