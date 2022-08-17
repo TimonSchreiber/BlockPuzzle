@@ -6,6 +6,7 @@ import game.RushHour;
 import solver.BFS_WithThreads;
 import solver.BreadthFirstSearch;
 import solver.DepthFirstSearch;
+import solver.ManualMode;
 
 /**
  * This App provides three different Logic-Puzzles and also three different
@@ -29,9 +30,9 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         try (final Scanner scanner = new Scanner(System.in)) {
-            String gameType = "J";  // D=DirtyDozen; J=HumpingRabbits; R=RushHour
-            String solvType = "B";  // D=Depth; B=Breadth; T=Threads
-            int gameNumber = 5;
+            String gameType = "D";  // D=DirtyDozen; J=HumpingRabbits; R=RushHour
+            String solvType = "M";  // D=Depth; B=Breadth; T=Threads; M=Manual
+            int gameNumber = 0;
 
             System.out.println("Game Number: " + gameNumber);
 
@@ -52,6 +53,7 @@ public class App {
                 case 'D'    -> new DepthFirstSearch(game, delay, show).solve();
                 case 'B'    -> new BreadthFirstSearch(game).solve();
                 case 'T'    -> new BFS_WithThreads(game).solve();
+                case 'M'    -> new ManualMode(game, scanner).play();
                 default     -> throw new IllegalStateException("Invalid SolveType: " + solvType);
             };
         }
