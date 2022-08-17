@@ -150,7 +150,33 @@ public final class RushHour extends Game {
         final Color TRUCK_4 = new Color(255,   0, 255); // Magenta
 
         // ---------------------------------------------------------------------
-        // TODO: Positions?
+        // POSITIONS
+
+        final Position P0_0 = new Position(0, 0);
+        final Position P0_1 = new Position(0, 1);
+        final Position P0_2 = new Position(0, 2);
+        final Position P0_3 = new Position(0, 3);
+        final Position P0_5 = new Position(0, 5);
+
+        final Position P1_2 = new Position(1, 2);
+        final Position P1_3 = new Position(1, 3);
+        final Position P1_5 = new Position(1, 5);
+
+        final Position P2_0 = new Position(2, 0);
+        final Position P2_1 = new Position(2, 1);
+        final Position P2_4 = new Position(2, 4);
+
+        final Position P3_0 = new Position(3, 0);
+        final Position P3_2 = new Position(3, 2);
+        final Position P3_3 = new Position(3, 3);
+        final Position P3_5 = new Position(3, 5);
+
+        final Position P4_1 = new Position(4, 1);
+        final Position P4_4 = new Position(4, 4);
+
+        final Position P5_0 = new Position(5, 0);
+        final Position P5_1 = new Position(5, 1);
+        final Position P5_3 = new Position(5, 3);
 
         // ---------------------------------------------------------------------
         // GAMES
@@ -174,49 +200,49 @@ public final class RushHour extends Game {
                         RED_CAR,
                         MovePattern.RIGHT_LEFT_DIRECTIONS,
                         true,
-                        new PositionsInfo(new Position(1, 3), 2, Direction.R, false)),
+                        new PositionsInfo(P1_3, 2, Direction.R, false)),
                     new BlockInfo(
                         C1,
                         CAR_1,
                         MovePattern.DOWN_UP_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 0), 2, Direction.U, false)),
+                        new PositionsInfo(P0_0, 2, Direction.U, false)),
                     new BlockInfo(
                         C2,
                         CAR_2,
                         MovePattern.RIGHT_LEFT_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 1), 2, Direction.R, false)),
+                        new PositionsInfo(P4_1, 2, Direction.R, false)),
                     new BlockInfo(
                         C3,
                         CAR_3,
                         MovePattern.RIGHT_LEFT_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 5), 2, Direction.R, false)),
+                        new PositionsInfo(P0_5, 2, Direction.R, false)),
                     new BlockInfo(
                         T1,
                         TRUCK_1,
                         MovePattern.RIGHT_LEFT_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 0), 3, Direction.R, false)),
+                        new PositionsInfo(P2_0, 3, Direction.R, false)),
                     new BlockInfo(
                         T2,
                         TRUCK_2,
                         MovePattern.DOWN_UP_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 2), 3, Direction.U, false)),
+                        new PositionsInfo(P0_2, 3, Direction.U, false)),
                     new BlockInfo(
                         T3,
                         TRUCK_3,
                         MovePattern.DOWN_UP_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 2), 3, Direction.U, false)),
+                        new PositionsInfo(P3_2, 3, Direction.U, false)),
                     new BlockInfo(
                         T4,
                         TRUCK_4,
                         MovePattern.DOWN_UP_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(5, 3), 3, Direction.U, false))
+                        new PositionsInfo(P5_3, 3, Direction.U, false))
                 )
             ),
             Map.entry(
@@ -236,49 +262,49 @@ public final class RushHour extends Game {
                         RED_CAR,
                         MovePattern.RIGHT_LEFT_DIRECTIONS,
                         true,
-                        new PositionsInfo(new Position(1, 3), 2, Direction.R, false)),
+                        new PositionsInfo(P1_3, 2, Direction.R, false)),
                     new BlockInfo(
                         C1,
                         CAR_1,
                         MovePattern.DOWN_UP_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(5, 0), 2, Direction.U, false)),
+                        new PositionsInfo(P5_0, 2, Direction.U, false)),
                     new BlockInfo(
                         C2,
                         CAR_2,
                         MovePattern.DOWN_UP_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 1), 2, Direction.U, false)),
+                        new PositionsInfo(P2_1, 2, Direction.U, false)),
                     new BlockInfo(
                         C3,
                         CAR_3,
                         MovePattern.RIGHT_LEFT_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(1, 5), 2, Direction.R, false)),
+                        new PositionsInfo(P1_5, 2, Direction.R, false)),
                     new BlockInfo(
                         T1,
                         TRUCK_1,
                         MovePattern.RIGHT_LEFT_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 0), 3, Direction.R, false)),
+                        new PositionsInfo(P2_0, 3, Direction.R, false)),
                     new BlockInfo(
                         T2,
                         TRUCK_2,
                         MovePattern.RIGHT_LEFT_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 2), 3, Direction.R, false)),
+                        new PositionsInfo(P3_2, 3, Direction.R, false)),
                     new BlockInfo(
                         T3,
                         TRUCK_3,
                         MovePattern.DOWN_UP_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 3), 3, Direction.U, false)),
+                        new PositionsInfo(P0_3, 3, Direction.U, false)),
                     new BlockInfo(
                         T4,
                         TRUCK_4,
                         MovePattern.DOWN_UP_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 3), 3, Direction.U, false))
+                        new PositionsInfo(P3_3, 3, Direction.U, false))
                 )
             ),
             Map.entry(
@@ -298,43 +324,43 @@ public final class RushHour extends Game {
                         RED_CAR,
                         MovePattern.RIGHT_LEFT_DIRECTIONS,
                         true,
-                        new PositionsInfo(new Position(1, 3), 2, Direction.R, false)),
+                        new PositionsInfo(P1_3, 2, Direction.R, false)),
                     new BlockInfo(
                         C1,
                         CAR_1,
                         MovePattern.DOWN_UP_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 4), 2, Direction.U, false)),
+                        new PositionsInfo(P2_4, 2, Direction.U, false)),
                     new BlockInfo(
                         C2,
                         CAR_2,
                         MovePattern.RIGHT_LEFT_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 5), 2, Direction.R, false)),
+                        new PositionsInfo(P0_5, 2, Direction.R, false)),
                     new BlockInfo(
                         T1,
                         TRUCK_1,
                         MovePattern.RIGHT_LEFT_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 0), 3, Direction.R, false)),
+                        new PositionsInfo(P3_0, 3, Direction.R, false)),
                     new BlockInfo(
                         T2,
                         TRUCK_2,
                         MovePattern.DOWN_UP_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 2), 3, Direction.U, false)),
+                        new PositionsInfo(P0_2, 3, Direction.U, false)),
                     new BlockInfo(
                         T3,
                         TRUCK_3,
                         MovePattern.RIGHT_LEFT_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(1, 2), 3, Direction.R, false)),
+                        new PositionsInfo(P1_2, 3, Direction.R, false)),
                     new BlockInfo(
                         T4,
                         TRUCK_4,
                         MovePattern.DOWN_UP_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 3), 3, Direction.U, false))
+                        new PositionsInfo(P3_3, 3, Direction.U, false))
                 )
             ),
             Map.entry(
@@ -354,67 +380,67 @@ public final class RushHour extends Game {
                         RED_CAR,
                         MovePattern.RIGHT_LEFT_DIRECTIONS,
                         true,
-                        new PositionsInfo(new Position(1, 3), 2, Direction.R, false)),
+                        new PositionsInfo(P1_3, 2, Direction.R, false)),
                     new BlockInfo(
                         C1,
                         CAR_1,
                         MovePattern.RIGHT_LEFT_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 1), 2, Direction.R, false)),
+                        new PositionsInfo(P0_1, 2, Direction.R, false)),
                     new BlockInfo(
                         C2,
                         CAR_2,
                         MovePattern.DOWN_UP_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 2), 2, Direction.U, false)),
+                        new PositionsInfo(P0_2, 2, Direction.U, false)),
                     new BlockInfo(
                         C3,
                         CAR_3,
                         MovePattern.RIGHT_LEFT_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 2), 2, Direction.R, false)),
+                        new PositionsInfo(P3_2, 2, Direction.R, false)),
                     new BlockInfo(
                         C4,
                         CAR_4,
                         MovePattern.DOWN_UP_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 3), 2, Direction.U, false)),
+                        new PositionsInfo(P3_3, 2, Direction.U, false)),
                     new BlockInfo(
                         C5,
                         CAR_5,
                         MovePattern.RIGHT_LEFT_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 4), 2, Direction.R, false)),
+                        new PositionsInfo(P4_4, 2, Direction.R, false)),
                     new BlockInfo(
                         C6,
                         CAR_6,
                         MovePattern.RIGHT_LEFT_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 5), 2, Direction.R, false)),
+                        new PositionsInfo(P0_5, 2, Direction.R, false)),
                     new BlockInfo(
                         T1,
                         TRUCK_1,
                         MovePattern.DOWN_UP_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 0), 3, Direction.U, false)),
+                        new PositionsInfo(P2_0, 3, Direction.U, false)),
                     new BlockInfo(
                         T2,
                         TRUCK_2,
                         MovePattern.RIGHT_LEFT_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 0), 3, Direction.R, false)),
+                        new PositionsInfo(P3_0, 3, Direction.R, false)),
                     new BlockInfo(
                         T3,
                         TRUCK_3,
                         MovePattern.DOWN_UP_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(5, 1), 3, Direction.U, false)),
+                        new PositionsInfo(P5_1, 3, Direction.U, false)),
                     new BlockInfo(
                         T4,
                         TRUCK_4,
                         MovePattern.RIGHT_LEFT_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 5), 3, Direction.R, false))
+                        new PositionsInfo(P3_5, 3, Direction.R, false))
                 )
             )
         );

@@ -17,7 +17,8 @@ import field.Rectangle;
 import field.CanvasInfo;
 
 /**
- * TODO
+ * A Logic Puzzle based on this post:
+ * https://trainyourprogrammer.de/java-254-holzblock-schiebe-spiel-das-gemeine-dutzend-.html
  */
 public final class DirtyDozen extends Game {
 
@@ -98,8 +99,7 @@ public final class DirtyDozen extends Game {
     }
 
     // -------------------------------------------------------------------------
-    // STATIC-BLOCK
-    // https://trainyourprogrammer.de/java-254-holzblock-schiebe-spiel-das-gemeine-dutzend-.html
+    // STATIC BLOCK
     // -------------------------------------------------------------------------
 
     static {
@@ -141,7 +141,43 @@ public final class DirtyDozen extends Game {
         final Color SQUARE_6    = new Color(  0,  42,   0);
 
         // ---------------------------------------------------------------------
-        // TODO: Positions?
+        // POSITIONS
+
+        final Position P0_0 = new Position(0, 0);
+        final Position P0_1 = new Position(0, 1);
+        final Position P0_2 = new Position(0, 2);
+        final Position P0_3 = new Position(0, 3);
+        final Position P0_4 = new Position(0, 4);
+
+        final Position P1_0 = new Position(1, 0);
+        final Position P1_1 = new Position(1, 1);
+        final Position P1_2 = new Position(1, 2);
+        final Position P1_3 = new Position(1, 3);
+        final Position P1_4 = new Position(1, 4);
+
+        final Position P2_0 = new Position(2, 0);
+        final Position P2_1 = new Position(2, 1);
+        final Position P2_2 = new Position(2, 2);
+        final Position P2_3 = new Position(2, 3);
+        final Position P2_4 = new Position(2, 4);
+
+        final Position P3_0 = new Position(3, 0);
+        final Position P3_1 = new Position(3, 1);
+        final Position P3_2 = new Position(3, 2);
+        final Position P3_3 = new Position(3, 3);
+        final Position P3_4 = new Position(3, 4);
+
+        final Position P4_0 = new Position(4, 0);
+        final Position P4_1 = new Position(4, 1);
+        final Position P4_2 = new Position(4, 2);
+        final Position P4_3 = new Position(4, 3);
+        final Position P4_4 = new Position(4, 4);
+
+        final Position P5_0 = new Position(5, 0);
+        final Position P5_1 = new Position(5, 1);
+        final Position P5_2 = new Position(5, 2);
+        final Position P5_3 = new Position(5, 3);
+        final Position P5_4 = new Position(5, 4);
 
         // ---------------------------------------------------------------------
         // GAMES
@@ -164,98 +200,98 @@ public final class DirtyDozen extends Game {
                         BIG_SQUARE,
                         MovePattern.ALL_DIRECTIONS,
                         true,
-                        new PositionsInfo(new Position(4, 1), 4, Direction.U, true)
+                        new PositionsInfo(P4_1, 4, Direction.U, true)
                     ),
                     new BlockInfo(
                         Y1,
                         ELBOW_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(1, 0), 3, Direction.L, true)
+                        new PositionsInfo(P1_0, 3, Direction.L, true)
                     ),
                     new BlockInfo(
                         Y2,
                         ELBOW_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 2), 3, Direction.R, true)
+                        new PositionsInfo(P0_2, 3, Direction.R, true)
                     ),
                     new BlockInfo(
                         Y3,
                         ELBOW_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 4), 3, Direction.R, true)
+                        new PositionsInfo(P0_4, 3, Direction.R, true)
                     ),
                     new BlockInfo(
                         Y4,
                         ELBOW_4,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 3), 3, Direction.L, true)
+                        new PositionsInfo(P2_3, 3, Direction.L, true)
                     ),
                     new BlockInfo(
                         B1,
                         RECTANGLE_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 0), 2, Direction.R, false)
+                        new PositionsInfo(P4_0, 2, Direction.R, false)
                     ),
                     new BlockInfo(
                         B2,
                         RECTANGLE_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 3), 2, Direction.U, false)
+                        new PositionsInfo(P3_3, 2, Direction.U, false)
                     ),
                     new BlockInfo(
                         B3,
                         RECTANGLE_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 3), 2, Direction.U, false)
+                        new PositionsInfo(P4_3, 2, Direction.U, false)
                     ),
                     new BlockInfo(
                         G1,
                         SQUARE_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 0), 1, Direction.D, false)
+                        new PositionsInfo(P2_0, 1, Direction.D, false)
                     ),
                     new BlockInfo(
                         G2,
                         SQUARE_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 0), 1, Direction.D, false)
+                        new PositionsInfo(P3_0, 1, Direction.D, false)
                     ),
                     new BlockInfo(
                         G3,
                         SQUARE_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 1), 1, Direction.D, false)
+                        new PositionsInfo(P2_1, 1, Direction.D, false)
                     ),
                     new BlockInfo(
                         G4,
                         SQUARE_4,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 1), 1, Direction.D, false)
+                        new PositionsInfo(P3_1, 1, Direction.D, false)
                     ),
                     new BlockInfo(
                         G5,
                         SQUARE_5,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 2), 1, Direction.D, false)
+                        new PositionsInfo(P2_2, 1, Direction.D, false)
                     ),
                     new BlockInfo(
                         G6,
                         SQUARE_6,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 2), 1, Direction.D, false)
+                        new PositionsInfo(P3_2, 1, Direction.D, false)
                     )
                 )
             ),
@@ -275,85 +311,85 @@ public final class DirtyDozen extends Game {
                         BIG_SQUARE,
                         MovePattern.ALL_DIRECTIONS,
                         true,
-                        new PositionsInfo(new Position(0, 3), 4, Direction.U, true)),
+                        new PositionsInfo(P0_3, 4, Direction.U, true)),
                     new BlockInfo(
                         Y1,
                         ELBOW_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 1), 3, Direction.R, true)),
+                        new PositionsInfo(P0_1, 3, Direction.R, true)),
                     new BlockInfo(
                         Y2,
                         ELBOW_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 0), 3, Direction.L, true)),
+                        new PositionsInfo(P2_0, 3, Direction.L, true)),
                     new BlockInfo(
                         Y3,
                         ELBOW_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 1), 3, Direction.R, true)),
+                        new PositionsInfo(P3_1, 3, Direction.R, true)),
                     new BlockInfo(
                         Y4,
                         ELBOW_4,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(5, 0), 3, Direction.L, true)),
+                        new PositionsInfo(P5_0, 3, Direction.L, true)),
                     new BlockInfo(
                         B1,
                         RECTANGLE_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 2), 2, Direction.R, false)),
+                        new PositionsInfo(P4_2, 2, Direction.R, false)),
                     new BlockInfo(
                         B2,
                         RECTANGLE_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 3), 2, Direction.R, false)),
+                        new PositionsInfo(P4_3, 2, Direction.R, false)),
                     new BlockInfo(
                         B3,
                         RECTANGLE_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 4), 2, Direction.R, false)),
+                        new PositionsInfo(P4_4, 2, Direction.R, false)),
                     new BlockInfo(
                         G1,
                         SQUARE_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 2), 1, Direction.D, false)),
+                        new PositionsInfo(P2_2, 1, Direction.D, false)),
                     new BlockInfo(
                         G2,
                         SQUARE_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 2), 1, Direction.D, false)),
+                        new PositionsInfo(P3_2, 1, Direction.D, false)),
                     new BlockInfo(
                         G3,
                         SQUARE_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 3), 1, Direction.D, false)),
+                        new PositionsInfo(P2_3, 1, Direction.D, false)),
                     new BlockInfo(
                         G4,
                         SQUARE_4,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 3), 1, Direction.D, false)),
+                        new PositionsInfo(P3_3, 1, Direction.D, false)),
                     new BlockInfo(
                         G5,
                         SQUARE_5,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 4), 1, Direction.D, false)),
+                        new PositionsInfo(P2_4, 1, Direction.D, false)),
                     new BlockInfo(
                         G6,
                         SQUARE_6,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 4), 1, Direction.D, false))
+                        new PositionsInfo(P3_4, 1, Direction.D, false))
                 )
             ),
             Map.entry(
@@ -372,85 +408,85 @@ public final class DirtyDozen extends Game {
                         BIG_SQUARE,
                         MovePattern.ALL_DIRECTIONS,
                         true,
-                        new PositionsInfo(new Position(0, 3), 4, Direction.U, true)),
+                        new PositionsInfo(P0_3, 4, Direction.U, true)),
                     new BlockInfo(
                         Y1,
                         ELBOW_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 1), 3, Direction.R, true)),
+                        new PositionsInfo(P0_1, 3, Direction.R, true)),
                     new BlockInfo(
                         Y2,
                         ELBOW_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 0), 3, Direction.L, true)),
+                        new PositionsInfo(P2_0, 3, Direction.L, true)),
                     new BlockInfo(
                         Y3,
                         ELBOW_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 1), 3, Direction.R, true)),
+                        new PositionsInfo(P3_1, 3, Direction.R, true)),
                     new BlockInfo(
                         Y4,
                         ELBOW_4,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(5, 0), 3, Direction.L, true)),
+                        new PositionsInfo(P5_0, 3, Direction.L, true)),
                     new BlockInfo(
                         B1,
                         RECTANGLE_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 2), 2, Direction.R, false)),
+                        new PositionsInfo(P0_2, 2, Direction.R, false)),
                     new BlockInfo(
                         B2,
                         RECTANGLE_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 2), 2, Direction.R, false)),
+                        new PositionsInfo(P2_2, 2, Direction.R, false)),
                     new BlockInfo(
                         B3,
                         RECTANGLE_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 2), 2, Direction.R, false)),
+                        new PositionsInfo(P4_2, 2, Direction.R, false)),
                     new BlockInfo(
                         G1,
                         SQUARE_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 3), 1, Direction.D, false)),
+                        new PositionsInfo(P2_3, 1, Direction.D, false)),
                     new BlockInfo(
                         G2,
                         SQUARE_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 3), 1, Direction.D, false)),
+                        new PositionsInfo(P3_3, 1, Direction.D, false)),
                     new BlockInfo(
                         G3,
                         SQUARE_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 3), 1, Direction.D, false)),
+                        new PositionsInfo(P4_3, 1, Direction.D, false)),
                     new BlockInfo(
                         G4,
                         SQUARE_4,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 4), 1, Direction.D, false)),
+                        new PositionsInfo(P2_4, 1, Direction.D, false)),
                     new BlockInfo(
                         G5,
                         SQUARE_5,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 4), 1, Direction.D, false)),
+                        new PositionsInfo(P3_4, 1, Direction.D, false)),
                     new BlockInfo(
                         G6,
                         SQUARE_6,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 4), 1, Direction.D, false))
+                        new PositionsInfo(P4_4, 1, Direction.D, false))
                 )
             ),
             Map.entry(
@@ -469,85 +505,85 @@ public final class DirtyDozen extends Game {
                         BIG_SQUARE,
                         MovePattern.ALL_DIRECTIONS,
                         true,
-                        new PositionsInfo(new Position(0, 3), 4, Direction.U, true)),
+                        new PositionsInfo(P0_3, 4, Direction.U, true)),
                     new BlockInfo(
                         Y1,
                         ELBOW_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 2), 3, Direction.R, true)),
+                        new PositionsInfo(P3_2, 3, Direction.R, true)),
                     new BlockInfo(
                         Y2,
                         ELBOW_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(5, 1), 3, Direction.L, true)),
+                        new PositionsInfo(P5_1, 3, Direction.L, true)),
                     new BlockInfo(
                         Y3,
                         ELBOW_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 4), 3, Direction.R, true)),
+                        new PositionsInfo(P3_4, 3, Direction.R, true)),
                     new BlockInfo(
                         Y4,
                         ELBOW_4,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(5, 3), 3, Direction.L, true)),
+                        new PositionsInfo(P5_3, 3, Direction.L, true)),
                     new BlockInfo(
                         B1,
                         RECTANGLE_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 0), 2, Direction.R, false)),
+                        new PositionsInfo(P0_0, 2, Direction.R, false)),
                     new BlockInfo(
                         B2,
                         RECTANGLE_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 1), 2, Direction.R, false)),
+                        new PositionsInfo(P0_1, 2, Direction.R, false)),
                     new BlockInfo(
                         B3,
                         RECTANGLE_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 2), 2, Direction.R, false)),
+                        new PositionsInfo(P0_2, 2, Direction.R, false)),
                     new BlockInfo(
                         G1,
                         SQUARE_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 0), 1, Direction.D, false)),
+                        new PositionsInfo(P2_0, 1, Direction.D, false)),
                     new BlockInfo(
                         G2,
                         SQUARE_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 0), 1, Direction.D, false)),
+                        new PositionsInfo(P3_0, 1, Direction.D, false)),
                     new BlockInfo(
                         G3,
                         SQUARE_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 1), 1, Direction.D, false)),
+                        new PositionsInfo(P2_1, 1, Direction.D, false)),
                     new BlockInfo(
                         G4,
                         SQUARE_4,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 2), 1, Direction.D, false)),
+                        new PositionsInfo(P2_2, 1, Direction.D, false)),
                     new BlockInfo(
                         G5,
                         SQUARE_5,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 3), 1, Direction.D, false)),
+                        new PositionsInfo(P2_3, 1, Direction.D, false)),
                     new BlockInfo(
                         G6,
                         SQUARE_6,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 4), 1, Direction.D, false))
+                        new PositionsInfo(P2_4, 1, Direction.D, false))
                 )
             ),
             Map.entry(
@@ -566,85 +602,85 @@ public final class DirtyDozen extends Game {
                         BIG_SQUARE,
                         MovePattern.ALL_DIRECTIONS,
                         true,
-                        new PositionsInfo(new Position(0, 3), 4, Direction.U, true)),
+                        new PositionsInfo(P0_3, 4, Direction.U, true)),
                     new BlockInfo(
                         Y1,
                         ELBOW_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(1, 0), 3, Direction.L, true)),
+                        new PositionsInfo(P1_0, 3, Direction.L, true)),
                     new BlockInfo(
                         Y2,
                         ELBOW_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 2), 3, Direction.R, true)),
+                        new PositionsInfo(P0_2, 3, Direction.R, true)),
                     new BlockInfo(
                         Y3,
                         ELBOW_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 4), 3, Direction.R, true)),
+                        new PositionsInfo(P2_4, 3, Direction.R, true)),
                     new BlockInfo(
                         Y4,
                         ELBOW_4,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 3), 3, Direction.L, true)),
+                        new PositionsInfo(P4_3, 3, Direction.L, true)),
                     new BlockInfo(
                         B1,
                         RECTANGLE_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 0), 2, Direction.R, false)),
+                        new PositionsInfo(P2_0, 2, Direction.R, false)),
                     new BlockInfo(
                         B2,
                         RECTANGLE_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 1), 2, Direction.R, false)),
+                        new PositionsInfo(P2_1, 2, Direction.R, false)),
                     new BlockInfo(
                         B3,
                         RECTANGLE_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 2), 2, Direction.R, false)),
+                        new PositionsInfo(P2_2, 2, Direction.R, false)),
                     new BlockInfo(
                         G1,
                         SQUARE_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 0), 1, Direction.D, false)),
+                        new PositionsInfo(P4_0, 1, Direction.D, false)),
                     new BlockInfo(
                         G2,
                         SQUARE_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 1), 1, Direction.D, false)),
+                        new PositionsInfo(P4_1, 1, Direction.D, false)),
                     new BlockInfo(
                         G3,
                         SQUARE_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 2), 1, Direction.D, false)),
+                        new PositionsInfo(P4_2, 1, Direction.D, false)),
                     new BlockInfo(
                         G4,
                         SQUARE_4,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(5, 2), 1, Direction.D, false)),
+                        new PositionsInfo(P5_2, 1, Direction.D, false)),
                     new BlockInfo(
                         G5,
                         SQUARE_5,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(5, 3), 1, Direction.D, false)),
+                        new PositionsInfo(P5_3, 1, Direction.D, false)),
                     new BlockInfo(
                         G6,
                         SQUARE_6,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(5, 4), 1, Direction.D, false))
+                        new PositionsInfo(P5_4, 1, Direction.D, false))
                 )
             ),
             Map.entry(
@@ -663,85 +699,85 @@ public final class DirtyDozen extends Game {
                         BIG_SQUARE,
                         MovePattern.ALL_DIRECTIONS,
                         true,
-                        new PositionsInfo(new Position(0, 3), 4, Direction.U, true)),
+                        new PositionsInfo(P0_3, 4, Direction.U, true)),
                     new BlockInfo(
                         Y1,
                         ELBOW_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 1), 3, Direction.R, true)),
+                        new PositionsInfo(P0_1, 3, Direction.R, true)),
                     new BlockInfo(
                         Y2,
                         ELBOW_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 0), 3, Direction.L, true)),
+                        new PositionsInfo(P2_0, 3, Direction.L, true)),
                     new BlockInfo(
                         Y3,
                         ELBOW_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 1), 3, Direction.R, true)),
+                        new PositionsInfo(P3_1, 3, Direction.R, true)),
                     new BlockInfo(
                         Y4,
                         ELBOW_4,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(5, 0), 3, Direction.L, true)),
+                        new PositionsInfo(P5_0, 3, Direction.L, true)),
                     new BlockInfo(
                         B1,
                         RECTANGLE_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 2), 2, Direction.R, false)),
+                        new PositionsInfo(P2_2, 2, Direction.R, false)),
                     new BlockInfo(
                         B2,
                         RECTANGLE_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 3), 2, Direction.R, false)),
+                        new PositionsInfo(P2_3, 2, Direction.R, false)),
                     new BlockInfo(
                         B3,
                         RECTANGLE_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 4), 2, Direction.R, false)),
+                        new PositionsInfo(P2_4, 2, Direction.R, false)),
                     new BlockInfo(
                         G1,
                         SQUARE_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 2), 1, Direction.D, false)),
+                        new PositionsInfo(P4_2, 1, Direction.D, false)),
                     new BlockInfo(
                         G2,
                         SQUARE_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(5, 2), 1, Direction.D, false)),
+                        new PositionsInfo(P5_2, 1, Direction.D, false)),
                     new BlockInfo(
                         G3,
                         SQUARE_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 3), 1, Direction.D, false)),
+                        new PositionsInfo(P4_3, 1, Direction.D, false)),
                     new BlockInfo(
                         G4,
                         SQUARE_4,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(5, 3), 1, Direction.D, false)),
+                        new PositionsInfo(P5_3, 1, Direction.D, false)),
                     new BlockInfo(
                         G5,
                         SQUARE_5,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 4), 1, Direction.D, false)),
+                        new PositionsInfo(P4_4, 1, Direction.D, false)),
                     new BlockInfo(
                         G6,
                         SQUARE_6,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(5, 4), 1, Direction.D, false))
+                        new PositionsInfo(P5_4, 1, Direction.D, false))
                 )
             ),
             Map.entry(
@@ -760,85 +796,85 @@ public final class DirtyDozen extends Game {
                         BIG_SQUARE,
                         MovePattern.ALL_DIRECTIONS,
                         true,
-                        new PositionsInfo(new Position(0, 3), 4, Direction.U, true)),
+                        new PositionsInfo(P0_3, 4, Direction.U, true)),
                     new BlockInfo(
                         Y1,
                         ELBOW_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 0), 3, Direction.L, true)),
+                        new PositionsInfo(P3_0, 3, Direction.L, true)),
                     new BlockInfo(
                         Y2,
                         ELBOW_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(5, 0), 3, Direction.L, true)),
+                        new PositionsInfo(P5_0, 3, Direction.L, true)),
                     new BlockInfo(
                         Y3,
                         ELBOW_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 2), 3, Direction.R, true)),
+                        new PositionsInfo(P2_2, 3, Direction.R, true)),
                     new BlockInfo(
                         Y4,
                         ELBOW_4,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 2), 3, Direction.R, true)),
+                        new PositionsInfo(P4_2, 3, Direction.R, true)),
                     new BlockInfo(
                         B1,
                         RECTANGLE_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 0), 2, Direction.R, false)),
+                        new PositionsInfo(P0_0, 2, Direction.R, false)),
                     new BlockInfo(
                         B2,
                         RECTANGLE_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 1), 2, Direction.R, false)),
+                        new PositionsInfo(P0_1, 2, Direction.R, false)),
                     new BlockInfo(
                         B3,
                         RECTANGLE_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 2), 2, Direction.R, false)),
+                        new PositionsInfo(P0_2, 2, Direction.R, false)),
                     new BlockInfo(
                         G1,
                         SQUARE_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 3), 1, Direction.D, false)),
+                        new PositionsInfo(P2_3, 1, Direction.D, false)),
                     new BlockInfo(
                         G2,
                         SQUARE_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 3), 1, Direction.D, false)),
+                        new PositionsInfo(P3_3, 1, Direction.D, false)),
                     new BlockInfo(
                         G3,
                         SQUARE_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 3), 1, Direction.D, false)),
+                        new PositionsInfo(P4_3, 1, Direction.D, false)),
                     new BlockInfo(
                         G4,
                         SQUARE_4,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 4), 1, Direction.D, false)),
+                        new PositionsInfo(P2_4, 1, Direction.D, false)),
                     new BlockInfo(
                         G5,
                         SQUARE_5,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 4), 1, Direction.D, false)),
+                        new PositionsInfo(P3_4, 1, Direction.D, false)),
                     new BlockInfo(
                         G6,
                         SQUARE_6,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 4), 1, Direction.D, false))
+                        new PositionsInfo(P4_4, 1, Direction.D, false))
                 )
             ),
             Map.entry(
@@ -857,85 +893,85 @@ public final class DirtyDozen extends Game {
                         BIG_SQUARE,
                         MovePattern.ALL_DIRECTIONS,
                         true,
-                        new PositionsInfo(new Position(0, 3), 4, Direction.U, true)),
+                        new PositionsInfo(P0_3, 4, Direction.U, true)),
                     new BlockInfo(
                         Y1,
                         ELBOW_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 1), 3, Direction.R, true)),
+                        new PositionsInfo(P3_1, 3, Direction.R, true)),
                     new BlockInfo(
                         Y2,
                         ELBOW_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(5, 0), 3, Direction.L, true)),
+                        new PositionsInfo(P5_0, 3, Direction.L, true)),
                     new BlockInfo(
                         Y3,
                         ELBOW_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 4), 3, Direction.R, true)),
+                        new PositionsInfo(P3_4, 3, Direction.R, true)),
                     new BlockInfo(
                         Y4,
                         ELBOW_4,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(5, 3), 3, Direction.L, true)),
+                        new PositionsInfo(P5_3, 3, Direction.L, true)),
                     new BlockInfo(
                         B1,
                         RECTANGLE_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 0), 2, Direction.R, false)),
+                        new PositionsInfo(P0_0, 2, Direction.R, false)),
                     new BlockInfo(
                         B2,
                         RECTANGLE_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 1), 2, Direction.R, false)),
+                        new PositionsInfo(P0_1, 2, Direction.R, false)),
                     new BlockInfo(
                         B3,
                         RECTANGLE_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 2), 2, Direction.R, false)),
+                        new PositionsInfo(P0_2, 2, Direction.R, false)),
                     new BlockInfo(
                         G1,
                         SQUARE_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 0), 1, Direction.D, false)),
+                        new PositionsInfo(P2_0, 1, Direction.D, false)),
                     new BlockInfo(
                         G2,
                         SQUARE_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 1), 1, Direction.D, false)),
+                        new PositionsInfo(P2_1, 1, Direction.D, false)),
                     new BlockInfo(
                         G3,
                         SQUARE_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 2), 1, Direction.D, false)),
+                        new PositionsInfo(P2_2, 1, Direction.D, false)),
                     new BlockInfo(
                         G4,
                         SQUARE_4,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 2), 1, Direction.D, false)),
+                        new PositionsInfo(P3_2, 1, Direction.D, false)),
                     new BlockInfo(
                         G5,
                         SQUARE_5,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 3), 1, Direction.D, false)),
+                        new PositionsInfo(P2_3, 1, Direction.D, false)),
                     new BlockInfo(
                         G6,
                         SQUARE_6,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 4), 1, Direction.D, false))
+                        new PositionsInfo(P2_4, 1, Direction.D, false))
                 )
             ),
             Map.entry(
@@ -954,85 +990,85 @@ public final class DirtyDozen extends Game {
                         BIG_SQUARE,
                         MovePattern.ALL_DIRECTIONS,
                         true,
-                        new PositionsInfo(new Position(0, 3), 4, Direction.U, true)),
+                        new PositionsInfo(P0_3, 4, Direction.U, true)),
                     new BlockInfo(
                         Y1,
                         ELBOW_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(5, 0), 3, Direction.L, true)),
+                        new PositionsInfo(P5_0, 3, Direction.L, true)),
                     new BlockInfo(
                         Y2,
                         ELBOW_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 2), 3, Direction.R, true)),
+                        new PositionsInfo(P4_2, 3, Direction.R, true)),
                     new BlockInfo(
                         Y3,
                         ELBOW_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 4), 3, Direction.R, true)),
+                        new PositionsInfo(P3_4, 3, Direction.R, true)),
                     new BlockInfo(
                         Y4,
                         ELBOW_4,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(5, 3), 3, Direction.L, true)),
+                        new PositionsInfo(P5_3, 3, Direction.L, true)),
                     new BlockInfo(
                         B1,
                         RECTANGLE_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 0), 2, Direction.R, false)),
+                        new PositionsInfo(P2_0, 2, Direction.R, false)),
                     new BlockInfo(
                         B2,
                         RECTANGLE_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 1), 2, Direction.R, false)),
+                        new PositionsInfo(P2_1, 2, Direction.R, false)),
                     new BlockInfo(
                         B3,
                         RECTANGLE_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 2), 2, Direction.R, false)),
+                        new PositionsInfo(P2_2, 2, Direction.R, false)),
                     new BlockInfo(
                         G1,
                         SQUARE_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 0), 1, Direction.D, false)),
+                        new PositionsInfo(P0_0, 1, Direction.D, false)),
                     new BlockInfo(
                         G2,
                         SQUARE_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(1, 0), 1, Direction.D, false)),
+                        new PositionsInfo(P1_0, 1, Direction.D, false)),
                     new BlockInfo(
                         G3,
                         SQUARE_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 1), 1, Direction.D, false)),
+                        new PositionsInfo(P0_1, 1, Direction.D, false)),
                     new BlockInfo(
                         G4,
                         SQUARE_4,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(1, 1), 1, Direction.D, false)),
+                        new PositionsInfo(P1_1, 1, Direction.D, false)),
                     new BlockInfo(
                         G5,
                         SQUARE_5,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 2), 1, Direction.D, false)),
+                        new PositionsInfo(P0_2, 1, Direction.D, false)),
                     new BlockInfo(
                         G6,
                         SQUARE_6,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(1, 2), 1, Direction.D, false))
+                        new PositionsInfo(P1_2, 1, Direction.D, false))
                 )
             ),
             Map.entry(
@@ -1051,85 +1087,85 @@ public final class DirtyDozen extends Game {
                         BIG_SQUARE,
                         MovePattern.ALL_DIRECTIONS,
                         true,
-                        new PositionsInfo(new Position(0, 3), 4, Direction.U, true)),
+                        new PositionsInfo(P0_3, 4, Direction.U, true)),
                     new BlockInfo(
                         Y1,
                         ELBOW_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 1), 3, Direction.R, true)),
+                        new PositionsInfo(P2_1, 3, Direction.R, true)),
                     new BlockInfo(
                         Y2,
                         ELBOW_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 0), 3, Direction.L, true)),
+                        new PositionsInfo(P4_0, 3, Direction.L, true)),
                     new BlockInfo(
                         Y3,
                         ELBOW_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 2), 3, Direction.L, true)),
+                        new PositionsInfo(P3_2, 3, Direction.L, true)),
                     new BlockInfo(
                         Y4,
                         ELBOW_4,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 4), 3, Direction.R, true)),
+                        new PositionsInfo(P2_4, 3, Direction.R, true)),
                     new BlockInfo(
                         B1,
                         RECTANGLE_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 0), 2, Direction.R, false)),
+                        new PositionsInfo(P0_0, 2, Direction.R, false)),
                     new BlockInfo(
                         B2,
                         RECTANGLE_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 1), 2, Direction.R, false)),
+                        new PositionsInfo(P0_1, 2, Direction.R, false)),
                     new BlockInfo(
                         B3,
                         RECTANGLE_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 2), 2, Direction.R, false)),
+                        new PositionsInfo(P0_2, 2, Direction.R, false)),
                     new BlockInfo(
                         G1,
                         SQUARE_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 2), 1, Direction.D, false)),
+                        new PositionsInfo(P4_2, 1, Direction.D, false)),
                     new BlockInfo(
                         G2,
                         SQUARE_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(5, 2), 1, Direction.D, false)),
+                        new PositionsInfo(P5_2, 1, Direction.D, false)),
                     new BlockInfo(
                         G3,
                         SQUARE_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 3), 1, Direction.D, false)),
+                        new PositionsInfo(P4_3, 1, Direction.D, false)),
                     new BlockInfo(
                         G4,
                         SQUARE_4,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(5, 3), 1, Direction.D, false)),
+                        new PositionsInfo(P5_3, 1, Direction.D, false)),
                     new BlockInfo(
                         G5,
                         SQUARE_5,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 4), 1, Direction.D, false)),
+                        new PositionsInfo(P4_4, 1, Direction.D, false)),
                     new BlockInfo(
                         G6,
                         SQUARE_6,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(5, 4), 1, Direction.D, false))
+                        new PositionsInfo(P5_4, 1, Direction.D, false))
                 )
             ),
             Map.entry(
@@ -1148,85 +1184,85 @@ public final class DirtyDozen extends Game {
                         BIG_SQUARE,
                         MovePattern.ALL_DIRECTIONS,
                         true,
-                        new PositionsInfo(new Position(2, 1), 4, Direction.U, true)),
+                        new PositionsInfo(P2_1, 4, Direction.U, true)),
                     new BlockInfo(
                         Y1,
                         ELBOW_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(5, 0), 3, Direction.L, true)),
+                        new PositionsInfo(P5_0, 3, Direction.L, true)),
                     new BlockInfo(
                         Y2,
                         ELBOW_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 2), 3, Direction.R, true)),
+                        new PositionsInfo(P4_2, 3, Direction.R, true)),
                     new BlockInfo(
                         Y3,
                         ELBOW_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 4), 3, Direction.R, true)),
+                        new PositionsInfo(P3_4, 3, Direction.R, true)),
                     new BlockInfo(
                         Y4,
                         ELBOW_4,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(5, 3), 3, Direction.L, true)),
+                        new PositionsInfo(P5_3, 3, Direction.L, true)),
                     new BlockInfo(
                         B1,
                         RECTANGLE_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 0), 2, Direction.R, false)),
+                        new PositionsInfo(P0_0, 2, Direction.R, false)),
                     new BlockInfo(
                         B2,
                         RECTANGLE_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 0), 2, Direction.R, false)),
+                        new PositionsInfo(P2_0, 2, Direction.R, false)),
                     new BlockInfo(
                         B3,
                         RECTANGLE_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 1), 2, Direction.R, false)),
+                        new PositionsInfo(P0_1, 2, Direction.R, false)),
                     new BlockInfo(
                         G1,
                         SQUARE_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 2), 1, Direction.D, false)),
+                        new PositionsInfo(P0_2, 1, Direction.D, false)),
                     new BlockInfo(
                         G2,
                         SQUARE_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(1, 2), 1, Direction.D, false)),
+                        new PositionsInfo(P1_2, 1, Direction.D, false)),
                     new BlockInfo(
                         G3,
                         SQUARE_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 3), 1, Direction.D, false)),
+                        new PositionsInfo(P0_3, 1, Direction.D, false)),
                     new BlockInfo(
                         G4,
                         SQUARE_4,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(1, 3), 1, Direction.D, false)),
+                        new PositionsInfo(P1_3, 1, Direction.D, false)),
                     new BlockInfo(
                         G5,
                         SQUARE_5,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 3), 1, Direction.D, false)),
+                        new PositionsInfo(P2_3, 1, Direction.D, false)),
                     new BlockInfo(
                         G6,
                         SQUARE_6,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 4), 1, Direction.D, false))
+                        new PositionsInfo(P2_4, 1, Direction.D, false))
                 )
             ),
             Map.entry(
@@ -1245,85 +1281,85 @@ public final class DirtyDozen extends Game {
                         BIG_SQUARE,
                         MovePattern.ALL_DIRECTIONS,
                         true,
-                        new PositionsInfo(new Position(0, 3), 4, Direction.U, true)),
+                        new PositionsInfo(P0_3, 4, Direction.U, true)),
                     new BlockInfo(
                         Y1,
                         ELBOW_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 1), 3, Direction.R, true)),
+                        new PositionsInfo(P0_1, 3, Direction.R, true)),
                     new BlockInfo(
                         Y2,
                         ELBOW_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 0), 3, Direction.L, true)),
+                        new PositionsInfo(P2_0, 3, Direction.L, true)),
                     new BlockInfo(
                         Y3,
                         ELBOW_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(5, 2), 3, Direction.L, true)),
+                        new PositionsInfo(P5_2, 3, Direction.L, true)),
                     new BlockInfo(
                         Y4,
                         ELBOW_4,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 4), 3, Direction.R, true)),
+                        new PositionsInfo(P3_4, 3, Direction.R, true)),
                     new BlockInfo(
                         B1,
                         RECTANGLE_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 0), 2, Direction.U, false)),
+                        new PositionsInfo(P4_0, 2, Direction.U, false)),
                     new BlockInfo(
                         B2,
                         RECTANGLE_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(5, 0), 2, Direction.U, false)),
+                        new PositionsInfo(P5_0, 2, Direction.U, false)),
                     new BlockInfo(
                         B3,
                         RECTANGLE_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 2), 2, Direction.R, false)),
+                        new PositionsInfo(P0_2, 2, Direction.R, false)),
                     new BlockInfo(
                         G1,
                         SQUARE_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 0), 1, Direction.D, false)),
+                        new PositionsInfo(P3_0, 1, Direction.D, false)),
                     new BlockInfo(
                         G2,
                         SQUARE_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 1), 1, Direction.D, false)),
+                        new PositionsInfo(P3_1, 1, Direction.D, false)),
                     new BlockInfo(
                         G3,
                         SQUARE_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 2), 1, Direction.D, false)),
+                        new PositionsInfo(P2_2, 1, Direction.D, false)),
                     new BlockInfo(
                         G4,
                         SQUARE_4,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 2), 1, Direction.D, false)),
+                        new PositionsInfo(P3_2, 1, Direction.D, false)),
                     new BlockInfo(
                         G5,
                         SQUARE_5,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 3), 1, Direction.D, false)),
+                        new PositionsInfo(P4_3, 1, Direction.D, false)),
                     new BlockInfo(
                         G6,
                         SQUARE_6,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(5, 4), 1, Direction.D, false))
+                        new PositionsInfo(P5_4, 1, Direction.D, false))
                 )
             ),
             Map.entry(
@@ -1342,85 +1378,85 @@ public final class DirtyDozen extends Game {
                         BIG_SQUARE,
                         MovePattern.ALL_DIRECTIONS,
                         true,
-                        new PositionsInfo(new Position(2, 1), 4, Direction.U, true)),
+                        new PositionsInfo(P2_1, 4, Direction.U, true)),
                     new BlockInfo(
                         Y1,
                         ELBOW_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(5, 0), 3, Direction.L, true)),
+                        new PositionsInfo(P5_0, 3, Direction.L, true)),
                     new BlockInfo(
                         Y2,
                         ELBOW_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(1, 4), 3, Direction.R, true)),
+                        new PositionsInfo(P1_4, 3, Direction.R, true)),
                     new BlockInfo(
                         Y3,
                         ELBOW_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 3), 3, Direction.L, true)),
+                        new PositionsInfo(P3_3, 3, Direction.L, true)),
                     new BlockInfo(
                         Y4,
                         ELBOW_4,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 4), 3, Direction.R, true)),
+                        new PositionsInfo(P4_4, 3, Direction.R, true)),
                     new BlockInfo(
                         B1,
                         RECTANGLE_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 0), 2, Direction.R, false)),
+                        new PositionsInfo(P2_0, 2, Direction.R, false)),
                     new BlockInfo(
                         B2,
                         RECTANGLE_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 1), 2, Direction.U, false)),
+                        new PositionsInfo(P4_1, 2, Direction.U, false)),
                     new BlockInfo(
                         B3,
                         RECTANGLE_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(5, 2), 2, Direction.U, false)),
+                        new PositionsInfo(P5_2, 2, Direction.U, false)),
                         new BlockInfo(
                         G1,
                         SQUARE_1,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 0), 1, Direction.D, false)),
+                        new PositionsInfo(P0_0, 1, Direction.D, false)),
                     new BlockInfo(
                         G2,
                         SQUARE_2,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(1, 0), 1, Direction.D, false)),
+                        new PositionsInfo(P1_0, 1, Direction.D, false)),
                     new BlockInfo(
                         G3,
                         SQUARE_3,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 1), 1, Direction.D, false)),
+                        new PositionsInfo(P0_1, 1, Direction.D, false)),
                     new BlockInfo(
                         G4,
                         SQUARE_4,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(1, 1), 1, Direction.D, false)),
+                        new PositionsInfo(P1_1, 1, Direction.D, false)),
                     new BlockInfo(
                         G5,
                         SQUARE_5,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 2), 1, Direction.D, false)),
+                        new PositionsInfo(P0_2, 1, Direction.D, false)),
                     new BlockInfo(
                         G6,
                         SQUARE_6,
                         MovePattern.ALL_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(1, 2), 1, Direction.D, false))
+                        new PositionsInfo(P1_2, 1, Direction.D, false))
                 )
             )
         );

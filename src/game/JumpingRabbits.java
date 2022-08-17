@@ -118,9 +118,16 @@ public final class JumpingRabbits extends Game {
     @Override
     public boolean isValidMove(final BlockSet blockSet, final Move move) {
 
+        final Block tmpBlock = blockSet.getBlock(move.name());
+
+        // check if the Move is valid.
+        if (tmpBlock == null) {
+            System.err.println("Invalid BlockName: " + move);
+            return false;
+        }
         // check if the normal way to move can be applied
         // -> forward to gameField.isValidMove()
-        if (!blockSet.getBlock(move.name()).isMainBlock()) {
+        if (!tmpBlock.isMainBlock()) {
             return gameField.isValidMove(blockSet, move);
         }
 
@@ -133,9 +140,8 @@ public final class JumpingRabbits extends Game {
         // count how far the rabbit needs to jump
         int counter = 0;
         Position tmpPosition = null;
-        final PositionList tmpPositionList = blockSet.getBlock(move.name()).positionList();
 
-        for (final Position position : tmpPositionList) {
+        for (final Position position : tmpBlock.positionList()) {
             // there is only one Position in this ^ List (Rabbits have a size of 1)
             tmpPosition = new Position(position);
 
@@ -203,7 +209,34 @@ public final class JumpingRabbits extends Game {
         final Color MUSHROOM_3  = new Color(124,   0,   0); // used to be (124)
 
         // ---------------------------------------------------------------------
-        // TODO: static final positions?
+        // POSITIONS
+
+        final Position P0_0 = new Position(0, 0);
+        final Position P0_1 = new Position(0, 1);
+        final Position P0_2 = new Position(0, 2);
+        final Position P0_3 = new Position(0, 3);
+
+        final Position P1_0 = new Position(1, 0);
+        final Position P1_1 = new Position(1, 1);
+        final Position P1_3 = new Position(1, 3);
+        final Position P1_4 = new Position(1, 4);
+        
+        final Position P2_0 = new Position(2, 0);
+        final Position P2_2 = new Position(2, 2);
+        final Position P2_3 = new Position(2, 3);
+        final Position P2_4 = new Position(2, 4);
+
+        final Position P3_0 = new Position(3, 0);
+        final Position P3_1 = new Position(3, 1);
+        final Position P3_2 = new Position(3, 2);
+        final Position P3_3 = new Position(3, 3);
+        final Position P3_4 = new Position(3, 4);
+        
+        final Position P4_0 = new Position(4, 0);
+        final Position P4_1 = new Position(4, 1);
+        final Position P4_2 = new Position(4, 2);
+        final Position P4_3 = new Position(4, 3);
+        final Position P4_4 = new Position(4, 4);
 
         // ---------------------------------------------------------------------
         // GAMES
@@ -226,25 +259,25 @@ public final class JumpingRabbits extends Game {
                         RABBIT_1,
                         MovePattern.ALL_DIRECTIONS,
                         true,
-                        new PositionsInfo(new Position(3, 2), 1, Direction.D, false)),
+                        new PositionsInfo(P3_2, 1, Direction.D, false)),
                     new BlockInfo(
                         M1,
                         MUSHROOM_1,
                         MovePattern.NO_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 3), 1, Direction.D, false)),
+                        new PositionsInfo(P3_3, 1, Direction.D, false)),
                     new BlockInfo(
                         M2,
                         MUSHROOM_2,
                         MovePattern.NO_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(1, 4), 1, Direction.D, false)),
+                        new PositionsInfo(P1_4, 1, Direction.D, false)),
                     new BlockInfo(
                         M3,
                         MUSHROOM_3,
                         MovePattern.NO_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 4), 1, Direction.D, false))
+                        new PositionsInfo(P2_4, 1, Direction.D, false))
                 )
             ),
             Map.entry(
@@ -263,31 +296,31 @@ public final class JumpingRabbits extends Game {
                         RABBIT_1,
                         MovePattern.ALL_DIRECTIONS,
                         true,
-                        new PositionsInfo(new Position(2, 3), 1, Direction.D, false)),
+                        new PositionsInfo(P2_3, 1, Direction.D, false)),
                     new BlockInfo(
                         F1,
                         FOX_1,
                         MovePattern.RIGHT_LEFT_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 3), 2, Direction.R, false)),
+                        new PositionsInfo(P3_3, 2, Direction.R, false)),
                     new BlockInfo(
                         M1,
                         MUSHROOM_1,
                         MovePattern.NO_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 2), 1, Direction.D, false)),
+                        new PositionsInfo(P2_2, 1, Direction.D, false)),
                     new BlockInfo(
                         M2,
                         MUSHROOM_2,
                         MovePattern.NO_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(1, 3), 1, Direction.D, false)),
+                        new PositionsInfo(P1_3, 1, Direction.D, false)),
                     new BlockInfo(
                         M3,
                         MUSHROOM_3,
                         MovePattern.NO_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 4), 1, Direction.D, false))
+                        new PositionsInfo(P3_4, 1, Direction.D, false))
                 )
             ),
             Map.entry(
@@ -306,43 +339,43 @@ public final class JumpingRabbits extends Game {
                         RABBIT_1,
                         MovePattern.ALL_DIRECTIONS,
                         true,
-                        new PositionsInfo(new Position(0, 1), 1, Direction.D, false)),
+                        new PositionsInfo(P0_1, 1, Direction.D, false)),
                     new BlockInfo(
                         R2,
                         RABBIT_2,
                         MovePattern.ALL_DIRECTIONS,
                         true,
-                        new PositionsInfo(new Position(3, 1), 1, Direction.D, false)),
+                        new PositionsInfo(P3_1, 1, Direction.D, false)),
                     new BlockInfo(
                         F1,
                         FOX_1,
                         MovePattern.DOWN_UP_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(1, 3), 2, Direction.U, false)),
+                        new PositionsInfo(P1_3, 2, Direction.U, false)),
                     new BlockInfo(
                         F2,
                         FOX_2,
                         MovePattern.DOWN_UP_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(3, 3), 2, Direction.U, false)),
+                        new PositionsInfo(P3_3, 2, Direction.U, false)),
                     new BlockInfo(
                         M1,
                         MUSHROOM_1,
                         MovePattern.NO_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 0), 1, Direction.D, false)),
+                        new PositionsInfo(P4_0, 1, Direction.D, false)),
                     new BlockInfo(
                         M2,
                         MUSHROOM_2,
                         MovePattern.NO_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 2), 1, Direction.D, false)),
+                        new PositionsInfo(P4_2, 1, Direction.D, false)),
                     new BlockInfo(
                         M3,
                         MUSHROOM_3,
                         MovePattern.NO_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 3), 1, Direction.D, false))
+                        new PositionsInfo(P4_3, 1, Direction.D, false))
                 )
             ),
             Map.entry(
@@ -361,37 +394,37 @@ public final class JumpingRabbits extends Game {
                         RABBIT_1,
                         MovePattern.ALL_DIRECTIONS,
                         true,
-                        new PositionsInfo(new Position(2, 0), 1, Direction.D, false)),
+                        new PositionsInfo(P2_0, 1, Direction.D, false)),
                     new BlockInfo(
                         F1,
                         FOX_1,
                         MovePattern.RIGHT_LEFT_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 1), 2, Direction.R, false)),
+                        new PositionsInfo(P0_1, 2, Direction.R, false)),
                     new BlockInfo(
                         F2,
                         FOX_2,
                         MovePattern.DOWN_UP_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(1, 3), 2, Direction.U, false)),
+                        new PositionsInfo(P1_3, 2, Direction.U, false)),
                     new BlockInfo(
                         M1,
                         MUSHROOM_1,
                         MovePattern.NO_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 0), 1, Direction.D, false)),
+                        new PositionsInfo(P0_0, 1, Direction.D, false)),
                     new BlockInfo(
                         M2,
                         MUSHROOM_2,
                         MovePattern.NO_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 2), 1, Direction.D, false)),
+                        new PositionsInfo(P2_2, 1, Direction.D, false)),
                     new BlockInfo(
                         M3,
                         MUSHROOM_3,
                         MovePattern.NO_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 3), 1, Direction.D, false))
+                        new PositionsInfo(P0_3, 1, Direction.D, false))
                 )
             ),
             Map.entry(
@@ -410,43 +443,43 @@ public final class JumpingRabbits extends Game {
                         RABBIT_1,
                         MovePattern.ALL_DIRECTIONS,
                         true,
-                        new PositionsInfo(new Position(3, 0), 1, Direction.D, false)),
+                        new PositionsInfo(P3_0, 1, Direction.D, false)),
                     new BlockInfo(
                         R2,
                         RABBIT_2,
                         MovePattern.ALL_DIRECTIONS,
                         true,
-                        new PositionsInfo(new Position(3, 3), 1, Direction.D, false)),
+                        new PositionsInfo(P3_3, 1, Direction.D, false)),
                     new BlockInfo(
                         R3,
                         RABBIT_3,
                         MovePattern.ALL_DIRECTIONS,
                         true,
-                        new PositionsInfo(new Position(4, 4), 1, Direction.D, false)),
+                        new PositionsInfo(P4_4, 1, Direction.D, false)),
                     new BlockInfo(
                         F1,
                         FOX_1,
                         MovePattern.DOWN_UP_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(1, 1), 2, Direction.U, false)),
+                        new PositionsInfo(P1_1, 2, Direction.U, false)),
                     new BlockInfo(
                         F2,
                         FOX_2,
                         MovePattern.RIGHT_LEFT_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(0, 3), 2, Direction.R, false)),
+                        new PositionsInfo(P0_3, 2, Direction.R, false)),
                     new BlockInfo(
                         M1,
                         MUSHROOM_1,
                         MovePattern.NO_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 0), 1, Direction.D, false)),
+                        new PositionsInfo(P4_0, 1, Direction.D, false)),
                     new BlockInfo(
                         M2,
                         MUSHROOM_2,
                         MovePattern.NO_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 2), 1, Direction.D, false))
+                        new PositionsInfo(P2_2, 1, Direction.D, false))
                 )
             ),
             Map.entry(
@@ -465,49 +498,49 @@ public final class JumpingRabbits extends Game {
                         RABBIT_1,
                         MovePattern.ALL_DIRECTIONS,
                         true,
-                        new PositionsInfo(new Position(1, 0), 1, Direction.D, false)),
+                        new PositionsInfo(P1_0, 1, Direction.D, false)),
                     new BlockInfo(
                         R2,
                         RABBIT_2,
                         MovePattern.ALL_DIRECTIONS,
                         true,
-                        new PositionsInfo(new Position(0, 2), 1, Direction.D, false)),
+                        new PositionsInfo(P0_2, 1, Direction.D, false)),
                     new BlockInfo(
                         R3,
                         RABBIT_3,
                         MovePattern.ALL_DIRECTIONS,
                         true,
-                        new PositionsInfo(new Position(4, 2), 1, Direction.D, false)),
+                        new PositionsInfo(P4_2, 1, Direction.D, false)),
                     new BlockInfo(
                         R4,
                         RABBIT_4,
                         MovePattern.ALL_DIRECTIONS,
                         true,
-                        new PositionsInfo(new Position(4, 4), 1, Direction.D, false)),
+                        new PositionsInfo(P4_4, 1, Direction.D, false)),
                     new BlockInfo(
                         F1,
                         FOX_1,
                         MovePattern.RIGHT_LEFT_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 3), 2, Direction.R, false)),
+                        new PositionsInfo(P2_3, 2, Direction.R, false)),
                     new BlockInfo(
                         M1,
                         MUSHROOM_1,
                         MovePattern.NO_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(4, 1), 1, Direction.D, false)),
+                        new PositionsInfo(P4_1, 1, Direction.D, false)),
                     new BlockInfo(
                         M2,
                         MUSHROOM_2,
                         MovePattern.NO_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(2, 2), 1, Direction.D, false)),
+                        new PositionsInfo(P2_2, 1, Direction.D, false)),
                     new BlockInfo(
                         M3,
                         MUSHROOM_3,
                         MovePattern.NO_DIRECTIONS,
                         false,
-                        new PositionsInfo(new Position(1, 4), 1, Direction.D, false))
+                        new PositionsInfo(P1_4, 1, Direction.D, false))
                 )
             )
         );
