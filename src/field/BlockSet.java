@@ -16,7 +16,6 @@ public final class BlockSet implements Iterable<Block> {
     // ATTRIBUTES
     // -------------------------------------------------------------------------
 
-    // TODO: maybe this should be a HashMap of BlockName and Block?
     /** TreeSet of Blocks. */
     private final Set<Block> blockSet;
 
@@ -85,7 +84,7 @@ public final class BlockSet implements Iterable<Block> {
                 return block.blockName();
             }
         }
-        // TODO: Do i need to use an Optional<Block> when this method is called?
+
         return null;
     }
 
@@ -103,10 +102,10 @@ public final class BlockSet implements Iterable<Block> {
 
         for (final Block block : blockSet) {
             if (block.blockName().equals(name)) {
-                return block;
+                return new Block(block);
             }
         }
-        // TODO: Do i need to use an Optional<Block> when this method is called?
+
         return null;
     }
 
@@ -136,7 +135,7 @@ public final class BlockSet implements Iterable<Block> {
 
     /**
      * Moves the Block specified by the Move object in this BlockSet.
-     * 
+     *
      * @param move  The Move to make
      */
     public void makeMove(final Move move) {
