@@ -15,6 +15,8 @@ import block.BlockInfo;
 import block.Position;
 import block.PositionList;
 import block.PositionsInfo;
+import canvas.CanvasInfo;
+import canvas.Rectangle;
 
 public class GameFieldTests {
 

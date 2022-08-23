@@ -9,13 +9,13 @@ import block.BlockInfo;
 import block.Position;
 import block.PositionList;
 import block.PositionsInfo;
+import canvas.CanvasInfo;
+import canvas.Rectangle;
 import field.BlockSet;
 import field.Direction;
 import field.GameField;
 import field.Move;
 import field.MovePattern;
-import field.Rectangle;
-import field.CanvasInfo;
 
 /**
  * The Game Jumping Rabbits.

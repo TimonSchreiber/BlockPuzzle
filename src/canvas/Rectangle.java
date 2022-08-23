@@ -1,4 +1,4 @@
-package field;
+package canvas;
 
 /**
  * Holds four double values for drawing rectangles.

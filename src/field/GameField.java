@@ -3,6 +3,9 @@ package field;
 import block.Block;
 import block.Position;
 import block.PositionList;
+import canvas.CanvasInfo;
+import canvas.Rectangle;
+import canvas.Zeichenblatt;
 
 /**
  * Simulates a GameField with a width and height.

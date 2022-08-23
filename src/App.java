@@ -31,9 +31,9 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         try (final Scanner scanner = new Scanner(System.in)) {
-            String gameType = "D";  // D=DirtyDozen; J=HumpingRabbits; R=RushHour
-            String solvType = "M";  // D=Depth; B=Breadth; T=Threads; M=Manual
-            int gameNumber = 0;
+            String gameType = "R";  // D=DirtyDozen; J=HumpingRabbits; R=RushHour
+            String solvType = "B";  // D=Depth; B=Breadth; T=Threads; M=Manual
+            int gameNumber = 2;
 
             System.out.println("Game Number: " + gameNumber);
 

@@ -1,4 +1,4 @@
-package field;
+package canvas;
 
 import java.awt.Color;
 import java.util.List;
