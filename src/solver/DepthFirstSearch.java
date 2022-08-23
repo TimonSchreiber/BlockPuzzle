@@ -20,7 +20,6 @@ public class DepthFirstSearch {
     // ATTRIBUTES
     // -------------------------------------------------------------------------
 
-    private final int delay;
     private final boolean show;
 
     /** HashSet of BlockSets to save every unique state. */
@@ -40,12 +39,10 @@ public class DepthFirstSearch {
      * Class constructor.
      * 
      * @param game      The Game
-     * @param delay     Time delay
      * @param show      show the moves while they are played
      */
-    public DepthFirstSearch(final Game game, final int delay, final boolean show) {
+    public DepthFirstSearch(final Game game, final boolean show) {
 
-        this.delay          = delay;
         this.show           = show;
 
         this.savedBlockSets = new HashSet<>();
@@ -155,7 +152,7 @@ public class DepthFirstSearch {
             + d.toSecondsPart() + " seconds, "
             + d.toMillisPart() + " milliseconds");
 
-        game.draw(delay);    // TODO: wait two seconds before showing the solution
+        game.draw(2000);    // TODO: wait two seconds before showing the solution
 
         // Show solution
         System.out.println("\nshow solution");
