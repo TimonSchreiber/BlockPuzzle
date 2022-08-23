@@ -36,21 +36,21 @@ public final class ManualMode {
 
     /** the Game */
     private final Game game;
-    
+
     // -------------------------------------------------------------------------
     // CONSTRUCTOR
     // -------------------------------------------------------------------------
 
     /**
      * Class constructor with a Game object.
-     * 
+     *
      * @param game  The Game
      */
     public ManualMode(final Game game, final int delay, final Scanner scanner) {
-        this.delay      = delay;
         this.moveList   = new LinkedList<>();
-        this.scanner    = scanner;
         this.game       = game;
+        this.delay      = delay;
+        this.scanner    = scanner;
     }
 
     // -------------------------------------------------------------------------
@@ -68,14 +68,14 @@ public final class ManualMode {
 
             // get input BlockName
             System.out.println("Enter a BlockName:");
-            String blockName = scanner.nextLine().toUpperCase();
+            final String blockName = scanner.nextLine().toUpperCase();
 
             switch (blockName) {
                 case "CLEAR":   clear(); continue;
                 case "UNDO":    undo(); continue;
                 case "REDO":    redo(); continue;
-                // maybe add a 'repeat' case so that the suer does not have to write the same move again.
                 default:        break;
+                // maybe add a 'repeat' case so that the user does not have to write the same move again.
             }
 
             // get Direction
@@ -85,34 +85,33 @@ public final class ManualMode {
             // TODO: validate input
 
             // create Move (TODO: add move to undo/redo List?)
-            Direction direction = Enum.valueOf(Direction.class, directionString);
-            Move move = new Move(blockName, direction);
+            final Direction direction = Enum.valueOf(Direction.class, directionString);
+            final Move move = new Move(blockName, direction);
 
             // try the move
             if (game.isValidMove(move)) {
                 System.out.println(move);
-                moveList.add(move);     // TODO: new Move(move)?
+                moveList.add(new Move(move));
+
             } else {
-                System.out.println("Not a legal move: " + move);
-                System.out.println("Try something else.");
+                System.out.println("Not a legal move: " + move + "\nTry something else.");
                 continue;
             }
 
             // check win condition
-            if (game.checkWinCondition()) {
-                foundASolution = true;
-                game.draw(0);
-                System.out.println("*** You Won! ***");
-
-                // reverse the Game
-                reverseGame();
-    
-                // show the solution
-                game.showSolution(moveList, delay);
-            }
-
+            foundASolution = game.checkWinCondition();
 
         }   // end while loop
+
+        // the Game is won
+        System.out.println("*** You Won! ***");
+        game.draw(0);
+
+        // reverse the Game
+        reverseGame();
+
+        // show the solution
+        game.showSolution(moveList, delay);
 
         return;
     }
@@ -143,7 +142,7 @@ public final class ManualMode {
         // TODO: also clear undoList and redoList.
         return;
     }
-    
+
     // -------------------------------------------------------------------------
     // UNDO AND REDO
     // -------------------------------------------------------------------------
@@ -152,7 +151,7 @@ public final class ManualMode {
      * Undoes the Last Move.
      */
     private void undo() {
-        // TODO
+        // TODO: implement this undo method
         return;
     }
 
@@ -160,7 +159,7 @@ public final class ManualMode {
      * Redoes the last undone Move.
      */
     private void redo() {
-        // TODO
+        // TODO: implement this redo method
         return;
     }
 

@@ -51,11 +51,11 @@ public class BreadthFirstSearch {
      *
      * @param game  The Game
      */
-    public BreadthFirstSearch(final Game game, final int delay/* TODO: more arguments? */) {
-        this.delay          = delay;
+    public BreadthFirstSearch(final Game game, final int delay) {
         this.savedBlockSets = new HashSet<>();
         this.gameStateQueue = new ArrayDeque<>();
         this.game           = game;
+        this.delay          = delay;
     }
 
     // -------------------------------------------------------------------------
@@ -88,8 +88,7 @@ public class BreadthFirstSearch {
                 System.out.println("No Solution Found!");
                 return;
             }
-            // else {} TODO: what are the other cases to check for?
-        }   // end while loop
+        }
 
         // Stop timer
         final Duration d = Duration.between(t, Instant.now());
@@ -111,7 +110,7 @@ public class BreadthFirstSearch {
 
         return;
     }
-    
+
     // -------------------------------------------------------------------------
     // FIND NEW MOVE
     // -------------------------------------------------------------------------
@@ -144,7 +143,7 @@ public class BreadthFirstSearch {
                  * -> save the BlockSet
                  * -> create a new GameState and add it to the GameStateQueue
                  */
-                if (!savedBlockSets.contains(new BlockSet(tmpBlockSet))) {  // TODO: why new BlockSet() and not just 'tmpBlockSet'? 
+                if (!savedBlockSets.contains(new BlockSet(tmpBlockSet))) {  // TODO: why new BlockSet() and not just 'tmpBlockSet'?
 
                     final List<Move> newMoveList = GameState.addMoveToNewList(tmpMoveList, newMove);
 

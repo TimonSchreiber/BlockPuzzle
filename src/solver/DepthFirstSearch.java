@@ -41,67 +41,16 @@ public class DepthFirstSearch {
 
     /**
      * Class constructor.
-     * 
+     *
      * @param game      The Game
      * @param show      show the moves while they are played
      */
     public DepthFirstSearch(final Game game, final int delay, final boolean show) {
-        this.delay          = delay;
-        this.show           = show;
         this.savedBlockSets = new HashSet<>();
         this.moveList       = new LinkedList<>();
         this.game           = game;
-    }
-
-    // -------------------------------------------------------------------------
-    // FIND NEW MOVE
-    // -------------------------------------------------------------------------
-
-    /**
-     * Makes a Move by going through every possible BlockName and Direction.
-     *
-     * @return  {@code true} if a new Move, leading to a new BlockSet is
-     *          found, {@code false} otherwise
-     */
-    private boolean findNewMove() {
-        final BlockSet tmpBlockSet = game.blockSet();
-
-        for (final Block block : tmpBlockSet) {
-
-            for (final Direction direction : block.movePattern()) {
-
-                final Move newMove = new Move(block.blockName(), direction);
-
-                // Check if nextMove is not a valid Move -> next iteration
-                if (!game.isValidMove(tmpBlockSet, newMove)) {
-                    continue;
-                }
-
-                // Check if it is a known BlockSet -> next iteration
-                if (savedBlockSets.contains(new BlockSet(tmpBlockSet))) {   // TODO: why new BlockSet() and not just 'tmpBlockSet'? 
-                    // reverse the last Move to continue looking for new Moves
-                    game.isValidMove(tmpBlockSet, newMove.reverse());
-                    continue;
-                }
-
-                // -> play this move on the GameField
-                game.isValidMove(newMove);
-
-                savedBlockSets.add(new BlockSet(tmpBlockSet));
-                moveList.add(newMove);
-
-                if (show) {
-                    game.draw(0);        // FIXME: this shows the GameField while it is solved delete for best time
-                }
-
-                // new Move found
-                return true;
-
-            }    // end for loop Direction
-        }    // end for loop Block
-
-        // no new Move found
-        return false;
+        this.delay          = delay;
+        this.show           = show;
     }
 
     // -------------------------------------------------------------------------
@@ -120,7 +69,7 @@ public class DepthFirstSearch {
         // Start timer
         final Instant t = Instant.now();
 
-        // Check for game.field.isWon() to become true
+        // Check for game.checkWinCondition() to become true
         while (!game.checkWinCondition()) {
 
             // If isNewMove() is false, the last Move will be reversed
@@ -154,7 +103,7 @@ public class DepthFirstSearch {
             + d.toSecondsPart() + " seconds, "
             + d.toMillisPart() + " milliseconds");
 
-        game.draw(2000);    // TODO: wait two seconds before showing the solution
+        game.draw(2000);
 
         // Show solution
         System.out.println("\nshow solution");
@@ -162,6 +111,57 @@ public class DepthFirstSearch {
         game.showSolution(moveList, delay);
 
         return;
+    }
+
+    // -------------------------------------------------------------------------
+    // FIND NEW MOVE
+    // -------------------------------------------------------------------------
+
+    /**
+     * Makes a Move by going through every possible BlockName and Direction.
+     *
+     * @return  {@code true} if a new Move, leading to a new BlockSet is
+     *          found, {@code false} otherwise
+     */
+    private boolean findNewMove() {
+        final BlockSet tmpBlockSet = game.blockSet();
+
+        for (final Block block : tmpBlockSet) {
+
+            for (final Direction direction : block.movePattern()) {
+
+                final Move newMove = new Move(block.blockName(), direction);
+
+                // Check if nextMove is not a valid Move -> next iteration
+                if (!game.isValidMove(tmpBlockSet, newMove)) {
+                    continue;
+                }
+
+                // Check if it is a known BlockSet -> next iteration
+                if (savedBlockSets.contains(new BlockSet(tmpBlockSet))) {   // TODO: why new BlockSet() and not just 'tmpBlockSet'?
+                    // reverse the last Move to continue looking for new Moves
+                    game.isValidMove(tmpBlockSet, newMove.reverse());
+                    continue;
+                }
+
+                // -> play this move on the GameField
+                game.isValidMove(newMove);
+
+                savedBlockSets.add(new BlockSet(tmpBlockSet));
+                moveList.add(newMove);
+
+                if (show) {
+                    game.draw(0);        // FIXME: this shows the GameField while it is solved delete for best time
+                }
+
+                // new Move found
+                return true;
+
+            }    // end for loop Direction
+        }    // end for loop Block
+
+        // no new Move found
+        return false;
     }
 
     // -------------------------------------------------------------------------

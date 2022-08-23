@@ -60,10 +60,10 @@ public class BFS_WithThreads {
      * @param delay     The time delay
      */
     public BFS_WithThreads(final Game game, final int delay) {
-        this.delay          = delay;
         this.savedBlockSets = ConcurrentHashMap.newKeySet();
         this.gameStateQueue = new LinkedBlockingDeque<>();
         this.game           = game;
+        this.delay          = delay;
     }
 
     // -------------------------------------------------------------------------
@@ -75,7 +75,7 @@ public class BFS_WithThreads {
      */
     public void solve() {
         System.out.println("START\n");
-        
+
         // add current BlockSet to the Map and Queue
         savedBlockSets.add(game.blockSet());
         gameStateQueue.add(new GameState(game.blockSet()));
@@ -88,11 +88,12 @@ public class BFS_WithThreads {
             // Thread start
             try {
                 final GameState nextGameState = gameStateQueue.take();
-                Runnable task = new Runnable() {
-                    public void run() {
-                        findNewMove(nextGameState);
-                    }
-                };
+                final Runnable task =
+                    new Runnable() {
+                        public void run() {
+                            findNewMove(nextGameState);
+                        }
+                    };
                 exec.execute(task);
 
             } catch (InterruptedException ie) {
@@ -109,7 +110,7 @@ public class BFS_WithThreads {
             // }
             // else {} TODO: what are the other cases to check for?
 
-        }   // end while loop
+        }
 
         // Stop timer
         final Duration d = Duration.between(t, Instant.now());
@@ -131,7 +132,7 @@ public class BFS_WithThreads {
 
         return;
     }
-    
+
     // -------------------------------------------------------------------------
     // FIND NEW MOVE
     // -------------------------------------------------------------------------
@@ -164,7 +165,7 @@ public class BFS_WithThreads {
                  * -> save the BlockSet
                  * -> create a new GameState and add it to the GameStateQueue
                  */
-                if (!savedBlockSets.contains(new BlockSet(tmpBlockSet))) {  // TODO: why new BlockSet() and not just 'tmpBlockSet'? 
+                if (!savedBlockSets.contains(new BlockSet(tmpBlockSet))) {  // TODO: why new BlockSet() and not just 'tmpBlockSet'?
 
                     final List<Move> newMoveList = GameState.addMoveToNewList(tmpMoveList, newMove);
 
