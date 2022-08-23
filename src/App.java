@@ -31,31 +31,28 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         try (final Scanner scanner = new Scanner(System.in)) {
-            String gameType = "R";  // D=DirtyDozen; J=HumpingRabbits; R=RushHour
-            String solvType = "B";  // D=Depth; B=Breadth; T=Threads; M=Manual
-            int gameNumber = 2;
+            final String gameType = "R";  // D=DirtyDozen; J=HumpingRabbits; R=RushHour
+            final String solvType = "B";  // D=Depth; B=Breadth; T=Threads; M=Manual
+            final int gameNumber = 2;
 
             System.out.println("Game Number: " + gameNumber);
 
-            int delay = 0;
-            boolean show = false;
-
-            Game game =
+            final Game game =
                 switch (gameType.toUpperCase().charAt(0)) {
-                    case 'D'    -> new DirtyDozen(gameNumber);
-                    case 'J'    -> new JumpingRabbits(gameNumber);
-                    case 'R'    -> new RushHour(gameNumber);
-                    default     -> throw new IllegalStateException("Invalid GameType: " + gameType);
+                    case 'D' -> new DirtyDozen(gameNumber);
+                    case 'J' -> new JumpingRabbits(gameNumber);
+                    case 'R' -> new RushHour(gameNumber);
+                    default  -> throw new IllegalStateException("Invalid GameType: " + gameType);
                 };
 
             game.print();
 
             switch (solvType.toUpperCase().charAt(0)) {
-                case 'D'    -> new DepthFirstSearch(game, delay, show).solve();
-                case 'B'    -> new BreadthFirstSearch(game).solve();
-                case 'T'    -> new BFS_WithThreads(game).solve();
-                case 'M'    -> new ManualMode(game, scanner).play();
-                default     -> throw new IllegalStateException("Invalid SolveType: " + solvType);
+                case 'D' -> new DepthFirstSearch(game, false).solve();
+                case 'B' -> new BreadthFirstSearch(game).solve();
+                case 'T' -> new BFS_WithThreads(game).solve();
+                case 'M' -> new ManualMode(game, scanner).play();
+                default  -> throw new IllegalStateException("Invalid SolveType: " + solvType);
             };
         }
 

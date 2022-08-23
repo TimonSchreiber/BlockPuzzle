@@ -62,7 +62,6 @@ public sealed abstract class Game
      */
     protected abstract void setUp(final int gameNumber);
 
-
     // -------------------------------------------------------------------------
     // SHOW SOLUTION
     // -------------------------------------------------------------------------
