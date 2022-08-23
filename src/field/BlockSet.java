@@ -55,6 +55,7 @@ public final class BlockSet implements Iterable<Block> {
      * @return          {@code true} if there is one Block which has these
      *                  x- and y-coordinates, {@code false} otherwise
      */
+    @Deprecated
     public boolean isBlock(final Position position) {
         // return this.blocks.stream()
         //         .anyMatch(block -> block.containsPosition(position));
@@ -67,14 +68,14 @@ public final class BlockSet implements Iterable<Block> {
         return false;
     }
 
-    /**
+    /** TODO: maybe return an Optional<String> here
      * Returns the Name of the Block with this Position.
      *
      * @param position  The Position
      * @return          The name of the Block if there is one at this Position,
      *                  {@code null} otherwise.
      */
-    public String getBlockName(final Position position) {
+    public String getBlocknameByPosition(final Position position) {
         // return this.blocks.stream()
         //         .filter(block -> block.positionList().contains(position))
         //         .findAny().get().blockName();
@@ -88,14 +89,14 @@ public final class BlockSet implements Iterable<Block> {
         return null;
     }
 
-    /**
+    /** TODO: maybe return an Optional<Block> here
      * Returns the Block with the specified name.
      *
      * @param name  Name of the Block.
      * @return      The Block with the specified name, or {@code null} if the
      *              Block does not exist.
      */
-    public Block getBlock(final String name) {
+    public Block getBlockByName(final String name) {
         // return this.blocks.stream()
         //         .filter(block -> block.blockName().equals(name))
         //         .findAny().get();
@@ -117,7 +118,7 @@ public final class BlockSet implements Iterable<Block> {
     public BlockSet getMainBlocks() {
         final BlockSet mainBlocks = new BlockSet();
 
-        for (Block block : blockSet) {
+        for (final Block block : blockSet) {
 
             if (block.isMainBlock()) {
                 mainBlocks.add(block);

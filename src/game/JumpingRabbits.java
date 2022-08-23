@@ -118,7 +118,7 @@ public final class JumpingRabbits extends Game {
     @Override
     public boolean isValidMove(final BlockSet blockSet, final Move move) {
 
-        final Block tmpBlock = blockSet.getBlock(move.name());
+        final Block tmpBlock = blockSet.getBlockByName(move.name());
 
         // check if the Move is valid.
         if (tmpBlock == null) {

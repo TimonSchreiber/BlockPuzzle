@@ -104,7 +104,7 @@ public final class GameField {
      *                  otherwise.
      */
     public boolean isCollisionFree(final BlockSet blockSet, final Move move) {
-        final Block tmpBlock = blockSet.getBlock(move.name());
+        final Block tmpBlock = blockSet.getBlockByName(move.name());
 
         // check if the Move is valid.
         if (tmpBlock == null) {
@@ -123,7 +123,7 @@ public final class GameField {
             // Checks if there is already a Block at this Positions
             // If yes, check if it does not have the same name
             if (blockSet.isBlock(tmpPosition)
-                && !blockSet.getBlockName(tmpPosition).equals(tmpBlock.blockName())) {
+                && !blockSet.getBlocknameByPosition(tmpPosition).equals(tmpBlock.blockName())) {
                 return false;   // collides with another Block
             }
         }
@@ -171,7 +171,7 @@ public final class GameField {
                 System.out.print(" ");
 
                 if (blockSet.isBlock(position)) {
-                    System.out.print(blockSet.getBlockName(position));
+                    System.out.print(blockSet.getBlocknameByPosition(position));
                 } else {
                     System.out.print("__");
                 }

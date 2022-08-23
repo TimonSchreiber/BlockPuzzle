@@ -105,7 +105,7 @@ public class BlockSetTests {
         final String expected = "M2";
         
         final Position position = new Position(1, 4);
-        final String actual = blockSet.getBlockName(position);
+        final String actual = blockSet.getBlocknameByPosition(position);
 
         assertEquals(expected, actual);
     }
@@ -114,7 +114,7 @@ public class BlockSetTests {
     @DisplayName("getBlockName Should return null if there is no Block at the Position")
     public void getBlockName_incorrectPosition() {
         final Position position = new Position(0, 4);
-        final String blockName = blockSet.getBlockName(position);
+        final String blockName = blockSet.getBlocknameByPosition(position);
 
         assertNull(blockName);
     }
@@ -132,7 +132,7 @@ public class BlockSetTests {
         );
 
         final String blockName = "M2";
-        final Block actual = blockSet.getBlock(blockName);
+        final Block actual = blockSet.getBlockByName(blockName);
 
         assertEquals(expected, actual);
     }
@@ -141,7 +141,7 @@ public class BlockSetTests {
     @DisplayName("getBlock Should return null if there is no Block with the blockName")
     public void getBlock_incorrectBlockName() {
         final String blockName = "T2";
-        final Block block = blockSet.getBlock(blockName);
+        final Block block = blockSet.getBlockByName(blockName);
 
         assertNull(block);
     }
