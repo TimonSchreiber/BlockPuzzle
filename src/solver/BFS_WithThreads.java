@@ -30,6 +30,9 @@ public class BFS_WithThreads {
     /** If a solution is found. */
     private boolean foundASolution = false;
 
+    /** Time delay between two Moves when showing the Solution */
+    private final int delay;
+
     /** LinkedBlocking Deque of GameStates to queue the states. */
     private final BlockingQueue<GameState> gameStateQueue;
 
@@ -51,22 +54,84 @@ public class BFS_WithThreads {
     // -------------------------------------------------------------------------
 
     /**
-     * Class constructor with a Game Object.
+     * Class constructor with a Game Object, and a time dleay.
      *
-     * @param game  The Game
+     * @param game      The Game
+     * @param delay     The time delay
      */
-    public BFS_WithThreads(final Game game/* TODO: more arguments? */) {
-
+    public BFS_WithThreads(final Game game, final int delay) {
+        this.delay          = delay;
         this.savedBlockSets = ConcurrentHashMap.newKeySet();
-
         this.gameStateQueue = new LinkedBlockingDeque<>();
-
         this.game           = game;
-
-        this.savedBlockSets.add(game.blockSet());
-        this.gameStateQueue.add(new GameState(game.blockSet()));
     }
 
+    // -------------------------------------------------------------------------
+    // SOLVE
+    // -------------------------------------------------------------------------
+
+    /**
+     * Tries to solve the BlockPuzzle.
+     */
+    public void solve() {
+        System.out.println("START\n");
+        
+        // add current BlockSet to the Map and Queue
+        savedBlockSets.add(game.blockSet());
+        gameStateQueue.add(new GameState(game.blockSet()));
+
+        // Start timer
+        final Instant t = Instant.now();
+
+        while (!foundASolution) {
+
+            // Thread start
+            try {
+                final GameState nextGameState = gameStateQueue.take();
+                Runnable task = new Runnable() {
+                    public void run() {
+                        findNewMove(nextGameState);
+                    }
+                };
+                exec.execute(task);
+
+            } catch (InterruptedException ie) {
+                System.err.println("Interrupted Expection Thrown!");
+                return;
+            }
+            // Thread end
+
+            // TODO: error handling
+            // FIXME: how to check if there is no solution but without #isEmpty()
+            // if (gameStateQueue.isEmpty()) {
+            //     System.out.println("No Solution Found!");
+            //     return;
+            // }
+            // else {} TODO: what are the other cases to check for?
+
+        }   // end while loop
+
+        // Stop timer
+        final Duration d = Duration.between(t, Instant.now());
+
+        // print result
+        System.out.println("END");
+
+        System.out.println("\nNumber of states saved:\n" + savedBlockSets.size());
+
+        System.out.println("\nNumber of moves for the Solution:\n" + solution.moves().size());
+
+        System.out.println("\nTime to solve:\n"
+            + d.toSecondsPart() + " seconds, "
+            + d.toMillisPart() + " milliseconds");
+
+        // Show solution
+        System.out.println("\nshow solution");
+        game.showSolution(solution.moves(), delay);
+
+        return;
+    }
+    
     // -------------------------------------------------------------------------
     // FIND NEW MOVE
     // -------------------------------------------------------------------------
@@ -121,69 +186,6 @@ public class BFS_WithThreads {
         }    // end for loop Block
 
         return;
-    }
-
-    // -------------------------------------------------------------------------
-    // SOLVE
-    // -------------------------------------------------------------------------
-
-    /**
-     * Tries to solve the BlockPuzzle.
-     */
-    public void solve() {
-        System.out.println("START\n");
-
-        // Start timer
-        final Instant t = Instant.now();
-
-        while (!foundASolution) {
-
-            // Thread start
-            try {
-                final GameState nextGameState = gameStateQueue.take();
-                Runnable task = new Runnable() {
-                    public void run() {
-                        findNewMove(nextGameState);
-                    }
-                };
-                exec.execute(task);
-
-            } catch (InterruptedException ie) {
-                System.err.println("Interrupted Expection Thrown!");
-                return;
-            }
-            // Thread end
-
-            // TODO: error handling
-            // FIXME: how to check if there is no solution but without #isEmpty()
-            // if (gameStateQueue.isEmpty()) {
-            //     System.out.println("No Solution Found!");
-            //     return;
-            // }
-            // else {} TODO: what are the other cases to check for?
-
-        }   // end while loop
-
-        // Stop timer
-        final Duration d = Duration.between(t, Instant.now());
-
-        // print result
-        System.out.println("END");
-
-        System.out.println("\nNumber of states saved:\n" + savedBlockSets.size());
-
-        System.out.println("\nNumber of moves for the Solution:\n" + solution.moves().size());
-
-        System.out.println("\nTime to solve:\n"
-            + d.toSecondsPart() + " seconds, "
-            + d.toMillisPart() + " milliseconds");
-
-        // Show solution
-        System.out.println("\nshow solution");
-        game.showSolution(solution.moves());
-
-        return;
-
     }
 
 }   // Breadth First Search - With Threads class

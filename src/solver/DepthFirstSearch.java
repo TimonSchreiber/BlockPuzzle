@@ -20,7 +20,11 @@ public class DepthFirstSearch {
     // ATTRIBUTES
     // -------------------------------------------------------------------------
 
+    /** If the GameField should show the Moves while solving */
     private final boolean show;
+
+    /** Time delay between two Moves when showing the Solution */
+    private final int delay;
 
     /** HashSet of BlockSets to save every unique state. */
     private final Set<BlockSet> savedBlockSets;
@@ -41,17 +45,12 @@ public class DepthFirstSearch {
      * @param game      The Game
      * @param show      show the moves while they are played
      */
-    public DepthFirstSearch(final Game game, final boolean show) {
-
+    public DepthFirstSearch(final Game game, final int delay, final boolean show) {
+        this.delay          = delay;
         this.show           = show;
-
         this.savedBlockSets = new HashSet<>();
-
         this.moveList       = new LinkedList<>();
-
         this.game           = game;
-
-        this.savedBlockSets.add(game.blockSet());
     }
 
     // -------------------------------------------------------------------------
@@ -115,6 +114,9 @@ public class DepthFirstSearch {
     public void solve() {
         System.out.println("START\n");
 
+        // add current BlockSet to the HashSet
+        this.savedBlockSets.add(game.blockSet());
+
         // Start timer
         final Instant t = Instant.now();
 
@@ -157,7 +159,7 @@ public class DepthFirstSearch {
         // Show solution
         System.out.println("\nshow solution");
         reverseGame();
-        game.showSolution(moveList);
+        game.showSolution(moveList, delay);
 
         return;
     }
@@ -170,10 +172,10 @@ public class DepthFirstSearch {
      * Reverses the Game to its Starting Position.
      */
     private void reverseGame() {
-        final Iterator<Move> iterator = ((LinkedList<Move>) moveList).descendingIterator();
+        final Iterator<Move> descIterator = ((LinkedList<Move>) moveList).descendingIterator();
 
-        while (iterator.hasNext()) {
-            game.isValidMove(iterator.next().reverse());
+        while (descIterator.hasNext()) {
+            game.isValidMove(descIterator.next().reverse());
         }
 
         return;

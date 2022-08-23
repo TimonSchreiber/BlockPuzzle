@@ -27,6 +27,9 @@ public class BreadthFirstSearch {
     /** If a solution is found. */
     private boolean foundASolution = false;
 
+    /** Time delay between two Moves when showing the Solution */
+    private final int delay;
+
     /** ArrayDeque of GameStates to queue the states. */
     private final Queue<GameState> gameStateQueue;
 
@@ -48,18 +51,67 @@ public class BreadthFirstSearch {
      *
      * @param game  The Game
      */
-    public BreadthFirstSearch(final Game game/* TODO: more arguments? */) {
-
+    public BreadthFirstSearch(final Game game, final int delay/* TODO: more arguments? */) {
+        this.delay          = delay;
         this.savedBlockSets = new HashSet<>();
-
         this.gameStateQueue = new ArrayDeque<>();
-
         this.game           = game;
-
-        this.savedBlockSets.add(game.blockSet());
-        this.gameStateQueue.add(new GameState(game.blockSet()));
     }
 
+    // -------------------------------------------------------------------------
+    // SOLVE
+    // -------------------------------------------------------------------------
+
+    /**
+     * Tries to solve the BlockPuzzle.
+     */
+    public void solve() {
+        System.out.println("START\n");
+
+        // add current BlockSet to the Map and Queue
+        this.savedBlockSets.add(game.blockSet());
+        this.gameStateQueue.add(new GameState(game.blockSet()));
+
+        // Start timer
+        final Instant t = Instant.now();
+
+        while (!foundASolution) {
+
+            // Get the first GameState in the Queue
+            final GameState nextGameState = gameStateQueue.remove();
+
+            // Call findNewMove to add GameStates to GameStateQueue
+            findNewMove(nextGameState);
+
+            // error handling
+            if (gameStateQueue.isEmpty()) {
+                System.out.println("No Solution Found!");
+                return;
+            }
+            // else {} TODO: what are the other cases to check for?
+        }   // end while loop
+
+        // Stop timer
+        final Duration d = Duration.between(t, Instant.now());
+
+        // print result
+        System.out.println("END");
+
+        System.out.println("\nNumber of states saved:\n" + savedBlockSets.size());
+
+        System.out.println("\nNumber of moves for the Solution:\n" + solution.moves().size());
+
+        System.out.println("\nTime to solve:\n"
+            + d.toSecondsPart() + " seconds, "
+            + d.toMillisPart() + " milliseconds");
+
+        // Show solution
+        System.out.println("\nshow solution");
+        game.showSolution(solution.moves(), delay);
+
+        return;
+    }
+    
     // -------------------------------------------------------------------------
     // FIND NEW MOVE
     // -------------------------------------------------------------------------
@@ -114,57 +166,6 @@ public class BreadthFirstSearch {
         }    // end for loop Block
 
         return;
-    }
-
-    // -------------------------------------------------------------------------
-    // SOLVE
-    // -------------------------------------------------------------------------
-
-    /**
-     * Tries to solve the BlockPuzzle.
-     */
-    public void solve() {
-        System.out.println("START\n");
-
-        // Start timer
-        final Instant t = Instant.now();
-
-        while (!foundASolution) {
-
-            // Get the first GameState in the Queue
-            final GameState nextGameState = gameStateQueue.remove();
-
-            // Call findNewMove to add GameStates to GameStateQueue
-            findNewMove(nextGameState);
-
-            // error handling
-            if (gameStateQueue.isEmpty()) {
-                System.out.println("No Solution Found!");
-                return;
-            }
-            // else {} TODO: what are the other cases to check for?
-        }   // end while loop
-
-        // Stop timer
-        final Duration d = Duration.between(t, Instant.now());
-
-        // print result
-        System.out.println("END");
-
-        System.out.println("\nNumber of states saved:\n" + savedBlockSets.size());
-
-        System.out.println("\nNumber of moves for the Solution:\n" + solution.moves().size());
-
-        System.out.println("\nTime to solve:\n"
-            + d.toSecondsPart() + " seconds, "
-            + d.toMillisPart() + " milliseconds");
-
-        // Show solution
-        System.out.println("\nshow solution");
-        game.showSolution(solution.moves());
-
-        return;
-
     }
 
 }   // Breadth First Search class
