@@ -25,6 +25,9 @@ public final class ManualMode {
     /** A solution is found */
     private boolean foundASolution = false;
 
+    /** Time delay between two Moves when showing the Solution */
+    private final int delay;
+
     /** LinkedList to save every Move. */
     private final List<Move> moveList;
 
@@ -43,7 +46,8 @@ public final class ManualMode {
      * 
      * @param game  The Game
      */
-    public ManualMode(final Game game, final Scanner scanner) {
+    public ManualMode(final Game game, final int delay, final Scanner scanner) {
+        this.delay      = delay;
         this.moveList   = new LinkedList<>();
         this.scanner    = scanner;
         this.game       = game;
@@ -104,7 +108,7 @@ public final class ManualMode {
                 reverseGame();
     
                 // show the solution
-                game.showSolution(moveList);
+                game.showSolution(moveList, delay);
             }
 
 
@@ -121,10 +125,10 @@ public final class ManualMode {
      * Reverses the Game to its start position.
      */
     private void reverseGame() {
-        final Iterator<Move> iterator = ((LinkedList<Move>) moveList).descendingIterator();
+        final Iterator<Move> descIterator = ((LinkedList<Move>) moveList).descendingIterator();
 
-        while (iterator.hasNext()) {
-            game.isValidMove(iterator.next().reverse());
+        while (descIterator.hasNext()) {
+            game.isValidMove(descIterator.next().reverse());
         }
 
         return;
