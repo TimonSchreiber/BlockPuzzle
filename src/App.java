@@ -31,9 +31,9 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         try (final Scanner scanner = new Scanner(System.in)) {
-            final String gameType = "R";  // D=DirtyDozen; J=HumpingRabbits; R=RushHour
+            final String gameType = "D";  // D=DirtyDozen; J=HumpingRabbits; R=RushHour
             final String solvType = "B";  // D=Depth; B=Breadth; T=Threads; M=Manual
-            final int gameNumber = 2;
+            final int gameNumber = 8;
 
             System.out.println("Game Number: " + gameNumber);
 
@@ -48,10 +48,10 @@ public class App {
             game.print();
 
             switch (solvType.toUpperCase().charAt(0)) {
-                case 'D' -> new DepthFirstSearch(game, false).solve();
-                case 'B' -> new BreadthFirstSearch(game).solve();
-                case 'T' -> new BFS_WithThreads(game).solve();
-                case 'M' -> new ManualMode(game, scanner).play();
+                case 'D' -> new DepthFirstSearch(game, 200, false).solve();
+                case 'B' -> new BreadthFirstSearch(game, 200).solve();
+                case 'T' -> new BFS_WithThreads(game, 200).solve();
+                case 'M' -> new ManualMode(game, 200, scanner).play();
                 default  -> throw new IllegalStateException("Invalid SolveType: " + solvType);
             };
         }
