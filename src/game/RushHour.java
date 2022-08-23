@@ -87,8 +87,6 @@ public final class RushHour extends Game {
                     // or if(..) {delay = xxx}
                 }
             );
-
-        gameField.draw(blockSet, 1000);    // FIXME: delete?
     }
 
     // -------------------------------------------------------------------------

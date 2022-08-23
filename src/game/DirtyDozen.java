@@ -94,8 +94,6 @@ public final class DirtyDozen extends Game {
                     // or if(..) {delay = xxx}
                 }
             );
-
-        gameField.draw(blockSet, 1000);    // FIXME: delete?
     }
 
     // -------------------------------------------------------------------------

@@ -71,15 +71,15 @@ public sealed abstract class Game
      *
      * @param moveList      a List of the Moves to the solution
      */
-    public void showSolution(final List<Move> moveList) {
+    public void showSolution(final List<Move> moveList, final int delay) {
 
         int i = 0;
 
-        draw(1000);
+        draw(5 * delay);
 
         for (final Move move : moveList) {
             isValidMove(move);
-            draw(200);  // TODO: delay
+            draw(delay);
             System.out.println(++i + "/" + moveList.size() + ": " + move);
         }
 

@@ -99,8 +99,6 @@ public final class JumpingRabbits extends Game {
                     // or if(..) {delay = xxx}
                 }
             );
-
-        gameField.draw(blockSet, 1000);    // FIXME: delete?
     }
 
     // -------------------------------------------------------------------------
