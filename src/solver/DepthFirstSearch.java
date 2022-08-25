@@ -64,7 +64,7 @@ public class DepthFirstSearch {
         System.out.println("START\n");
 
         // add current BlockSet to the HashSet
-        this.savedBlockSets.add(game.blockSet());
+        this.savedBlockSets.add(game.blocks());
 
         // Start timer
         final Instant t = Instant.now();
@@ -124,13 +124,13 @@ public class DepthFirstSearch {
      *          found, {@code false} otherwise
      */
     private boolean findNewMove() {
-        final BlockSet tmpBlockSet = game.blockSet();
+        final BlockSet tmpBlockSet = game.blocks(); // TODO: maybe push this inside the for-loops?
 
         for (final Block block : tmpBlockSet) {
 
             for (final Direction direction : block.movePattern()) {
 
-                final Move newMove = new Move(block.blockName(), direction);
+                final Move newMove = new Move(block.name(), direction);
 
                 // Check if nextMove is not a valid Move -> next iteration
                 if (!game.isValidMove(tmpBlockSet, newMove)) {

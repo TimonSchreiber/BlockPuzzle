@@ -62,7 +62,7 @@ public final class GameField {
          */
         for (Block block : blockSet.getMainBlocks()) {
 
-            for (Position position : block.positionList()) {
+            for (Position position : block.positions()) {
 
                 if (!WIN_CONDITION.contains(position)) {
                     return false;
@@ -115,7 +115,7 @@ public final class GameField {
             return false;
         }
 
-        for (final Position position : tmpBlock.positionList()) {
+        for (final Position position : tmpBlock.positions()) {
             final Position tmpPosition = position.moveTowards(move.direction());
 
             // Checks if the new Position is outside the GameField
@@ -126,7 +126,7 @@ public final class GameField {
             // Checks if there is already a Block at this Positions
             // If yes, check if it does not have the same name
             if (blockSet.isBlock(tmpPosition)
-                && !blockSet.getBlocknameByPosition(tmpPosition).equals(tmpBlock.blockName())) {
+                && !blockSet.getNameByPosition(tmpPosition).equals(tmpBlock.name())) {
                 return false;   // collides with another Block
             }
         }
@@ -166,20 +166,19 @@ public final class GameField {
      * if there is no Block.
      */
     public void print(final BlockSet blockSet) {
-        for (int i = (HEIGHT - 1); i >= 0; i--) {
 
+        for (int i = (HEIGHT - 1); i >= 0; i--) {
             for (int j = 0; j < WIDTH; j++) {
 
-                final Position position = new Position(j, i);
-                System.out.print(" ");
+                // BlockName to print
+                final String possibleBlockName =
+                    blockSet.getNameByPosition(new Position(j, i));
 
-                if (blockSet.isBlock(position)) {
-                    System.out.print(blockSet.getBlocknameByPosition(position));
-                } else {
-                    System.out.print("__");
-                }
-                System.out.print(" ");
+                // print BlockName, or "__" and a space at the end
+                System.out.print(((possibleBlockName == null) ? "__" : possibleBlockName) + " ");
+
             }
+            // double linebreak at the end
             System.out.println("\n");
         }
         return;
@@ -246,7 +245,7 @@ public final class GameField {
 
         // draw each Block
         for (final Block block : blockSet) {
-            for (final Position position : block.positionList()) {
+            for (final Position position : block.positions()) {
                 canvas.setVordergrundFarbe(block.color());
                 canvas.rechteck(
                     position.x() + OFFSET,

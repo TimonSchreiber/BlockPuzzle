@@ -39,8 +39,8 @@ public class BFS_WithThreads {
     /** ConcurrentHashSet of BlockSets to save every unique state. */
     private final Set<BlockSet> savedBlockSets;
 
-    /** GameState for saving the final Solution. */
-    private GameState solution;
+    /** List of Moves for the final solution. */
+    private List<Move> solutionMoveList;
 
     /** the Game */
     private final Game game;
@@ -77,8 +77,8 @@ public class BFS_WithThreads {
         System.out.println("START\n");
 
         // add current BlockSet to the Map and Queue
-        savedBlockSets.add(game.blockSet());
-        gameStateQueue.add(new GameState(game.blockSet()));
+        savedBlockSets.add(game.blocks());
+        gameStateQueue.add(new GameState(game.blocks()));
 
         // Start timer
         final Instant t = Instant.now();
@@ -120,7 +120,7 @@ public class BFS_WithThreads {
 
         System.out.println("\nNumber of states saved:\n" + savedBlockSets.size());
 
-        System.out.println("\nNumber of moves for the Solution:\n" + solution.moves().size());
+        System.out.println("\nNumber of moves for the Solution:\n" + solutionMoveList.size());
 
         System.out.println("\nTime to solve:\n"
             + d.toSecondsPart() + " seconds, "
@@ -128,7 +128,7 @@ public class BFS_WithThreads {
 
         // Show solution
         System.out.println("\nshow solution");
-        game.showSolution(solution.moves(), delay);
+        game.showSolution(solutionMoveList, delay);
 
         return;
     }
@@ -145,15 +145,15 @@ public class BFS_WithThreads {
      */
     private void findNewMove(final GameState gameState) {
 
-        // Deconstruction
-        final BlockSet tmpBlockSet = gameState.blockSet();
+        // Deconstruction    // TODO: push this inside the for loops
+        final BlockSet tmpBlockSet = gameState.blocks();
         final List<Move> tmpMoveList = gameState.moves();
 
         for (final Block block : tmpBlockSet) {
 
             for (final Direction direction : block.movePattern()) {
 
-                final Move newMove = new Move(block.blockName(), direction);
+                final Move newMove = new Move(block.name(), direction);
 
                 // Check if nextMove is not a valid Move -> next iteration
                 if (!game.isValidMove(tmpBlockSet, newMove)) {
@@ -175,7 +175,7 @@ public class BFS_WithThreads {
                     // check if a Solution was found -> save the current GameState + MoveList and return
                     if (game.checkWinCondition(tmpBlockSet)) {
                         foundASolution = true;
-                        solution = new GameState(new BlockSet(tmpBlockSet), newMoveList);
+                        solutionMoveList = newMoveList;
                         return;
                     }
                 }

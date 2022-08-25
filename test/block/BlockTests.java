@@ -29,7 +29,7 @@ public class BlockTests {
                     new Color(255, 0, 0),
                     MovePattern.ALL_DIRECTIONS,
                     true,
-                    new PositionsInfo(new Position(3, 3), 3, Direction.U, true))
+                    new PositionListInfo(new Position(3, 3), 3, Direction.U, true))
             );
 
         final String expectedName = "T4";
@@ -45,9 +45,9 @@ public class BlockTests {
 
         assertAll(
             () -> assertTrue(actual.isMainBlock()),
-            () -> assertEquals(expectedName, actual.blockName()),
+            () -> assertEquals(expectedName, actual.name()),
             () -> assertEquals(expectedColor, actual.color()),
-            () -> assertEquals(expectedPositions, actual.positionList()),
+            () -> assertEquals(expectedPositions, actual.positions()),
             () -> assertEquals(expectedMovePattern, actual.movePattern())
         );
     }
@@ -66,7 +66,7 @@ public class BlockTests {
                     new Color(155, 0, 0),
                     MovePattern.ALL_DIRECTIONS,
                     false,
-                    new PositionsInfo(new Position(3, 3), 3, Direction.U, false))
+                    new PositionListInfo(new Position(3, 3), 3, Direction.U, false))
             );
 
             assertTrue(block.containsPosition(pos));
@@ -82,7 +82,7 @@ public class BlockTests {
                     new Color(155, 0, 0),
                     MovePattern.ALL_DIRECTIONS,
                     false,
-                    new PositionsInfo(new Position(3, 3), 3, Direction.U, false))
+                    new PositionListInfo(new Position(3, 3), 3, Direction.U, false))
             );
 
         final Block expected =
@@ -92,7 +92,7 @@ public class BlockTests {
                     new Color(155, 0, 0),
                     MovePattern.ALL_DIRECTIONS,
                     false,
-                    new PositionsInfo(new Position(3, 1), 3, Direction.U, false))
+                    new PositionListInfo(new Position(3, 1), 3, Direction.U, false))
             );
 
         actual.moveTowards(Direction.D, Direction.D);
@@ -113,7 +113,7 @@ public class BlockTests {
                     new Color(155, 0, 0),
                     MovePattern.ALL_DIRECTIONS,
                     false,
-                    new PositionsInfo(new Position(3, 3), 3, Direction.D, false))
+                    new PositionListInfo(new Position(3, 3), 3, Direction.D, false))
             );
 
         final Block block2 =
@@ -123,7 +123,7 @@ public class BlockTests {
                     new Color(123, 0, 43),
                     MovePattern.ALL_DIRECTIONS,
                     false,
-                    new PositionsInfo(new Position(3, 1), 3, Direction.U, false))
+                    new PositionListInfo(new Position(3, 1), 3, Direction.U, false))
             );
 
         assertEquals(block1, block2);
@@ -139,7 +139,7 @@ public class BlockTests {
                     new Color(155, 0, 0),
                     MovePattern.ALL_DIRECTIONS,
                     false,
-                    new PositionsInfo(new Position(3, 3), 2, Direction.D, false))
+                    new PositionListInfo(new Position(3, 3), 2, Direction.D, false))
             );
 
         final Block block2 =
@@ -149,7 +149,7 @@ public class BlockTests {
                     new Color(123, 0, 43),
                     MovePattern.ALL_DIRECTIONS,
                     false,
-                    new PositionsInfo(new Position(3, 1), 3, Direction.U, false))
+                    new PositionListInfo(new Position(3, 1), 3, Direction.U, false))
             );
 
         assertNotEquals(block1, block2);
@@ -165,7 +165,7 @@ public class BlockTests {
                     new Color(155, 0, 0),
                     MovePattern.DOWN_UP_DIRECTIONS,
                     false,
-                    new PositionsInfo(new Position(3, 3), 3, Direction.D, false))
+                    new PositionListInfo(new Position(3, 3), 3, Direction.D, false))
             );
 
         final Block block2 =
@@ -175,7 +175,7 @@ public class BlockTests {
                     new Color(123, 0, 43),
                     MovePattern.DOWN_UP_DIRECTIONS,
                     true,
-                    new PositionsInfo(new Position(3, 1), 3, Direction.U, false))
+                    new PositionListInfo(new Position(3, 1), 3, Direction.U, false))
             );
 
         assertNotEquals(block1, block2);
@@ -191,7 +191,7 @@ public class BlockTests {
                     new Color(155, 0, 0),
                     MovePattern.NO_DIRECTIONS,
                     false,
-                    new PositionsInfo(new Position(3, 3), 3, Direction.D, false))
+                    new PositionListInfo(new Position(3, 3), 3, Direction.D, false))
             );
 
         final Block block2 =
@@ -201,7 +201,7 @@ public class BlockTests {
                     new Color(123, 0, 43),
                     MovePattern.RIGHT_LEFT_DIRECTIONS,
                     false,
-                    new PositionsInfo(new Position(3, 1), 3, Direction.U, false))
+                    new PositionListInfo(new Position(3, 1), 3, Direction.U, false))
             );
 
         assertNotEquals(block1, block2);

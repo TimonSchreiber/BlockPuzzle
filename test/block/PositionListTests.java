@@ -20,7 +20,7 @@ public class PositionListTests {
     public void construct_Square() {
         final PositionList actual =
             new PositionList(
-                new PositionsInfo(
+                new PositionListInfo(
                     new Position(3, 3),
                     1,
                     Direction.D,
@@ -41,7 +41,7 @@ public class PositionListTests {
     public void construct_Rectangle_2() {
         final PositionList actual =
             new PositionList(
-                new PositionsInfo(
+                new PositionListInfo(
                     new Position(1, 2),
                     2,
                     Direction.L,
@@ -63,7 +63,7 @@ public class PositionListTests {
     public void construct_Rectangle_3() {
         final PositionList actual =
             new PositionList(
-                new PositionsInfo(
+                new PositionListInfo(
                     new Position(4, 0),
                     3,
                     Direction.R,
@@ -86,7 +86,7 @@ public class PositionListTests {
     public void construct_Elbow() {
         final PositionList actual =
             new PositionList(
-                new PositionsInfo(
+                new PositionListInfo(
                     new Position(0, 0),
                     3,
                     Direction.U,
@@ -109,7 +109,7 @@ public class PositionListTests {
     public void construct_BigSquare() {
         final PositionList actual =
             new PositionList(
-                new PositionsInfo(
+                new PositionListInfo(
                     new Position(0, 3),
                     4,
                     Direction.U,
@@ -136,7 +136,7 @@ public class PositionListTests {
     public void moveTowards_Rectangle3_Left() {
         final PositionList actual =
             new PositionList(
-                new PositionsInfo(
+                new PositionListInfo(
                     new Position(4, 3),
                     3,
                     Direction.R,
@@ -161,7 +161,7 @@ public class PositionListTests {
     public void moveTowards_LargeSquare_RiaghtAndDown() {
         final PositionList actual =
             new PositionList(
-                new PositionsInfo(
+                new PositionListInfo(
                     new Position(0, 3),
                     4,
                     Direction.U,
@@ -191,7 +191,7 @@ public class PositionListTests {
         final Position p = new Position(0, 1);
         final PositionList pl =
             new PositionList(
-                new PositionsInfo(
+                new PositionListInfo(
                     new Position(0, 0),
                     3,
                     Direction.U,
@@ -209,7 +209,7 @@ public class PositionListTests {
     public void compareTo_DifferentSizes_BiggerListComesFirst() {
         final PositionList pl1 =
             new PositionList(
-                new PositionsInfo(
+                new PositionListInfo(
                     new Position(2, 3),
                     3,
                     Direction.D,
@@ -218,7 +218,7 @@ public class PositionListTests {
 
         final PositionList pl2 =
             new PositionList(
-                new PositionsInfo(
+                new PositionListInfo(
                     new Position(2, 3),
                     2,
                     Direction.D,
@@ -234,7 +234,7 @@ public class PositionListTests {
 
         final PositionList pl1 =
             new PositionList(
-                new PositionsInfo(
+                new PositionListInfo(
                     new Position(1, 1),
                     3,
                     Direction.R,
@@ -242,7 +242,7 @@ public class PositionListTests {
                 ));
         final PositionList pl2 =
             new PositionList(
-                new PositionsInfo(
+                new PositionListInfo(
                     new Position(2, 3),
                     3,
                     Direction.D,

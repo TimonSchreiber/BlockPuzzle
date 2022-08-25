@@ -17,7 +17,7 @@ public sealed abstract class Game
     // -------------------------------------------------------------------------
 
     /** A BlockSet. */
-    protected final BlockSet blockSet;
+    protected final BlockSet blocks;
 
     /** A GameField to play on. */
     protected final GameField gameField;
@@ -32,7 +32,7 @@ public sealed abstract class Game
      * @param gameNumber    the gameNumber
      */
     protected Game(final BlockSet blockSet, final GameField gameField, final int gameNumber) {
-        this.blockSet   = blockSet;
+        this.blocks     = blockSet;
         this.gameField  = gameField;
 
         this.setUp(gameNumber);
@@ -47,8 +47,8 @@ public sealed abstract class Game
      *
      * @return  The BlockSet
      */
-    public BlockSet blockSet() {
-        return new BlockSet(blockSet);
+    public BlockSet blocks() {
+        return new BlockSet(blocks);
     }
 
     // -------------------------------------------------------------------------
@@ -69,18 +69,18 @@ public sealed abstract class Game
     /**
      * Shows the Solution from Start to End with a time delay between two Moves.
      *
-     * @param moveList      a List of the Moves to the solution
+     * @param moves     a List of the Moves to the solution
      */
-    public void showSolution(final List<Move> moveList, final int delay) {
+    public void showSolution(final List<Move> moves, final int delay) {
 
         int i = 0;
 
         draw(5 * delay);
 
-        for (final Move move : moveList) {
+        for (final Move move : moves) {
             isValidMove(move);
             draw(delay);
-            System.out.println(++i + "/" + moveList.size() + ": " + move);
+            System.out.println(++i + "/" + moves.size() + ": " + move);
         }
 
         return;
@@ -95,12 +95,12 @@ public sealed abstract class Game
 
     // check this BlockSet
     public boolean checkWinCondition() {
-        return gameField.checkWinCondition(blockSet);
+        return gameField.checkWinCondition(blocks);
     }
 
     // check a BlockSet
-    public boolean checkWinCondition(final BlockSet blockSet) {
-        return gameField.checkWinCondition(blockSet);
+    public boolean checkWinCondition(final BlockSet blocks) {
+        return gameField.checkWinCondition(blocks);
     }
 
     // ----------------
@@ -108,12 +108,12 @@ public sealed abstract class Game
 
     // move this BlockSet
     public boolean isValidMove(final Move move) {
-        return gameField.isValidMove(blockSet, move);
+        return gameField.isValidMove(blocks, move);
     }
 
     // move a BlockSet
-    public boolean isValidMove(final BlockSet blockSet, final Move move) {
-        return gameField.isValidMove(blockSet, move);
+    public boolean isValidMove(final BlockSet blocks, final Move move) {
+        return gameField.isValidMove(blocks, move);
     }
 
     // ----------------
@@ -121,12 +121,12 @@ public sealed abstract class Game
 
     // print this BlockSet
     public void print() {
-        gameField.print(blockSet);
+        gameField.print(blocks);
     }
 
     // draw this BlockSet
     public void draw(final int delay) {
-        gameField.draw(blockSet, delay);
+        gameField.draw(blocks, delay);
     }
 
 }   // Game abstract class

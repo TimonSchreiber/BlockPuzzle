@@ -1,7 +1,5 @@
-import java.util.List;
 import java.util.Scanner;
 
-import field.Direction;
 import game.DirtyDozen;
 import game.Game;
 import game.JumpingRabbits;
@@ -33,12 +31,10 @@ public class App {
 
     public static void main(String[] args) {
 
-        System.out.println(List.of(Direction.values()));
-
         try (final Scanner scanner = new Scanner(System.in)) {
-            final String gameType = "J";  // D=DirtyDozen; J=HumpingRabbits; R=RushHour
+            final String gameType = "D";  // D=DirtyDozen; J=HumpingRabbits; R=RushHour
             final String solvType = "B";  // D=Depth; B=Breadth; T=Threads; M=Manual
-            final int gameNumber = 1;
+            final int gameNumber = 8;
 
             System.out.println("Game Number: " + gameNumber);
 

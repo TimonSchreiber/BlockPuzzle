@@ -14,7 +14,7 @@ import block.Block;
 import block.BlockInfo;
 import block.Position;
 import block.PositionList;
-import block.PositionsInfo;
+import block.PositionListInfo;
 import canvas.CanvasInfo;
 import canvas.Rectangle;
 
@@ -61,7 +61,7 @@ public class GameFieldTests {
                     null,
                     null,
                     false,
-                    new PositionsInfo(
+                    new PositionListInfo(
                         new Position(0, 0),
                         2,
                         Direction.R,
@@ -85,7 +85,7 @@ public class GameFieldTests {
                     null,
                     null,
                     true,
-                    new PositionsInfo(
+                    new PositionListInfo(
                         new Position(1, 0),
                         2,
                         Direction.R,
@@ -112,7 +112,7 @@ public class GameFieldTests {
                     null,
                     MovePattern.ALL_DIRECTIONS,
                     false,
-                    new PositionsInfo(
+                    new PositionListInfo(
                         new Position(0, 0),
                         2,
                         Direction.R,
@@ -128,7 +128,7 @@ public class GameFieldTests {
                     null,
                     MovePattern.ALL_DIRECTIONS,
                     false,
-                    new PositionsInfo(
+                    new PositionListInfo(
                         new Position(0, 1),
                         2,
                         Direction.R,
@@ -152,7 +152,7 @@ public class GameFieldTests {
                     null,
                     null,
                     false,
-                    new PositionsInfo(
+                    new PositionListInfo(
                         new Position(0, 0),
                         2,
                         Direction.R,
@@ -168,7 +168,7 @@ public class GameFieldTests {
                     null,
                     null,
                     false,
-                    new PositionsInfo(
+                    new PositionListInfo(
                         new Position(0, 1),
                         2,
                         Direction.R,
@@ -214,7 +214,7 @@ public class GameFieldTests {
                     null,
                     null,
                     false,
-                    new PositionsInfo(
+                    new PositionListInfo(
                         new Position(0, 0),
                         2,
                         Direction.R,
@@ -230,7 +230,7 @@ public class GameFieldTests {
                     null,
                     null,
                     false,
-                    new PositionsInfo(
+                    new PositionListInfo(
                         new Position(0, 1),
                         2,
                         Direction.R,
@@ -254,7 +254,7 @@ public class GameFieldTests {
                     null,
                     null,
                     false,
-                    new PositionsInfo(
+                    new PositionListInfo(
                         new Position(0, 0),
                         2,
                         Direction.R,
@@ -270,7 +270,7 @@ public class GameFieldTests {
                     null,
                     null,
                     false,
-                    new PositionsInfo(
+                    new PositionListInfo(
                         new Position(0, 1),
                         2,
                         Direction.R,

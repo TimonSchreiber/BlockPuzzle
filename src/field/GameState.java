@@ -14,7 +14,7 @@ public final class GameState {
     // -------------------------------------------------------------------------
 
     /** The BlockSet */
-    private final BlockSet blockSet;
+    private final BlockSet blocks;
 
     /** A LinkedList of Moves */
     private final List<Move> moves;
@@ -26,21 +26,21 @@ public final class GameState {
     /**
      * Class constructor copying a BlockSet and creating an empty List of Moves.
      *
-     * @param blockSet  The BlockSet.
+     * @param blocks  The BlockSet.
      */
-    public GameState(final BlockSet blockSet) {
-        this.blockSet   = new BlockSet(blockSet);
-        this.moves      = new LinkedList<>();
+    public GameState(final BlockSet blocks) {
+        this.blocks = new BlockSet(blocks);
+        this.moves  = new LinkedList<>();
     }
 
     /**
      * Class constructor copying a BlockSet and a List of Moves.
      *
-     * @param blockSet  The BlockSet
+     * @param blocks    The BlockSet
      * @param moves     The List of Moves
      */
-    public GameState(final BlockSet blockSet, final List<Move> moves) {
-        this.blockSet   = new BlockSet(blockSet);
+    public GameState(final BlockSet blocks, final List<Move> moves) {
+        this.blocks   = new BlockSet(blocks);
         this.moves      = new LinkedList<>();
         
         for (final Move move : moves) {
@@ -57,8 +57,8 @@ public final class GameState {
      *
      * @return  The BlockSet
      */
-    public BlockSet blockSet() {
-        return new BlockSet(blockSet);
+    public BlockSet blocks() {
+        return new BlockSet(blocks);
     }
 
     /**
@@ -118,9 +118,9 @@ public final class GameState {
         // Object must be PositionList at this point
         final GameState other = (GameState) obj;
 
-        return  ((blockSet == other.blockSet)
-                    || ((blockSet != null)
-                        && blockSet.equals(other.blockSet)))
+        return  ((blocks == other.blocks)
+                    || ((blocks != null)
+                        && blocks.equals(other.blocks)))
                 && ((moves == other.moves)
                     || ((moves != null)
                         && moves.equals(other.moves)));
@@ -134,7 +134,7 @@ public final class GameState {
         final int PRIME = 31;
         int hash = 7;
 
-        hash = PRIME * hash + ((blockSet == null) ? 0 : blockSet.hashCode());
+        hash = PRIME * hash + ((blocks == null) ? 0 : blocks.hashCode());
         hash = PRIME * hash + ((moves == null) ? 0 : moves.hashCode());
 
         return hash;
@@ -149,7 +149,7 @@ public final class GameState {
      */
     @Override
     public String toString() {
-        return "GameState [blockSet=" + blockSet + ", moves=" + moves + "]";
+        return "GameState [blockSet=" + blocks + ", moves=" + moves + "]";
     }
 
 }   // GameState class

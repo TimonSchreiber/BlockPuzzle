@@ -12,6 +12,6 @@ public record BlockInfo(
     Color color,
     MovePattern movePattern,
     boolean isMainBlock,
-    PositionsInfo positionsInfo
+    PositionListInfo positionsInfo
 ) {
 }   // Block Info record

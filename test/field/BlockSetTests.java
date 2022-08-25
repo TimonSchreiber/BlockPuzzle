@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 import block.Block;
 import block.BlockInfo;
 import block.Position;
-import block.PositionsInfo;
+import block.PositionListInfo;
 
 public class BlockSetTests {
 
@@ -34,25 +34,25 @@ public class BlockSetTests {
                 null,
                 MovePattern.ALL_DIRECTIONS,
                 true,
-                new PositionsInfo(new Position(3, 2), 1, Direction.D, false)),
+                new PositionListInfo(new Position(3, 2), 1, Direction.D, false)),
             new BlockInfo(
                 "M1",
                 null,
                 MovePattern.NO_DIRECTIONS,
                 false,
-                new PositionsInfo(new Position(3, 3), 1, Direction.D, false)),
+                new PositionListInfo(new Position(3, 3), 1, Direction.D, false)),
             new BlockInfo(
                 "M2",
                 null,
                 MovePattern.NO_DIRECTIONS,
                 false,
-                new PositionsInfo(new Position(1, 4), 1, Direction.D, false)),
+                new PositionListInfo(new Position(1, 4), 1, Direction.D, false)),
             new BlockInfo(
                 "M3",
                 null,
                 MovePattern.NO_DIRECTIONS,
                 false,
-                new PositionsInfo(new Position(2, 4), 1, Direction.D, false))
+                new PositionListInfo(new Position(2, 4), 1, Direction.D, false))
     );
 
     private BlockSet blockSet;
@@ -105,7 +105,7 @@ public class BlockSetTests {
         final String expected = "M2";
         
         final Position position = new Position(1, 4);
-        final String actual = blockSet.getBlocknameByPosition(position);
+        final String actual = blockSet.getNameByPosition(position);
 
         assertEquals(expected, actual);
     }
@@ -114,7 +114,7 @@ public class BlockSetTests {
     @DisplayName("getBlockName Should return null if there is no Block at the Position")
     public void getBlockName_incorrectPosition() {
         final Position position = new Position(0, 4);
-        final String blockName = blockSet.getBlocknameByPosition(position);
+        final String blockName = blockSet.getNameByPosition(position);
 
         assertNull(blockName);
     }
@@ -128,7 +128,7 @@ public class BlockSetTests {
                 null,
                 MovePattern.NO_DIRECTIONS,
                 false,
-                new PositionsInfo(new Position(1, 4), 1, Direction.D, false))
+                new PositionListInfo(new Position(1, 4), 1, Direction.D, false))
         );
 
         final String blockName = "M2";
@@ -158,7 +158,7 @@ public class BlockSetTests {
                     null,
                     MovePattern.ALL_DIRECTIONS,
                     true,
-                    new PositionsInfo(
+                    new PositionListInfo(
                         new Position(3, 2),
                         1,
                         Direction.D,

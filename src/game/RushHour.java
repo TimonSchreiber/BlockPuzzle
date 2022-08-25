@@ -8,7 +8,7 @@ import block.Block;
 import block.BlockInfo;
 import block.Position;
 import block.PositionList;
-import block.PositionsInfo;
+import block.PositionListInfo;
 import canvas.CanvasInfo;
 import canvas.Rectangle;
 import field.BlockSet;
@@ -30,7 +30,7 @@ public final class RushHour extends Game {
 
     /** Preset win condition as a PositionList */
     private static final
-    PositionList WIN_CONDITION =
+    PositionList WIN_AREA =
         new PositionList(
             List.of(
                 new Position(4, 3),
@@ -53,7 +53,7 @@ public final class RushHour extends Game {
 
     /** Map of a List of BlockInfos */
     private static final
-    Map<Integer, List<BlockInfo>> START_POSITION_MAP;
+    Map<Integer, List<BlockInfo>> INT_TO_BLOCKINFOS_MAP;
 
     // -------------------------------------------------------------------------
     // CONSTRUCTOR
@@ -67,7 +67,7 @@ public final class RushHour extends Game {
     public RushHour(final int gameNumber) {
         super(
             new BlockSet(),
-            new GameField(SIZE, SIZE, WIN_CONDITION, CANVAS_INFO),
+            new GameField(SIZE, SIZE, WIN_AREA, CANVAS_INFO),
             gameNumber
         );
     }
@@ -78,12 +78,12 @@ public final class RushHour extends Game {
 
     @Override
     protected void setUp(final int gameNumber) {
-        START_POSITION_MAP
+        INT_TO_BLOCKINFOS_MAP
             .get(gameNumber)
             .forEach(
                 blockInfo -> {
-                    blockSet.add(new Block(blockInfo));
-                    gameField.draw(blockSet, 100);    // FIXME: make this a choice of the user -> if(...) {draw()}
+                    blocks.add(new Block(blockInfo));
+                    gameField.draw(blocks, 100);    // FIXME: make this a choice of the user -> if(...) {draw()}
                     // or if(..) {delay = xxx}
                 }
             );
@@ -179,269 +179,269 @@ public final class RushHour extends Game {
         // ---------------------------------------------------------------------
         // GAMES
 
-        START_POSITION_MAP =
-        Map.ofEntries(
-            Map.entry(
-            /* Game 0 - 16 Moves
-             * Beginner 1
-             * C3 C3 __ __ __ T4
-             * T2 __ __ T3 __ T4
-             * T2 R1 R1 T3 __ T4
-             * T2 __ __ T3 __ __
-             * C1 __ __ __ C2 C2
-             * C1 __ T1 T1 T1 __
-             */
-                0,
-                List.of(
-                    new BlockInfo(
-                        R1,
-                        RED_CAR,
-                        MovePattern.RIGHT_LEFT_DIRECTIONS,
-                        true,
-                        new PositionsInfo(P1_3, 2, Direction.R, false)),
-                    new BlockInfo(
-                        C1,
-                        CAR_1,
-                        MovePattern.DOWN_UP_DIRECTIONS,
-                        false,
-                        new PositionsInfo(P0_0, 2, Direction.U, false)),
-                    new BlockInfo(
-                        C2,
-                        CAR_2,
-                        MovePattern.RIGHT_LEFT_DIRECTIONS,
-                        false,
-                        new PositionsInfo(P4_1, 2, Direction.R, false)),
-                    new BlockInfo(
-                        C3,
-                        CAR_3,
-                        MovePattern.RIGHT_LEFT_DIRECTIONS,
-                        false,
-                        new PositionsInfo(P0_5, 2, Direction.R, false)),
-                    new BlockInfo(
-                        T1,
-                        TRUCK_1,
-                        MovePattern.RIGHT_LEFT_DIRECTIONS,
-                        false,
-                        new PositionsInfo(P2_0, 3, Direction.R, false)),
-                    new BlockInfo(
-                        T2,
-                        TRUCK_2,
-                        MovePattern.DOWN_UP_DIRECTIONS,
-                        false,
-                        new PositionsInfo(P0_2, 3, Direction.U, false)),
-                    new BlockInfo(
-                        T3,
-                        TRUCK_3,
-                        MovePattern.DOWN_UP_DIRECTIONS,
-                        false,
-                        new PositionsInfo(P3_2, 3, Direction.U, false)),
-                    new BlockInfo(
-                        T4,
-                        TRUCK_4,
-                        MovePattern.DOWN_UP_DIRECTIONS,
-                        false,
-                        new PositionsInfo(P5_3, 3, Direction.U, false))
+        INT_TO_BLOCKINFOS_MAP =
+            Map.ofEntries(
+                Map.entry(
+                /* Game 0 - 16 Moves
+                * Beginner 1
+                * C3 C3 __ __ __ T4
+                * T2 __ __ T3 __ T4
+                * T2 R1 R1 T3 __ T4
+                * T2 __ __ T3 __ __
+                * C1 __ __ __ C2 C2
+                * C1 __ T1 T1 T1 __
+                */
+                    0,
+                    List.of(
+                        new BlockInfo(
+                            R1,
+                            RED_CAR,
+                            MovePattern.RIGHT_LEFT_DIRECTIONS,
+                            true,
+                            new PositionListInfo(P1_3, 2, Direction.R, false)),
+                        new BlockInfo(
+                            C1,
+                            CAR_1,
+                            MovePattern.DOWN_UP_DIRECTIONS,
+                            false,
+                            new PositionListInfo(P0_0, 2, Direction.U, false)),
+                        new BlockInfo(
+                            C2,
+                            CAR_2,
+                            MovePattern.RIGHT_LEFT_DIRECTIONS,
+                            false,
+                            new PositionListInfo(P4_1, 2, Direction.R, false)),
+                        new BlockInfo(
+                            C3,
+                            CAR_3,
+                            MovePattern.RIGHT_LEFT_DIRECTIONS,
+                            false,
+                            new PositionListInfo(P0_5, 2, Direction.R, false)),
+                        new BlockInfo(
+                            T1,
+                            TRUCK_1,
+                            MovePattern.RIGHT_LEFT_DIRECTIONS,
+                            false,
+                            new PositionListInfo(P2_0, 3, Direction.R, false)),
+                        new BlockInfo(
+                            T2,
+                            TRUCK_2,
+                            MovePattern.DOWN_UP_DIRECTIONS,
+                            false,
+                            new PositionListInfo(P0_2, 3, Direction.U, false)),
+                        new BlockInfo(
+                            T3,
+                            TRUCK_3,
+                            MovePattern.DOWN_UP_DIRECTIONS,
+                            false,
+                            new PositionListInfo(P3_2, 3, Direction.U, false)),
+                        new BlockInfo(
+                            T4,
+                            TRUCK_4,
+                            MovePattern.DOWN_UP_DIRECTIONS,
+                            false,
+                            new PositionListInfo(P5_3, 3, Direction.U, false))
+                    )
+                ),
+                Map.entry(
+                /* Game 1 - 56 Moves
+                * Intermediate 11
+                * T3 C3 C3 T4 __ __
+                * T3 __ __ T4 __ __
+                * T3 R1 R1 T4 __ __
+                * __ __ C2 T2 T2 T2
+                * __ __ C2 __ __ C1
+                * __ __ T1 T1 T1 C1
+                */
+                    1,
+                    List.of(
+                        new BlockInfo(
+                            R1,
+                            RED_CAR,
+                            MovePattern.RIGHT_LEFT_DIRECTIONS,
+                            true,
+                            new PositionListInfo(P1_3, 2, Direction.R, false)),
+                        new BlockInfo(
+                            C1,
+                            CAR_1,
+                            MovePattern.DOWN_UP_DIRECTIONS,
+                            false,
+                            new PositionListInfo(P5_0, 2, Direction.U, false)),
+                        new BlockInfo(
+                            C2,
+                            CAR_2,
+                            MovePattern.DOWN_UP_DIRECTIONS,
+                            false,
+                            new PositionListInfo(P2_1, 2, Direction.U, false)),
+                        new BlockInfo(
+                            C3,
+                            CAR_3,
+                            MovePattern.RIGHT_LEFT_DIRECTIONS,
+                            false,
+                            new PositionListInfo(P1_5, 2, Direction.R, false)),
+                        new BlockInfo(
+                            T1,
+                            TRUCK_1,
+                            MovePattern.RIGHT_LEFT_DIRECTIONS,
+                            false,
+                            new PositionListInfo(P2_0, 3, Direction.R, false)),
+                        new BlockInfo(
+                            T2,
+                            TRUCK_2,
+                            MovePattern.RIGHT_LEFT_DIRECTIONS,
+                            false,
+                            new PositionListInfo(P3_2, 3, Direction.R, false)),
+                        new BlockInfo(
+                            T3,
+                            TRUCK_3,
+                            MovePattern.DOWN_UP_DIRECTIONS,
+                            false,
+                            new PositionListInfo(P0_3, 3, Direction.U, false)),
+                        new BlockInfo(
+                            T4,
+                            TRUCK_4,
+                            MovePattern.DOWN_UP_DIRECTIONS,
+                            false,
+                            new PositionListInfo(P3_3, 3, Direction.U, false))
+                    )
+                ),
+                Map.entry(
+                /* Game 2 - 49 Moves
+                * Advanced 21
+                * C2 C2 C1 T4 __ __
+                * T2 __ C1 T4 __ __
+                * T2 R1 R1 T4 __ __
+                * T2 T3 T3 T3 __ __
+                * __ __ __ __ __ __
+                * __ __ __ T1 T1 T1
+                */
+                    2,
+                    List.of(
+                        new BlockInfo(
+                            R1,
+                            RED_CAR,
+                            MovePattern.RIGHT_LEFT_DIRECTIONS,
+                            true,
+                            new PositionListInfo(P1_3, 2, Direction.R, false)),
+                        new BlockInfo(
+                            C1,
+                            CAR_1,
+                            MovePattern.DOWN_UP_DIRECTIONS,
+                            false,
+                            new PositionListInfo(P2_4, 2, Direction.U, false)),
+                        new BlockInfo(
+                            C2,
+                            CAR_2,
+                            MovePattern.RIGHT_LEFT_DIRECTIONS,
+                            false,
+                            new PositionListInfo(P0_5, 2, Direction.R, false)),
+                        new BlockInfo(
+                            T1,
+                            TRUCK_1,
+                            MovePattern.RIGHT_LEFT_DIRECTIONS,
+                            false,
+                            new PositionListInfo(P3_0, 3, Direction.R, false)),
+                        new BlockInfo(
+                            T2,
+                            TRUCK_2,
+                            MovePattern.DOWN_UP_DIRECTIONS,
+                            false,
+                            new PositionListInfo(P0_2, 3, Direction.U, false)),
+                        new BlockInfo(
+                            T3,
+                            TRUCK_3,
+                            MovePattern.RIGHT_LEFT_DIRECTIONS,
+                            false,
+                            new PositionListInfo(P1_2, 3, Direction.R, false)),
+                        new BlockInfo(
+                            T4,
+                            TRUCK_4,
+                            MovePattern.DOWN_UP_DIRECTIONS,
+                            false,
+                            new PositionListInfo(P3_3, 3, Direction.U, false))
+                    )
+                ),
+                Map.entry(
+                /* Game 3 - 69 Moves
+                * Expert 31
+                * C6 C6 __ T4 T4 T4
+                * __ __ __ C4 C5 C5
+                * C2 R1 R1 C4 __ T3
+                * C2 __ T1 C3 C3 T3
+                * C1 C1 T1 __ __ T3
+                * __ __ T1 T2 T2 T2
+                */
+                    3,
+                    List.of(
+                        new BlockInfo(
+                            R1,
+                            RED_CAR,
+                            MovePattern.RIGHT_LEFT_DIRECTIONS,
+                            true,
+                            new PositionListInfo(P1_3, 2, Direction.R, false)),
+                        new BlockInfo(
+                            C1,
+                            CAR_1,
+                            MovePattern.RIGHT_LEFT_DIRECTIONS,
+                            false,
+                            new PositionListInfo(P0_1, 2, Direction.R, false)),
+                        new BlockInfo(
+                            C2,
+                            CAR_2,
+                            MovePattern.DOWN_UP_DIRECTIONS,
+                            false,
+                            new PositionListInfo(P0_2, 2, Direction.U, false)),
+                        new BlockInfo(
+                            C3,
+                            CAR_3,
+                            MovePattern.RIGHT_LEFT_DIRECTIONS,
+                            false,
+                            new PositionListInfo(P3_2, 2, Direction.R, false)),
+                        new BlockInfo(
+                            C4,
+                            CAR_4,
+                            MovePattern.DOWN_UP_DIRECTIONS,
+                            false,
+                            new PositionListInfo(P3_3, 2, Direction.U, false)),
+                        new BlockInfo(
+                            C5,
+                            CAR_5,
+                            MovePattern.RIGHT_LEFT_DIRECTIONS,
+                            false,
+                            new PositionListInfo(P4_4, 2, Direction.R, false)),
+                        new BlockInfo(
+                            C6,
+                            CAR_6,
+                            MovePattern.RIGHT_LEFT_DIRECTIONS,
+                            false,
+                            new PositionListInfo(P0_5, 2, Direction.R, false)),
+                        new BlockInfo(
+                            T1,
+                            TRUCK_1,
+                            MovePattern.DOWN_UP_DIRECTIONS,
+                            false,
+                            new PositionListInfo(P2_0, 3, Direction.U, false)),
+                        new BlockInfo(
+                            T2,
+                            TRUCK_2,
+                            MovePattern.RIGHT_LEFT_DIRECTIONS,
+                            false,
+                            new PositionListInfo(P3_0, 3, Direction.R, false)),
+                        new BlockInfo(
+                            T3,
+                            TRUCK_3,
+                            MovePattern.DOWN_UP_DIRECTIONS,
+                            false,
+                            new PositionListInfo(P5_1, 3, Direction.U, false)),
+                        new BlockInfo(
+                            T4,
+                            TRUCK_4,
+                            MovePattern.RIGHT_LEFT_DIRECTIONS,
+                            false,
+                            new PositionListInfo(P3_5, 3, Direction.R, false))
+                    )
                 )
-            ),
-            Map.entry(
-            /* Game 1 - 56 Moves
-             * Intermediate 11
-             * T3 C3 C3 T4 __ __
-             * T3 __ __ T4 __ __
-             * T3 R1 R1 T4 __ __
-             * __ __ C2 T2 T2 T2
-             * __ __ C2 __ __ C1
-             * __ __ T1 T1 T1 C1
-             */
-                1,
-                List.of(
-                    new BlockInfo(
-                        R1,
-                        RED_CAR,
-                        MovePattern.RIGHT_LEFT_DIRECTIONS,
-                        true,
-                        new PositionsInfo(P1_3, 2, Direction.R, false)),
-                    new BlockInfo(
-                        C1,
-                        CAR_1,
-                        MovePattern.DOWN_UP_DIRECTIONS,
-                        false,
-                        new PositionsInfo(P5_0, 2, Direction.U, false)),
-                    new BlockInfo(
-                        C2,
-                        CAR_2,
-                        MovePattern.DOWN_UP_DIRECTIONS,
-                        false,
-                        new PositionsInfo(P2_1, 2, Direction.U, false)),
-                    new BlockInfo(
-                        C3,
-                        CAR_3,
-                        MovePattern.RIGHT_LEFT_DIRECTIONS,
-                        false,
-                        new PositionsInfo(P1_5, 2, Direction.R, false)),
-                    new BlockInfo(
-                        T1,
-                        TRUCK_1,
-                        MovePattern.RIGHT_LEFT_DIRECTIONS,
-                        false,
-                        new PositionsInfo(P2_0, 3, Direction.R, false)),
-                    new BlockInfo(
-                        T2,
-                        TRUCK_2,
-                        MovePattern.RIGHT_LEFT_DIRECTIONS,
-                        false,
-                        new PositionsInfo(P3_2, 3, Direction.R, false)),
-                    new BlockInfo(
-                        T3,
-                        TRUCK_3,
-                        MovePattern.DOWN_UP_DIRECTIONS,
-                        false,
-                        new PositionsInfo(P0_3, 3, Direction.U, false)),
-                    new BlockInfo(
-                        T4,
-                        TRUCK_4,
-                        MovePattern.DOWN_UP_DIRECTIONS,
-                        false,
-                        new PositionsInfo(P3_3, 3, Direction.U, false))
-                )
-            ),
-            Map.entry(
-            /* Game 2 - 49 Moves
-             * Advanced 21
-             * C2 C2 C1 T4 __ __
-             * T2 __ C1 T4 __ __
-             * T2 R1 R1 T4 __ __
-             * T2 T3 T3 T3 __ __
-             * __ __ __ __ __ __
-             * __ __ __ T1 T1 T1
-             */
-                2,
-                List.of(
-                    new BlockInfo(
-                        R1,
-                        RED_CAR,
-                        MovePattern.RIGHT_LEFT_DIRECTIONS,
-                        true,
-                        new PositionsInfo(P1_3, 2, Direction.R, false)),
-                    new BlockInfo(
-                        C1,
-                        CAR_1,
-                        MovePattern.DOWN_UP_DIRECTIONS,
-                        false,
-                        new PositionsInfo(P2_4, 2, Direction.U, false)),
-                    new BlockInfo(
-                        C2,
-                        CAR_2,
-                        MovePattern.RIGHT_LEFT_DIRECTIONS,
-                        false,
-                        new PositionsInfo(P0_5, 2, Direction.R, false)),
-                    new BlockInfo(
-                        T1,
-                        TRUCK_1,
-                        MovePattern.RIGHT_LEFT_DIRECTIONS,
-                        false,
-                        new PositionsInfo(P3_0, 3, Direction.R, false)),
-                    new BlockInfo(
-                        T2,
-                        TRUCK_2,
-                        MovePattern.DOWN_UP_DIRECTIONS,
-                        false,
-                        new PositionsInfo(P0_2, 3, Direction.U, false)),
-                    new BlockInfo(
-                        T3,
-                        TRUCK_3,
-                        MovePattern.RIGHT_LEFT_DIRECTIONS,
-                        false,
-                        new PositionsInfo(P1_2, 3, Direction.R, false)),
-                    new BlockInfo(
-                        T4,
-                        TRUCK_4,
-                        MovePattern.DOWN_UP_DIRECTIONS,
-                        false,
-                        new PositionsInfo(P3_3, 3, Direction.U, false))
-                )
-            ),
-            Map.entry(
-            /* Game 3 - 69 Moves
-             * Expert 31
-             * C6 C6 __ T4 T4 T4
-             * __ __ __ C4 C5 C5
-             * C2 R1 R1 C4 __ T3
-             * C2 __ T1 C3 C3 T3
-             * C1 C1 T1 __ __ T3
-             * __ __ T1 T2 T2 T2
-             */
-                3,
-                List.of(
-                    new BlockInfo(
-                        R1,
-                        RED_CAR,
-                        MovePattern.RIGHT_LEFT_DIRECTIONS,
-                        true,
-                        new PositionsInfo(P1_3, 2, Direction.R, false)),
-                    new BlockInfo(
-                        C1,
-                        CAR_1,
-                        MovePattern.RIGHT_LEFT_DIRECTIONS,
-                        false,
-                        new PositionsInfo(P0_1, 2, Direction.R, false)),
-                    new BlockInfo(
-                        C2,
-                        CAR_2,
-                        MovePattern.DOWN_UP_DIRECTIONS,
-                        false,
-                        new PositionsInfo(P0_2, 2, Direction.U, false)),
-                    new BlockInfo(
-                        C3,
-                        CAR_3,
-                        MovePattern.RIGHT_LEFT_DIRECTIONS,
-                        false,
-                        new PositionsInfo(P3_2, 2, Direction.R, false)),
-                    new BlockInfo(
-                        C4,
-                        CAR_4,
-                        MovePattern.DOWN_UP_DIRECTIONS,
-                        false,
-                        new PositionsInfo(P3_3, 2, Direction.U, false)),
-                    new BlockInfo(
-                        C5,
-                        CAR_5,
-                        MovePattern.RIGHT_LEFT_DIRECTIONS,
-                        false,
-                        new PositionsInfo(P4_4, 2, Direction.R, false)),
-                    new BlockInfo(
-                        C6,
-                        CAR_6,
-                        MovePattern.RIGHT_LEFT_DIRECTIONS,
-                        false,
-                        new PositionsInfo(P0_5, 2, Direction.R, false)),
-                    new BlockInfo(
-                        T1,
-                        TRUCK_1,
-                        MovePattern.DOWN_UP_DIRECTIONS,
-                        false,
-                        new PositionsInfo(P2_0, 3, Direction.U, false)),
-                    new BlockInfo(
-                        T2,
-                        TRUCK_2,
-                        MovePattern.RIGHT_LEFT_DIRECTIONS,
-                        false,
-                        new PositionsInfo(P3_0, 3, Direction.R, false)),
-                    new BlockInfo(
-                        T3,
-                        TRUCK_3,
-                        MovePattern.DOWN_UP_DIRECTIONS,
-                        false,
-                        new PositionsInfo(P5_1, 3, Direction.U, false)),
-                    new BlockInfo(
-                        T4,
-                        TRUCK_4,
-                        MovePattern.RIGHT_LEFT_DIRECTIONS,
-                        false,
-                        new PositionsInfo(P3_5, 3, Direction.R, false))
-                )
-            )
-        );
+            );
 
     }   // static
 

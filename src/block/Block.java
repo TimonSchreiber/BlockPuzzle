@@ -18,13 +18,13 @@ public final class Block implements Comparable<Block> {
     private final boolean isMainBlock;
 
     /** The name of this Block. */
-    private final String blockName;
+    private final String name;
 
     /** The Color of this Block. */
     private final Color color;
 
     /** A List of all Positions this Block has. */
-    private final PositionList positionList;
+    private final PositionList positions;
 
     /** Defines how this Block can move in a 2D-plane. */
     private final MovePattern movePattern;
@@ -40,9 +40,9 @@ public final class Block implements Comparable<Block> {
      */
     public Block(final BlockInfo blockInfo) {
         this.isMainBlock    = blockInfo.isMainBlock();
-        this.blockName      = blockInfo.name();
+        this.name           = blockInfo.name();
         this.color          = blockInfo.color();
-        this.positionList   = new PositionList(blockInfo.positionsInfo());
+        this.positions      = new PositionList(blockInfo.positionsInfo());
         this.movePattern    = blockInfo.movePattern();
     }
 
@@ -53,9 +53,9 @@ public final class Block implements Comparable<Block> {
      */
     public Block(final Block block) {
         this.isMainBlock    = block.isMainBlock;
-        this.blockName      = block.blockName;
+        this.name           = block.name;
         this.color          = block.color;
-        this.positionList   = new PositionList(block.positionList);
+        this.positions      = new PositionList(block.positions);
         this.movePattern    = block.movePattern;
     }
 
@@ -78,8 +78,8 @@ public final class Block implements Comparable<Block> {
      *
      * @return  A String with this BlockName
      */
-    public String blockName() {
-        return blockName;
+    public String name() {
+        return name;
     }
 
     /**
@@ -96,8 +96,8 @@ public final class Block implements Comparable<Block> {
      *
      * @return  The PositionList of this Block
      */
-    public PositionList positionList() {
-        return new PositionList(positionList);
+    public PositionList positions() {
+        return new PositionList(positions);
     }
 
     /**
@@ -121,7 +121,7 @@ public final class Block implements Comparable<Block> {
      *          Position, {@code false} otehrwise.
      */
     public boolean containsPosition(final Position position) {
-        return positionList.contains(position);
+        return positions.contains(position);
     }
 
     /**
@@ -135,7 +135,7 @@ public final class Block implements Comparable<Block> {
             return;
         }
 
-        positionList.moveTowards(directions);
+        positions.moveTowards(directions);
 
         return;
     }
@@ -163,9 +163,9 @@ public final class Block implements Comparable<Block> {
         final Block other = (Block) obj;
 
         return  (isMainBlock == other.isMainBlock)
-                && ((positionList == other.positionList)
-                    || ((positionList != null)
-                        && positionList.equals(other.positionList)))
+                && ((positions == other.positions)
+                    || ((positions != null)
+                        && positions.equals(other.positions)))
                 && ((movePattern == other.movePattern)
                     || ((movePattern != null)
                         && movePattern.equals(other.movePattern)));
@@ -182,7 +182,7 @@ public final class Block implements Comparable<Block> {
         int hash = 7;
 
         hash = PRIME * hash + Boolean.hashCode(isMainBlock);
-        hash = PRIME * hash + ((positionList == null) ? 0 : positionList.hashCode());
+        hash = PRIME * hash + ((positions == null) ? 0 : positions.hashCode());
         hash = PRIME * hash + ((movePattern == null) ? 0 : movePattern.hashCode());
 
         return hash;
@@ -197,11 +197,11 @@ public final class Block implements Comparable<Block> {
      */
     @Override
     public String toString() {
-        return "Block [blockName=" + blockName
+        return "Block [blockName=" + name
                 + ", color=" + color
                 + ", isMainBlock=" + isMainBlock
                 + ", movePattern=" + movePattern
-                + ", positionList=" + positionList + "]";
+                + ", positionList=" + positions + "]";
     }
 
     // =========================================================================
@@ -220,7 +220,7 @@ public final class Block implements Comparable<Block> {
     public int compareTo(final Block other) {
         return (isMainBlock != other.isMainBlock)
                 ? -Boolean.compare(isMainBlock, other.isMainBlock)
-                : positionList.compareTo(other.positionList);
+                : positions.compareTo(other.positions);
     }
 
 }    // Block class

@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import block.Block;
 import block.BlockInfo;
 import block.Position;
-import block.PositionsInfo;
+import block.PositionListInfo;
 
 public class GameStateTests {
 
@@ -32,25 +32,25 @@ public class GameStateTests {
                 null,
                 MovePattern.ALL_DIRECTIONS,
                 true,
-                new PositionsInfo(new Position(3, 2), 1, Direction.D, false)),
+                new PositionListInfo(new Position(3, 2), 1, Direction.D, false)),
             new BlockInfo(
                 "M1",
                 null,
                 MovePattern.NO_DIRECTIONS,
                 false,
-                new PositionsInfo(new Position(3, 3), 1, Direction.D, false)),
+                new PositionListInfo(new Position(3, 3), 1, Direction.D, false)),
             new BlockInfo(
                 "M2",
                 null,
                 MovePattern.NO_DIRECTIONS,
                 false,
-                new PositionsInfo(new Position(1, 4), 1, Direction.D, false)),
+                new PositionListInfo(new Position(1, 4), 1, Direction.D, false)),
             new BlockInfo(
                 "M3",
                 null,
                 MovePattern.NO_DIRECTIONS,
                 false,
-                new PositionsInfo(new Position(2, 4), 1, Direction.D, false))
+                new PositionListInfo(new Position(2, 4), 1, Direction.D, false))
     );
 
     private GameState gameState;
@@ -91,7 +91,7 @@ public class GameStateTests {
             );
 
         assertAll(
-            () -> assertEquals(expectedBlockSet, gameState.blockSet()),
+            () -> assertEquals(expectedBlockSet, gameState.blocks()),
             () -> assertEquals(expectedMoves, gameState.moves())
         );
     }
