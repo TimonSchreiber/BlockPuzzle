@@ -95,8 +95,7 @@ public final class JumpingRabbits extends Game {
             .forEach(
                 blockInfo -> {
                     blocks.add(new Block(blockInfo));
-                    gameField.draw(blocks, 100);    // FIXME: make this a choice of the user -> if(...) {draw()}
-                    // or if(..) {delay = xxx}
+                    gameField.draw(blocks, 100);
                 }
             );
     }
