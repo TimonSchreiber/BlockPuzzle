@@ -2,7 +2,7 @@ package block;
 
 import field.Direction;
 
-/** TODO: find a better name? just list all the variables maybe? "PositionSizeDirectionAndElbow"
+/**
  * Holds all the information needed for creating the PositionList of a Block.
  */
 public record PositionListInfo(
