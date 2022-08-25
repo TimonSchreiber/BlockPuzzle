@@ -107,27 +107,33 @@ public final class GameField {
      *                  otherwise.
      */
     public boolean isCollisionFree(final BlockSet blockSet, final Move move) {
-        final Block tmpBlock = blockSet.getBlockByName(move.name());
+        final Block block = blockSet.getBlockByName(move.name());
 
-        // check if the Move is valid.
-        if (tmpBlock == null) {
+        // check if the Move is valid by checking if the Block exists.
+        if (block == null) {
             System.err.println("Invalid BlockName: " + move);
             return false;
         }
 
-        for (final Position position : tmpBlock.positions()) {
-            final Position tmpPosition = position.moveTowards(move.direction());
+        // iterate over every Position the Block has
+        for (final Position position : block.positions()) {
+
+            // move the current Position
+            final Position newPosition = position.moveTowards(move.direction());
 
             // Checks if the new Position is outside the GameField
-            if (!isInInterval(tmpPosition)) {
-                return false;   // outside GameField
+            if (!isInInterval(newPosition)) {
+                return false;
             }
 
-            // Checks if there is already a Block at this Positions
-            // If yes, check if it does not have the same name
-            if (blockSet.isBlock(tmpPosition)
-                && !blockSet.getNameByPosition(tmpPosition).equals(tmpBlock.name())) {
-                return false;   // collides with another Block
+            /*
+             * Checks if there is already a Block at the new Positions.
+             * If yes, check if it has a different BlockName.
+             * -> Move collides with another Block
+             */
+            final String name = blockSet.getNameByPosition(newPosition);
+            if (name != null && !name.equals(block.name())) {
+                return false;
             }
         }
 

@@ -148,7 +148,8 @@ public final class JumpingRabbits extends Game {
 
                 //count one up
                 ++numberOfMoves;
-            } while (gameField.isInInterval(tmpPosition) && blocks.isBlock(tmpPosition));
+            } while (gameField.isInInterval(tmpPosition)
+                    && (blocks.getNameByPosition(tmpPosition) != null));
 
         }
 

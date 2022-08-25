@@ -1,10 +1,9 @@
 package field;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
@@ -82,22 +81,6 @@ public class BlockSetTests {
 
     // -------------------------------------------------------------------------
     // Getter
-
-    @Test
-    @DisplayName("isBlock Should be true When there is a Block at the Position")
-    public void isBlock_true() {
-        final Position position = new Position(3, 2);
-        
-        assertTrue(blockSet.isBlock(position));
-    }
-
-    @Test
-    @DisplayName("isBlock Should be false When there is no Block at the Position")
-    public void isBlock_false() {
-        final Position position = new Position(3, 4);
-
-        assertFalse(blockSet.isBlock(position));
-    }
 
     @Test
     @DisplayName("getBlockName Should return the blockName of the Block at the Position")
@@ -178,7 +161,7 @@ public class BlockSetTests {
         final Move move = new Move("R1", Direction.D);
         blockSet.makeMove(move);
 
-        assertTrue(blockSet.isBlock(position));
+        assertNotNull(blockSet.getNameByPosition(position));
     }
 
     @Test

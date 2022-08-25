@@ -47,27 +47,6 @@ public final class BlockSet implements Iterable<Block> {
     // GETTERS
     // -------------------------------------------------------------------------
 
-    /**
-     * Checks if there is a Block in this BlockSet with the same x- and
-     * y-coordinates as one of its Blocks.
-     *
-     * @param position  the Position
-     * @return          {@code true} if there is one Block which has these
-     *                  x- and y-coordinates, {@code false} otherwise
-     */
-    @Deprecated
-    public boolean isBlock(final Position position) {
-        // return this.blocks.stream()
-        //         .anyMatch(block -> block.containsPosition(position));
-
-        for (final Block block : blocks) {
-            if (block.containsPosition(position)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     /** TODO: maybe return an Optional<String> here
      * Returns the Name of the Block with this Position.
      *
