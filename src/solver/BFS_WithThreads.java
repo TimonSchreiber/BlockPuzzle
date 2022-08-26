@@ -145,18 +145,17 @@ public class BFS_WithThreads {
      */
     private void findNewMove(final GameState gameState) {
 
-        // Deconstruction    // TODO: push this inside the for loops
-        final BlockSet tmpBlockSet = gameState.blocks();
-        final List<Move> tmpMoveList = gameState.moves();
+        // Extract the BlockSet out of the GameState
+        final BlockSet newBlockSet = gameState.blocks();
 
-        for (final Block block : tmpBlockSet) {
+        for (final Block block : newBlockSet) {
 
             for (final Direction direction : block.movePattern()) {
 
                 final Move newMove = new Move(block.name(), direction);
 
                 // Check if nextMove is not a valid Move -> next iteration
-                if (!game.isValidMove(tmpBlockSet, newMove)) {
+                if (!game.isValidMove(newBlockSet, newMove)) {
                     continue;
                 }
 
@@ -165,15 +164,15 @@ public class BFS_WithThreads {
                  * -> save the BlockSet
                  * -> create a new GameState and add it to the GameStateQueue
                  */
-                if (!savedBlockSets.contains(new BlockSet(tmpBlockSet))) {  // TODO: why new BlockSet() and not just 'tmpBlockSet'?
+                if (!savedBlockSets.contains(new BlockSet(newBlockSet))) {  // TODO: why new BlockSet() and not just 'newBlockSet'?
 
-                    final List<Move> newMoveList = GameState.addMoveToNewList(tmpMoveList, newMove);
+                    final List<Move> newMoveList = GameState.addMoveToNewList(gameState.moves(), newMove);
 
-                    savedBlockSets.add(new BlockSet(tmpBlockSet));
-                    gameStateQueue.add(new GameState(tmpBlockSet, newMoveList));
+                    savedBlockSets.add(new BlockSet(newBlockSet));
+                    gameStateQueue.add(new GameState(newBlockSet, newMoveList));
 
                     // check if a Solution was found -> save the current GameState + MoveList and return
-                    if (game.checkWinCondition(tmpBlockSet)) {
+                    if (game.checkWinCondition(newBlockSet)) {
                         foundASolution = true;
                         solutionMoveList = newMoveList;
                         return;
@@ -181,7 +180,7 @@ public class BFS_WithThreads {
                 }
 
                 // reverse the last Move to continue looking for new Moves
-                game.isValidMove(tmpBlockSet, newMove.reverse());
+                game.isValidMove(newBlockSet, newMove.reverse());
 
             }    // end for loop Direction
         }    // end for loop Block
