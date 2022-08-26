@@ -14,20 +14,20 @@ public final class Block implements Comparable<Block> {
     // ATTRIBUTES
     // -------------------------------------------------------------------------
 
-    /** Indicates if this Block is a MainBlock. */
-    private final boolean isMainBlock;
-
     /** The name of this Block. */
     private final String name;
 
     /** The Color of this Block. */
     private final Color color;
 
-    /** A List of all Positions this Block has. */
-    private final PositionList positions;
+    /** Indicates if this Block is a MainBlock. */
+    private final boolean isMainBlock;
 
     /** Defines how this Block can move in a 2D-plane. */
     private final MovePattern movePattern;
+
+    /** A List of all Positions this Block has. */
+    private final PositionList positions;
 
     // -------------------------------------------------------------------------
     // CONSTRUCTORS
@@ -39,11 +39,11 @@ public final class Block implements Comparable<Block> {
      * @param blockInfo     The BlockInfo
      */
     public Block(final BlockInfo blockInfo) {
-        this.isMainBlock    = blockInfo.isMainBlock();
         this.name           = blockInfo.name();
         this.color          = blockInfo.color();
-        this.positions      = new PositionList(blockInfo.positionsInfo());
+        this.isMainBlock    = blockInfo.isMainBlock();
         this.movePattern    = blockInfo.movePattern();
+        this.positions      = new PositionList(blockInfo.positionsInfo());
     }
 
     /**
@@ -52,11 +52,11 @@ public final class Block implements Comparable<Block> {
      * @param block        the Block
      */
     public Block(final Block block) {
-        this.isMainBlock    = block.isMainBlock;
         this.name           = block.name;
         this.color          = block.color;
-        this.positions      = new PositionList(block.positions);
+        this.isMainBlock    = block.isMainBlock;
         this.movePattern    = block.movePattern;
+        this.positions      = new PositionList(block.positions);
     }
 
     // -------------------------------------------------------------------------
@@ -197,11 +197,15 @@ public final class Block implements Comparable<Block> {
      */
     @Override
     public String toString() {
-        return "Block [blockName=" + name
-                + ", color=" + color
-                + ", isMainBlock=" + isMainBlock
-                + ", movePattern=" + movePattern
-                + ", positionList=" + positions + "]";
+
+        return """
+                Block [name=%s, \
+                color=%s, \
+                isMainBlock=%s, \
+                movePattern=%s, \
+                positions=%s]\
+                """
+                .formatted(name, color, isMainBlock, movePattern, positions);
     }
 
     // =========================================================================

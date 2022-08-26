@@ -184,7 +184,10 @@ public final class BlockSet implements Iterable<Block> {
      */
     @Override
     public String toString() {
-        return "BlockSet [blocks=" + blocks + "]";
+        return """
+                BlockSet [blocks=%s]\
+                """
+                .formatted(blocks);
     }
 
     // =========================================================================

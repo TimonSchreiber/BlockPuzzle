@@ -70,18 +70,18 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
      * Returns a new List of Positions where all Positions form a straight line.
      */
     private List<Position> newRectangle(PositionListInfo positionsInfo) {
-        final List<Position> tmpList = new ArrayList<>();
-        Position tmpPosition = positionsInfo.position();
+        final List<Position> newList = new ArrayList<>();
+        Position newPosition = positionsInfo.position();
 
         for (int i = 0; i < positionsInfo.size(); ++i) {
-            tmpList.add(tmpPosition);
-            tmpPosition = tmpPosition.moveTowards(positionsInfo.direction());
+            newList.add(newPosition);
+            newPosition = newPosition.moveTowards(positionsInfo.direction());
         }
 
         // make sure the List is sorted.
-        Collections.sort(tmpList);
+        Collections.sort(newList);
 
-        return tmpList;
+        return newList;
     }
 
     /**
@@ -89,33 +89,33 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
      * bends like a L or a big square.
      */
     private List<Position> newElbow(final PositionListInfo positionsInfo) {
-        final List<Position> tmpList = new ArrayList<>();
+        final List<Position> newList = new ArrayList<>();
 
         switch (positionsInfo.size()) {
             case 4:     // add the 'diagonal' Block
-                tmpList.add(
+                newList.add(
                     positionsInfo.position().moveTowards(
                         positionsInfo.direction(),
                         positionsInfo.direction().next()));
                 // falls through
             case 3:     // add the 'next' Block
-                tmpList.add(
+                newList.add(
                     positionsInfo.position().moveTowards(
                         positionsInfo.direction().next()));
                 // falls through
             default:    // add the 'direction' and 'this position' Block
-                tmpList.add(
+                newList.add(
                     positionsInfo.position().moveTowards(
                         positionsInfo.direction()));
-                tmpList.add(
+                newList.add(
                     positionsInfo.position());
                 break;
         }
 
         // make sure the List is sorted.
-        Collections.sort(tmpList);
+        Collections.sort(newList);
 
-        return tmpList;
+        return newList;
     }
 
     // -------------------------------------------------------------------------
@@ -193,9 +193,13 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
     /* (non-Javadoc)
      * @see java.lang.Object#toString()
      */
+    
     @Override
     public String toString() {
-        return "PositionList [positions=" + positions + "]";
+        return """
+                PositionList [positions=%s]\
+                """
+                .formatted(positions);
     }
 
     // =========================================================================

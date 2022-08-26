@@ -13,7 +13,7 @@ public final class MovePattern implements Iterable<Direction> {
     // -------------------------------------------------------------------------
 
     /** List of Directions. */
-    private final List<Direction> movePattern;
+    private final List<Direction> directions;
 
     // -------------------------------------------------------------------------
     // CONSTRUCTOR
@@ -23,7 +23,7 @@ public final class MovePattern implements Iterable<Direction> {
      * Private constructor.
      */
     private MovePattern(final List<Direction> directions) {
-        this.movePattern = directions;
+        this.directions = directions;
     }
 
 
@@ -111,7 +111,7 @@ public final class MovePattern implements Iterable<Direction> {
      *                      specified Directions, {@code false} otherwise.
      */
     public boolean containsAll(Direction... directions) {
-        return movePattern.containsAll(List.of(directions));
+        return this.directions.containsAll(List.of(directions));
     }
 
     // -------------------------------------------------------------------------
@@ -134,9 +134,9 @@ public final class MovePattern implements Iterable<Direction> {
         // Object must be MovePattern at this point
         MovePattern other = (MovePattern) obj;
 
-        return  ((movePattern == other.movePattern)
-                || ((movePattern != null)
-                    && movePattern.equals(other.movePattern)));
+        return  ((directions == other.directions)
+                || ((directions != null)
+                    && directions.equals(other.directions)));
     }
 
     /* (non-Javadoc)
@@ -147,7 +147,7 @@ public final class MovePattern implements Iterable<Direction> {
         final int PRIME = 31;
         int hash = 7;
 
-        hash = PRIME * hash + ((movePattern == null) ? 0 : movePattern.hashCode());
+        hash = PRIME * hash + ((directions == null) ? 0 : directions.hashCode());
 
         return hash;
     }
@@ -161,7 +161,10 @@ public final class MovePattern implements Iterable<Direction> {
      */
     @Override
     public String toString() {
-        return "MovePattern [directions=" + movePattern + "]";
+        return """
+                MovePattern [directions=%s]\
+                """
+                .formatted(directions);
     }
 
     // =========================================================================
@@ -179,7 +182,7 @@ public final class MovePattern implements Iterable<Direction> {
      */
     @Override
     public Iterator<Direction> iterator() {
-        return movePattern.iterator();
+        return directions.iterator();
     }
 
 }   // Move Pattern class

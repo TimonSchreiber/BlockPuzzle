@@ -40,8 +40,8 @@ public final class GameState {
      * @param moves     The List of Moves
      */
     public GameState(final BlockSet blocks, final List<Move> moves) {
-        this.blocks   = new BlockSet(blocks);
-        this.moves      = new LinkedList<>();
+        this.blocks = new BlockSet(blocks);
+        this.moves  = new LinkedList<>();
         
         for (final Move move : moves) {
             this.moves.add(new Move(move));
@@ -67,13 +67,13 @@ public final class GameState {
      * @return  A new List with a copy of every Move.
      */
     public List<Move> moves() {
-        final List<Move> tmpList = new LinkedList<>();
+        final List<Move> neMoveList = new LinkedList<>();
 
         for (final Move move : moves) {
-            tmpList.add(new Move(move));
+            neMoveList.add(new Move(move));
         }
 
-        return tmpList;
+        return neMoveList;
     }
 
     // -------------------------------------------------------------------------
@@ -87,15 +87,15 @@ public final class GameState {
      * @return
      */
     public static List<Move> addMoveToNewList(final List<Move> moves, final Move newMove) {
-        final List<Move> tmpList = new LinkedList<>();
+        final List<Move> newMoveList = new LinkedList<>();
 
         for (final Move move : moves) {
-            tmpList.add(new Move(move));
+            newMoveList.add(new Move(move));
         }
 
-        tmpList.add(new Move(newMove));
+        newMoveList.add(new Move(newMove));
 
-        return tmpList;
+        return newMoveList;
     }
 
     // -------------------------------------------------------------------------
@@ -149,7 +149,11 @@ public final class GameState {
      */
     @Override
     public String toString() {
-        return "GameState [blockSet=" + blocks + ", moves=" + moves + "]";
+        return """
+                GameState [blocks=%s, \
+                moves=%s]\
+                """
+                .formatted(blocks, moves);
     }
 
 }   // GameState class
