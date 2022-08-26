@@ -53,8 +53,8 @@ public class GameFieldTests {
     @Test
     @DisplayName("checkWinCondition Should return true When the PositionLists match")
     public void checkWinCondition_true() {
-        final BlockSet blockSet = new BlockSet();
-        blockSet.add(
+        final BlockSet blocks = new BlockSet();
+        blocks.add(
             new Block(
                 new BlockInfo(
                     "R1",
@@ -71,14 +71,14 @@ public class GameFieldTests {
             )
         );
 
-        assertTrue(gameField.checkWinCondition(blockSet));
+        assertTrue(gameField.checkWinCondition(blocks));
     }
 
     @Test
     @DisplayName("checkWinCondition Should return false When the PositionLists do not match")
     public void checkWinCondition_false() {
-        final BlockSet blockSet = new BlockSet();
-        blockSet.add(
+        final BlockSet blocks = new BlockSet();
+        blocks.add(
             new Block(
                 new BlockInfo(
                     "R1",
@@ -95,7 +95,7 @@ public class GameFieldTests {
             )
         );
 
-        assertFalse(gameField.checkWinCondition(blockSet));
+        assertFalse(gameField.checkWinCondition(blocks));
     }
 
     // -------------------------------------------------------------------------
@@ -104,8 +104,8 @@ public class GameFieldTests {
     @Test
     @DisplayName("isValidMove Should return true When the Move can be played")
     public void validMove_true() {
-        final BlockSet blockSet = new BlockSet();
-        blockSet.add(
+        final BlockSet blocks = new BlockSet();
+        blocks.add(
             new Block(
                 new BlockInfo(
                     "R1",
@@ -121,7 +121,7 @@ public class GameFieldTests {
                 )
             )
         );
-        blockSet.add(
+        blocks.add(
             new Block(
                 new BlockInfo(
                     "R2",
@@ -138,14 +138,14 @@ public class GameFieldTests {
             )
         );
 
-        assertTrue(gameField.isValidMove(blockSet, new Move("R1", Direction.R)));
+        assertTrue(gameField.isValidMove(blocks, new Move("R1", Direction.R)));
     }
 
     @Test
     @DisplayName("isValidMove Should return false When the Move can not be played")
     public void validMove_false() {
-        final BlockSet blockSet = new BlockSet();
-        blockSet.add(
+        final BlockSet blocks = new BlockSet();
+        blocks.add(
             new Block(
                 new BlockInfo(
                     "R1",
@@ -161,7 +161,7 @@ public class GameFieldTests {
                 )
             )
         );
-        blockSet.add(
+        blocks.add(
             new Block(
                 new BlockInfo(
                     "R2",
@@ -178,7 +178,7 @@ public class GameFieldTests {
             )
         );
 
-        assertFalse(gameField.isValidMove(blockSet, new Move("R1", Direction.U)));
+        assertFalse(gameField.isValidMove(blocks, new Move("R1", Direction.U)));
     }
 
     // -------------------------------------------------------------------------
@@ -206,8 +206,8 @@ public class GameFieldTests {
     @Test
     @DisplayName("isCollisionFree true")
     public void isCollisionFree_true() {
-        final BlockSet blockSet = new BlockSet();
-        blockSet.add(
+        final BlockSet blocks = new BlockSet();
+        blocks.add(
             new Block(
                 new BlockInfo(
                     "R1",
@@ -223,7 +223,7 @@ public class GameFieldTests {
                 )
             )
         );
-        blockSet.add(
+        blocks.add(
             new Block(
                 new BlockInfo(
                     "R2",
@@ -240,14 +240,14 @@ public class GameFieldTests {
             )
         );
 
-        assertTrue(gameField.isCollisionFree(blockSet, new Move("R1", Direction.R)));
+        assertTrue(gameField.isCollisionFree(blocks, new Move("R1", Direction.R)));
     }
 
     @Test
     @DisplayName("isCollisionFree false")
     public void isCollisionFree_false() {
-        final BlockSet blockSet = new BlockSet();
-        blockSet.add(
+        final BlockSet blocks = new BlockSet();
+        blocks.add(
             new Block(
                 new BlockInfo(
                     "R1",
@@ -263,7 +263,7 @@ public class GameFieldTests {
                 )
             )
         );
-        blockSet.add(
+        blocks.add(
             new Block(
                 new BlockInfo(
                     "R2",
@@ -280,7 +280,7 @@ public class GameFieldTests {
             )
         );
 
-        assertFalse(gameField.isCollisionFree(blockSet, new Move("R1", Direction.U)));
+        assertFalse(gameField.isCollisionFree(blocks, new Move("R1", Direction.U)));
     }
 
 }   // Game Field Test class

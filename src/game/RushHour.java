@@ -30,7 +30,7 @@ public final class RushHour extends Game {
 
     /** Preset win condition as a PositionList */
     private static final
-    PositionList WIN_AREA =
+    PositionList WIN_POSITIONS =
         new PositionList(
             List.of(
                 new Position(4, 3),
@@ -67,7 +67,7 @@ public final class RushHour extends Game {
     public RushHour(final int gameNumber) {
         super(
             new BlockSet(),
-            new GameField(SIZE, SIZE, WIN_AREA, CANVAS_INFO),
+            new GameField(SIZE, SIZE, WIN_POSITIONS, CANVAS_INFO),
             gameNumber
         );
     }
@@ -107,7 +107,7 @@ public final class RushHour extends Game {
         final String C4 = "C4";
         final String C5 = "C5";
         final String C6 = "C6";
-        // unlock when needed
+        // --> unlock additional Names when needed <--
         // final String C7 = "C7";
         // final String C8 = "C8";
         // final String C9 = "C9";
@@ -133,7 +133,7 @@ public final class RushHour extends Game {
         final Color CAR_4 = new Color(255, 140,   0);  // Dark Orange
         final Color CAR_5 = new Color(  0, 255,   0);  // Green
         final Color CAR_6 = new Color(  0, 178,   0);  // Dark Green
-        // unlock when needed
+        // --> unlock additional Colors when needed <--
         // final Color CAR_7 = new Color(128, 128, 128);  // Gray
         // final Color CAR_8 = new Color( 64,  64,  64);  // Dark Gray
         // final Color CAR_9 = new Color(255, 175, 175);  // Pink

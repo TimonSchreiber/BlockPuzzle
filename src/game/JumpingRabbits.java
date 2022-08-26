@@ -31,7 +31,7 @@ public final class JumpingRabbits extends Game {
 
     /** Preset win condition as a PositionList */
     private static final
-    PositionList WIN_AREA =
+    PositionList WIN_POSITIONS =
         new PositionList(
             List.of(
                 new Position(0, 0),
@@ -79,7 +79,7 @@ public final class JumpingRabbits extends Game {
     public JumpingRabbits(final int gameNumber) {
         super(
             new BlockSet(),
-            new GameField(SIZE, SIZE, WIN_AREA, CANVAS_INFO),
+            new GameField(SIZE, SIZE, WIN_POSITIONS, CANVAS_INFO),
             gameNumber
         );
     }
@@ -199,12 +199,12 @@ public final class JumpingRabbits extends Game {
         final Color RABBIT_3    = new Color(  0, 255, 255); // Cyan
         final Color RABBIT_4    = new Color(255,   0, 255); // Magenta
 
-        final Color FOX_1       = new Color(255, 200,   0); // ORANGE
-        final Color FOX_2       = new Color(255, 140,   0); // used to be (255, 140)
+        final Color FOX_1       = new Color(255, 200,   0); // Orange
+        final Color FOX_2       = new Color(255, 140,   0);
 
-        final Color MUSHROOM_1  = new Color(255,   0,   0); // RED
-        final Color MUSHROOM_2  = new Color(178,   0,   0); // used to be (178)
-        final Color MUSHROOM_3  = new Color(124,   0,   0); // used to be (124)
+        final Color MUSHROOM_1  = new Color(255,   0,   0); // red
+        final Color MUSHROOM_2  = new Color(178,   0,   0);
+        final Color MUSHROOM_3  = new Color(124,   0,   0);
 
         // ---------------------------------------------------------------------
         // POSITIONS

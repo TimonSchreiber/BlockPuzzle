@@ -34,7 +34,7 @@ public final class DirtyDozen extends Game {
 
     /** Preset win condition as a PositionList */
     private static final
-    PositionList WIN_AREA =
+    PositionList WIN_POSITIONS =
         new PositionList(
             List.of(
                 new Position(4, 0),
@@ -74,7 +74,7 @@ public final class DirtyDozen extends Game {
     public DirtyDozen(final int gameNumber) {
         super(
             new BlockSet(),
-            new GameField(HEIGHT, WIDTH, WIN_AREA, CANVAS_INFO),
+            new GameField(HEIGHT, WIDTH, WIN_POSITIONS, CANVAS_INFO),
             gameNumber
         );
     }
@@ -104,14 +104,21 @@ public final class DirtyDozen extends Game {
         // ---------------------------------------------------------------------
         // STRINGS
 
+        // Big Square (2x2)
         final String R1 = "R1";
+
+        // Elbow (2x2)
         final String Y1 = "Y1";
         final String Y2 = "Y2";
         final String Y3 = "Y3";
         final String Y4 = "Y4";
+
+        // Rectangle (1x2)
         final String B1 = "B1";
         final String B2 = "B2";
         final String B3 = "B3";
+
+        // Square (1x1)
         final String G1 = "G1";
         final String G2 = "G2";
         final String G3 = "G3";
@@ -123,13 +130,16 @@ public final class DirtyDozen extends Game {
         // COLORS
 
         final Color BIG_SQUARE  = new Color(255,   0,   0); // Red
+
         final Color ELBOW_1     = new Color(255, 255,   0); // Yellow
         final Color ELBOW_2     = new Color(178, 178,   0);
         final Color ELBOW_3     = new Color(124, 124,   0);
         final Color ELBOW_4     = new Color( 86,  86,   0);
+
         final Color RECTANGLE_1 = new Color(  0,   0, 255); // Blue
         final Color RECTANGLE_2 = new Color(  0,   0, 178);
         final Color RECTANGLE_3 = new Color(  0,   0, 124);
+
         final Color SQUARE_1    = new Color(  0, 255,   0); // Green
         final Color SQUARE_2    = new Color(  0, 178,   0);
         final Color SQUARE_3    = new Color(  0, 124,   0);

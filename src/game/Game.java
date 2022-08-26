@@ -31,8 +31,8 @@ public sealed abstract class Game
      *
      * @param gameNumber    the gameNumber
      */
-    protected Game(final BlockSet blockSet, final GameField gameField, final int gameNumber) {
-        this.blocks     = blockSet;
+    protected Game(final BlockSet blocks, final GameField gameField, final int gameNumber) {
+        this.blocks     = blocks;
         this.gameField  = gameField;
 
         this.setUp(gameNumber);

@@ -57,9 +57,9 @@ public class GameStateTests {
 
     @BeforeEach
     public void setUp() {
-        BlockSet blockSet = new BlockSet();
+        BlockSet blocks = new BlockSet();
         startPosition.forEach(
-            blockInfo -> blockSet.add(new Block(blockInfo))
+            blockInfo -> blocks.add(new Block(blockInfo))
         );
         String R1 = "R1";
         List<Move> moves =
@@ -69,7 +69,7 @@ public class GameStateTests {
                 new Move(R1, Direction.U)
             );
 
-        gameState = new GameState(blockSet, moves);
+        gameState = new GameState(blocks, moves);
     }
 
     // -------------------------------------------------------------------------

@@ -54,13 +54,13 @@ public class BlockSetTests {
                 new PositionListInfo(new Position(2, 4), 1, Direction.D, false))
     );
 
-    private BlockSet blockSet;
+    private BlockSet blocks;
 
     @BeforeEach
     public void setUp() {
-        blockSet = new BlockSet();
+        blocks = new BlockSet();
         startPosition.forEach(
-            blockInfo -> blockSet.add(new Block(blockInfo))
+            blockInfo -> blocks.add(new Block(blockInfo))
         );
     }
 
@@ -70,7 +70,7 @@ public class BlockSetTests {
     @Test
     @DisplayName("The copy constructor should return a deep copy")
     public void newBlockSetCreatesADeepCopy() {
-        final BlockSet expected = new BlockSet(blockSet);
+        final BlockSet expected = new BlockSet(blocks);
         final BlockSet actual = new BlockSet(expected);
 
         final Move move = new Move("R1", Direction.U);
@@ -88,7 +88,7 @@ public class BlockSetTests {
         final String expected = "M2";
         
         final Position position = new Position(1, 4);
-        final String actual = blockSet.getNameByPosition(position);
+        final String actual = blocks.getNameByPosition(position);
 
         assertEquals(expected, actual);
     }
@@ -97,7 +97,7 @@ public class BlockSetTests {
     @DisplayName("getBlockName Should return null if there is no Block at the Position")
     public void getBlockName_incorrectPosition() {
         final Position position = new Position(0, 4);
-        final String blockName = blockSet.getNameByPosition(position);
+        final String blockName = blocks.getNameByPosition(position);
 
         assertNull(blockName);
     }
@@ -115,7 +115,7 @@ public class BlockSetTests {
         );
 
         final String blockName = "M2";
-        final Block actual = blockSet.getBlockByName(blockName);
+        final Block actual = blocks.getBlockByName(blockName);
 
         assertEquals(expected, actual);
     }
@@ -124,7 +124,7 @@ public class BlockSetTests {
     @DisplayName("getBlock Should return null if there is no Block with the blockName")
     public void getBlock_incorrectBlockName() {
         final String blockName = "T2";
-        final Block block = blockSet.getBlockByName(blockName);
+        final Block block = blocks.getBlockByName(blockName);
 
         assertNull(block);
     }
@@ -132,7 +132,7 @@ public class BlockSetTests {
     @Test
     @DisplayName("getMainBlocks Should return a new(?) BlockSet with all the MainBlocks")
     public void getMainBlocks() {
-        final BlockSet actual = blockSet.getMainBlocks();
+        final BlockSet actual = blocks.getMainBlocks();
         final BlockSet expected = new BlockSet();
         expected.add(
             new Block(
@@ -159,19 +159,19 @@ public class BlockSetTests {
         final Position position = new Position(3, 1);
 
         final Move move = new Move("R1", Direction.D);
-        blockSet.makeMove(move);
+        blocks.makeMove(move);
 
-        assertNotNull(blockSet.getNameByPosition(position));
+        assertNotNull(blocks.getNameByPosition(position));
     }
 
     @Test
     @DisplayName("Move a nonexistant Block and nothing changes")
     public void makeMoveWithInvalidBlock() {
-        final BlockSet expected = new BlockSet(blockSet);
+        final BlockSet expected = new BlockSet(blocks);
 
         final Move move = new Move("T1", Direction.D);
-        blockSet.makeMove(move);
-        final BlockSet actual = new BlockSet(blockSet);
+        blocks.makeMove(move);
+        final BlockSet actual = new BlockSet(blocks);
 
         assertEquals(expected, actual);
     }
