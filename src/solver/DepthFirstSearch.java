@@ -124,35 +124,34 @@ public class DepthFirstSearch {
      *          found, {@code false} otherwise
      */
     private boolean findNewMove() {
-        final BlockSet tmpBlockSet = game.blocks(); // TODO: maybe push this inside the for-loops?
+        final BlockSet newBlockSet = game.blocks();
 
-        for (final Block block : tmpBlockSet) {
+        for (final Block block : newBlockSet) {
 
             for (final Direction direction : block.movePattern()) {
 
                 final Move newMove = new Move(block.name(), direction);
 
                 // Check if nextMove is not a valid Move -> next iteration
-                if (!game.isValidMove(tmpBlockSet, newMove)) {
+                if (!game.isValidMove(newBlockSet, newMove)) {
                     continue;
                 }
 
                 // Check if it is a known BlockSet -> next iteration
-                if (savedBlockSets.contains(new BlockSet(tmpBlockSet))) {   // TODO: why new BlockSet() and not just 'tmpBlockSet'?
+                if (savedBlockSets.contains(new BlockSet(newBlockSet))) {   // TODO: why new BlockSet() and not just 'newBlockSet'?
                     // reverse the last Move to continue looking for new Moves
-                    game.isValidMove(tmpBlockSet, newMove.reverse());
+                    game.isValidMove(newBlockSet, newMove.reverse());
                     continue;
                 }
 
                 // -> play this move on the GameField
                 game.isValidMove(newMove);
 
-                savedBlockSets.add(new BlockSet(tmpBlockSet));
+                // save the new found BlockSet and add the Move to the moveList
+                savedBlockSets.add(new BlockSet(newBlockSet));
                 moveList.add(newMove);
 
-                if (show) {
-                    game.draw(0);        // FIXME: this shows the GameField while it is solved delete for best time
-                }
+                if (show) game.draw(0);
 
                 // new Move found
                 return true;

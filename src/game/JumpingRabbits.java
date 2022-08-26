@@ -115,16 +115,16 @@ public final class JumpingRabbits extends Game {
     @Override
     public boolean isValidMove(final BlockSet blocks, final Move move) {
 
-        final Block tmpBlock = blocks.getBlockByName(move.name());
+        final Block block = blocks.getBlockByName(move.name());
 
         // check if the Move is valid.
-        if (tmpBlock == null) {
+        if (block == null) {
             System.err.println("Invalid BlockName: " + move);
             return false;
         }
         // check if the normal way to move can be applied
         // -> forward to gameField.isValidMove()
-        if (!tmpBlock.isMainBlock()) {
+        if (!block.isMainBlock()) {
             return gameField.isValidMove(blocks, move);
         }
 
@@ -136,26 +136,26 @@ public final class JumpingRabbits extends Game {
 
         // count how far the rabbit needs to jump
         int numberOfMoves = 0;
-        Position tmpPosition = null;
+        Position newPosition = null;
 
-        for (final Position position : tmpBlock.positions()) {
-            // there is only one Position in this ^ List (Rabbits have a size of 1)
-            tmpPosition = new Position(position);
+        // there is only ONE Position in this List (Rabbits have a size of 1)
+        for (final Position position : block.positions()) {
+            newPosition = new Position(position);
 
             do {
                 // move to the next Position
-                tmpPosition = tmpPosition.moveTowards(move.direction());
+                newPosition = newPosition.moveTowards(move.direction());
 
                 //count one up
                 ++numberOfMoves;
-            } while (gameField.isInInterval(tmpPosition)
-                    && (blocks.getNameByPosition(tmpPosition) != null));
+            } while (gameField.isInInterval(newPosition)
+                    && (blocks.getNameByPosition(newPosition) != null));
 
         }
 
         // check if the while loop aborted because an empty Position was found,
         // or because the GameField border was left.
-        if ((tmpPosition != null) && !gameField.isInInterval(tmpPosition)) {
+        if ((newPosition != null) && !gameField.isInInterval(newPosition)) {
             return false;
         }
 
