@@ -32,27 +32,28 @@ public class App {
     public static void main(String[] args) {
 
         try (final Scanner scanner = new Scanner(System.in)) {
-            final String gameType = "D";  // D=DirtyDozen; J=HumpingRabbits; R=RushHour
-            final String solvType = "B";  // D=Depth; B=Breadth; T=Threads; M=Manual
-            final int gameNumber = 8;
+            final String gameType   = "J";  // D=DirtyDozen(13); J=HumpingRabbits(5); R=RushHour(3)
+            final String solvType   = "B";  // D=Depth; B=Breadth; T=Threads; M=Manual
+            final int gameNumber    = 5;
+            final int delay         = 200;
 
             System.out.println("Game Number: " + gameNumber);
 
             final Game game =
                 switch (gameType.toUpperCase().charAt(0)) {
-                    case 'D' -> new DirtyDozen(gameNumber);
-                    case 'J' -> new JumpingRabbits(gameNumber);
-                    case 'R' -> new RushHour(gameNumber);
+                    case 'D' -> new DirtyDozen(     gameNumber);
+                    case 'J' -> new JumpingRabbits( gameNumber);
+                    case 'R' -> new RushHour(       gameNumber);
                     default  -> throw new IllegalStateException("Invalid GameType: " + gameType);
                 };
 
             game.print();
 
             switch (solvType.toUpperCase().charAt(0)) {
-                case 'D' -> new DepthFirstSearch(game, 200, false).solve();
-                case 'B' -> new BreadthFirstSearch(game, 200).solve();
-                case 'T' -> new BFS_WithThreads(game, 200).solve();
-                case 'M' -> new ManualMode(game, 200, scanner).play();
+                case 'D' -> new DepthFirstSearch(   game, (delay/10), false ).solve();
+                case 'B' -> new BreadthFirstSearch( game, delay             ).solve();
+                case 'T' -> new BFS_WithThreads(    game, delay             ).solve();
+                case 'M' -> new ManualMode(         game, delay,    scanner ).play();
                 default  -> throw new IllegalStateException("Invalid SolveType: " + solvType);
             };
         }
