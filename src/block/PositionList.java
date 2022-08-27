@@ -27,13 +27,13 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
      * Class constructor from a PosittionsInfo object. Delegates
      * the construction to one of two private factory methods.
      *
-     * @param positionsInfo     The PositionsInfo
+     * @param positionListInfo     The PositionListInfo
      */
-    public PositionList(final PositionListInfo positionsInfo) {
-        if (positionsInfo.isElbow()) {
-            positions = newElbow(positionsInfo);
+    public PositionList(final PositionListInfo positionListInfo) {
+        if (positionListInfo.isElbow()) {
+            positions = newElbow(positionListInfo);
         } else {
-            positions = newRectangle(positionsInfo);
+            positions = newRectangle(positionListInfo);
         }
     }
 
@@ -69,13 +69,13 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
     /**
      * Returns a new List of Positions where all Positions form a straight line.
      */
-    private List<Position> newRectangle(PositionListInfo positionsInfo) {
+    private List<Position> newRectangle(PositionListInfo positionListInfo) {
         final List<Position> newList = new ArrayList<>();
-        Position newPosition = positionsInfo.position();
+        Position newPosition = positionListInfo.position();
 
-        for (int i = 0; i < positionsInfo.size(); ++i) {
+        for (int i = 0; i < positionListInfo.size(); ++i) {
             newList.add(newPosition);
-            newPosition = newPosition.moveTowards(positionsInfo.direction());
+            newPosition = newPosition.moveTowards(positionListInfo.direction());
         }
 
         // make sure the List is sorted.
@@ -86,29 +86,35 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
 
     /**
      * Returns a new List of Positions where the Positions form a shape that
-     * bends like a L or a big square.
+     * bends like an L (size 3) or a big square (size 4).
+     *               X _             X X
+     *               X X             X X
+     * Note: This method should only get a PositionListInfo with size 3 or 4.
      */
-    private List<Position> newElbow(final PositionListInfo positionsInfo) {
+    private List<Position> newElbow(final PositionListInfo positionListInfo) {
         final List<Position> newList = new ArrayList<>();
 
-        switch (positionsInfo.size()) {
-            case 4:     // add the 'diagonal' Block
+        switch (positionListInfo.size()) {
+            // add the 'diagonal' Block
+            case 4:
                 newList.add(
-                    positionsInfo.position().moveTowards(
-                        positionsInfo.direction(),
-                        positionsInfo.direction().next()));
+                    positionListInfo.position().moveTowards(
+                        positionListInfo.direction(),
+                        positionListInfo.direction().next()));
                 // falls through
-            case 3:     // add the 'next' Block
+            // add the 'next' Block
+            case 3:
                 newList.add(
-                    positionsInfo.position().moveTowards(
-                        positionsInfo.direction().next()));
+                    positionListInfo.position().moveTowards(
+                        positionListInfo.direction().next()));
                 // falls through
-            default:    // add the 'direction' and 'this position' Block
+            // add the 'direction' and 'this position' Block
+            default:
                 newList.add(
-                    positionsInfo.position().moveTowards(
-                        positionsInfo.direction()));
+                    positionListInfo.position().moveTowards(
+                        positionListInfo.direction()));
                 newList.add(
-                    positionsInfo.position());
+                    positionListInfo.position());
                 break;
         }
 
@@ -168,9 +174,9 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
         // Object must be PositionList at this point
         final PositionList other = (PositionList) obj;
 
-        return  ((positions == other.positions)
+        return (positions == other.positions)
                 || ((positions != null)
-                    && positions.equals(other.positions)));
+                    && positions.equals(other.positions));
     }
 
     /* (non-Javadoc)
@@ -193,7 +199,7 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
     /* (non-Javadoc)
      * @see java.lang.Object#toString()
      */
-    
+
     @Override
     public String toString() {
         return """
@@ -202,17 +208,13 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
                 .formatted(positions);
     }
 
-    // =========================================================================
-    // INTERFACE - METHODS
-    // =========================================================================
-
     // -------------------------------------------------------------------------
     // ITERABLE
     // -------------------------------------------------------------------------
 
     /**
      * Returns an Iterator over all Positions.
-     * 
+     *
      * @see java.util.List#iterator()
      */
     @Override

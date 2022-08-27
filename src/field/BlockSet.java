@@ -113,7 +113,7 @@ public final class BlockSet implements Iterable<Block> {
     //  MOVE
     // -------------------------------------------------------------------------
 
-    /**
+    /** TODO: make it possible for a Block to move more than once
      * Moves the Block specified by the Move object in this BlockSet.
      *
      * @param move  The Move to make
@@ -157,9 +157,9 @@ public final class BlockSet implements Iterable<Block> {
         // Object must be PositionList at this point
         final BlockSet other = (BlockSet) obj;
 
-        return  ((blocks == other.blocks)
+        return (blocks == other.blocks)
                 || ((blocks != null)
-                    && blocks.equals(other.blocks)));
+                    && blocks.equals(other.blocks));
     }
 
     /* (non-Javadoc)
@@ -189,10 +189,6 @@ public final class BlockSet implements Iterable<Block> {
                 """
                 .formatted(blocks);
     }
-
-    // =========================================================================
-    // INTERFACE - METHODS
-    // =========================================================================
 
     // -------------------------------------------------------------------------
     // ITERABLE

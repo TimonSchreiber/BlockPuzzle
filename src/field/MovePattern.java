@@ -105,7 +105,7 @@ public final class MovePattern implements Iterable<Direction> {
 
     /**
      * Checks if this MovePattern conatins all the specified Directions.
-     * 
+     *
      * @param directions    The Directions whose presence is to be tested.
      * @return              {@code true} if this MovePattern conatins all the
      *                      specified Directions, {@code false} otherwise.
@@ -132,11 +132,11 @@ public final class MovePattern implements Iterable<Direction> {
         }
 
         // Object must be MovePattern at this point
-        MovePattern other = (MovePattern) obj;
+        final MovePattern other = (MovePattern) obj;
 
-        return  ((directions == other.directions)
+        return (directions == other.directions)
                 || ((directions != null)
-                    && directions.equals(other.directions)));
+                    && directions.equals(other.directions));
     }
 
     /* (non-Javadoc)
@@ -166,10 +166,6 @@ public final class MovePattern implements Iterable<Direction> {
                 """
                 .formatted(directions);
     }
-
-    // =========================================================================
-    // INTERFACE - METHODS
-    // =========================================================================
 
     // -------------------------------------------------------------------------
     // ITERABLE

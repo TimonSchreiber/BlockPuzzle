@@ -3,7 +3,7 @@ package block;
 import field.Direction;
 
 /**
- * Represents a pair of x- and y-values.
+ * Represents a pair of x- and y-values in a 2D-plane.
  */
 public record Position(int x, int y) implements Comparable<Position> {
 
@@ -37,19 +37,15 @@ public record Position(int x, int y) implements Comparable<Position> {
 
         for (final Direction direction : directions) {
             switch (direction) {
-                case R: ++x; break;
-                case D: --y; break;
-                case L: --x; break;
-                case U: ++y; break;
+                case R -> ++x;
+                case D -> --y;
+                case L -> --x;
+                case U -> ++y;
             }
         }
 
         return new Position(x, y);
     }
-
-    // =========================================================================
-    // INTERFACE - METHODS
-    // =========================================================================
 
     // -------------------------------------------------------------------------
     // COMPARABLE

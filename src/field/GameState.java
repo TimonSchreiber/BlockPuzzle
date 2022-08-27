@@ -118,12 +118,12 @@ public final class GameState {
         // Object must be PositionList at this point
         final GameState other = (GameState) obj;
 
-        return  ((blocks == other.blocks)
-                    || ((blocks != null)
-                        && blocks.equals(other.blocks)))
-                && ((moves == other.moves)
-                    || ((moves != null)
-                        && moves.equals(other.moves)));
+        return ((blocks == other.blocks)
+                || ((blocks != null)
+                    && blocks.equals(other.blocks)))
+            && ((moves == other.moves)
+                || ((moves != null)
+                    && moves.equals(other.moves)));
     }
 
     /* (non-Javadoc)
@@ -135,7 +135,7 @@ public final class GameState {
         int hash = 7;
 
         hash = PRIME * hash + ((blocks == null) ? 0 : blocks.hashCode());
-        hash = PRIME * hash + ((moves == null) ? 0 : moves.hashCode());
+        hash = PRIME * hash + (( moves == null) ? 0 :  moves.hashCode());
 
         return hash;
     }
@@ -150,10 +150,15 @@ public final class GameState {
     @Override
     public String toString() {
         return """
-                GameState [blocks=%s, \
-                moves=%s]\
+                GameState [\
+                blocks=%s, \
+                moves=%s\
+                ]\
                 """
-                .formatted(blocks, moves);
+                .formatted(
+                    blocks,
+                    moves
+                );
     }
 
 }   // GameState class

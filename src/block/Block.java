@@ -43,7 +43,7 @@ public final class Block implements Comparable<Block> {
         this.color          = blockInfo.color();
         this.isMainBlock    = blockInfo.isMainBlock();
         this.movePattern    = blockInfo.movePattern();
-        this.positions      = new PositionList(blockInfo.positionsInfo());
+        this.positions      = new PositionList(blockInfo.positionListInfo());
     }
 
     /**
@@ -125,8 +125,7 @@ public final class Block implements Comparable<Block> {
     }
 
     /**
-     * Changes every Position in the PositionList of this
-     * Block.
+     * Changes every Position in the PositionList of this Block.
      *
      * @param directions    One or more Directions this Block moves towards.
      */
@@ -150,7 +149,7 @@ public final class Block implements Comparable<Block> {
      * This method ignores the String BlockName and the Color.
      */
     @Override
-    public boolean equals(final Object obj) {
+    public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
@@ -162,13 +161,13 @@ public final class Block implements Comparable<Block> {
         // Object must be Block at this point
         final Block other = (Block) obj;
 
-        return  (isMainBlock == other.isMainBlock)
-                && ((positions == other.positions)
-                    || ((positions != null)
-                        && positions.equals(other.positions)))
-                && ((movePattern == other.movePattern)
-                    || ((movePattern != null)
-                        && movePattern.equals(other.movePattern)));
+        return (isMainBlock == other.isMainBlock)
+            && ((positions == other.positions)
+                || ((positions != null)
+                    && positions.equals(other.positions)))
+            && ((movePattern == other.movePattern)
+                || ((movePattern != null)
+                    && movePattern.equals(other.movePattern)));
     }
 
     /* (non-Javadoc)
@@ -182,7 +181,7 @@ public final class Block implements Comparable<Block> {
         int hash = 7;
 
         hash = PRIME * hash + Boolean.hashCode(isMainBlock);
-        hash = PRIME * hash + ((positions == null) ? 0 : positions.hashCode());
+        hash = PRIME * hash + ((  positions == null) ? 0 :   positions.hashCode());
         hash = PRIME * hash + ((movePattern == null) ? 0 : movePattern.hashCode());
 
         return hash;
@@ -197,20 +196,23 @@ public final class Block implements Comparable<Block> {
      */
     @Override
     public String toString() {
-
         return """
-                Block [name=%s, \
+                Block [\
+                name=%s, \
                 color=%s, \
                 isMainBlock=%s, \
                 movePattern=%s, \
-                positions=%s]\
+                positions=%s\
+                ]\
                 """
-                .formatted(name, color, isMainBlock, movePattern, positions);
+                .formatted(
+                    name,
+                    color,
+                    isMainBlock,
+                    movePattern,
+                    positions
+                );
     }
-
-    // =========================================================================
-    // INTERFACE - METHODS
-    // =========================================================================
 
     // -------------------------------------------------------------------------
     // COMPARABLE
