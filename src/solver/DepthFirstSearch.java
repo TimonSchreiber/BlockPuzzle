@@ -26,11 +26,11 @@ public class DepthFirstSearch {
     /** Time delay between two Moves when showing the Solution */
     private final int delay;
 
-    /** HashSet of BlockSets to save every unique state. */
-    private final Set<BlockSet> savedBlockSets;
-
     /** LinkedList to save every Move. */
     private final List<Move> moveList;
+
+    /** HashSet of BlockSets to save every unique state. */
+    private final Set<BlockSet> savedBlockSets;
 
     /** the Game */
     private final Game game;
@@ -46,8 +46,8 @@ public class DepthFirstSearch {
      * @param show      show the moves while they are played
      */
     public DepthFirstSearch(final Game game, final int delay, final boolean show) {
-        this.savedBlockSets = new HashSet<>();
         this.moveList       = new LinkedList<>();
+        this.savedBlockSets = new HashSet<>();
         this.game           = game;
         this.delay          = delay;
         this.show           = show;
@@ -178,6 +178,83 @@ public class DepthFirstSearch {
         }
 
         return;
+    }
+
+    // -------------------------------------------------------------------------
+    // EQUALS AND HASH-CODE
+    // -------------------------------------------------------------------------
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if ((obj == null) || (getClass() != obj.getClass())) {
+            return false;
+        }
+
+        // Object must be DeapthFirstSerch at this Point
+        final DepthFirstSearch other = (DepthFirstSearch) obj;
+
+        return (show == other.show)
+            && (delay == other.delay)
+            && ((moveList == other.moveList)
+                || ((moveList != null)
+                    && moveList.equals(other.moveList)))
+            && ((savedBlockSets == other.savedBlockSets)
+                || ((savedBlockSets != null)
+                    &&savedBlockSets.equals(other.savedBlockSets)))
+            && ((game == other.game)
+                || ((game != null)
+                    && game.equals(other.game)));
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        final int PRIME = 31;
+        int hash = 7;
+
+        hash = PRIME * hash + Boolean.hashCode(show);
+        hash = PRIME * hash + Integer.hashCode(delay);
+        hash = PRIME * hash + ((     moveList == null) ? 0 :       moveList.hashCode());
+        hash = PRIME * hash + ((savedBlockSets== null) ? 0 : savedBlockSets.hashCode());
+        hash = PRIME * hash + ((         game == null) ? 0 :           game.hashCode());
+
+        return hash;
+    }
+
+    // -------------------------------------------------------------------------
+    // TO STRING
+    // -------------------------------------------------------------------------
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return """
+                DepthFirstSearch [\
+                show=%b, \
+                delay=%d, \
+                game=%s, \
+                moveList=%s, \
+                savedBlockSets=%s\
+                ]\
+                """
+                .formatted(
+                    show,
+                    delay,
+                    game,
+                    moveList,
+                    savedBlockSets
+                );
     }
 
 }   // Depth First Search class

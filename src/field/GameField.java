@@ -55,7 +55,7 @@ public final class GameField {
      *          defined by WIN_AREA, {@code false} otherwise.
      */
     public boolean checkWinCondition(final BlockSet blocks) {
-        /* 
+        /*
          * Get every MainBlocks PositionList and check if every Position is in
          * the WIN_POSITIONS PositionList. If not, return false.
          */
@@ -272,6 +272,76 @@ public final class GameField {
         canvas.pause(delay);
 
         return;
+    }
+
+    // -------------------------------------------------------------------------
+    // EQUALS AND HASH-CODE
+    // -------------------------------------------------------------------------
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if ((obj == null) || (getClass() != obj.getClass())) {
+            return false;
+        }
+
+        // Object must be GameField at this Point
+        final GameField other = (GameField) obj;
+
+        return (HEIGHT == other.HEIGHT)
+            && (WIDTH == other.WIDTH)
+            && ((WIN_POSITIONS == other.WIN_POSITIONS)
+                || ((WIN_POSITIONS != null)
+                    && WIN_POSITIONS.equals(other.WIN_POSITIONS)))
+            && ((CANVAS_INFO == other.CANVAS_INFO)
+                || ((CANVAS_INFO != null)
+                    && CANVAS_INFO.equals(other.CANVAS_INFO)));
+    }
+    /* (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        final int PRIME = 31;
+        int hash = 7;
+
+        hash = PRIME * hash + Integer.hashCode(HEIGHT);
+        hash = PRIME * hash + Integer.hashCode(WIDTH);
+        hash = PRIME * hash + ((WIN_POSITIONS == null) ? 0 : WIN_POSITIONS.hashCode());
+        hash = PRIME * hash + ((  CANVAS_INFO == null) ? 0 :   CANVAS_INFO.hashCode());
+
+        return hash;
+    }
+
+    // -------------------------------------------------------------------------
+    // TO STRING
+    // -------------------------------------------------------------------------
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return """
+                GameField [\
+                HEIGHT=%s, \
+                WIDTH=%s, \
+                WIN_POSITIONS=%s, \
+                CANVAS_INFO=%s\
+                ]\
+                """
+                .formatted(
+                    HEIGHT,
+                    WIDTH,
+                    WIN_POSITIONS,
+                    CANVAS_INFO
+                );
     }
 
 }   // Game Field class

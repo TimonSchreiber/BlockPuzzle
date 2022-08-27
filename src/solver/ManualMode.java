@@ -72,9 +72,9 @@ public final class ManualMode {
 
             switch (blockName) {
                 case "CLEAR":   clear(); continue;
-                case "UNDO":    undo(); continue;
-                case "REDO":    redo(); continue;
-                default:        break;
+                case "UNDO" :   undo(); continue;
+                case "REDO" :   redo(); continue;
+                default     :   break;
                 // maybe add a 'repeat' case so that the user does not have to write the same move again.
             }
 
@@ -161,6 +161,77 @@ public final class ManualMode {
     private void redo() {
         // TODO: implement this redo method
         return;
+    }
+
+    // -------------------------------------------------------------------------
+    // EQUALS AND HASH-CODE
+    // -------------------------------------------------------------------------
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if ((obj == null) || (getClass() != obj.getClass())) {
+            return false;
+        }
+
+        // Object must be ManualMode at this point.
+        final ManualMode other = (ManualMode) obj;
+        
+        return (delay == other.delay)
+            && (foundASolution == other.foundASolution)
+            && ((moveList == other.moveList)
+                || ((moveList != null)
+                    && moveList.equals(other.moveList)))
+            && ((game == other.game)
+                || ((game != null)
+                    && game.equals(other.game)));
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        final int PRIME = 31;
+        int hash = 7;
+
+        hash = PRIME * hash + Boolean.hashCode(foundASolution);
+        hash = PRIME * hash + Integer.hashCode(delay);
+        hash = PRIME * hash + ((moveList == null) ? 0 : moveList.hashCode());
+        hash = PRIME * hash + ((    game == null) ? 0 :     game.hashCode());
+
+        return hash;
+    }
+
+    // -------------------------------------------------------------------------
+    // TO STRING
+    // -------------------------------------------------------------------------
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return """
+                ManualMode [\
+                foundASolution=%b, \
+                delay=%d, \
+                game=%s, \
+                moveList=%s\
+                ]\
+                """
+                .formatted(
+                    foundASolution,
+                    delay,
+                    game,
+                    moveList
+                );
     }
 
 

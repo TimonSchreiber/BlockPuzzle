@@ -96,6 +96,69 @@ public final class DirtyDozen extends Game {
     }
 
     // -------------------------------------------------------------------------
+    // EQUALS AND HASH-CODE
+    // -------------------------------------------------------------------------
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if ((obj == null) || (getClass() != obj.getClass())) {
+            return false;
+        }
+
+        // Object must be DirtyDozen at this point
+        final DirtyDozen other = (DirtyDozen) obj;
+
+        return ((blocks == other.blocks())
+                || (( blocks != null)
+                    && blocks.equals(other.blocks)))
+            && ((gameField == other.gameField)
+                || ((gameField != null)
+                    && gameField.equals(other.gameField)));
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        final int PRIME = 31;
+        int hash = 7;
+
+        hash = PRIME * hash + ((   blocks == null) ? 0 :    blocks.hashCode());
+        hash = PRIME * hash + ((gameField == null) ? 0 : gameField.hashCode());
+
+        return hash;
+    }
+
+    // -------------------------------------------------------------------------
+    // TO STRING
+    // -------------------------------------------------------------------------
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return """
+                DirtyDozen [\
+                blocks=%s, \
+                gameField=%s\
+                ]\
+                """
+                .formatted(
+                    blocks,
+                    gameField
+                );
+    }
+
+    // -------------------------------------------------------------------------
     // STATIC BLOCK
     // -------------------------------------------------------------------------
 

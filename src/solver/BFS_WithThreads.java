@@ -38,13 +38,13 @@ public class BFS_WithThreads {
 
     /** ConcurrentHashSet of BlockSets to save every unique state. */
     private final Set<BlockSet> savedBlockSets;
-
-    /** List of Moves for the final solution. */
-    private List<Move> solutionMoveList;
-
+    
     /** the Game */
     private final Game game;
 
+    /** List of Moves for the final solution. */
+    private List<Move> solutionMoveList;
+    
     // Thread variables
     private static final int NTHREADS = 6;
     private static final Executor exec = Executors.newFixedThreadPool(NTHREADS);
@@ -186,6 +186,91 @@ public class BFS_WithThreads {
         }    // end for loop Block
 
         return;
+    }
+
+    // -------------------------------------------------------------------------
+    // EQUALS AND HASH-CODE
+    // -------------------------------------------------------------------------
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if ((obj == null) || (getClass() != obj.getClass())) {
+            return false;
+        }
+
+        // Object must be BreadthFirstSearch at this Point
+        BFS_WithThreads other = (BFS_WithThreads) obj;
+
+        return (foundASolution == other.foundASolution)
+            && (delay == other.delay)
+            && ((gameStateQueue == other.gameStateQueue)
+                || ((gameStateQueue != null)
+                    && gameStateQueue.equals(other.gameStateQueue)))
+            && ((savedBlockSets == other.savedBlockSets)
+                || ((savedBlockSets != null)
+                    && savedBlockSets.equals(other.savedBlockSets)))
+            && ((solutionMoveList == other.solutionMoveList)
+                || ((solutionMoveList != null)
+                    && solutionMoveList.equals(other.solutionMoveList)))
+            && ((game == other.game)
+                || ((game != null)
+                    && game.equals(other.game)));
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        final int PRIME = 31;
+        int hash = 7;
+
+        hash = PRIME * hash + Boolean.hashCode(foundASolution);
+        hash = PRIME * hash + Integer.hashCode(delay);
+        hash = PRIME * hash + ((gameStateQueue   == null) ? 0 :   gameStateQueue.hashCode());
+        hash = PRIME * hash + ((savedBlockSets   == null) ? 0 :   savedBlockSets.hashCode());
+        hash = PRIME * hash + ((solutionMoveList == null) ? 0 : solutionMoveList.hashCode());
+        hash = PRIME * hash + ((            game == null) ? 0 :             game.hashCode());
+
+        return hash;
+    }
+
+    // -------------------------------------------------------------------------
+    // TO STRING
+    // -------------------------------------------------------------------------
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return """
+                BFS_WithThreads [\
+                NTHREADS=%d, \
+                foundASolution=%b, \
+                delay=%d, \
+                game=%s, \
+                solutionMoveList=%s, \
+                savedBlockSets=%s, \
+                gameStateQueue=%s\
+                ]\
+                """
+                .formatted(
+                    NTHREADS,
+                    foundASolution,
+                    delay,
+                    game,
+                    solutionMoveList,
+                    savedBlockSets,
+                    gameStateQueue
+                );
     }
 
 }   // Breadth First Search - With Threads class

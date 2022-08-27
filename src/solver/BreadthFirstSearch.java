@@ -36,11 +36,11 @@ public class BreadthFirstSearch {
     /** HashSet of BlockSets to save every unique state. */
     private final Set<BlockSet> savedBlockSets;
 
-    /** List of Moves for the final solution. */
-    private List<Move> solutionMoveList;
-
     /** The Game */
     private final Game game;
+
+    /** List of Moves for the final solution. */
+    private List<Move> solutionMoveList;
 
     // -------------------------------------------------------------------------
     // CONSTRUCTOR
@@ -164,6 +164,89 @@ public class BreadthFirstSearch {
         }    // end for loop Block
 
         return;
+    }
+
+    // -------------------------------------------------------------------------
+    // EQUALS AND HASH-CODE
+    // -------------------------------------------------------------------------
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if ((obj == null) || (getClass() != obj.getClass())) {
+            return false;
+        }
+
+        // Object must be BreadthFirstSearch at this Point
+        BreadthFirstSearch other = (BreadthFirstSearch) obj;
+
+        return (foundASolution == other.foundASolution)
+            && (delay == other.delay)
+            && ((gameStateQueue == other.gameStateQueue)
+                || ((gameStateQueue != null)
+                    && gameStateQueue.equals(other.gameStateQueue)))
+            && ((savedBlockSets == other.savedBlockSets)
+                || ((savedBlockSets != null)
+                    && savedBlockSets.equals(other.savedBlockSets)))
+            && ((solutionMoveList == other.solutionMoveList)
+                || ((solutionMoveList != null)
+                    && solutionMoveList.equals(other.solutionMoveList)))
+            && ((game == other.game)
+                || ((game != null)
+                    && game.equals(other.game)));
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        final int PRIME = 31;
+        int hash = 7;
+
+        hash = PRIME * hash + Boolean.hashCode(foundASolution);
+        hash = PRIME * hash + Integer.hashCode(delay);
+        hash = PRIME * hash + ((gameStateQueue   == null) ? 0 :   gameStateQueue.hashCode());
+        hash = PRIME * hash + ((savedBlockSets   == null) ? 0 :   savedBlockSets.hashCode());
+        hash = PRIME * hash + ((solutionMoveList == null) ? 0 : solutionMoveList.hashCode());
+        hash = PRIME * hash + ((            game == null) ? 0 :             game.hashCode());
+
+        return hash;
+    }
+
+    // -------------------------------------------------------------------------
+    // TO STRING
+    // -------------------------------------------------------------------------
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return """
+                BreadthFirstSearch [\
+                foundASolution=%b, \
+                delay=%d, \
+                game=%s, \
+                solutionMoveList=%s, \
+                savedBlockSets=%s, \
+                gameStateQueue=%s\
+                ]\
+                """
+                .formatted(
+                    foundASolution,
+                    delay,
+                    game,
+                    solutionMoveList,
+                    savedBlockSets,
+                    gameStateQueue
+                );
     }
 
 }   // Breadth First Search class
