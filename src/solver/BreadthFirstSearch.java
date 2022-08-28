@@ -142,7 +142,7 @@ public class BreadthFirstSearch {
                  * -> save the BlockSet
                  * -> create a new GameState and add it to the GameStateQueue
                  */
-                if (!savedBlockSets.contains(new BlockSet(newBlockSet))) {  // TODO: why new BlockSet() and not just 'newBlockSet'?
+                if (!savedBlockSets.contains(new BlockSet(newBlockSet))) {  // TODO: why new BlockSet(...) and not just 'newBlockSet'?
 
                     final List<Move> newMoveList = GameState.addMoveToNewList(gameState.moves(), newMove);
 

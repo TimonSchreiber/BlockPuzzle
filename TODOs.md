@@ -2,7 +2,7 @@
 
  - [ ] Try find to find a way to move a "Block" twice before the next "Block" is tried. -> MovePattern.All_DIRECTIONS_PLUS with Arrays of Directions?
 
- - [ ] Go over all 'TODOs'.
+ - [ ] Clear all 'TODOs'.
  - [ ] Save the StartingPosition in a JSON-File and extract the data in the Game classes.
  - [ ] Finish the 'Makefile', every package gets a Makefile and those get called in the src Makefile and so on...
  - [ ] Close Threads when finished.

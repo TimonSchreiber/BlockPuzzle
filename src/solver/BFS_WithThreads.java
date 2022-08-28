@@ -109,7 +109,6 @@ public class BFS_WithThreads {
             //     return;
             // }
             // else {} TODO: what are the other cases to check for?
-
         }
 
         // Stop timer
@@ -164,7 +163,7 @@ public class BFS_WithThreads {
                  * -> save the BlockSet
                  * -> create a new GameState and add it to the GameStateQueue
                  */
-                if (!savedBlockSets.contains(new BlockSet(newBlockSet))) {  // TODO: why new BlockSet() and not just 'newBlockSet'?
+                if (!savedBlockSets.contains(new BlockSet(newBlockSet))) {  // TODO: why new BlockSet(...) and not just 'newBlockSet'?
 
                     final List<Move> newMoveList = GameState.addMoveToNewList(gameState.moves(), newMove);
 

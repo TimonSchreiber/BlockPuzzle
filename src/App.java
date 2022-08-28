@@ -10,20 +10,20 @@ import solver.DepthFirstSearch;
 import solver.ManualMode;
 
 /**
- * This App provides three different Logic-Puzzles and also three different
+ * This App provides three different Logic-Puzzles and also four different
  * ways for solving.
- * 
+ *
  * Puzzles:
- *  - DirtyDozen
- *  - JumpinRabbits
- *  - RushHour
- * 
+ *  - DirtyDozen    - 13 Games in total (number 0 to 12)
+ *  - JumpinRabbits -  6 Games in total (number 0 to  5)
+ *  - RushHour      -  4 Games in total (number 0 to  3)
+ *
  * solving methods:
  *  - Depth First Search
  *  - Breadth First Search
- *  - Breadth first Search with Threads
+ *  - Breadth fFirst Search with Multi-Threads
  *  - Manual Mode
- * 
+ *
  * @version     1.1     16 Aug 2022
  * @author      Timon Schreiber
  */
@@ -32,12 +32,12 @@ public class App {
     public static void main(String[] args) {
 
         try (final Scanner scanner = new Scanner(System.in)) {
-            final String gameType   = "J";  // D=DirtyDozen(13); J=HumpingRabbits(5); R=RushHour(3)
-            final String solvType   = "B";  // D=Depth; B=Breadth; T=Threads; M=Manual
+            final String gameType   = "J";  // [D=DirtyDozen; J=HumpingRabbits; R=RushHour]
+            final String solvType   = "T";  // [D=Depth; B=Breadth; T=Threads; M=Manual]
             final int gameNumber    = 5;
             final int delay         = 200;
 
-            System.out.println("Game Number: " + gameNumber);
+            System.out.println("\nGame Number: " + gameNumber);
 
             final Game game =
                 switch (gameType.toUpperCase().charAt(0)) {
@@ -47,13 +47,14 @@ public class App {
                     default  -> throw new IllegalStateException("Invalid GameType: " + gameType);
                 };
 
+            System.out.println("\nBoard:");
             game.print();
 
             switch (solvType.toUpperCase().charAt(0)) {
                 case 'D' -> new DepthFirstSearch(   game, (delay/10), false ).solve();
-                case 'B' -> new BreadthFirstSearch( game, delay             ).solve();
-                case 'T' -> new BFS_WithThreads(    game, delay             ).solve();
-                case 'M' -> new ManualMode(         game, delay,    scanner ).play();
+                case 'B' -> new BreadthFirstSearch( game,  delay            ).solve();
+                case 'T' -> new BFS_WithThreads(    game,  delay            ).solve();
+                case 'M' -> new ManualMode(         game,  delay,   scanner ).play();
                 default  -> throw new IllegalStateException("Invalid SolveType: " + solvType);
             };
         }

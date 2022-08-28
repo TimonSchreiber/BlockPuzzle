@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.function.Consumer;
 
 import field.Direction;
 import field.Move;
@@ -19,8 +20,8 @@ public final class ManualMode {
     // -------------------------------------------------------------------------
 
     // TODO: try to make undo/redo possible?
-    // private final List<Consumer<ManualMode>> unDoList;
-    // private final List<Consumer<ManualMode>> reDoList;
+    private final List<Consumer<ManualMode>> undoList;
+    private final List<Consumer<ManualMode>> redoList;
 
     /** A solution is found */
     private boolean foundASolution = false;
@@ -47,6 +48,8 @@ public final class ManualMode {
      * @param game  The Game
      */
     public ManualMode(final Game game, final int delay, final Scanner scanner) {
+        this.undoList   = new LinkedList<>();
+        this.redoList   = new LinkedList<>();
         this.moveList   = new LinkedList<>();
         this.game       = game;
         this.delay      = delay;
@@ -139,7 +142,8 @@ public final class ManualMode {
     private void clear() {
         reverseGame();
         moveList.clear();
-        // TODO: also clear undoList and redoList.
+        undoList.clear();
+        redoList.clear();
         return;
     }
 
@@ -148,18 +152,18 @@ public final class ManualMode {
     // -------------------------------------------------------------------------
 
     /**
-     * Undoes the Last Move.
+     * Undoe the Last Move.
      */
     private void undo() {
-        // TODO: implement this undo method
+        // TODO: implement this method
         return;
     }
 
     /**
-     * Redoes the last undone Move.
+     * Redoe the last undone Move.
      */
     private void redo() {
-        // TODO: implement this redo method
+        // TODO: implement this method
         return;
     }
 

@@ -138,7 +138,7 @@ public class DepthFirstSearch {
                 }
 
                 // Check if it is a known BlockSet -> next iteration
-                if (savedBlockSets.contains(new BlockSet(newBlockSet))) {   // TODO: why new BlockSet() and not just 'newBlockSet'?
+                if (savedBlockSets.contains(new BlockSet(newBlockSet))) {   // TODO: why new BlockSet(...) and not just 'newBlockSet'?
                     // reverse the last Move to continue looking for new Moves
                     game.isValidMove(newBlockSet, newMove.reverse());
                     continue;
@@ -151,6 +151,7 @@ public class DepthFirstSearch {
                 savedBlockSets.add(new BlockSet(newBlockSet));
                 moveList.add(newMove);
 
+                // show the current GameField if true
                 if (show) game.draw(0);
 
                 // new Move found
