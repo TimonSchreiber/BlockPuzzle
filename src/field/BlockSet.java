@@ -16,6 +16,9 @@ public final class BlockSet implements Iterable<Block> {
     // ATTRIBUTES
     // -------------------------------------------------------------------------
 
+    // TODO: Maybe make this a map with Blockname to Block
+    // and only look at the value-Set for equals and HashCode
+    // So all the complex 'for (Block block : blocks)'s are no longer needed
     /** TreeSet of Blocks. */
     private final Set<Block> blocks;
 
@@ -100,7 +103,7 @@ public final class BlockSet implements Iterable<Block> {
         for (final Block block : blocks) {
 
             if (block.isMainBlock()) {
-                mainBlocks.add(block);
+                mainBlocks.blocks.add(block);
             } else {
                 break;
             }
@@ -132,9 +135,23 @@ public final class BlockSet implements Iterable<Block> {
     // FORWARDING - METHODS
     // -------------------------------------------------------------------------
 
-    // TODO: maybe check if no Blocks overlapp?
+    /**
+     * Adds a Block to this BlockSet. Checks if the new Block does not overlapp
+     * with an existing Block.
+     *
+     * @param block     The new Block to add.
+     * @return          {@code true} if the Block was added, {@code false}
+     *                  otherwise.
+     */
     public boolean add(final Block block) {
-        return blocks.add(new Block(block));
+        // check if any Position of the new Block is already occupied
+        for (final Position position : block.positions()) {
+            if (getNameByPosition(position) != null) {
+                return false;
+            }
+        }
+        // the new Block can be added to this BlockSet
+        return blocks.add(block);
     }
 
     // -------------------------------------------------------------------------
