@@ -1,9 +1,12 @@
 package field;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
@@ -86,7 +89,7 @@ public class BlockSetTests {
     @DisplayName("getBlockName Should return the blockName of the Block at the Position")
     public void getBlockName_correctPosition() {
         final String expected = "M2";
-        
+
         final Position position = new Position(1, 4);
         final String actual = blocks.getNameByPosition(position);
 
@@ -174,6 +177,57 @@ public class BlockSetTests {
         final BlockSet actual = new BlockSet(blocks);
 
         assertEquals(expected, actual);
+    }
+
+    // -------------------------------------------------------------------------
+    // Move
+
+    @Test
+    @DisplayName("add should return true if the Block can be added")
+    public void addShouldReturnTrueIfSuccessful() {
+        final Block block =
+            new Block(
+                new BlockInfo(
+                    null,
+                    null,
+                    null,
+                    false,
+                    new PositionListInfo(
+                        new Position(2, 2),
+                        1,
+                        Direction.U,
+                        false
+                    )
+                )
+            );
+
+        assertTrue(blocks.add(block));
+    }
+
+    @Test
+    @DisplayName("add should return false if the Block can not be added")
+    public void addShouldReturnFalseIfBlocksOverlapp() {
+        final String B1 = "B1";
+        final Block block =
+            new Block(
+                new BlockInfo(
+                    B1,
+                    null,
+                    null,
+                    false,
+                    new PositionListInfo(
+                        new Position(3, 3),
+                        1,
+                        Direction.U,
+                        false
+                    )
+                )
+            );
+
+        assertAll(
+            () -> assertFalse(blocks.add(block)),
+            () -> assertNull(blocks.getBlockByName(B1))
+        );
     }
 
 }   // Block Set Test class
