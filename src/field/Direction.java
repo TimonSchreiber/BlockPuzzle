@@ -25,7 +25,7 @@ public enum Direction {
     /**
      * Array of Directions with the value of every Direction constant.
      */
-    private static Direction[] VALUES = Direction.values();
+    private final static Direction[] VALUES = Direction.values();
 
     // -------------------------------------------------------------------------
     // NEXT
@@ -37,7 +37,9 @@ public enum Direction {
      * @return    the next Direction constant
      */
     public Direction next() {
-        return Direction.VALUES[(ordinal() + 1) % Direction.VALUES.length];
+        return Direction.VALUES[
+            (ordinal() + 1) % Direction.VALUES.length
+        ];
     }
 
     // -------------------------------------------------------------------------
@@ -50,7 +52,9 @@ public enum Direction {
      * @return    the opposite Direction constant
      */
     public Direction reverse() {
-        return Direction.VALUES[(ordinal() + 2) % Direction.VALUES.length];
+        return Direction.VALUES[
+            (ordinal() + 2) % Direction.VALUES.length
+        ];
     }
 
 }   // Direction enum
