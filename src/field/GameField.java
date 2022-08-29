@@ -22,10 +22,11 @@ public final class GameField {
     /**Width of this GameField */
     private final int WIDTH;
 
-    private final CanvasInfo CANVAS_INFO;
-
     /** Winning PositionList */
     private final PositionList WIN_POSITIONS;
+
+    // Info for the Zeichenblatt
+    private final CanvasInfo CANVAS_INFO;
 
     /** Canvas to draw this GameField on */
     private Zeichenblatt canvas;
@@ -54,12 +55,12 @@ public final class GameField {
      * @return  {@code true} if the MainBlocks reached the winning Position
      *          defined by WIN_AREA, {@code false} otherwise.
      */
-    public boolean checkWinCondition(final BlockSet blocks) {
+    public boolean checkWinCondition(final BlockSet blockSet) {
         /*
          * Get every MainBlocks PositionList and check if every Position is in
          * the WIN_POSITIONS PositionList. If not, return false.
          */
-        for (final Block block : blocks.getMainBlocks()) {
+        for (final Block block : blockSet.getMainBlocks()) {
 
             for (final Position position : block.positions()) {
 
@@ -102,13 +103,13 @@ public final class GameField {
      * BlockSet by overlapping two (or more) Blocks, or by leaving the
      * boundaries of this GameField.
      *
-     * @param blocks  The BlockSet
+     * @param blockSet  The BlockSet
      * @param move      The Move
      * @return          {@code true} if this Move can be made, {@code false}
      *                  otherwise.
      */
-    public boolean isCollisionFree(final BlockSet blocks, final Move move) {
-        final Block block = blocks.getBlockByName(move.name());
+    public boolean isCollisionFree(final BlockSet blockSet, final Move move) {
+        final Block block = blockSet.getBlockByName(move.name());
 
         // check if the Move is valid by checking if the Block exists.
         if (block == null) {
@@ -132,7 +133,7 @@ public final class GameField {
              * If yes, check if it has a different BlockName.
              * -> Move collides with another Block
              */
-            final String name = blocks.getNameByPosition(newPosition);
+            final String name = blockSet.getNameByPosition(newPosition);
             if ((name != null) && !name.equals(block.name())) {
                 return false;
             }
@@ -150,20 +151,20 @@ public final class GameField {
      * Checks if the Block specified by the Move can be moved into the Direction
      * of the Move.
      *
-     * @param blocks  The BlockSet
+     * @param blockSet  The BlockSet
      * @param move      The Move
      * @return          {@code true} if the Move was successful, {@code false}
      *                  otherwise.
      */
-    public boolean isValidMove(final BlockSet blocks, final Move move) {
+    public boolean isValidMove(final BlockSet blockSet, final Move move) {
         // check if the Move can be made
         // if not return false
-        if (!isCollisionFree(blocks, move)) {
+        if (!isCollisionFree(blockSet, move)) {
             return false;
         }
 
         // play the Move
-        blocks.makeMove(move);
+        blockSet.makeMove(move);
 
         // return successfull
         return true;
@@ -176,21 +177,23 @@ public final class GameField {
     /**
      * Prints the Name of each Block for each Position on the Console and "__"
      * if there is no Block.
+     *
+     * @param blockSet  The BlockSet
      */
-    public void print(final BlockSet blocks) {
+    public void print(final BlockSet blockSet) {
 
         for (int i = (HEIGHT - 1); i >= 0; --i) {
             for (int j = 0; j < WIDTH; ++j) {
-
                 // BlockName to print
-                final String blockName = blocks.getNameByPosition(new Position(j, i));
+                final String blockName = blockSet.getNameByPosition(new Position(j, i));
 
                 // print BlockName, or "__" and a space at the end
-                System.out.print(((blockName == null) ? "__" : blockName) + " ");
+                System.out.print(" " + ((blockName == null) ? "__" : blockName) + " ");
             }
             // double linebreak at the end
             System.out.println("\n");
         }
+
         return;
     }
 
@@ -199,14 +202,15 @@ public final class GameField {
     // -------------------------------------------------------------------------
 
     /**
-     * Draws the GameField onto a Zeichenblatt with a time-delay.
+     * Draws the GameField and BlockSet onto a Zeichenblatt with a time-delay.
      *
+     * @param BlockSet  The BlockSet
      * @param delay     The time delay
      */
-    public void draw(final BlockSet blocks, final int delay) {
+    public void draw(final BlockSet BlockSet, final int delay) {
         final int WINDOW_SIZE_FACTOR    = 64;
-        final int BLOCKSIZE             = 1;
-        final double OFFSET             = .5;
+        final int BLOCKSIZE             =  1;
+        final double OFFSET             =  0.5;
 
         // new Zeichenblatt.java
         if (canvas == null) {
@@ -253,7 +257,7 @@ public final class GameField {
         }
 
         // draw each Block
-        for (final Block block : blocks) {
+        for (final Block block : BlockSet) {
             for (final Position position : block.positions()) {
                 canvas.setVordergrundFarbe(block.color());
                 canvas.rechteck(
