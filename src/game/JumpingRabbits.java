@@ -26,7 +26,7 @@ public final class JumpingRabbits extends Game {
     // STATIC ATTRIBUTES
     // -------------------------------------------------------------------------
 
-    /** Preset game values for size */
+    /** Value for the GameField size (quadratic GameField) */
     private static final int SIZE = 5;
 
     /** Preset win condition as a PositionList */
@@ -94,8 +94,8 @@ public final class JumpingRabbits extends Game {
             .get(gameNumber)
             .forEach(
                 blockInfo -> {
-                    blocks.add(new Block(blockInfo));
-                    gameField.draw(blocks, 100);
+                    blockSet.add(new Block(blockInfo));
+                    gameField.draw(blockSet, 100);
                 }
             );
     }
@@ -107,15 +107,15 @@ public final class JumpingRabbits extends Game {
     // Delegate to the method below.
     @Override
     public boolean isValidMove(final Move move) {
-        return isValidMove(blocks, move);
+        return isValidMove(blockSet, move);
     }
 
     // If the Block is a mainBlock (aka Rabbit) it needs to jump over another
     // Block to move.
     @Override
-    public boolean isValidMove(final BlockSet blocks, final Move move) {
+    public boolean isValidMove(final BlockSet blockSet, final Move move) {
 
-        final Block block = blocks.getBlockByName(move.name());
+        final Block block = blockSet.getBlockByName(move.name());
 
         // check if the Move is valid.
         if (block == null) {
@@ -125,12 +125,12 @@ public final class JumpingRabbits extends Game {
         // check if the normal way to move can be applied
         // -> forward to gameField.isValidMove()
         if (!block.isMainBlock()) {
-            return gameField.isValidMove(blocks, move);
+            return gameField.isValidMove(blockSet, move);
         }
 
         // check if there is no Block next to this one to jump over
         // -> return false
-        if (gameField.isCollisionFree(blocks, move)) {
+        if (gameField.isCollisionFree(blockSet, move)) {
             return false;
         }
 
@@ -149,7 +149,7 @@ public final class JumpingRabbits extends Game {
                 //count one up
                 ++numberOfMoves;
             } while (gameField.isInInterval(newPosition)
-                    && (blocks.getNameByPosition(newPosition) != null));
+                    && (blockSet.getNameByPosition(newPosition) != null));
 
         }
 
@@ -161,7 +161,7 @@ public final class JumpingRabbits extends Game {
 
         // skip over all the Blocks in between
         for (int i = 0; i < numberOfMoves; ++i) {
-            blocks.makeMove(move);
+            blockSet.makeMove(move);
         }
 
         return true;
@@ -187,9 +187,9 @@ public final class JumpingRabbits extends Game {
         // Object must be JumpingRabbits at this point
         final JumpingRabbits other = (JumpingRabbits) obj;
 
-        return ((blocks == other.blocks())
-                || (( blocks != null)
-                    && blocks.equals(other.blocks)))
+        return ((blockSet == other.blockSet)
+                || (( blockSet != null)
+                    && blockSet.equals(other.blockSet)))
             && ((gameField == other.gameField)
                 || ((gameField != null)
                     && gameField.equals(other.gameField)));
@@ -203,7 +203,7 @@ public final class JumpingRabbits extends Game {
         final int PRIME = 31;
         int hash = 7;
 
-        hash = PRIME * hash + ((   blocks == null) ? 0 :    blocks.hashCode());
+        hash = PRIME * hash + (( blockSet == null) ? 0 :  blockSet.hashCode());
         hash = PRIME * hash + ((gameField == null) ? 0 : gameField.hashCode());
 
         return hash;
@@ -220,12 +220,12 @@ public final class JumpingRabbits extends Game {
     public String toString() {
         return """
                 JumpingRabbits [\
-                blocks=%s, \
+                blockSet=%s, \
                 gameField=%s\
                 ]\
                 """
                 .formatted(
-                    blocks,
+                    blockSet,
                     gameField
                 );
     }

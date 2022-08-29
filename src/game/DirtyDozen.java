@@ -26,10 +26,10 @@ public final class DirtyDozen extends Game {
     // STATIC ATTRIBUTES
     // -------------------------------------------------------------------------
 
-    /** Preset game values for height */
+    /** Value for the GameField height */
     private static final int HEIGHT = 5;
 
-    /** Preset game values for width */
+    /** Value for the GameField width */
     private static final int WIDTH = 6;
 
     /** Preset win condition as a PositionList */
@@ -89,8 +89,8 @@ public final class DirtyDozen extends Game {
             .get(gameNumber)
             .forEach(
                 blockInfo -> {
-                    blocks.add(new Block(blockInfo));
-                    gameField.draw(blocks, 100);
+                    blockSet.add(new Block(blockInfo));
+                    gameField.draw(blockSet, 100);
                 }
             );
     }
@@ -115,9 +115,9 @@ public final class DirtyDozen extends Game {
         // Object must be DirtyDozen at this point
         final DirtyDozen other = (DirtyDozen) obj;
 
-        return ((blocks == other.blocks())
-                || (( blocks != null)
-                    && blocks.equals(other.blocks)))
+        return ((blockSet == other.blockSet)
+                || (( blockSet != null)
+                    && blockSet.equals(other.blockSet)))
             && ((gameField == other.gameField)
                 || ((gameField != null)
                     && gameField.equals(other.gameField)));
@@ -131,7 +131,7 @@ public final class DirtyDozen extends Game {
         final int PRIME = 31;
         int hash = 7;
 
-        hash = PRIME * hash + ((   blocks == null) ? 0 :    blocks.hashCode());
+        hash = PRIME * hash + (( blockSet == null) ? 0 :  blockSet.hashCode());
         hash = PRIME * hash + ((gameField == null) ? 0 : gameField.hashCode());
 
         return hash;
@@ -148,12 +148,12 @@ public final class DirtyDozen extends Game {
     public String toString() {
         return """
                 DirtyDozen [\
-                blocks=%s, \
+                blockSet=%s, \
                 gameField=%s\
                 ]\
                 """
                 .formatted(
-                    blocks,
+                    blockSet,
                     gameField
                 );
     }

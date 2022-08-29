@@ -25,7 +25,7 @@ public final class RushHour extends Game {
     // STATIC ATTRIBUTES
     // -------------------------------------------------------------------------
 
-    /** Preset game values for size */
+    /** Value for the GameField size (quadratic GameField) */
     private static final int SIZE = 6;
 
     /** Preset win condition as a PositionList */
@@ -82,8 +82,8 @@ public final class RushHour extends Game {
             .get(gameNumber)
             .forEach(
                 blockInfo -> {
-                    blocks.add(new Block(blockInfo));
-                    gameField.draw(blocks, 100);
+                    blockSet.add(new Block(blockInfo));
+                    gameField.draw(blockSet, 100);
                 }
             );
     }
@@ -108,9 +108,9 @@ public final class RushHour extends Game {
         // Object must be RushHour at this point
         final RushHour other = (RushHour) obj;
 
-        return ((blocks == other.blocks())
-                || (( blocks != null)
-                    && blocks.equals(other.blocks)))
+        return ((blockSet == other.blockSet)
+                || (( blockSet != null)
+                    && blockSet.equals(other.blockSet)))
             && ((gameField == other.gameField)
                 || ((gameField != null)
                     && gameField.equals(other.gameField)));
@@ -124,7 +124,7 @@ public final class RushHour extends Game {
         final int PRIME = 31;
         int hash = 7;
 
-        hash = PRIME * hash + ((   blocks == null) ? 0 :    blocks.hashCode());
+        hash = PRIME * hash + (( blockSet == null) ? 0 :  blockSet.hashCode());
         hash = PRIME * hash + ((gameField == null) ? 0 : gameField.hashCode());
 
         return hash;
@@ -141,12 +141,12 @@ public final class RushHour extends Game {
     public String toString() {
         return """
                 RushHour [\
-                blocks=%s, \
+                blockSet=%s, \
                 gameField=%s\
                 ]\
                 """
                 .formatted(
-                    blocks,
+                    blockSet,
                     gameField
                 );
     }
