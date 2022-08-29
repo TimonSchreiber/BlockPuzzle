@@ -17,7 +17,7 @@ public sealed abstract class Game
     // -------------------------------------------------------------------------
 
     /** A BlockSet. */
-    protected final BlockSet blocks;
+    protected final BlockSet blockSet;
 
     /** A GameField to play on. */
     protected final GameField gameField;
@@ -27,12 +27,14 @@ public sealed abstract class Game
     // -------------------------------------------------------------------------
 
     /**
-     * Class constructor with a gameNumber.
+     * Class constructor with a BlockSet, a GameField, and a game number.
      *
-     * @param gameNumber    the gameNumber
+     * @param blockSet      The BlockSet
+     * @param gameField     The GameField
+     * @param gameNumber    the game number
      */
-    protected Game(final BlockSet blocks, final GameField gameField, final int gameNumber) {
-        this.blocks     = blocks;
+    protected Game(final BlockSet blockSet, final GameField gameField, final int gameNumber) {
+        this.blockSet   = blockSet;
         this.gameField  = gameField;
 
         this.setUp(gameNumber);
@@ -47,8 +49,8 @@ public sealed abstract class Game
      *
      * @return  The BlockSet
      */
-    public BlockSet blocks() {
-        return new BlockSet(blocks);
+    public BlockSet blockSet() {
+        return new BlockSet(blockSet);
     }
 
     // -------------------------------------------------------------------------
@@ -69,18 +71,18 @@ public sealed abstract class Game
     /**
      * Shows the Solution from Start to End with a time delay between two Moves.
      *
-     * @param moves     a List of the Moves to the solution
+     * @param moveList  a List of the Moves to the solution
      */
-    public void showSolution(final List<Move> moves, final int delay) {
+    public void showSolution(final List<Move> moveList, final int delay) {
 
         int i = 0;
 
         draw(5 * delay);
 
-        for (final Move move : moves) {
+        for (final Move move : moveList) {
             isValidMove(move);
             draw(delay);
-            System.out.println(++i + "/" + moves.size() + ": " + move);
+            System.out.println(++i + "/" + moveList.size() + ": " + move);
         }
 
         return;
@@ -95,12 +97,12 @@ public sealed abstract class Game
 
     // check this BlockSet
     public boolean checkWinCondition() {
-        return gameField.checkWinCondition(blocks);
+        return gameField.checkWinCondition(blockSet);
     }
 
     // check a BlockSet
-    public boolean checkWinCondition(final BlockSet blocks) {
-        return gameField.checkWinCondition(blocks);
+    public boolean checkWinCondition(final BlockSet blockSet) {
+        return gameField.checkWinCondition(blockSet);
     }
 
     // ----------------
@@ -108,12 +110,12 @@ public sealed abstract class Game
 
     // move this BlockSet
     public boolean isValidMove(final Move move) {
-        return gameField.isValidMove(blocks, move);
+        return gameField.isValidMove(blockSet, move);
     }
 
     // move a BlockSet
-    public boolean isValidMove(final BlockSet blocks, final Move move) {
-        return gameField.isValidMove(blocks, move);
+    public boolean isValidMove(final BlockSet blockSet, final Move move) {
+        return gameField.isValidMove(blockSet, move);
     }
 
     // ----------------
@@ -121,12 +123,12 @@ public sealed abstract class Game
 
     // print this BlockSet
     public void print() {
-        gameField.print(blocks);
+        gameField.print(blockSet);
     }
 
     // draw this BlockSet
     public void draw(final int delay) {
-        gameField.draw(blocks, delay);
+        gameField.draw(blockSet, delay);
     }
 
 }   // Game abstract class
