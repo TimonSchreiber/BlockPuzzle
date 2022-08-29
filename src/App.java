@@ -32,9 +32,9 @@ public class App {
     public static void main(String[] args) {
 
         try (final Scanner scanner = new Scanner(System.in)) {
-            final String gameType   = "J";  // [D=DirtyDozen; J=HumpingRabbits; R=RushHour]
-            final String solvType   = "T";  // [D=Depth; B=Breadth; T=Threads; M=Manual]
-            final int gameNumber    = 5;
+            final String gameType   = "D";  // [D=DirtyDozen; J=HumpingRabbits; R=RushHour]
+            final String solvType   = "B";  // [D=Depth; B=Breadth; T=Threads; M=Manual]
+            final int gameNumber    = 12;
             final int delay         = 200;
 
             System.out.println("\nGame Number: " + gameNumber);

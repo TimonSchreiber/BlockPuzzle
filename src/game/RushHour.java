@@ -260,49 +260,97 @@ public final class RushHour extends Game {
                             RED_CAR,
                             MovePattern.RIGHT_LEFT_DIRECTIONS,
                             true,
-                            new PositionListInfo(P1_3, 2, Direction.R, false)),
+                            new PositionListInfo(
+                                P1_3,
+                                2,
+                                Direction.R,
+                                false
+                            )
+                        ),
                         new BlockInfo(
                             C1,
                             CAR_1,
                             MovePattern.DOWN_UP_DIRECTIONS,
                             false,
-                            new PositionListInfo(P0_0, 2, Direction.U, false)),
+                            new PositionListInfo(
+                                P0_0,
+                                2,
+                                Direction.U,
+                                false
+                            )
+                        ),
                         new BlockInfo(
                             C2,
                             CAR_2,
                             MovePattern.RIGHT_LEFT_DIRECTIONS,
                             false,
-                            new PositionListInfo(P4_1, 2, Direction.R, false)),
+                            new PositionListInfo(
+                                P4_1,
+                                2,
+                                Direction.R,
+                                false
+                            )
+                        ),
                         new BlockInfo(
                             C3,
                             CAR_3,
                             MovePattern.RIGHT_LEFT_DIRECTIONS,
                             false,
-                            new PositionListInfo(P0_5, 2, Direction.R, false)),
+                            new PositionListInfo(
+                                P0_5,
+                                2,
+                                Direction.R,
+                                false
+                            )
+                        ),
                         new BlockInfo(
                             T1,
                             TRUCK_1,
                             MovePattern.RIGHT_LEFT_DIRECTIONS,
                             false,
-                            new PositionListInfo(P2_0, 3, Direction.R, false)),
+                            new PositionListInfo(
+                                P2_0,
+                                3,
+                                Direction.R,
+                                false
+                            )
+                        ),
                         new BlockInfo(
                             T2,
                             TRUCK_2,
                             MovePattern.DOWN_UP_DIRECTIONS,
                             false,
-                            new PositionListInfo(P0_2, 3, Direction.U, false)),
+                            new PositionListInfo(
+                                P0_2,
+                                3,
+                                Direction.U,
+                                false
+                            )
+                        ),
                         new BlockInfo(
                             T3,
                             TRUCK_3,
                             MovePattern.DOWN_UP_DIRECTIONS,
                             false,
-                            new PositionListInfo(P3_2, 3, Direction.U, false)),
+                            new PositionListInfo(
+                                P3_2,
+                                3,
+                                Direction.U,
+                                false
+                            )
+                        ),
                         new BlockInfo(
                             T4,
                             TRUCK_4,
                             MovePattern.DOWN_UP_DIRECTIONS,
                             false,
-                            new PositionListInfo(P5_3, 3, Direction.U, false))
+                            new PositionListInfo(
+                                P5_3,
+                                3,
+                                Direction.U,
+                                false
+                            )
+                        )
                     )
                 ),
                 Map.entry(
@@ -322,49 +370,97 @@ public final class RushHour extends Game {
                             RED_CAR,
                             MovePattern.RIGHT_LEFT_DIRECTIONS,
                             true,
-                            new PositionListInfo(P1_3, 2, Direction.R, false)),
+                            new PositionListInfo(
+                                P1_3,
+                                2,
+                                Direction.R,
+                                false
+                            )
+                        ),
                         new BlockInfo(
                             C1,
                             CAR_1,
                             MovePattern.DOWN_UP_DIRECTIONS,
                             false,
-                            new PositionListInfo(P5_0, 2, Direction.U, false)),
+                            new PositionListInfo(
+                                P5_0,
+                                2,
+                                Direction.U,
+                                false
+                            )
+                        ),
                         new BlockInfo(
                             C2,
                             CAR_2,
                             MovePattern.DOWN_UP_DIRECTIONS,
                             false,
-                            new PositionListInfo(P2_1, 2, Direction.U, false)),
+                            new PositionListInfo(
+                                P2_1,
+                                2,
+                                Direction.U,
+                                false
+                            )
+                        ),
                         new BlockInfo(
                             C3,
                             CAR_3,
                             MovePattern.RIGHT_LEFT_DIRECTIONS,
                             false,
-                            new PositionListInfo(P1_5, 2, Direction.R, false)),
+                            new PositionListInfo(
+                                P1_5,
+                                2,
+                                Direction.R,
+                                false
+                            )
+                        ),
                         new BlockInfo(
                             T1,
                             TRUCK_1,
                             MovePattern.RIGHT_LEFT_DIRECTIONS,
                             false,
-                            new PositionListInfo(P2_0, 3, Direction.R, false)),
+                            new PositionListInfo(
+                                P2_0,
+                                3,
+                                Direction.R,
+                                false
+                            )
+                        ),
                         new BlockInfo(
                             T2,
                             TRUCK_2,
                             MovePattern.RIGHT_LEFT_DIRECTIONS,
                             false,
-                            new PositionListInfo(P3_2, 3, Direction.R, false)),
+                            new PositionListInfo(
+                                P3_2,
+                                3,
+                                Direction.R,
+                                false
+                            )
+                        ),
                         new BlockInfo(
                             T3,
                             TRUCK_3,
                             MovePattern.DOWN_UP_DIRECTIONS,
                             false,
-                            new PositionListInfo(P0_3, 3, Direction.U, false)),
+                            new PositionListInfo(
+                                P0_3,
+                                3,
+                                Direction.U,
+                                false
+                            )
+                        ),
                         new BlockInfo(
                             T4,
                             TRUCK_4,
                             MovePattern.DOWN_UP_DIRECTIONS,
                             false,
-                            new PositionListInfo(P3_3, 3, Direction.U, false))
+                            new PositionListInfo(
+                                P3_3,
+                                3,
+                                Direction.U,
+                                false
+                            )
+                        )
                     )
                 ),
                 Map.entry(
@@ -384,43 +480,85 @@ public final class RushHour extends Game {
                             RED_CAR,
                             MovePattern.RIGHT_LEFT_DIRECTIONS,
                             true,
-                            new PositionListInfo(P1_3, 2, Direction.R, false)),
+                            new PositionListInfo(
+                                P1_3,
+                                2,
+                                Direction.R,
+                                false
+                            )
+                        ),
                         new BlockInfo(
                             C1,
                             CAR_1,
                             MovePattern.DOWN_UP_DIRECTIONS,
                             false,
-                            new PositionListInfo(P2_4, 2, Direction.U, false)),
+                            new PositionListInfo(
+                                P2_4,
+                                2,
+                                Direction.U,
+                                false
+                            )
+                        ),
                         new BlockInfo(
                             C2,
                             CAR_2,
                             MovePattern.RIGHT_LEFT_DIRECTIONS,
                             false,
-                            new PositionListInfo(P0_5, 2, Direction.R, false)),
+                            new PositionListInfo(
+                                P0_5,
+                                2,
+                                Direction.R,
+                                false
+                            )
+                        ),
                         new BlockInfo(
                             T1,
                             TRUCK_1,
                             MovePattern.RIGHT_LEFT_DIRECTIONS,
                             false,
-                            new PositionListInfo(P3_0, 3, Direction.R, false)),
+                            new PositionListInfo(
+                                P3_0,
+                                3,
+                                Direction.R,
+                                false
+                            )
+                        ),
                         new BlockInfo(
                             T2,
                             TRUCK_2,
                             MovePattern.DOWN_UP_DIRECTIONS,
                             false,
-                            new PositionListInfo(P0_2, 3, Direction.U, false)),
+                            new PositionListInfo(
+                                P0_2,
+                                3,
+                                Direction.U,
+                                false
+                            )
+                        ),
                         new BlockInfo(
                             T3,
                             TRUCK_3,
                             MovePattern.RIGHT_LEFT_DIRECTIONS,
                             false,
-                            new PositionListInfo(P1_2, 3, Direction.R, false)),
+                            new PositionListInfo(
+                                P1_2,
+                                3,
+                                Direction.R,
+                                false
+                            )
+                        ),
                         new BlockInfo(
                             T4,
                             TRUCK_4,
                             MovePattern.DOWN_UP_DIRECTIONS,
                             false,
-                            new PositionListInfo(P3_3, 3, Direction.U, false))
+                            new PositionListInfo(
+                                P3_3,
+                                3,
+                                Direction.U,
+                                false
+                            )
+                        )
                     )
                 ),
                 Map.entry(
@@ -440,67 +578,133 @@ public final class RushHour extends Game {
                             RED_CAR,
                             MovePattern.RIGHT_LEFT_DIRECTIONS,
                             true,
-                            new PositionListInfo(P1_3, 2, Direction.R, false)),
+                            new PositionListInfo(
+                                P1_3,
+                                2,
+                                Direction.R,
+                                false
+                            )
+                        ),
                         new BlockInfo(
                             C1,
                             CAR_1,
                             MovePattern.RIGHT_LEFT_DIRECTIONS,
                             false,
-                            new PositionListInfo(P0_1, 2, Direction.R, false)),
+                            new PositionListInfo(
+                                P0_1,
+                                2,
+                                Direction.R,
+                                false
+                            )
+                        ),
                         new BlockInfo(
                             C2,
                             CAR_2,
                             MovePattern.DOWN_UP_DIRECTIONS,
                             false,
-                            new PositionListInfo(P0_2, 2, Direction.U, false)),
+                            new PositionListInfo(
+                                P0_2,
+                                2,
+                                Direction.U,
+                                false
+                            )
+                        ),
                         new BlockInfo(
                             C3,
                             CAR_3,
                             MovePattern.RIGHT_LEFT_DIRECTIONS,
                             false,
-                            new PositionListInfo(P3_2, 2, Direction.R, false)),
+                            new PositionListInfo(
+                                P3_2,
+                                2,
+                                Direction.R,
+                                false
+                            )
+                        ),
                         new BlockInfo(
                             C4,
                             CAR_4,
                             MovePattern.DOWN_UP_DIRECTIONS,
                             false,
-                            new PositionListInfo(P3_3, 2, Direction.U, false)),
+                            new PositionListInfo(
+                                P3_3,
+                                2,
+                                Direction.U,
+                                false
+                            )
+                        ),
                         new BlockInfo(
                             C5,
                             CAR_5,
                             MovePattern.RIGHT_LEFT_DIRECTIONS,
                             false,
-                            new PositionListInfo(P4_4, 2, Direction.R, false)),
+                            new PositionListInfo(
+                                P4_4,
+                                2,
+                                Direction.R,
+                                false
+                            )
+                        ),
                         new BlockInfo(
                             C6,
                             CAR_6,
                             MovePattern.RIGHT_LEFT_DIRECTIONS,
                             false,
-                            new PositionListInfo(P0_5, 2, Direction.R, false)),
+                            new PositionListInfo(
+                                P0_5,
+                                2,
+                                Direction.R,
+                                false
+                            )
+                        ),
                         new BlockInfo(
                             T1,
                             TRUCK_1,
                             MovePattern.DOWN_UP_DIRECTIONS,
                             false,
-                            new PositionListInfo(P2_0, 3, Direction.U, false)),
+                            new PositionListInfo(
+                                P2_0,
+                                3,
+                                Direction.U,
+                                false
+                            )
+                        ),
                         new BlockInfo(
                             T2,
                             TRUCK_2,
                             MovePattern.RIGHT_LEFT_DIRECTIONS,
                             false,
-                            new PositionListInfo(P3_0, 3, Direction.R, false)),
+                            new PositionListInfo(
+                                P3_0,
+                                3,
+                                Direction.R,
+                                false
+                            )
+                        ),
                         new BlockInfo(
                             T3,
                             TRUCK_3,
                             MovePattern.DOWN_UP_DIRECTIONS,
                             false,
-                            new PositionListInfo(P5_1, 3, Direction.U, false)),
+                            new PositionListInfo(
+                                P5_1,
+                                3,
+                                Direction.U,
+                                false
+                            )
+                        ),
                         new BlockInfo(
                             T4,
                             TRUCK_4,
                             MovePattern.RIGHT_LEFT_DIRECTIONS,
                             false,
-                            new PositionListInfo(P3_5, 3, Direction.R, false))
+                            new PositionListInfo(
+                                P3_5,
+                                3,
+                                Direction.R,
+                                false
+                            )
+                        )
                     )
                 )
             );

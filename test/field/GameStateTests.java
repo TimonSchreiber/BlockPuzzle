@@ -32,25 +32,49 @@ public class GameStateTests {
                 null,
                 MovePattern.ALL_DIRECTIONS,
                 true,
-                new PositionListInfo(new Position(3, 2), 1, Direction.D, false)),
+                new PositionListInfo(
+                    new Position(3, 2),
+                    1,
+                    Direction.D,
+                    false
+                )
+            ),
             new BlockInfo(
                 "M1",
                 null,
                 MovePattern.NO_DIRECTIONS,
                 false,
-                new PositionListInfo(new Position(3, 3), 1, Direction.D, false)),
+                new PositionListInfo(
+                    new Position(3, 3),
+                    1,
+                    Direction.D,
+                    false
+                )
+            ),
             new BlockInfo(
                 "M2",
                 null,
                 MovePattern.NO_DIRECTIONS,
                 false,
-                new PositionListInfo(new Position(1, 4), 1, Direction.D, false)),
+                new PositionListInfo(
+                    new Position(1, 4),
+                    1,
+                    Direction.D,
+                    false
+                )
+            ),
             new BlockInfo(
                 "M3",
                 null,
                 MovePattern.NO_DIRECTIONS,
                 false,
-                new PositionListInfo(new Position(2, 4), 1, Direction.D, false))
+                new PositionListInfo(
+                    new Position(2, 4),
+                    1,
+                    Direction.D,
+                    false
+                )
+            )
     );
 
     private GameState gameState;
