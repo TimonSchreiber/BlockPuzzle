@@ -64,7 +64,7 @@ public class DepthFirstSearch {
         System.out.println("START\n");
 
         // add current BlockSet to the HashSet
-        this.savedBlockSets.add(game.blocks());
+        this.savedBlockSets.add(game.blockSet());
 
         // Start timer
         final Instant t = Instant.now();
@@ -124,7 +124,7 @@ public class DepthFirstSearch {
      *          found, {@code false} otherwise
      */
     private boolean findNewMove() {
-        final BlockSet newBlockSet = game.blocks();
+        final BlockSet newBlockSet = game.blockSet();
 
         for (final Block block : newBlockSet) {
 

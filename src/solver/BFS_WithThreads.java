@@ -77,8 +77,8 @@ public class BFS_WithThreads {
         System.out.println("START\n");
 
         // add current BlockSet to the Map and Queue
-        savedBlockSets.add(game.blocks());
-        gameStateQueue.add(new GameState(game.blocks()));
+        savedBlockSets.add(game.blockSet());
+        gameStateQueue.add(new GameState(game.blockSet()));
 
         // Start timer
         final Instant t = Instant.now();
@@ -145,7 +145,7 @@ public class BFS_WithThreads {
     private void findNewMove(final GameState gameState) {
 
         // Extract the BlockSet out of the GameState
-        final BlockSet newBlockSet = gameState.blocks();
+        final BlockSet newBlockSet = gameState.blockSet();
 
         for (final Block block : newBlockSet) {
 
@@ -165,7 +165,8 @@ public class BFS_WithThreads {
                  */
                 if (!savedBlockSets.contains(new BlockSet(newBlockSet))) {  // TODO: why new BlockSet(...) and not just 'newBlockSet'?
 
-                    final List<Move> newMoveList = GameState.addMoveToNewList(gameState.moves(), newMove);
+                    final List<Move> newMoveList =
+                        GameState.addMoveToNewList(gameState.moveList(), newMove);
 
                     savedBlockSets.add(new BlockSet(newBlockSet));
                     gameStateQueue.add(new GameState(newBlockSet, newMoveList));
