@@ -73,7 +73,7 @@ public class BlockTests {
     }
 
     @Test
-    @DisplayName("Move Square down twice")
+    @DisplayName("Move Square down")
     public void moveTowards() {
         final Block actual =
             new Block(
@@ -92,10 +92,10 @@ public class BlockTests {
                     new Color(155, 0, 0),
                     MovePattern.ALL_DIRECTIONS,
                     false,
-                    new PositionListInfo(new Position(3, 1), 3, Direction.U, false))
+                    new PositionListInfo(new Position(3, 2), 3, Direction.U, false))
             );
 
-        actual.moveTowards(Direction.D, Direction.D);
+        actual.moveTowards(Direction.D);
 
         assertEquals(expected, actual);
     }

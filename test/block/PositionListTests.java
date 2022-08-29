@@ -157,7 +157,7 @@ public class PositionListTests {
     }
 
     @Test
-    @DisplayName("Moving a Large Square to the right and down")
+    @DisplayName("Moving a Large Square to the right")
     public void moveTowards_LargeSquare_RiaghtAndDown() {
         final PositionList actual =
             new PositionList(
@@ -171,13 +171,13 @@ public class PositionListTests {
         final PositionList expected =
             new PositionList(
                 List.of(
-                    new Position(1, 2),
-                    new Position(2, 2),
                     new Position(1, 3),
-                    new Position(2, 3)
+                    new Position(2, 3),
+                    new Position(1, 4),
+                    new Position(2, 4)
                 ));
 
-        actual.moveTowards(Direction.R, Direction.D);
+        actual.moveTowards(Direction.R);
 
         assertEquals(expected, actual);
     }

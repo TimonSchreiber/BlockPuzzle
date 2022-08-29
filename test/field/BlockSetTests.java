@@ -57,13 +57,13 @@ public class BlockSetTests {
                 new PositionListInfo(new Position(2, 4), 1, Direction.D, false))
     );
 
-    private BlockSet blocks;
+    private BlockSet blockSet;
 
     @BeforeEach
     public void setUp() {
-        blocks = new BlockSet();
+        blockSet = new BlockSet();
         startPosition.forEach(
-            blockInfo -> blocks.add(new Block(blockInfo))
+            blockInfo -> blockSet.add(new Block(blockInfo))
         );
     }
 
@@ -73,7 +73,7 @@ public class BlockSetTests {
     @Test
     @DisplayName("The copy constructor should return a deep copy")
     public void newBlockSetCreatesADeepCopy() {
-        final BlockSet expected = new BlockSet(blocks);
+        final BlockSet expected = new BlockSet(blockSet);
         final BlockSet actual = new BlockSet(expected);
 
         final Move move = new Move("R1", Direction.U);
@@ -91,7 +91,7 @@ public class BlockSetTests {
         final String expected = "M2";
 
         final Position position = new Position(1, 4);
-        final String actual = blocks.getNameByPosition(position);
+        final String actual = blockSet.getNameByPosition(position);
 
         assertEquals(expected, actual);
     }
@@ -100,7 +100,7 @@ public class BlockSetTests {
     @DisplayName("getBlockName Should return null if there is no Block at the Position")
     public void getBlockName_incorrectPosition() {
         final Position position = new Position(0, 4);
-        final String blockName = blocks.getNameByPosition(position);
+        final String blockName = blockSet.getNameByPosition(position);
 
         assertNull(blockName);
     }
@@ -118,7 +118,7 @@ public class BlockSetTests {
         );
 
         final String blockName = "M2";
-        final Block actual = blocks.getBlockByName(blockName);
+        final Block actual = blockSet.getBlockByName(blockName);
 
         assertEquals(expected, actual);
     }
@@ -127,7 +127,7 @@ public class BlockSetTests {
     @DisplayName("getBlock Should return null if there is no Block with the blockName")
     public void getBlock_incorrectBlockName() {
         final String blockName = "T2";
-        final Block block = blocks.getBlockByName(blockName);
+        final Block block = blockSet.getBlockByName(blockName);
 
         assertNull(block);
     }
@@ -135,7 +135,7 @@ public class BlockSetTests {
     @Test
     @DisplayName("getMainBlocks Should return a new(?) BlockSet with all the MainBlocks")
     public void getMainBlocks() {
-        final BlockSet actual = blocks.getMainBlocks();
+        final BlockSet actual = blockSet.getMainBlocks();
         final BlockSet expected = new BlockSet();
         expected.add(
             new Block(
@@ -162,19 +162,19 @@ public class BlockSetTests {
         final Position position = new Position(3, 1);
 
         final Move move = new Move("R1", Direction.D);
-        blocks.makeMove(move);
+        blockSet.makeMove(move);
 
-        assertNotNull(blocks.getNameByPosition(position));
+        assertNotNull(blockSet.getNameByPosition(position));
     }
 
     @Test
     @DisplayName("Move a nonexistant Block and nothing changes")
     public void makeMoveWithInvalidBlock() {
-        final BlockSet expected = new BlockSet(blocks);
+        final BlockSet expected = new BlockSet(blockSet);
 
         final Move move = new Move("T1", Direction.D);
-        blocks.makeMove(move);
-        final BlockSet actual = new BlockSet(blocks);
+        blockSet.makeMove(move);
+        final BlockSet actual = new BlockSet(blockSet);
 
         assertEquals(expected, actual);
     }
@@ -201,7 +201,7 @@ public class BlockSetTests {
                 )
             );
 
-        assertTrue(blocks.add(block));
+        assertTrue(blockSet.add(block));
     }
 
     @Test
@@ -225,8 +225,8 @@ public class BlockSetTests {
             );
 
         assertAll(
-            () -> assertFalse(blocks.add(block)),
-            () -> assertNull(blocks.getBlockByName(B1))
+            () -> assertFalse(blockSet.add(block)),
+            () -> assertNull(blockSet.getBlockByName(B1))
         );
     }
 

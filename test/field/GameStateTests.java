@@ -57,19 +57,19 @@ public class GameStateTests {
 
     @BeforeEach
     public void setUp() {
-        BlockSet blocks = new BlockSet();
+        final BlockSet blockSet = new BlockSet();
         startPosition.forEach(
-            blockInfo -> blocks.add(new Block(blockInfo))
+            blockInfo -> blockSet.add(new Block(blockInfo))
         );
-        String R1 = "R1";
-        List<Move> moves =
+        final String R1 = "R1";
+        final List<Move> moveList =
             List.of(
                 new Move(R1, Direction.U),
                 new Move(R1, Direction.R),
                 new Move(R1, Direction.U)
             );
 
-        gameState = new GameState(blocks, moves);
+        gameState = new GameState(blockSet, moveList);
     }
 
     // -------------------------------------------------------------------------
@@ -91,8 +91,8 @@ public class GameStateTests {
             );
 
         assertAll(
-            () -> assertEquals(expectedBlockSet, gameState.blocks()),
-            () -> assertEquals(expectedMoves, gameState.moves())
+            () -> assertEquals(expectedBlockSet, gameState.blockSet()),
+            () -> assertEquals(expectedMoves, gameState.moveList())
         );
     }
 
