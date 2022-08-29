@@ -13,7 +13,7 @@ public final class MovePattern implements Iterable<Direction> {
     // -------------------------------------------------------------------------
 
     /** List of Directions. */
-    private final List<Direction> directions;
+    private final List<Direction> movePattern;
 
     // -------------------------------------------------------------------------
     // CONSTRUCTOR
@@ -23,7 +23,7 @@ public final class MovePattern implements Iterable<Direction> {
      * Private constructor.
      */
     private MovePattern(final List<Direction> directions) {
-        this.directions = directions;
+        this.movePattern = directions;
     }
 
 
@@ -43,8 +43,8 @@ public final class MovePattern implements Iterable<Direction> {
     MovePattern DOWN_UP_DIRECTIONS =
         new MovePattern(
             List.of(
-            Direction.D,
-            Direction.U
+                Direction.D,
+                Direction.U
             )
         );
 
@@ -106,12 +106,13 @@ public final class MovePattern implements Iterable<Direction> {
     /**
      * Checks if this MovePattern conatins all the specified Directions.
      *
-     * @param directions    The Directions whose presence is to be tested.
+     * @param direction    The Directions whose presence is to be tested.
      * @return              {@code true} if this MovePattern conatins all the
      *                      specified Directions, {@code false} otherwise.
+     * @see java.util.List#contains(Object)
      */
-    public boolean containsAll(Direction... directions) {
-        return this.directions.containsAll(List.of(directions));
+    public boolean contains(Direction direction) {
+        return this.movePattern.contains(direction);
     }
 
     // -------------------------------------------------------------------------
@@ -134,9 +135,9 @@ public final class MovePattern implements Iterable<Direction> {
         // Object must be MovePattern at this point
         final MovePattern other = (MovePattern) obj;
 
-        return (directions == other.directions)
-                || ((directions != null)
-                    && directions.equals(other.directions));
+        return (movePattern == other.movePattern)
+                || ((movePattern != null)
+                    && movePattern.equals(other.movePattern));
     }
 
     /* (non-Javadoc)
@@ -147,7 +148,7 @@ public final class MovePattern implements Iterable<Direction> {
         final int PRIME = 31;
         int hash = 7;
 
-        hash = PRIME * hash + ((directions == null) ? 0 : directions.hashCode());
+        hash = PRIME * hash + ((movePattern == null) ? 0 : movePattern.hashCode());
 
         return hash;
     }
@@ -162,9 +163,9 @@ public final class MovePattern implements Iterable<Direction> {
     @Override
     public String toString() {
         return """
-                MovePattern [directions=%s]\
+                MovePattern [movePattern=%s]\
                 """
-                .formatted(directions);
+                .formatted(movePattern);
     }
 
     // -------------------------------------------------------------------------
@@ -178,7 +179,7 @@ public final class MovePattern implements Iterable<Direction> {
      */
     @Override
     public Iterator<Direction> iterator() {
-        return directions.iterator();
+        return movePattern.iterator();
     }
 
 }   // Move Pattern class
