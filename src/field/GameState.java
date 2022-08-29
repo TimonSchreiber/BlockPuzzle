@@ -14,10 +14,10 @@ public final class GameState {
     // -------------------------------------------------------------------------
 
     /** The BlockSet */
-    private final BlockSet blocks;
+    private final BlockSet blockSet;
 
     /** A LinkedList of Moves */
-    private final List<Move> moves;
+    private final List<Move> moveList;
 
     // -------------------------------------------------------------------------
     // CONSTRUCTOR
@@ -26,25 +26,25 @@ public final class GameState {
     /**
      * Class constructor copying a BlockSet and creating an empty List of Moves.
      *
-     * @param blocks  The BlockSet.
+     * @param blockSet  The BlockSet.
      */
-    public GameState(final BlockSet blocks) {
-        this.blocks = new BlockSet(blocks);
-        this.moves  = new LinkedList<>();
+    public GameState(final BlockSet blockSet) {
+        this.blockSet   = new BlockSet(blockSet);
+        this.moveList   = new LinkedList<>();
     }
 
     /**
      * Class constructor copying a BlockSet and a List of Moves.
      *
-     * @param blocks    The BlockSet
-     * @param moves     The List of Moves
+     * @param blockSet  The BlockSet
+     * @param moveList  The List of Moves
      */
-    public GameState(final BlockSet blocks, final List<Move> moves) {
-        this.blocks = new BlockSet(blocks);
-        this.moves  = new LinkedList<>();
+    public GameState(final BlockSet blockSet, final List<Move> moveList) {
+        this.blockSet   = new BlockSet(blockSet);
+        this.moveList   = new LinkedList<>();
         
-        for (final Move move : moves) {
-            this.moves.add(new Move(move));
+        for (final Move move : moveList) {
+            this.moveList.add(new Move(move));
         }
     }
 
@@ -57,8 +57,8 @@ public final class GameState {
      *
      * @return  The BlockSet
      */
-    public BlockSet blocks() {
-        return new BlockSet(blocks);
+    public BlockSet blockSet() {
+        return new BlockSet(blockSet);
     }
 
     /**
@@ -66,10 +66,10 @@ public final class GameState {
      *
      * @return  A new List with a copy of every Move.
      */
-    public List<Move> moves() {
+    public List<Move> moveList() {
         final List<Move> neMoveList = new LinkedList<>();
 
-        for (final Move move : moves) {
+        for (final Move move : moveList) {
             neMoveList.add(new Move(move));
         }
 
@@ -81,15 +81,16 @@ public final class GameState {
     // -------------------------------------------------------------------------
 
     /**
-     * Creates a copy of this
+     * Creates a new List with an additional Move added to the end.
      *
-     * @param moves
-     * @return
+     * @param moveList  The move List to copy
+     * @param newMove   The new Move
+     * @return          A new List
      */
-    public static List<Move> addMoveToNewList(final List<Move> moves, final Move newMove) {
+    public static List<Move> addMoveToNewList(final List<Move> moveList, final Move newMove) {
         final List<Move> newMoveList = new LinkedList<>();
 
-        for (final Move move : moves) {
+        for (final Move move : moveList) {
             newMoveList.add(new Move(move));
         }
 
@@ -118,12 +119,12 @@ public final class GameState {
         // Object must be PositionList at this point
         final GameState other = (GameState) obj;
 
-        return ((blocks == other.blocks)
-                || ((blocks != null)
-                    && blocks.equals(other.blocks)))
-            && ((moves == other.moves)
-                || ((moves != null)
-                    && moves.equals(other.moves)));
+        return ((blockSet == other.blockSet)
+                || ((blockSet != null)
+                    && blockSet.equals(other.blockSet)))
+            && ((moveList == other.moveList)
+                || ((moveList != null)
+                    && moveList.equals(other.moveList)));
     }
 
     /* (non-Javadoc)
@@ -134,8 +135,8 @@ public final class GameState {
         final int PRIME = 31;
         int hash = 7;
 
-        hash = PRIME * hash + ((blocks == null) ? 0 : blocks.hashCode());
-        hash = PRIME * hash + (( moves == null) ? 0 :  moves.hashCode());
+        hash = PRIME * hash + ((blockSet == null) ? 0 : blockSet.hashCode());
+        hash = PRIME * hash + ((moveList == null) ? 0 : moveList.hashCode());
 
         return hash;
     }
@@ -151,14 +152,14 @@ public final class GameState {
     public String toString() {
         return """
                 GameState [\
-                blocks=%s, \
-                moves=%s\
+                blockSet=%s, \
+                moveList=%s\
                 ]\
                 """
                 .formatted(
-                    blocks,
-                    moves
+                    blockSet,
+                    moveList
                 );
     }
 
-}   // GameState class
+}   // Game State class
