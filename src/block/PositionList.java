@@ -17,7 +17,7 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
     // -------------------------------------------------------------------------
 
     /** ArrayList of Positions */
-    private final List<Position> positions;
+    private final List<Position> positionList;
 
     // -------------------------------------------------------------------------
     // CONSTRUCTORS
@@ -27,38 +27,37 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
      * Class constructor from a PosittionsInfo object. Delegates
      * the construction to one of two private factory methods.
      *
-     * @param positionListInfo     The PositionListInfo
+     * @param positionListInfo  The PositionListInfo
      */
     public PositionList(final PositionListInfo positionListInfo) {
-        if (positionListInfo.isElbow()) {
-            positions = newElbow(positionListInfo);
-        } else {
-            positions = newRectangle(positionListInfo);
-        }
+        this.positionList =
+            (positionListInfo.isElbow())
+                ?     newElbow(positionListInfo)
+                : newRectangle(positionListInfo);
     }
 
     /**
      * Class constrcutor form a List of Positions.
      *
-     * @param positions     A List of Positions
+     * @param positionList  A List of Positions
      */
-    public PositionList(final List<Position> positions) {
-        this.positions = new ArrayList<>(positions);
+    public PositionList(final List<Position> positionList) {
+        this.positionList = new ArrayList<>(positionList);
 
         // make sure this List is sorted.
-        Collections.sort(this.positions);
+        Collections.sort(this.positionList);
     }
 
     /**
      * Copy constructor.
      *
-     * @param positions     A PositionList
+     * @param positionList  A PositionList
      */
-    public PositionList(final PositionList positions) {
-        this.positions = new ArrayList<>();
+    public PositionList(final PositionList positionList) {
+        this.positionList = new ArrayList<>();
 
-        for (final Position position : positions) {
-            this.positions.add(new Position(position));
+        for (final Position position : positionList) {
+            this.positionList.add(new Position(position));
         }
     }
 
@@ -69,13 +68,18 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
     /**
      * Returns a new List of Positions where all Positions form a straight line.
      */
-    private List<Position> newRectangle(PositionListInfo positionListInfo) {
+    private List<Position> newRectangle(final PositionListInfo positionListInfo) {
         final List<Position> newList = new ArrayList<>();
         Position newPosition = positionListInfo.position();
 
-        for (int i = 0; i < positionListInfo.size(); ++i) {
-            newList.add(newPosition);
+        // add the current (first) Position to the List.
+        newList.add(newPosition);
+        
+        // if the size is > 1: move the newPosition towards the Direction and
+        // add it to the List.
+        for (int i = 1; i < positionListInfo.size(); ++i) {
             newPosition = newPosition.moveTowards(positionListInfo.direction());
+            newList.add(newPosition);
         }
 
         // make sure the List is sorted.
@@ -93,28 +97,38 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
      */
     private List<Position> newElbow(final PositionListInfo positionListInfo) {
         final List<Position> newList = new ArrayList<>();
+        final Position newPosition = positionListInfo.position();
 
         switch (positionListInfo.size()) {
-            // add the 'diagonal' Block
+            // add the 'diagonal Direction' Position to the List.
             case 4:
                 newList.add(
-                    positionListInfo.position().moveTowards(
+                    newPosition.moveTowards(
                         positionListInfo.direction(),
-                        positionListInfo.direction().next()));
+                        positionListInfo.direction().next()
+                    )
+                );
                 // falls through
-            // add the 'next' Block
+
+            // add the 'next Direction' Position to the List.
             case 3:
                 newList.add(
-                    positionListInfo.position().moveTowards(
-                        positionListInfo.direction().next()));
+                    newPosition.moveTowards(
+                        positionListInfo.direction().next()
+                    )
+                );
                 // falls through
-            // add the 'direction' and 'this position' Block
+
+            // add the 'Direction' and 'current' Position to the List.
             default:
                 newList.add(
-                    positionListInfo.position().moveTowards(
-                        positionListInfo.direction()));
+                    newPosition.moveTowards(
+                        positionListInfo.direction()
+                    )
+                );
                 newList.add(
-                    positionListInfo.position());
+                    newPosition
+                );
                 break;
         }
 
@@ -130,12 +144,12 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
 
     /**
      * Replaces every Position in this List with a new Position resulting from
-     * moving it towards the specified Directions.
+     * moving it towards the specified Direction.
      *
-     * @param directions    One or more Directions.
+     * @param direction     One or more Direction.
      */
-    public void moveTowards(final Direction... directions) {
-        positions.replaceAll(pos -> pos.moveTowards(directions));
+    public void moveTowards(final Direction direction) {
+        positionList.replaceAll(pos -> pos.moveTowards(direction));
     }
 
     // -------------------------------------------------------------------------
@@ -151,7 +165,7 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
      * @see java.util.List#contains(Object)
      */
     public boolean contains(final Position position) {
-        return positions.contains(position);
+        return positionList.contains(position);
     }
 
     // -------------------------------------------------------------------------
@@ -174,9 +188,9 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
         // Object must be PositionList at this point
         final PositionList other = (PositionList) obj;
 
-        return (positions == other.positions)
-                || ((positions != null)
-                    && positions.equals(other.positions));
+        return (positionList == other.positionList)
+                || ((positionList != null)
+                    && positionList.equals(other.positionList));
     }
 
     /* (non-Javadoc)
@@ -187,7 +201,7 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
         final int PRIME = 31;
         int hash = 7;
 
-        hash = PRIME * hash + ((positions == null) ? 0 : positions.hashCode());
+        hash = PRIME * hash + ((positionList == null) ? 0 : positionList.hashCode());
 
         return hash;
     }
@@ -203,9 +217,9 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
     @Override
     public String toString() {
         return """
-                PositionList [positions=%s]\
+                PositionList [positionList=%s]\
                 """
-                .formatted(positions);
+                .formatted(positionList);
     }
 
     // -------------------------------------------------------------------------
@@ -219,7 +233,7 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
      */
     @Override
     public Iterator<Position> iterator() {
-        return positions.iterator();
+        return positionList.iterator();
     }
 
     // -------------------------------------------------------------------------
@@ -232,9 +246,9 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
      */
     @Override
     public int compareTo(PositionList other) {
-        return (positions.size() != other.positions.size())
-                ? -Integer.compare(positions.size(), other.positions.size())
-                : positions.get(0).compareTo(other.positions.get(0));
+        return (positionList.size() != other.positionList.size())
+                ? -Integer.compare(positionList.size(), other.positionList.size())
+                : positionList.get(0).compareTo(other.positionList.get(0));
     }
 
 }   // PositionList class
