@@ -18,9 +18,9 @@ public final class BlockSet implements Iterable<Block> {
 
     // TODO: Maybe make this a map with Blockname to Block
     // and only look at the value-Set for equals and HashCode
-    // So all the complex 'for (Block block : blocks)'s are no longer needed
+    // So all the complex 'for (Block block : blockSet)'s are no longer needed
     /** TreeSet of Blocks. */
-    private final Set<Block> blocks;
+    private final Set<Block> blockSet;
 
     // -------------------------------------------------------------------------
     // CONSTRUCTORS
@@ -30,19 +30,19 @@ public final class BlockSet implements Iterable<Block> {
      * Class constructor.
      */
     public BlockSet() {
-        this.blocks = new TreeSet<>();
+        this.blockSet = new TreeSet<>();
     }
 
     /**
      * Copy constructor.
      *
-     * @param blocks    the BlockSet
+     * @param blockSet  the BlockSet
      */
-    public BlockSet(final BlockSet blocks) {
-        this.blocks = new TreeSet<>();
+    public BlockSet(final BlockSet blockSet) {
+        this.blockSet = new TreeSet<>();
 
-        for (final Block block : blocks) {
-            this.blocks.add(new Block(block));
+        for (final Block block : blockSet) {
+            this.blockSet.add(new Block(block));
         }
     }
 
@@ -58,11 +58,8 @@ public final class BlockSet implements Iterable<Block> {
      *                  {@code null} otherwise.
      */
     public String getNameByPosition(final Position position) {
-        // return this.blocks.stream()
-        //         .filter(block -> block.positionList().contains(position))
-        //         .findAny().get().blockName();
+        for (final Block block : blockSet) {
 
-        for (final Block block : blocks) {
             if (block.containsPosition(position)) {
                 return block.name();
             }
@@ -79,11 +76,8 @@ public final class BlockSet implements Iterable<Block> {
      *              Block does not exist.
      */
     public Block getBlockByName(final String name) {
-        // return this.blocks.stream()
-        //         .filter(block -> block.blockName().equals(name))
-        //         .findAny().get();
+        for (final Block block : blockSet) {
 
-        for (final Block block : blocks) {
             if (block.name().equals(name)) {
                 return new Block(block);
             }
@@ -98,18 +92,18 @@ public final class BlockSet implements Iterable<Block> {
      * @return  A BlockSet with only MainBlocks
      */
     public BlockSet getMainBlocks() {
-        final BlockSet mainBlocks = new BlockSet();
+        final BlockSet mainBlockSet = new BlockSet();
 
-        for (final Block block : blocks) {
+        for (final Block block : blockSet) {
 
             if (block.isMainBlock()) {
-                mainBlocks.blocks.add(block);
+                mainBlockSet.blockSet.add(block);
             } else {
                 break;
             }
         }
 
-        return mainBlocks;
+        return mainBlockSet;
     }
 
     // -------------------------------------------------------------------------
@@ -122,12 +116,14 @@ public final class BlockSet implements Iterable<Block> {
      * @param move  The Move to make
      */
     public void makeMove(final Move move) {
-        for (final Block block : blocks) {
+        for (final Block block : blockSet) {
+
             if (block.name().equals(move.name())) {
                 block.moveTowards(move.direction());
                 return;
             }
         }
+
         return;
     }
 
@@ -146,12 +142,13 @@ public final class BlockSet implements Iterable<Block> {
     public boolean add(final Block block) {
         // check if any Position of the new Block is already occupied
         for (final Position position : block.positions()) {
+
             if (getNameByPosition(position) != null) {
                 return false;
             }
         }
         // the new Block can be added to this BlockSet
-        return blocks.add(block);
+        return blockSet.add(block);
     }
 
     // -------------------------------------------------------------------------
@@ -174,9 +171,9 @@ public final class BlockSet implements Iterable<Block> {
         // Object must be PositionList at this point
         final BlockSet other = (BlockSet) obj;
 
-        return (blocks == other.blocks)
-                || ((blocks != null)
-                    && blocks.equals(other.blocks));
+        return (blockSet == other.blockSet)
+                || ((blockSet != null)
+                    && blockSet.equals(other.blockSet));
     }
 
     /* (non-Javadoc)
@@ -187,7 +184,7 @@ public final class BlockSet implements Iterable<Block> {
         final int PRIME = 31;
         int hash = 7;
 
-        hash = PRIME * hash + ((blocks == null) ? 0 : blocks.hashCode());
+        hash = PRIME * hash + ((blockSet == null) ? 0 : blockSet.hashCode());
 
         return hash;
     }
@@ -202,9 +199,9 @@ public final class BlockSet implements Iterable<Block> {
     @Override
     public String toString() {
         return """
-                BlockSet [blocks=%s]\
+                BlockSet [blockSet=%s]\
                 """
-                .formatted(blocks);
+                .formatted(blockSet);
     }
 
     // -------------------------------------------------------------------------
@@ -218,7 +215,7 @@ public final class BlockSet implements Iterable<Block> {
      */
     @Override
     public Iterator<Block> iterator() {
-        return blocks.iterator();
+        return blockSet.iterator();
     }
 
 }   // BlockSet class
