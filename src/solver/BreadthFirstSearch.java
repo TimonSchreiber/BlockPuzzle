@@ -239,8 +239,7 @@ public class BreadthFirstSearch {
                 savedBlockSets=%s, \
                 gameStateQueue=%s\
                 ]\
-                """
-                .formatted(
+                """.formatted(
                     foundASolution,
                     delay,
                     game,

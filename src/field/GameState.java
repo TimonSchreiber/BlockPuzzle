@@ -155,8 +155,7 @@ public final class GameState {
                 blockSet=%s, \
                 moveList=%s\
                 ]\
-                """
-                .formatted(
+                """.formatted(
                     blockSet,
                     moveList
                 );

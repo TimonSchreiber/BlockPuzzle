@@ -248,8 +248,7 @@ public class DepthFirstSearch {
                 moveList=%s, \
                 savedBlockSets=%s\
                 ]\
-                """
-                .formatted(
+                """.formatted(
                     show,
                     delay,
                     game,

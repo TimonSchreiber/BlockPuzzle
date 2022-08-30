@@ -223,8 +223,7 @@ public final class JumpingRabbits extends Game {
                 blockSet=%s, \
                 gameField=%s\
                 ]\
-                """
-                .formatted(
+                """.formatted(
                     blockSet,
                     gameField
                 );

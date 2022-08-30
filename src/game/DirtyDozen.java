@@ -151,8 +151,7 @@ public final class DirtyDozen extends Game {
                 blockSet=%s, \
                 gameField=%s\
                 ]\
-                """
-                .formatted(
+                """.formatted(
                     blockSet,
                     gameField
                 );

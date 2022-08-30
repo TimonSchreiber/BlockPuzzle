@@ -16,7 +16,7 @@ public final class BlockSet implements Iterable<Block> {
     // ATTRIBUTES
     // -------------------------------------------------------------------------
 
-    // TODO: Maybe make this a map with Blockname to Block
+    // TODO: Maybe make this a map with Blockname (key)  to Block (value)
     // and only look at the value-Set for equals and HashCode
     // So all the complex 'for (Block block : blockSet)'s are no longer needed
     /** TreeSet of Blocks. */
@@ -115,7 +115,7 @@ public final class BlockSet implements Iterable<Block> {
      *
      * @param move  The Move to make
      */
-    public void makeMove(final Move move) {
+    public void makeMove(final Move move /* maybe add a number how often this move should be repeated {, int number} */) {
         for (final Block block : blockSet) {
 
             if (block.name().equals(move.name())) {
@@ -200,8 +200,7 @@ public final class BlockSet implements Iterable<Block> {
     public String toString() {
         return """
                 BlockSet [blockSet=%s]\
-                """
-                .formatted(blockSet);
+                """.formatted(blockSet);
     }
 
     // -------------------------------------------------------------------------

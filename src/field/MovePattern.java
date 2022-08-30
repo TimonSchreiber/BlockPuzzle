@@ -164,8 +164,7 @@ public final class MovePattern implements Iterable<Direction> {
     public String toString() {
         return """
                 MovePattern [movePattern=%s]\
-                """
-                .formatted(movePattern);
+                """.formatted(movePattern);
     }
 
     // -------------------------------------------------------------------------

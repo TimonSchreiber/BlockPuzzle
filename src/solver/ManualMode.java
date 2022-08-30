@@ -229,8 +229,7 @@ public final class ManualMode {
                 game=%s, \
                 moveList=%s\
                 ]\
-                """
-                .formatted(
+                """.formatted(
                     foundASolution,
                     delay,
                     game,

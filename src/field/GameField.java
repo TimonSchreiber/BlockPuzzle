@@ -339,8 +339,7 @@ public final class GameField {
                 WIN_POSITIONS=%s, \
                 CANVAS_INFO=%s\
                 ]\
-                """
-                .formatted(
+                """.formatted(
                     HEIGHT,
                     WIDTH,
                     WIN_POSITIONS,

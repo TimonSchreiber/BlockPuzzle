@@ -144,8 +144,7 @@ public final class RushHour extends Game {
                 blockSet=%s, \
                 gameField=%s\
                 ]\
-                """
-                .formatted(
+                """.formatted(
                     blockSet,
                     gameField
                 );

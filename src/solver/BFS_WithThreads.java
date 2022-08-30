@@ -261,8 +261,7 @@ public class BFS_WithThreads {
                 savedBlockSets=%s, \
                 gameStateQueue=%s\
                 ]\
-                """
-                .formatted(
+                """.formatted(
                     NTHREADS,
                     foundASolution,
                     delay,
