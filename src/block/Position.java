@@ -25,10 +25,26 @@ public record Position(int x, int y) implements Comparable<Position> {
     // -------------------------------------------------------------------------
 
     /**
+     * Returns a new Position with chnaged x-, or y-values according to the
+     * Direction given as argument.
+     *
+     * @param direction     One Direction to move this Position towards
+     * @return              The new Position
+     */
+    public Position moveTowards(final Direction direction) {
+        return switch (direction) {
+            case R -> new Position(x + 1, y    );
+            case D -> new Position(x    , y - 1);
+            case L -> new Position(x - 1, y    );
+            case U -> new Position(x    , y + 1);
+        };
+    }
+
+    /**
      * Returns a new Position with changed x-, and y-values according to the
      * Directions given as arguments.
      *
-     * @param directions    one or more Directions
+     * @param directions    an implicit Array of Directions to move towards
      * @return              a new Position
      */
     public Position moveTowards(final Direction... directions) {
