@@ -39,7 +39,7 @@ public final class BlockSet implements Iterable<Block> {
      * @param blockSet  the BlockSet
      */
     public BlockSet(final BlockSet blockSet) {
-        this.blockSet = new TreeSet<>();
+        this();
 
         for (final Block block : blockSet) {
             this.blockSet.add(new Block(block));

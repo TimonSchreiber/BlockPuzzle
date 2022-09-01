@@ -34,29 +34,50 @@ public final class Block implements Comparable<Block> {
     // -------------------------------------------------------------------------
 
     /**
+     * Private catch all class constructor for use in other public constructors.
+     *
+     * @param name          the Block name
+     * @param color         the Block color
+     * @param isMainBlock   the Main Block flag
+     * @param movePattern   the Move Pattern
+     * @param positionList  the Position List
+     */
+    private Block(final String name, final Color color, final boolean isMainBlock, final MovePattern movePattern, final PositionList positionList) {
+        this.name           = name;
+        this.color          = color;
+        this.isMainBlock    = isMainBlock;
+        this.movePattern    = movePattern;
+        this.positionList   = positionList;
+    }
+
+    /**
      * Class constructor from a BlockInfo record.
      *
      * @param blockInfo     The BlockInfo
      */
     public Block(final BlockInfo blockInfo) {
-        this.name           = blockInfo.name();
-        this.color          = blockInfo.color();
-        this.isMainBlock    = blockInfo.isMainBlock();
-        this.movePattern    = blockInfo.movePattern();
-        this.positionList   = new PositionList(blockInfo.positionListInfo());
+        this(
+            blockInfo.name(),
+            blockInfo.color(),
+            blockInfo.isMainBlock(),
+            blockInfo.movePattern(),
+            new PositionList(blockInfo.positionListInfo())
+        );
     }
 
     /**
      * Copy constructor.
      *
-     * @param block        the Block
+     * @param block        the Block to be copied.
      */
     public Block(final Block block) {
-        this.name           = block.name;
-        this.color          = block.color;
-        this.isMainBlock    = block.isMainBlock;
-        this.movePattern    = block.movePattern;
-        this.positionList   = new PositionList(block.positionList);
+        this(
+            block.name,
+            block.color,
+            block.isMainBlock,
+            block.movePattern,
+            new PositionList(block.positionList)
+        );
     }
 
     // -------------------------------------------------------------------------
