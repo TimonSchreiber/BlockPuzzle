@@ -66,14 +66,14 @@ public class BreadthFirstSearch {
      * Tries to solve the BlockPuzzle.
      */
     public void solve() {
-        System.out.println("START\n");
-
+        
         // add current BlockSet to the Map and Queue
         this.savedBlockSets.add(game.blockSet());
         this.gameStateQueue.add(new GameState(game.blockSet()));
-
+        
         // Start timer
-        final Instant t = Instant.now();
+        System.out.println("START\n");
+        final Instant time = Instant.now();
 
         while (!foundASolution) {
 
@@ -91,21 +91,14 @@ public class BreadthFirstSearch {
         }
 
         // Stop timer
-        final Duration d = Duration.between(t, Instant.now());
+        final Duration duration = Duration.between(time, Instant.now());
+        System.out.println("END\n");
 
         // print result
-        System.out.println("END");
-
-        System.out.println("\nNumber of states saved:\n" + savedBlockSets.size());
-
-        System.out.println("\nNumber of moves for the Solution:\n" + solutionMoveList.size());
-
-        System.out.println("\nTime to solve:\n"
-            + d.toSecondsPart() + " seconds, "
-            + d.toMillisPart() + " milliseconds");
+        System.out.println(resultToString(duration));
 
         // Show solution
-        System.out.println("\nshow solution");
+        System.out.println("show solution");
         game.showSolution(solutionMoveList, delay);
 
         return;
@@ -165,6 +158,35 @@ public class BreadthFirstSearch {
         }    // end for loop Block
 
         return;
+    }
+
+    // -------------------------------------------------------------------------
+    // PRINT RESULT
+    // -------------------------------------------------------------------------
+
+    /**
+     * Prints the result information with number of states, number of moves and
+     * time it took to solve this puzzle.
+     *
+     * @param duration  The duration from start to end
+     */
+    private String resultToString(final Duration duration) {
+        return
+            """
+            Number of states saved:
+            %d
+
+            Number of moves made:
+            %d
+
+            Time to solve:
+            %d seconds, %d milliseconds
+            """.formatted(
+                savedBlockSets.size(),
+                solutionMoveList.size(),
+                duration.toSecondsPart(),
+                duration.toMillisPart()
+            );
     }
 
     // -------------------------------------------------------------------------
@@ -230,23 +252,24 @@ public class BreadthFirstSearch {
      */
     @Override
     public String toString() {
-        return """
-                BreadthFirstSearch [\
-                foundASolution=%b, \
-                delay=%d, \
-                game=%s, \
-                solutionMoveList=%s, \
-                savedBlockSets=%s, \
-                gameStateQueue=%s\
-                ]\
-                """.formatted(
-                    foundASolution,
-                    delay,
-                    game,
-                    solutionMoveList,
-                    savedBlockSets,
-                    gameStateQueue
-                );
+        return
+            """
+            BreadthFirstSearch [\
+            foundASolution=%b, \
+            delay=%d, \
+            game=%s, \
+            solutionMoveList=%s, \
+            savedBlockSets=%s, \
+            gameStateQueue=%s\
+            ]\
+            """.formatted(
+                foundASolution,
+                delay,
+                game,
+                solutionMoveList,
+                savedBlockSets,
+                gameStateQueue
+            );
     }
 
 }   // Breadth First Search class

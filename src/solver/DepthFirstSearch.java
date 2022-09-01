@@ -61,13 +61,13 @@ public class DepthFirstSearch {
      * Tries to solve the BlockPuzzle.
      */
     public void solve() {
-        System.out.println("START\n");
-
+        
         // add current BlockSet to the HashSet
         this.savedBlockSets.add(game.blockSet());
-
+        
         // Start timer
-        final Instant t = Instant.now();
+        System.out.println("START\n");
+        final Instant time = Instant.now();
 
         // Check for game.checkWinCondition() to become true
         while (!game.checkWinCondition()) {
@@ -91,22 +91,16 @@ public class DepthFirstSearch {
         }   // end outer while loop
 
         // Stop timer
-        final Duration d = Duration.between(t, Instant.now());
+        final Duration duration = Duration.between(time, Instant.now());
+        System.out.println("END\n");
 
-        System.out.println("END");
-
-        System.out.println("\nNumber of states saved:\n" + savedBlockSets.size());
-
-        System.out.println("\nNumber of moves made:\n" + moveList.size());
-
-        System.out.println("\nTime to solve:\n"
-            + d.toSecondsPart() + " seconds, "
-            + d.toMillisPart() + " milliseconds");
+        // print result
+        System.out.println(resultToString(duration));
 
         game.draw(2000);
 
         // Show solution
-        System.out.println("\nshow solution");
+        System.out.println("show solution");
         reverseGame();
         game.showSolution(moveList, delay);
 
@@ -182,6 +176,35 @@ public class DepthFirstSearch {
     }
 
     // -------------------------------------------------------------------------
+    // PRINT RESULT
+    // -------------------------------------------------------------------------
+
+    /**
+     * Prints the result information with number of states, number of moves and
+     * time it took to solve this puzzle.
+     *
+     * @param duration  The duration from start to end
+     */
+    private String resultToString(final Duration duration) {
+        return
+            """
+            Number of states saved:
+            %d
+
+            Number of moves made:
+            %d
+
+            Time to solve:
+            %d seconds, %d milliseconds
+            """.formatted(
+                savedBlockSets.size(),
+                moveList.size(),
+                duration.toSecondsPart(),
+                duration.toMillisPart()
+            );
+    }
+
+    // -------------------------------------------------------------------------
     // EQUALS AND HASH-CODE
     // -------------------------------------------------------------------------
 
@@ -240,21 +263,22 @@ public class DepthFirstSearch {
      */
     @Override
     public String toString() {
-        return """
-                DepthFirstSearch [\
-                show=%b, \
-                delay=%d, \
-                game=%s, \
-                moveList=%s, \
-                savedBlockSets=%s\
-                ]\
-                """.formatted(
-                    show,
-                    delay,
-                    game,
-                    moveList,
-                    savedBlockSets
-                );
+        return
+            """
+            DepthFirstSearch [\
+            show=%b, \
+            delay=%d, \
+            game=%s, \
+            moveList=%s, \
+            savedBlockSets=%s\
+            ]\
+            """.formatted(
+                show,
+                delay,
+                game,
+                moveList,
+                savedBlockSets
+            );
     }
 
 }   // Depth First Search class

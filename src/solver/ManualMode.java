@@ -168,6 +168,36 @@ public final class ManualMode {
     }
 
     // -------------------------------------------------------------------------
+    // PRINT RESULT
+    // -------------------------------------------------------------------------
+
+    /**
+     * Prints the result information with number of states, number of moves and
+     * time it took to solve this puzzle.
+     *
+     * @param duration  The duration from start to end
+     */
+    private void printResult(/* final Duration duration */) {
+        System.out.println("END");
+
+        System.out.println(
+            /* "\nNumber of states saved:\n"
+            + savedBlockSets.size() */
+        );
+
+        System.out.println(
+            "\nNumber of moves made:\n"
+            + moveList.size()
+        );
+
+        System.out.println(
+            /* "\nTime to solve:\n"
+            + duration.toSecondsPart() + " seconds, "
+            + duration.toMillisPart() + " milliseconds" */
+        );
+    }
+
+    // -------------------------------------------------------------------------
     // EQUALS AND HASH-CODE
     // -------------------------------------------------------------------------
 
