@@ -146,15 +146,16 @@ public final class DirtyDozen extends Game {
      */
     @Override
     public String toString() {
-        return """
-                DirtyDozen [\
-                blockSet=%s, \
-                gameField=%s\
-                ]\
-                """.formatted(
-                    blockSet,
-                    gameField
-                );
+        return
+            """
+            DirtyDozen [\
+            blockSet=%s, \
+            gameField=%s\
+            ]\
+            """.formatted(
+                blockSet,
+                gameField
+            );
     }
 
     // -------------------------------------------------------------------------

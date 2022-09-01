@@ -139,15 +139,16 @@ public final class RushHour extends Game {
      */
     @Override
     public String toString() {
-        return """
-                RushHour [\
-                blockSet=%s, \
-                gameField=%s\
-                ]\
-                """.formatted(
-                    blockSet,
-                    gameField
-                );
+        return
+            """
+            RushHour [\
+            blockSet=%s, \
+            gameField=%s\
+            ]\
+            """.formatted(
+                blockSet,
+                gameField
+            );
     }
 
     // -------------------------------------------------------------------------

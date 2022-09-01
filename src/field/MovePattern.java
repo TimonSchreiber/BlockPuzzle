@@ -162,9 +162,10 @@ public final class MovePattern implements Iterable<Direction> {
      */
     @Override
     public String toString() {
-        return """
-                MovePattern [movePattern=%s]\
-                """.formatted(movePattern);
+        return
+            """
+            MovePattern [movePattern=%s]\
+            """.formatted(movePattern);
     }
 
     // -------------------------------------------------------------------------

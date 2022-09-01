@@ -218,21 +218,22 @@ public final class Block implements Comparable<Block> {
      */
     @Override
     public String toString() {
-        return """
-                Block [\
-                name=%s, \
-                color=%s, \
-                isMainBlock=%s, \
-                movePattern=%s, \
-                positionList=%s\
-                ]\
-                """.formatted(
-                    name,
-                    color,
-                    isMainBlock,
-                    movePattern,
-                    positionList
-                );
+        return
+            """
+            Block [\
+            name=%s, \
+            color=%s, \
+            isMainBlock=%s, \
+            movePattern=%s, \
+            positionList=%s\
+            ]\
+            """.formatted(
+                name,
+                color,
+                isMainBlock,
+                movePattern,
+                positionList
+            );
     }
 
     // -------------------------------------------------------------------------

@@ -198,9 +198,10 @@ public final class BlockSet implements Iterable<Block> {
      */
     @Override
     public String toString() {
-        return """
-                BlockSet [blockSet=%s]\
-                """.formatted(blockSet);
+        return
+            """
+            BlockSet [blockSet=%s]\
+            """.formatted(blockSet);
     }
 
     // -------------------------------------------------------------------------

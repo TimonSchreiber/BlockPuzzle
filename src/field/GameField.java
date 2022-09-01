@@ -332,19 +332,20 @@ public final class GameField {
      */
     @Override
     public String toString() {
-        return """
-                GameField [\
-                HEIGHT=%s, \
-                WIDTH=%s, \
-                WIN_POSITIONS=%s, \
-                CANVAS_INFO=%s\
-                ]\
-                """.formatted(
-                    HEIGHT,
-                    WIDTH,
-                    WIN_POSITIONS,
-                    CANVAS_INFO
-                );
+        return
+            """
+            GameField [\
+            HEIGHT=%s, \
+            WIDTH=%s, \
+            WIN_POSITIONS=%s, \
+            CANVAS_INFO=%s\
+            ]\
+            """.formatted(
+                HEIGHT,
+                WIDTH,
+                WIN_POSITIONS,
+                CANVAS_INFO
+            );
     }
 
 }   // Game Field class

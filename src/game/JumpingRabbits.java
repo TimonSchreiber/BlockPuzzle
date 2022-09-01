@@ -218,15 +218,16 @@ public final class JumpingRabbits extends Game {
      */
     @Override
     public String toString() {
-        return """
-                JumpingRabbits [\
-                blockSet=%s, \
-                gameField=%s\
-                ]\
-                """.formatted(
-                    blockSet,
-                    gameField
-                );
+        return
+            """
+            JumpingRabbits [\
+            blockSet=%s, \
+            gameField=%s\
+            ]\
+            """.formatted(
+                blockSet,
+                gameField
+            );
     }
 
     // -------------------------------------------------------------------------

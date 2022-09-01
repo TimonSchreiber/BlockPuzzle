@@ -149,15 +149,16 @@ public final class GameState {
      */
     @Override
     public String toString() {
-        return """
-                GameState [\
-                blockSet=%s, \
-                moveList=%s\
-                ]\
-                """.formatted(
-                    blockSet,
-                    moveList
-                );
+        return
+            """
+            GameState [\
+            blockSet=%s, \
+            moveList=%s\
+            ]\
+            """.formatted(
+                blockSet,
+                moveList
+            );
     }
 
 }   // Game State class

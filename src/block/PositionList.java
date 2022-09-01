@@ -216,9 +216,10 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
 
     @Override
     public String toString() {
-        return """
-                PositionList [positionList=%s]\
-                """.formatted(positionList);
+        return
+            """
+            PositionList [positionList=%s]\
+            """.formatted(positionList);
     }
 
     // -------------------------------------------------------------------------
