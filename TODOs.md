@@ -1,11 +1,11 @@
 # TODOs
 
+ - [ ] Add a boolean for showing the board at all (other than updating it between to moves)
  - [ ] Try find to find a way to move a "Block" twice before the next "Block" is tried. -> MovePattern.All_DIRECTIONS_PLUS with Arrays of Directions?
-
  - [ ] Clear all 'TODOs'.
- - [ ] Save the StartingPosition in a JSON-File and extract the data in the Game classes.
  - [ ] Finish the 'Makefile', every package gets a Makefile and those get called in the src Makefile and so on...
  - [ ] Close Threads when finished.
+ - [ ] Save the StartingPosition in a JSON-File and extract the data in the Game classes.
 
  - [X] Add a 'manual mode'.
  - [X] Check when and where to create copies (Foo newFoo = new Foo(foo)), maybe the "receiving"-end does not also need to create a copy?
