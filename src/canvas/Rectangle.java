@@ -8,5 +8,4 @@ public record Rectangle(
     double minY,
     double width,
     double height
-) {
-}   // Rectangle record
+) {}

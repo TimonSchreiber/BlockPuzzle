@@ -18,7 +18,7 @@ public final class BlockSet implements Iterable<Block> {
 
     // TODO: Maybe make this a map with Blockname (key)  to Block (value)
     // and only look at the value-Set for equals and HashCode
-    // So all the complex 'for (Block block : blockSet)'s are no longer needed
+    // So all the complex 'for (final Block block : blockSet)'s are no longer needed
     /** TreeSet of Blocks. */
     private final Set<Block> blockSet;
 
@@ -38,7 +38,7 @@ public final class BlockSet implements Iterable<Block> {
      *
      * @param blockSet  the BlockSet
      */
-    public BlockSet(final BlockSet blockSet) {
+    public BlockSet(BlockSet blockSet) {
         this();
 
         for (final Block block : blockSet) {
@@ -57,10 +57,10 @@ public final class BlockSet implements Iterable<Block> {
      * @return          The name of the Block if there is one at this Position,
      *                  {@code null} otherwise.
      */
-    public String getNameByPosition(final Position position) {
+    public String getNameBy(Position position) {
         for (final Block block : blockSet) {
 
-            if (block.containsPosition(position)) {
+            if (block.contains(position)) {
                 return block.name();
             }
         }
@@ -75,7 +75,7 @@ public final class BlockSet implements Iterable<Block> {
      * @return      The Block with the specified name, or {@code null} if the
      *              Block does not exist.
      */
-    public Block getBlockByName(final String name) {
+    public Block getBlockBy(String name) {
         for (final Block block : blockSet) {
 
             if (block.name().equals(name)) {
@@ -96,11 +96,12 @@ public final class BlockSet implements Iterable<Block> {
 
         for (final Block block : blockSet) {
 
-            if (block.isMainBlock()) {
-                mainBlockSet.blockSet.add(block);
-            } else {
+            // all the MainBlocks are at the beginning of the BlockSet.
+            // if the current Block is not a MainBlock: leave the for loop
+            if (!block.isMainBlock()) {
                 break;
             }
+            mainBlockSet.blockSet.add(block);
         }
 
         return mainBlockSet;
@@ -110,16 +111,37 @@ public final class BlockSet implements Iterable<Block> {
     //  MOVE
     // -------------------------------------------------------------------------
 
-    /** TODO: make it possible for a Block to move more than once
+    /**
      * Moves the Block specified by the Move object in this BlockSet.
      *
      * @param move  The Move to make
      */
-    public void makeMove(final Move move /* maybe add a number how often this move should be repeated {, int number} */) {
+    public void makeMove(Move move) {
         for (final Block block : blockSet) {
 
             if (block.name().equals(move.name())) {
                 block.moveTowards(move.direction());
+                return;
+            }
+        }
+
+        return;
+    }
+
+    /** TODO: not used so far <---> maybe make this a (Move... moves) method?
+     * Moves the Block specified by the Move object in this BlockSet a certain
+     * amount of times.
+     *
+     * @param move          The Move to make
+     * @param repetitions   How often to repeat the Move.
+     */
+    public void makeMove(Move move, int repetitions) {
+        for (final Block block : blockSet) {
+
+            if (block.name().equals(move.name())) {
+                for (int i = 0; i < repetitions; ++i) {
+                    block.moveTowards(move.direction());
+                }
                 return;
             }
         }
@@ -139,11 +161,11 @@ public final class BlockSet implements Iterable<Block> {
      * @return          {@code true} if the Block was added, {@code false}
      *                  otherwise.
      */
-    public boolean add(final Block block) {
+    public boolean add(Block block) {
         // check if any Position of the new Block is already occupied
         for (final Position position : block.positions()) {
 
-            if (getNameByPosition(position) != null) {
+            if (getNameBy(position) != null) {
                 return false;
             }
         }
@@ -198,10 +220,9 @@ public final class BlockSet implements Iterable<Block> {
      */
     @Override
     public String toString() {
-        return
-            """
-            BlockSet [blockSet=%s]\
-            """.formatted(blockSet);
+        return """
+                BlockSet [blockSet=%s]\
+                """.formatted(blockSet);
     }
 
     // -------------------------------------------------------------------------
@@ -218,4 +239,4 @@ public final class BlockSet implements Iterable<Block> {
         return blockSet.iterator();
     }
 
-}   // BlockSet class
+}

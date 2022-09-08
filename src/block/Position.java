@@ -31,7 +31,7 @@ public record Position(int x, int y) implements Comparable<Position> {
      * @param direction     One Direction to move this Position towards
      * @return              The new Position
      */
-    public Position moveTowards(final Direction direction) {
+    public Position moveTowards(Direction direction) {
         return switch (direction) {
             case R -> new Position(x + 1, y    );
             case D -> new Position(x    , y - 1);
@@ -47,7 +47,7 @@ public record Position(int x, int y) implements Comparable<Position> {
      * @param directions    an implicit Array of Directions to move towards
      * @return              a new Position
      */
-    public Position moveTowards(final Direction... directions) {
+    public Position moveTowards(Direction... directions) {
         int x = this.x;
         int y = this.y;
 
@@ -78,4 +78,4 @@ public record Position(int x, int y) implements Comparable<Position> {
             : Integer.compare(x, other.x);
     }
 
-}   // Position record
+}

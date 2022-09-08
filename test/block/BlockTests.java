@@ -64,7 +64,7 @@ public class BlockTests {
     @Test
     @DisplayName("Block contains a Position")
     public void contains() {
-        final Position pos = new Position(3, 5);
+        final Position position = new Position(3, 5);
         final Block block =
             new Block(
                 new BlockInfo(
@@ -81,7 +81,7 @@ public class BlockTests {
                 )
             );
 
-            assertTrue(block.containsPosition(pos));
+            assertTrue(block.contains(position));
     }
 
     @Test

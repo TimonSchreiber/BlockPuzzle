@@ -71,7 +71,7 @@ public final class DirtyDozen extends Game {
      *
      * @param gameNumber    the gameNumber
      */
-    public DirtyDozen(final int gameNumber) {
+    public DirtyDozen(int gameNumber) {
         super(
             new BlockSet(),
             new GameField(HEIGHT, WIDTH, WIN_POSITIONS, CANVAS_INFO),
@@ -84,7 +84,7 @@ public final class DirtyDozen extends Game {
     // -------------------------------------------------------------------------
 
     @Override
-    protected void setUp(final int gameNumber) {
+    protected void setUp(int gameNumber) {
         INT_TO_BLOCKINFOS_MAP
             .get(gameNumber)
             .forEach(
@@ -146,16 +146,15 @@ public final class DirtyDozen extends Game {
      */
     @Override
     public String toString() {
-        return
-            """
-            DirtyDozen [\
-            blockSet=%s, \
-            gameField=%s\
-            ]\
-            """.formatted(
-                blockSet,
-                gameField
-            );
+        return """
+                DirtyDozen [\
+                blockSet=%s, \
+                gameField=%s\
+                ]\
+                """.formatted(
+                    blockSet,
+                    gameField
+                );
     }
 
     // -------------------------------------------------------------------------
@@ -2613,4 +2612,4 @@ public final class DirtyDozen extends Game {
 
     }   // static
 
-}    // Dirty Dozen class
+}

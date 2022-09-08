@@ -64,7 +64,7 @@ public final class RushHour extends Game {
      *
      * @param gameNumber    the gameNumber
      */
-    public RushHour(final int gameNumber) {
+    public RushHour(int gameNumber) {
         super(
             new BlockSet(),
             new GameField(SIZE, SIZE, WIN_POSITIONS, CANVAS_INFO),
@@ -77,7 +77,7 @@ public final class RushHour extends Game {
     // -------------------------------------------------------------------------
 
     @Override
-    protected void setUp(final int gameNumber) {
+    protected void setUp(int gameNumber) {
         INT_TO_BLOCKINFOS_MAP
             .get(gameNumber)
             .forEach(
@@ -139,16 +139,15 @@ public final class RushHour extends Game {
      */
     @Override
     public String toString() {
-        return
-            """
-            RushHour [\
-            blockSet=%s, \
-            gameField=%s\
-            ]\
-            """.formatted(
-                blockSet,
-                gameField
-            );
+        return """
+                RushHour [\
+                blockSet=%s, \
+                gameField=%s\
+                ]\
+                """.formatted(
+                    blockSet,
+                    gameField
+                );
     }
 
     // -------------------------------------------------------------------------
@@ -711,4 +710,4 @@ public final class RushHour extends Game {
 
     }   // static
 
-}   // Rush Hour class
+}

@@ -45,7 +45,7 @@ public class DepthFirstSearch {
      * @param game      The Game
      * @param show      show the moves while they are played
      */
-    public DepthFirstSearch(final Game game, final int delay, final boolean show) {
+    public DepthFirstSearch(Game game, int delay, boolean show) {
         this.moveList       = new LinkedList<>();
         this.savedBlockSets = new HashSet<>();
         this.game           = game;
@@ -61,10 +61,10 @@ public class DepthFirstSearch {
      * Tries to solve the BlockPuzzle.
      */
     public void solve() {
-        
+
         // add current BlockSet to the HashSet
         this.savedBlockSets.add(game.blockSet());
-        
+
         // Start timer
         System.out.println("START\n");
         final Instant time = Instant.now();
@@ -100,7 +100,6 @@ public class DepthFirstSearch {
         game.draw(2000);
 
         // Show solution
-        System.out.println("show solution");
         reverseGame();
         game.showSolution(moveList, delay);
 
@@ -185,23 +184,22 @@ public class DepthFirstSearch {
      *
      * @param duration  The duration from start to end
      */
-    private String resultToString(final Duration duration) {
-        return
-            """
-            Number of states saved:
-            %d
+    private String resultToString(Duration duration) {
+        return """
+                Number of states saved:
+                %d
 
-            Number of moves made:
-            %d
+                Number of moves made:
+                %d
 
-            Time to solve:
-            %d seconds, %d milliseconds
-            """.formatted(
-                savedBlockSets.size(),
-                moveList.size(),
-                duration.toSecondsPart(),
-                duration.toMillisPart()
-            );
+                Time to solve:
+                %d seconds, %d milliseconds
+                """.formatted(
+                    savedBlockSets.size(),
+                    moveList.size(),
+                    duration.toSecondsPart(),
+                    duration.toMillisPart()
+                );
     }
 
     // -------------------------------------------------------------------------
@@ -263,22 +261,21 @@ public class DepthFirstSearch {
      */
     @Override
     public String toString() {
-        return
-            """
-            DepthFirstSearch [\
-            show=%b, \
-            delay=%d, \
-            game=%s, \
-            moveList=%s, \
-            savedBlockSets=%s\
-            ]\
-            """.formatted(
-                show,
-                delay,
-                game,
-                moveList,
-                savedBlockSets
-            );
+        return """
+                DepthFirstSearch [\
+                show=%b, \
+                delay=%d, \
+                game=%s, \
+                moveList=%s, \
+                savedBlockSets=%s\
+                ]\
+                """.formatted(
+                    show,
+                    delay,
+                    game,
+                    moveList,
+                    savedBlockSets
+                );
     }
 
-}   // Depth First Search class
+}

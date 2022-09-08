@@ -22,7 +22,7 @@ public final class MovePattern implements Iterable<Direction> {
     /**
      * Private constructor.
      */
-    private MovePattern(final List<Direction> directions) {
+    private MovePattern(List<Direction> directions) {
         this.movePattern = directions;
     }
 
@@ -162,10 +162,9 @@ public final class MovePattern implements Iterable<Direction> {
      */
     @Override
     public String toString() {
-        return
-            """
-            MovePattern [movePattern=%s]\
-            """.formatted(movePattern);
+        return """
+                MovePattern [movePattern=%s]\
+                """.formatted(movePattern);
     }
 
     // -------------------------------------------------------------------------
@@ -182,4 +181,4 @@ public final class MovePattern implements Iterable<Direction> {
         return movePattern.iterator();
     }
 
-}   // Move Pattern class
+}

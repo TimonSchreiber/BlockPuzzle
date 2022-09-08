@@ -13,5 +13,4 @@ public record BlockInfo(
     MovePattern movePattern,
     boolean isMainBlock,
     PositionListInfo positionListInfo
-) {
-}   // Block Info record
+) {}

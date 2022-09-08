@@ -10,5 +10,4 @@ public record PositionListInfo(
     int size,
     Direction direction,
     boolean isElbow
-) {
-}   // Position List Info record
+) {}

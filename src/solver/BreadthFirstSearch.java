@@ -51,7 +51,7 @@ public class BreadthFirstSearch {
      *
      * @param game  The Game
      */
-    public BreadthFirstSearch(final Game game, final int delay) {
+    public BreadthFirstSearch(Game game, int delay) {
         this.savedBlockSets = new HashSet<>();
         this.gameStateQueue = new ArrayDeque<>();
         this.game           = game;
@@ -98,7 +98,6 @@ public class BreadthFirstSearch {
         System.out.println(resultToString(duration));
 
         // Show solution
-        System.out.println("show solution");
         game.showSolution(solutionMoveList, delay);
 
         return;
@@ -114,37 +113,37 @@ public class BreadthFirstSearch {
      *
      * @param gameState     The GameState
      */
-    private void findNewMove(final GameState gameState) {
+    private void findNewMove(GameState gameState) {
 
         // Extract the BlockSet out of the GameState
-        final BlockSet newBlockSet = gameState.blockSet();
+        final BlockSet blockSet = gameState.blockSet();
 
-        for (final Block block : newBlockSet) {
+        for (final Block block : blockSet) {
 
             for (final Direction direction : block.movePattern()) {
 
-                final Move newMove = new Move(block.name(), direction);
+                final Move move = new Move(block.name(), direction);
 
                 // Check if nextMove is not a valid Move -> next iteration
-                if (!game.isValidMove(newBlockSet, newMove)) {
+                if (!game.isValidMove(blockSet, move)) {
                     continue;
                 }
 
-                /* Check if it is an uknown BlockSet:
+                /* Check if it is an unknown BlockSet:
                  * -> copy MoveList and add new Move
                  * -> save the BlockSet
                  * -> create a new GameState and add it to the GameStateQueue
                  */
-                if (!savedBlockSets.contains(new BlockSet(newBlockSet))) {  // TODO: why new BlockSet(...) and not just 'newBlockSet'?
+                if (!savedBlockSets.contains(new BlockSet(blockSet))) {  // TODO: why new BlockSet(...) and not just 'blockSet'?
 
                     final List<Move> newMoveList =
-                        GameState.addMoveToNewList(gameState.moveList(), newMove);
+                        GameState.addMoveToNewList(gameState.moveList(), move);
 
-                    savedBlockSets.add(new BlockSet(newBlockSet));
-                    gameStateQueue.add(new GameState(newBlockSet, newMoveList));
+                    savedBlockSets.add(new BlockSet(blockSet));
+                    gameStateQueue.add(new GameState(blockSet, newMoveList));
 
                     // check if a Solution was found -> save the current GameState + MoveList and return
-                    if (game.checkWinCondition(newBlockSet)) {
+                    if (game.checkWinCondition(blockSet)) {
                         foundASolution = true;
                         solutionMoveList = newMoveList;
                         return;
@@ -152,7 +151,7 @@ public class BreadthFirstSearch {
                 }
 
                 // reverse the last Move to continue looking for new Moves
-                game.isValidMove(newBlockSet, newMove.reverse());
+                game.isValidMove(blockSet, move.reverse());
 
             }    // end for loop Direction
         }    // end for loop Block
@@ -170,23 +169,22 @@ public class BreadthFirstSearch {
      *
      * @param duration  The duration from start to end
      */
-    private String resultToString(final Duration duration) {
-        return
-            """
-            Number of states saved:
-            %d
+    private String resultToString(Duration duration) {
+        return """
+                Number of states saved:
+                %d
 
-            Number of moves made:
-            %d
+                Number of moves made:
+                %d
 
-            Time to solve:
-            %d seconds, %d milliseconds
-            """.formatted(
-                savedBlockSets.size(),
-                solutionMoveList.size(),
-                duration.toSecondsPart(),
-                duration.toMillisPart()
-            );
+                Time to solve:
+                %d seconds, %d milliseconds
+                """.formatted(
+                    savedBlockSets.size(),
+                    solutionMoveList.size(),
+                    duration.toSecondsPart(),
+                    duration.toMillisPart()
+                );
     }
 
     // -------------------------------------------------------------------------
@@ -207,7 +205,7 @@ public class BreadthFirstSearch {
         }
 
         // Object must be BreadthFirstSearch at this Point
-        BreadthFirstSearch other = (BreadthFirstSearch) obj;
+        final BreadthFirstSearch other = (BreadthFirstSearch) obj;
 
         return (foundASolution == other.foundASolution)
             && (delay == other.delay)
@@ -252,24 +250,23 @@ public class BreadthFirstSearch {
      */
     @Override
     public String toString() {
-        return
-            """
-            BreadthFirstSearch [\
-            foundASolution=%b, \
-            delay=%d, \
-            game=%s, \
-            solutionMoveList=%s, \
-            savedBlockSets=%s, \
-            gameStateQueue=%s\
-            ]\
-            """.formatted(
-                foundASolution,
-                delay,
-                game,
-                solutionMoveList,
-                savedBlockSets,
-                gameStateQueue
-            );
+        return """
+                BreadthFirstSearch [\
+                foundASolution=%b, \
+                delay=%d, \
+                game=%s, \
+                solutionMoveList=%s, \
+                savedBlockSets=%s, \
+                gameStateQueue=%s\
+                ]\
+                """.formatted(
+                    foundASolution,
+                    delay,
+                    game,
+                    solutionMoveList,
+                    savedBlockSets,
+                    gameStateQueue
+                );
     }
 
-}   // Breadth First Search class
+}

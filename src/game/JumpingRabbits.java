@@ -76,7 +76,7 @@ public final class JumpingRabbits extends Game {
      *
      * @param gameNumber    the gameNumber
      */
-    public JumpingRabbits(final int gameNumber) {
+    public JumpingRabbits(int gameNumber) {
         super(
             new BlockSet(),
             new GameField(SIZE, SIZE, WIN_POSITIONS, CANVAS_INFO),
@@ -89,7 +89,7 @@ public final class JumpingRabbits extends Game {
     // -------------------------------------------------------------------------
 
     @Override
-    protected void setUp(final int gameNumber) {
+    protected void setUp(int gameNumber) {
         INT_TO_BLOCKINFOS_MAP
             .get(gameNumber)
             .forEach(
@@ -106,22 +106,23 @@ public final class JumpingRabbits extends Game {
 
     // Delegate to the method below.
     @Override
-    public boolean isValidMove(final Move move) {
+    public boolean isValidMove(Move move) {
         return isValidMove(blockSet, move);
     }
 
     // If the Block is a mainBlock (aka Rabbit) it needs to jump over another
     // Block to move.
     @Override
-    public boolean isValidMove(final BlockSet blockSet, final Move move) {
+    public boolean isValidMove(BlockSet blockSet, Move move) {
 
-        final Block block = blockSet.getBlockByName(move.name());
+        final Block block = blockSet.getBlockBy(move.name());
 
         // check if the Move is valid.
         if (block == null) {
             System.err.println("Invalid BlockName: " + move);
             return false;
         }
+
         // check if the normal way to move can be applied
         // -> forward to gameField.isValidMove()
         if (!block.isMainBlock()) {
@@ -136,26 +137,26 @@ public final class JumpingRabbits extends Game {
 
         // count how far the rabbit needs to jump
         int numberOfMoves = 0;
-        Position newPosition = null;
+        Position position = null;
 
         // there is only ONE Position in this List (Rabbits have a size of 1)
-        for (final Position position : block.positions()) {
-            newPosition = new Position(position);
+        for (final Position pos : block.positions()) {
+            position = new Position(pos);
 
             do {
                 // move to the next Position
-                newPosition = newPosition.moveTowards(move.direction());
+                position = position.moveTowards(move.direction());
 
                 //count one up
                 ++numberOfMoves;
-            } while (gameField.isInInterval(newPosition)
-                    && (blockSet.getNameByPosition(newPosition) != null));
+            } while (gameField.isInInterval(position)
+                    && (blockSet.getNameBy(position) != null));
 
         }
 
         // check if the while loop aborted because an empty Position was found,
         // or because the GameField border was left.
-        if ((newPosition != null) && !gameField.isInInterval(newPosition)) {
+        if ((position != null) && !gameField.isInInterval(position)) {
             return false;
         }
 
@@ -218,16 +219,15 @@ public final class JumpingRabbits extends Game {
      */
     @Override
     public String toString() {
-        return
-            """
-            JumpingRabbits [\
-            blockSet=%s, \
-            gameField=%s\
-            ]\
-            """.formatted(
-                blockSet,
-                gameField
-            );
+        return """
+                JumpingRabbits [\
+                blockSet=%s, \
+                gameField=%s\
+                ]\
+                """.formatted(
+                    blockSet,
+                    gameField
+                );
     }
 
     // -------------------------------------------------------------------------
@@ -830,4 +830,4 @@ public final class JumpingRabbits extends Game {
 
     }   // static
 
-}   // Jumping Rabbits class
+}

@@ -6,9 +6,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Executor;
+// import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.ThreadPoolExecutor;
 
 import block.Block;
 import field.BlockSet;
@@ -38,16 +39,27 @@ public class BFS_WithThreads {
 
     /** ConcurrentHashSet of BlockSets to save every unique state. */
     private final Set<BlockSet> savedBlockSets;
-    
+
     /** the Game */
     private final Game game;
 
     /** List of Moves for the final solution. */
     private List<Move> solutionMoveList;
-    
+
+    // -------------------------------------------------------------------------
     // Thread variables
-    private static final int NTHREADS = 6;
-    private static final Executor exec = Executors.newFixedThreadPool(NTHREADS);
+    // TODO: can virtual threads be used?
+
+    /** Number of Threads */
+    private static final
+    int NTHREADS =
+        Runtime.getRuntime().availableProcessors() / 2;  // -> 6
+
+    /** Fixed Thread Pool */
+    private static final
+    ThreadPoolExecutor executor =
+        (ThreadPoolExecutor) Executors.newCachedThreadPool();
+    // Executor executor = Executors.newFixedThreadPool(NTHREADS);  // TODO
 
     // -------------------------------------------------------------------------
     // CONSTRUCTOR
@@ -59,7 +71,7 @@ public class BFS_WithThreads {
      * @param game      The Game
      * @param delay     The time delay
      */
-    public BFS_WithThreads(final Game game, final int delay) {
+    public BFS_WithThreads(Game game, int delay) {
         this.savedBlockSets = ConcurrentHashMap.newKeySet();
         this.gameStateQueue = new LinkedBlockingDeque<>();
         this.game           = game;
@@ -85,22 +97,26 @@ public class BFS_WithThreads {
 
         while (!foundASolution) {
 
-            // Thread start
+            // ----> Thread start <----
             try {
                 final GameState nextGameState = gameStateQueue.take();
                 final Runnable task =
                     new Runnable() {
                         public void run() {
                             findNewMove(nextGameState);
+                            // System.out.println(Thread.currentThread());  // delete
                         }
                     };
-                exec.execute(task);
+                executor.execute(task);
+                // System.out.println(executor); // delete
+                // System.out.println("active Thread count: " + Thread.activeCount());
+                // System.out.println("queued tasks: " + executor.getQueue().size());
 
             } catch (InterruptedException ie) {
                 System.err.println("Interrupted Expection Thrown!");
                 return;
             }
-            // Thread end
+            // ----> Thread end <----
 
             // TODO: error handling
             // FIXME: how to check if there is no solution but without #isEmpty()
@@ -119,7 +135,6 @@ public class BFS_WithThreads {
         System.out.println(resultToString(duration));
 
         // Show solution
-        System.out.println("show solution");
         game.showSolution(solutionMoveList, delay);
 
         return;
@@ -135,37 +150,44 @@ public class BFS_WithThreads {
      *
      * @param gameState     The GameState
      */
-    private void findNewMove(final GameState gameState) {
+    private void findNewMove(GameState gameState) {
+
+        // try {
+        //     Thread.sleep(10);
+        // } catch (InterruptedException e) {
+        //     // TODO Auto-generated catch block
+        //     e.printStackTrace();
+        // }
 
         // Extract the BlockSet out of the GameState
-        final BlockSet newBlockSet = gameState.blockSet();
+        final BlockSet blockSet = gameState.blockSet();
 
-        for (final Block block : newBlockSet) {
+        for (final Block block : blockSet) {
 
             for (final Direction direction : block.movePattern()) {
 
-                final Move newMove = new Move(block.name(), direction);
+                final Move move = new Move(block.name(), direction);
 
                 // Check if nextMove is not a valid Move -> next iteration
-                if (!game.isValidMove(newBlockSet, newMove)) {
+                if (!game.isValidMove(blockSet, move)) {
                     continue;
                 }
 
-                /* Check if it is an uknown BlockSet:
+                /* Check if it is an unknown BlockSet:
                  * -> copy MoveList and add new Move
                  * -> save the BlockSet
                  * -> create a new GameState and add it to the GameStateQueue
                  */
-                if (!savedBlockSets.contains(new BlockSet(newBlockSet))) {  // TODO: why new BlockSet(...) and not just 'newBlockSet'?
+                if (!savedBlockSets.contains(new BlockSet(blockSet))) {  // TODO: why new BlockSet(...) and not just 'newBlockSet'?
 
                     final List<Move> newMoveList =
-                        GameState.addMoveToNewList(gameState.moveList(), newMove);
+                        GameState.addMoveToNewList(gameState.moveList(), move);
 
-                    savedBlockSets.add(new BlockSet(newBlockSet));
-                    gameStateQueue.add(new GameState(newBlockSet, newMoveList));
+                    savedBlockSets.add(new BlockSet(blockSet));
+                    gameStateQueue.add(new GameState(blockSet, newMoveList));
 
                     // check if a Solution was found -> save the current GameState + MoveList and return
-                    if (game.checkWinCondition(newBlockSet)) {
+                    if (game.checkWinCondition(blockSet)) {
                         foundASolution = true;
                         solutionMoveList = newMoveList;
                         return;
@@ -173,7 +195,7 @@ public class BFS_WithThreads {
                 }
 
                 // reverse the last Move to continue looking for new Moves
-                game.isValidMove(newBlockSet, newMove.reverse());
+                game.isValidMove(blockSet, move.reverse());
 
             }    // end for loop Direction
         }    // end for loop Block
@@ -191,23 +213,22 @@ public class BFS_WithThreads {
      *
      * @param duration  The duration from start to end
      */
-    private String resultToString(final Duration duration) {
-        return
-            """
-            Number of states saved:
-            %d
+    private String resultToString(Duration duration) {
+        return """
+                Number of states saved:
+                %d
 
-            Number of moves made:
-            %d
+                Number of moves made:
+                %d
 
-            Time to solve:
-            %d seconds, %d milliseconds
-            """.formatted(
-                savedBlockSets.size(),
-                solutionMoveList.size(),
-                duration.toSecondsPart(),
-                duration.toMillisPart()
-            );
+                Time to solve:
+                %d seconds, %d milliseconds
+                """.formatted(
+                    savedBlockSets.size(),
+                    solutionMoveList.size(),
+                    duration.toSecondsPart(),
+                    duration.toMillisPart()
+                );
     }
 
     // -------------------------------------------------------------------------
@@ -228,7 +249,7 @@ public class BFS_WithThreads {
         }
 
         // Object must be BreadthFirstSearch at this Point
-        BFS_WithThreads other = (BFS_WithThreads) obj;
+        final BFS_WithThreads other = (BFS_WithThreads) obj;
 
         return (foundASolution == other.foundASolution)
             && (delay == other.delay)
@@ -273,26 +294,25 @@ public class BFS_WithThreads {
      */
     @Override
     public String toString() {
-        return
-            """
-            BFS_WithThreads [\
-            NTHREADS=%d, \
-            foundASolution=%b, \
-            delay=%d, \
-            game=%s, \
-            solutionMoveList=%s, \
-            savedBlockSets=%s, \
-            gameStateQueue=%s\
-            ]\
-            """.formatted(
-                NTHREADS,
-                foundASolution,
-                delay,
-                game,
-                solutionMoveList,
-                savedBlockSets,
-                gameStateQueue
-            );
+        return """
+                BFS_WithThreads [\
+                NTHREADS=%d, \
+                foundASolution=%b, \
+                delay=%d, \
+                game=%s, \
+                solutionMoveList=%s, \
+                savedBlockSets=%s, \
+                gameStateQueue=%s\
+                ]\
+                """.formatted(
+                    NTHREADS,
+                    foundASolution,
+                    delay,
+                    game,
+                    solutionMoveList,
+                    savedBlockSets,
+                    gameStateQueue
+                );
     }
 
-}   // Breadth First Search - With Threads class
+}

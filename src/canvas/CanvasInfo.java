@@ -11,5 +11,4 @@ public record CanvasInfo(
     Color insideColor,
     Color winColor,
     List<Rectangle> winArea
-) {
-}   // Canvas Info record
+) {}

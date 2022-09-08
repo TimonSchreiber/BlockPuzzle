@@ -28,9 +28,9 @@ public final class GameState {
      *
      * @param blockSet  The BlockSet.
      */
-    public GameState(final BlockSet blockSet) {
-        this.blockSet   = new BlockSet(blockSet);
-        this.moveList   = new LinkedList<>();
+    public GameState(BlockSet blockSet) {
+        this.blockSet = new BlockSet(blockSet);
+        this.moveList = new LinkedList<>();
     }
 
     /**
@@ -39,7 +39,7 @@ public final class GameState {
      * @param blockSet  The BlockSet
      * @param moveList  The List of Moves
      */
-    public GameState(final BlockSet blockSet, final List<Move> moveList) {
+    public GameState(BlockSet blockSet, List<Move> moveList) {
         this(blockSet);
         
         for (final Move move : moveList) {
@@ -86,7 +86,7 @@ public final class GameState {
      * @param newMove   The new Move
      * @return          A new List
      */
-    public static List<Move> addMoveToNewList(final List<Move> moveList, final Move newMove) {
+    public static List<Move> addMoveToNewList(List<Move> moveList, Move newMove) {
         final List<Move> newMoveList = new LinkedList<>();
 
         for (final Move move : moveList) {
@@ -149,16 +149,15 @@ public final class GameState {
      */
     @Override
     public String toString() {
-        return
-            """
-            GameState [\
-            blockSet=%s, \
-            moveList=%s\
-            ]\
-            """.formatted(
-                blockSet,
-                moveList
-            );
+        return """
+                GameState [\
+                blockSet=%s, \
+                moveList=%s\
+                ]\
+                """.formatted(
+                    blockSet,
+                    moveList
+                );
     }
 
-}   // Game State class
+}

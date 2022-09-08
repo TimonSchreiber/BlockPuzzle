@@ -1,5 +1,7 @@
 package solver;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -47,13 +49,13 @@ public final class ManualMode {
      *
      * @param game  The Game
      */
-    public ManualMode(final Game game, final int delay, final Scanner scanner) {
-        this.undoList   = new LinkedList<>();
-        this.redoList   = new LinkedList<>();
-        this.moveList   = new LinkedList<>();
-        this.game       = game;
-        this.delay      = delay;
-        this.scanner    = scanner;
+    public ManualMode(Game game, int delay, Scanner scanner) {
+        this.undoList = new LinkedList<>();
+        this.redoList = new LinkedList<>();
+        this.moveList = new LinkedList<>();
+        this.game     = game;
+        this.delay    = delay;
+        this.scanner  = scanner;
     }
 
     // -------------------------------------------------------------------------
@@ -64,6 +66,10 @@ public final class ManualMode {
      * Allows the user to play the Game on their own.
      */
     public void play() {
+
+        // Start timer
+        System.out.println("START\n");
+        final Instant time = Instant.now();
 
         while(!foundASolution) {
 
@@ -91,24 +97,30 @@ public final class ManualMode {
             final Direction direction = Enum.valueOf(Direction.class, directionString);
             final Move move = new Move(blockName, direction);
 
-            // try the move
-            if (game.isValidMove(move)) {
-                System.out.println(move);
-                moveList.add(new Move(move));
-
-            } else {
+            // try the move: If not an alowed move -> error msg and try again.
+            if (!game.isValidMove(move)) {
                 System.out.println("Not a legal move: " + move + "\nTry something else.");
                 continue;
             }
+
+            System.out.println(move);
+            moveList.add(new Move(move));
 
             // check win condition
             foundASolution = game.checkWinCondition();
 
         }   // end while loop
-
+        
         // the Game is won
-        System.out.println("*** You Won! ***");
-        game.draw(0);
+
+        // Stop timer
+        final Duration duration = Duration.between(time, Instant.now());
+        System.out.println("*** You Won! ***\n");
+
+        game.draw(2000);
+
+        // print result
+        System.out.println(resultToString(duration));
 
         // reverse the Game
         reverseGame();
@@ -171,30 +183,24 @@ public final class ManualMode {
     // PRINT RESULT
     // -------------------------------------------------------------------------
 
-    /**
+    /** TODO
      * Prints the result information with number of states, number of moves and
      * time it took to solve this puzzle.
      *
      * @param duration  The duration from start to end
      */
-    private void printResult(/* final Duration duration */) {
-        System.out.println("END");
+    private String resultToString(Duration duration) {
+        return """
+                Number of moves made:
+                %d
 
-        System.out.println(
-            /* "\nNumber of states saved:\n"
-            + savedBlockSets.size() */
-        );
-
-        System.out.println(
-            "\nNumber of moves made:\n"
-            + moveList.size()
-        );
-
-        System.out.println(
-            /* "\nTime to solve:\n"
-            + duration.toSecondsPart() + " seconds, "
-            + duration.toMillisPart() + " milliseconds" */
-        );
+                Time to solve:
+                %d seconds, %d milliseconds
+                """.formatted(
+                    moveList.size(),
+                    duration.toSecondsPart(),
+                    duration.toMillisPart()
+                );
     }
 
     // -------------------------------------------------------------------------
@@ -216,7 +222,7 @@ public final class ManualMode {
 
         // Object must be ManualMode at this point.
         final ManualMode other = (ManualMode) obj;
-        
+
         return (delay == other.delay)
             && (foundASolution == other.foundASolution)
             && ((moveList == other.moveList)
@@ -268,4 +274,4 @@ public final class ManualMode {
     }
 
 
-}   // Manual Mode class
+}

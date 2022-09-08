@@ -33,9 +33,9 @@ public sealed abstract class Game
      * @param gameField     The GameField
      * @param gameNumber    the game number
      */
-    protected Game(final BlockSet blockSet, final GameField gameField, final int gameNumber) {
-        this.blockSet   = blockSet;
-        this.gameField  = gameField;
+    protected Game(BlockSet blockSet, GameField gameField, int gameNumber) {
+        this.blockSet  = blockSet;
+        this.gameField = gameField;
 
         this.setUp(gameNumber);
     }
@@ -62,7 +62,7 @@ public sealed abstract class Game
      *
      * @param gameNumber    The Game specifier.
      */
-    protected abstract void setUp(final int gameNumber);
+    protected abstract void setUp(int gameNumber);
 
     // -------------------------------------------------------------------------
     // SHOW SOLUTION
@@ -73,7 +73,9 @@ public sealed abstract class Game
      *
      * @param moveList  a List of the Moves to the solution
      */
-    public void showSolution(final List<Move> moveList, final int delay) {
+    public void showSolution(List<Move> moveList, int delay) {
+
+        System.out.println("show solution");
 
         int i = 0;
 
@@ -101,7 +103,7 @@ public sealed abstract class Game
     }
 
     // check a BlockSet
-    public boolean checkWinCondition(final BlockSet blockSet) {
+    public boolean checkWinCondition(BlockSet blockSet) {
         return gameField.checkWinCondition(blockSet);
     }
 
@@ -109,12 +111,12 @@ public sealed abstract class Game
     // is valid move
 
     // move this BlockSet
-    public boolean isValidMove(final Move move) {
+    public boolean isValidMove(Move move) {
         return gameField.isValidMove(blockSet, move);
     }
 
     // move a BlockSet
-    public boolean isValidMove(final BlockSet blockSet, final Move move) {
+    public boolean isValidMove(BlockSet blockSet, Move move) {
         return gameField.isValidMove(blockSet, move);
     }
 
@@ -127,8 +129,8 @@ public sealed abstract class Game
     }
 
     // draw this BlockSet
-    public void draw(final int delay) {
+    public void draw(int delay) {
         gameField.draw(blockSet, delay);
     }
 
-}   // Game abstract class
+}
