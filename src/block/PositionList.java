@@ -24,24 +24,11 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
     // -------------------------------------------------------------------------
 
     /**
-     * Class constructor from a PosittionsInfo object. Delegates
-     * the construction to one of two private factory methods.
-     *
-     * @param positionListInfo  The PositionListInfo
-     */
-    public PositionList(final PositionListInfo positionListInfo) {
-        this.positionList =
-            (positionListInfo.isElbow())
-                ?     newElbow(positionListInfo)
-                : newRectangle(positionListInfo);
-    }
-
-    /**
      * Class constrcutor form a List of Positions.
      *
      * @param positionList  A List of Positions
      */
-    public PositionList(final List<Position> positionList) {
+    public PositionList(List<Position> positionList) {
         this.positionList = new ArrayList<>(positionList);
 
         // make sure this List is sorted.
@@ -49,14 +36,28 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
     }
 
     /**
+     * Class constructor from a PosittionsInfo object. Delegates
+     * the construction to one of two private factory methods.
+     *
+     * @param positionListInfo  The PositionListInfo
+     */
+    public PositionList(PositionListInfo positionListInfo) {
+        this(
+            positionListInfo.isElbow()
+                ? newElbow(    positionListInfo)
+                : newRectangle(positionListInfo)
+        );
+    }
+
+    /** TODO: can the 'canonical' constructor be used here?
      * Copy constructor.
      *
      * @param positionList  A PositionList
      */
-    public PositionList(final PositionList positionList) {
+    public PositionList(PositionList positionList) {
         this.positionList = new ArrayList<>();
 
-        for (final Position position : positionList) {
+        for (Position position : positionList) {
             this.positionList.add(new Position(position));
         }
     }
@@ -68,7 +69,7 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
     /**
      * Returns a new List of Positions where all Positions form a straight line.
      */
-    private List<Position> newRectangle(final PositionListInfo positionListInfo) {
+    private static List<Position> newRectangle(PositionListInfo positionListInfo) {
         final List<Position> newList = new ArrayList<>();
         Position newPosition = positionListInfo.position();
 
@@ -82,9 +83,6 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
             newList.add(newPosition);
         }
 
-        // make sure the List is sorted.
-        Collections.sort(newList);
-
         return newList;
     }
 
@@ -95,7 +93,7 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
      *               X X             X X
      * Note: This method should only get a PositionListInfo with size 3 or 4.
      */
-    private List<Position> newElbow(final PositionListInfo positionListInfo) {
+    private static List<Position> newElbow(PositionListInfo positionListInfo) {
         final List<Position> newList = new ArrayList<>();
         final Position newPosition = positionListInfo.position();
 
@@ -132,9 +130,6 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
                 break;
         }
 
-        // make sure the List is sorted.
-        Collections.sort(newList);
-
         return newList;
     }
 
@@ -148,8 +143,10 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
      *
      * @param direction     One or more Direction.
      */
-    public void moveTowards(final Direction direction) {
-        positionList.replaceAll(pos -> pos.moveTowards(direction));
+    public void moveTowards(Direction direction) {
+        positionList.replaceAll(
+            position -> position.moveTowards(direction)
+        );
     }
 
     // -------------------------------------------------------------------------
@@ -164,7 +161,7 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
      *                  {@code false} otherwise.
      * @see java.util.List#contains(Object)
      */
-    public boolean contains(final Position position) {
+    public boolean contains(Position position) {
         return positionList.contains(position);
     }
 
@@ -216,10 +213,9 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
 
     @Override
     public String toString() {
-        return
-            """
-            PositionList [positionList=%s]\
-            """.formatted(positionList);
+        return """
+                PositionList [positionList=%s]\
+                """.formatted(positionList);
     }
 
     // -------------------------------------------------------------------------
@@ -251,4 +247,4 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
                 : positionList.get(0).compareTo(other.positionList.get(0));
     }
 
-}   // PositionList class
+}
