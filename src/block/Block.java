@@ -6,7 +6,9 @@ import field.Direction;
 import field.MovePattern;
 
 /**
- * Immutable class representing a Block on a 2D-Plane.
+ * Record class representing a Block on a 2D-Plane.
+ * <p>Each Block has a name, a color, a 'MainBlock'-flag, a MovePattern and a
+ * PositionList.
  */
 public record Block(
     String name,
@@ -36,7 +38,7 @@ public record Block(
     }
 
     /**
-     * Copy constructor.
+     * Copy constructor deep copying the PositionList.
      *
      * @param block        the Block to be copied.
      */

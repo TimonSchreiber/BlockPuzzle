@@ -8,7 +8,7 @@ import java.util.List;
 import field.Direction;
 
 /**
- * Wrapper around an ArrayList of Positions.
+ * Record class with an {@code ArrayList} of Positions.
  */
 public record PositionList(List<Position> positionList)
     implements Iterable<Position>, Comparable<PositionList> {

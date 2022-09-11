@@ -9,13 +9,13 @@ import block.Block;
 import block.Position;
 
 /**
- * Wrapper around a Set of Blocks.
+ * Record class with a {@code TreeSet} of Blocks.
  */
 public record BlockSet(Set<Block> blockSet) implements Iterable<Block> {
 
-    /* TODO: Maybe make this a map with Blockname (key)  to Block (value)
-     * and only look at the value-Set for equals and HashCode
-     * So all the complex 'for (final Block block : blockSet)'s are no longer needed
+    /* TODO: Maybe make this a map with Blockname (key) to Block (value) and
+     * only look at the value-Set for equals and HashCode, yo all the complex
+     * 'for (final Block block : blockSet)'s are no longer needed.
      */
 
     // -------------------------------------------------------------------------

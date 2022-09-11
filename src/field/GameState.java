@@ -5,8 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Holds a BlockSet and a List of Moves which led to this BlockSet
- * configuration.
+ * Record class with a BlockSet and a List of Moves which led to this BlockSet.
  */
 public record GameState(BlockSet blockSet, List<Move> moveList) {
 

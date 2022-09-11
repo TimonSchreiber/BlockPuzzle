@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Stores the Directions a Block can Move.
+ * Record class with Lists of Directions a Block can Move towards.
  */
 public record MovePattern(List<Direction> movePattern)
     implements Iterable<Direction> {

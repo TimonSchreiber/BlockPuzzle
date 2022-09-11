@@ -3,7 +3,7 @@ package block;
 import field.Direction;
 
 /**
- * Represents a pair of x- and y-values in a 2D-plane.
+ * Record class representing a pair of x-, and y-vlaues in a 2D-plane.
  */
 public record Position(int x, int y) implements Comparable<Position> {
 
