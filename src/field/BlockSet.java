@@ -1,5 +1,6 @@
 package field;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
@@ -10,27 +11,35 @@ import block.Position;
 /**
  * Wrapper around a Set of Blocks.
  */
-public final class BlockSet implements Iterable<Block> {
+public record BlockSet(Set<Block> blockSet) implements Iterable<Block> {
 
-    // -------------------------------------------------------------------------
-    // ATTRIBUTES
-    // -------------------------------------------------------------------------
-
-    // TODO: Maybe make this a map with Blockname (key)  to Block (value)
-    // and only look at the value-Set for equals and HashCode
-    // So all the complex 'for (final Block block : blockSet)'s are no longer needed
-    /** TreeSet of Blocks. */
-    private final Set<Block> blockSet;
+    /* TODO: Maybe make this a map with Blockname (key)  to Block (value)
+     * and only look at the value-Set for equals and HashCode
+     * So all the complex 'for (final Block block : blockSet)'s are no longer needed
+     */
 
     // -------------------------------------------------------------------------
     // CONSTRUCTORS
     // -------------------------------------------------------------------------
 
     /**
-     * Class constructor.
+     * Canonical constructor creating a deep copy of the field.
+     *
+     * @param blockSet  The {@code Set} of Blocks.
+     */
+    public BlockSet(Set<Block> blockSet) {
+        this.blockSet = new TreeSet<>();
+
+        for (final Block block : blockSet) {
+            this.blockSet.add(new Block(block));
+        }
+    }
+
+    /**
+     * Class constructor with an empty {@code Set}.
      */
     public BlockSet() {
-        this.blockSet = new TreeSet<>();
+        this(Collections.emptySet());
     }
 
     /**
@@ -39,11 +48,7 @@ public final class BlockSet implements Iterable<Block> {
      * @param blockSet  the BlockSet
      */
     public BlockSet(BlockSet blockSet) {
-        this();
-
-        for (final Block block : blockSet) {
-            this.blockSet.add(new Block(block));
-        }
+        this(blockSet.blockSet);
     }
 
     // -------------------------------------------------------------------------
@@ -128,7 +133,7 @@ public final class BlockSet implements Iterable<Block> {
         return;
     }
 
-    /** TODO: not used so far <---> maybe make this a (Move... moves) method?
+    /** FIXME: not used so far <---> maybe make this a (Move... moves) method?
      * Moves the Block specified by the Move object in this BlockSet a certain
      * amount of times.
      *
@@ -171,58 +176,6 @@ public final class BlockSet implements Iterable<Block> {
         }
         // the new Block can be added to this BlockSet
         return blockSet.add(block);
-    }
-
-    // -------------------------------------------------------------------------
-    // EQUALS AND HASH-CODE
-    // -------------------------------------------------------------------------
-
-    /* (non-Javadoc)
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-
-        if ((obj == null) || (getClass() != obj.getClass())) {
-            return false;
-        }
-
-        // Object must be PositionList at this point
-        final BlockSet other = (BlockSet) obj;
-
-        return (blockSet == other.blockSet)
-                || ((blockSet != null)
-                    && blockSet.equals(other.blockSet));
-    }
-
-    /* (non-Javadoc)
-     * @see java.lang.Object#hashCode()
-     */
-    @Override
-    public int hashCode() {
-        final int PRIME = 31;
-        int hash = 7;
-
-        hash = PRIME * hash + ((blockSet == null) ? 0 : blockSet.hashCode());
-
-        return hash;
-    }
-
-    // -------------------------------------------------------------------------
-    // TO STRING
-    // -------------------------------------------------------------------------
-
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString() {
-        return """
-                BlockSet [blockSet=%s]\
-                """.formatted(blockSet);
     }
 
     // -------------------------------------------------------------------------

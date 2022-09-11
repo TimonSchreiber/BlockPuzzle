@@ -1,5 +1,6 @@
 package field;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -7,21 +8,26 @@ import java.util.List;
  * Holds a BlockSet and a List of Moves which led to this BlockSet
  * configuration.
  */
-public final class GameState {
-
-    // -------------------------------------------------------------------------
-    // ATTRIBUTES
-    // -------------------------------------------------------------------------
-
-    /** The BlockSet */
-    private final BlockSet blockSet;
-
-    /** A LinkedList of Moves */
-    private final List<Move> moveList;
+public record GameState(BlockSet blockSet, List<Move> moveList) {
 
     // -------------------------------------------------------------------------
     // CONSTRUCTOR
     // -------------------------------------------------------------------------
+
+    /**
+     * Canonical constructor creating a deep copy of each field.
+     *
+     * @param blockSet  The BlockSet
+     * @param moveList  The List of Moves
+     */
+    public GameState(BlockSet blockSet, List<Move> moveList) {
+        this.blockSet = new BlockSet(blockSet);
+        this.moveList = new LinkedList<>();
+        
+        for (final Move move : moveList) {
+            this.moveList.add(new Move(move));
+        }
+    }
 
     /**
      * Class constructor copying a BlockSet and creating an empty List of Moves.
@@ -29,29 +35,18 @@ public final class GameState {
      * @param blockSet  The BlockSet.
      */
     public GameState(BlockSet blockSet) {
-        this.blockSet = new BlockSet(blockSet);
-        this.moveList = new LinkedList<>();
-    }
-
-    /**
-     * Class constructor copying a BlockSet and a List of Moves.
-     *
-     * @param blockSet  The BlockSet
-     * @param moveList  The List of Moves
-     */
-    public GameState(BlockSet blockSet, List<Move> moveList) {
-        this(blockSet);
-        
-        for (final Move move : moveList) {
-            this.moveList.add(new Move(move));
-        }
+        this(
+            blockSet,
+            Collections.emptyList()
+        );
     }
 
     // -------------------------------------------------------------------------
     // GETTERS
     // -------------------------------------------------------------------------
 
-    /**
+    /** TODO: are these needed? Maybe use a 'for each Block'-method when other
+     * classes want to itterate over all blocks.
      * Returns the BlockSet.
      *
      * @return  The BlockSet
@@ -96,68 +91,6 @@ public final class GameState {
         newMoveList.add(new Move(newMove));
 
         return newMoveList;
-    }
-
-    // -------------------------------------------------------------------------
-    // EQUALS AND HASH-CODE
-    // -------------------------------------------------------------------------
-
-    /* (non-Javadoc)
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-
-        if ((obj == null) || (getClass() != obj.getClass())) {
-            return false;
-        }
-
-        // Object must be PositionList at this point
-        final GameState other = (GameState) obj;
-
-        return ((blockSet == other.blockSet)
-                || ((blockSet != null)
-                    && blockSet.equals(other.blockSet)))
-            && ((moveList == other.moveList)
-                || ((moveList != null)
-                    && moveList.equals(other.moveList)));
-    }
-
-    /* (non-Javadoc)
-     * @see java.lang.Object#hashCode()
-     */
-    @Override
-    public int hashCode() {
-        final int PRIME = 31;
-        int hash = 7;
-
-        hash = PRIME * hash + ((blockSet == null) ? 0 : blockSet.hashCode());
-        hash = PRIME * hash + ((moveList == null) ? 0 : moveList.hashCode());
-
-        return hash;
-    }
-
-    // -------------------------------------------------------------------------
-    // TO STRING
-    // -------------------------------------------------------------------------
-
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString() {
-        return """
-                GameState [\
-                blockSet=%s, \
-                moveList=%s\
-                ]\
-                """.formatted(
-                    blockSet,
-                    moveList
-                );
     }
 
 }

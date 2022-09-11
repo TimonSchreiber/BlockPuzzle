@@ -10,34 +10,32 @@ import field.Direction;
 /**
  * Wrapper around an ArrayList of Positions.
  */
-public final class PositionList implements Iterable<Position>, Comparable<PositionList> {
-
-    // -------------------------------------------------------------------------
-    // ATTRIBUTES
-    // -------------------------------------------------------------------------
-
-    /** ArrayList of Positions */
-    private final List<Position> positionList;
+public record PositionList(List<Position> positionList)
+    implements Iterable<Position>, Comparable<PositionList> {
 
     // -------------------------------------------------------------------------
     // CONSTRUCTORS
     // -------------------------------------------------------------------------
 
     /**
-     * Class constrcutor form a List of Positions.
+     * Canonical constrcutor creating a deep copy of the field.
      *
      * @param positionList  A List of Positions
      */
     public PositionList(List<Position> positionList) {
-        this.positionList = new ArrayList<>(positionList);
+        this.positionList = new ArrayList<>();
 
-        // make sure this List is sorted.
+        for (final Position position : positionList) {
+            this.positionList.add(new Position(position));
+        }
+
+        // Sort the List
         Collections.sort(this.positionList);
     }
 
     /**
-     * Class constructor from a PosittionsInfo object. Delegates
-     * the construction to one of two private factory methods.
+     * Class constructor from a PositionListInfo object. Delegates the
+     * construction to one of two private factory methods.
      *
      * @param positionListInfo  The PositionListInfo
      */
@@ -49,21 +47,17 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
         );
     }
 
-    /** TODO: can the 'canonical' constructor be used here?
+    /**
      * Copy constructor.
      *
      * @param positionList  A PositionList
      */
     public PositionList(PositionList positionList) {
-        this.positionList = new ArrayList<>();
-
-        for (Position position : positionList) {
-            this.positionList.add(new Position(position));
-        }
+        this(positionList.positionList);
     }
 
     // -------------------------------------------------------------------------
-    // FACTORYS
+    // FACTORIES
     // -------------------------------------------------------------------------
 
     /**
@@ -163,59 +157,6 @@ public final class PositionList implements Iterable<Position>, Comparable<Positi
      */
     public boolean contains(Position position) {
         return positionList.contains(position);
-    }
-
-    // -------------------------------------------------------------------------
-    // EQUALS AND HASH-CODE
-    // -------------------------------------------------------------------------
-
-    /* (non-Javadoc)
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-
-        if ((obj == null) || (getClass() != obj.getClass())) {
-            return false;
-        }
-
-        // Object must be PositionList at this point
-        final PositionList other = (PositionList) obj;
-
-        return (positionList == other.positionList)
-                || ((positionList != null)
-                    && positionList.equals(other.positionList));
-    }
-
-    /* (non-Javadoc)
-     * @see java.lang.Object#hashCode()
-     */
-    @Override
-    public int hashCode() {
-        final int PRIME = 31;
-        int hash = 7;
-
-        hash = PRIME * hash + ((positionList == null) ? 0 : positionList.hashCode());
-
-        return hash;
-    }
-
-    // -------------------------------------------------------------------------
-    // TO STRING
-    // -------------------------------------------------------------------------
-
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
-
-    @Override
-    public String toString() {
-        return """
-                PositionList [positionList=%s]\
-                """.formatted(positionList);
     }
 
     // -------------------------------------------------------------------------

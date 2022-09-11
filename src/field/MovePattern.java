@@ -1,31 +1,14 @@
 package field;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
 /**
  * Stores the Directions a Block can Move.
  */
-public final class MovePattern implements Iterable<Direction> {
-
-    // -------------------------------------------------------------------------
-    // ATTRIBUTES
-    // -------------------------------------------------------------------------
-
-    /** List of Directions. */
-    private final List<Direction> movePattern;
-
-    // -------------------------------------------------------------------------
-    // CONSTRUCTOR
-    // -------------------------------------------------------------------------
-
-    /**
-     * Private constructor.
-     */
-    private MovePattern(List<Direction> directions) {
-        this.movePattern = directions;
-    }
-
+public record MovePattern(List<Direction> movePattern)
+    implements Iterable<Direction> {
 
     // -------------------------------------------------------------------------
     // INSTANCES
@@ -35,10 +18,10 @@ public final class MovePattern implements Iterable<Direction> {
     public static final
     MovePattern NO_DIRECTIONS =
         new MovePattern(
-            List.of()
+            Collections.emptyList()
         );
 
-    /** Only Down and Up Directions*/
+    /** Only Down, and Up Directions*/
     public static final
     MovePattern DOWN_UP_DIRECTIONS =
         new MovePattern(
@@ -48,7 +31,7 @@ public final class MovePattern implements Iterable<Direction> {
             )
         );
 
-    /** Only Right and Left Directions */
+    /** Only Right, and Left Directions */
     public static final
     MovePattern RIGHT_LEFT_DIRECTIONS =
         new MovePattern(
@@ -58,7 +41,7 @@ public final class MovePattern implements Iterable<Direction> {
             )
         );
 
-    /** Right, Down, Left, and Up */
+    /** Right, Down, Left, and Up Directions */
     public static final
     MovePattern ALL_DIRECTIONS =
         new MovePattern(
@@ -69,8 +52,6 @@ public final class MovePattern implements Iterable<Direction> {
                 Direction.U
             )
         );
-
-
 
     // -------------------------------------------------------------------------
     // Two Steps in every possible (and useful) combination of Directions.
@@ -113,58 +94,6 @@ public final class MovePattern implements Iterable<Direction> {
      */
     public boolean contains(Direction direction) {
         return this.movePattern.contains(direction);
-    }
-
-    // -------------------------------------------------------------------------
-    // EQUALS AND HASH-CODE
-    // -------------------------------------------------------------------------
-
-    /* (non-Javadoc)
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-
-        if ((obj == null) || (getClass() != obj.getClass())) {
-            return false;
-        }
-
-        // Object must be MovePattern at this point
-        final MovePattern other = (MovePattern) obj;
-
-        return (movePattern == other.movePattern)
-                || ((movePattern != null)
-                    && movePattern.equals(other.movePattern));
-    }
-
-    /* (non-Javadoc)
-     * @see java.lang.Object#hashCode()
-     */
-    @Override
-    public int hashCode() {
-        final int PRIME = 31;
-        int hash = 7;
-
-        hash = PRIME * hash + ((movePattern == null) ? 0 : movePattern.hashCode());
-
-        return hash;
-    }
-
-    // -------------------------------------------------------------------------
-    // TO STRING
-    // -------------------------------------------------------------------------
-
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString() {
-        return """
-                MovePattern [movePattern=%s]\
-                """.formatted(movePattern);
     }
 
     // -------------------------------------------------------------------------

@@ -8,47 +8,17 @@ import field.MovePattern;
 /**
  * Immutable class representing a Block on a 2D-Plane.
  */
-public final class Block implements Comparable<Block> {
-
-    // -------------------------------------------------------------------------
-    // ATTRIBUTES
-    // -------------------------------------------------------------------------
-
-    /** The name of this Block. */
-    private final String name;
-
-    /** The Color of this Block. */
-    private final Color color;
-
-    /** Indicates if this Block is a MainBlock. */
-    private final boolean isMainBlock;
-
-    /** Defines how this Block can move in a 2D-plane. */
-    private final MovePattern movePattern;
-
-    /** A List of all Positions this Block has. */
-    private final PositionList positionList;
+public record Block(
+    String name,
+    Color color,
+    boolean isMainBlock,
+    MovePattern movePattern,
+    PositionList positions
+) implements Comparable<Block> {
 
     // -------------------------------------------------------------------------
     // CONSTRUCTORS
     // -------------------------------------------------------------------------
-
-    /**
-     * Private catch all class constructor for use in other public constructors.
-     *
-     * @param name          the Block name
-     * @param color         the Block color
-     * @param isMainBlock   the Main Block flag
-     * @param movePattern   the Move Pattern
-     * @param positionList  the Position List
-     */
-    private Block(String name, Color color, boolean isMainBlock, MovePattern movePattern, PositionList positionList) {
-        this.name         = name;
-        this.color        = color;
-        this.isMainBlock  = isMainBlock;
-        this.movePattern  = movePattern;
-        this.positionList = positionList;
-    }
 
     /**
      * Class constructor from a BlockInfo record.
@@ -76,58 +46,8 @@ public final class Block implements Comparable<Block> {
             block.color,
             block.isMainBlock,
             block.movePattern,
-            new PositionList(block.positionList)
+            new PositionList(block.positions)
         );
-    }
-
-    // -------------------------------------------------------------------------
-    // GETTERS
-    // -------------------------------------------------------------------------
-
-    /**
-     * Returns the boolean isMainBlock field of this Block.
-     *
-     * @return  {@code true} if this Block is a MainBlock, {@code false}
-     *          otherwise.
-     */
-    public boolean isMainBlock() {
-        return isMainBlock;
-    }
-
-    /**
-     * Returns a String with the name of this Block.
-     *
-     * @return  A String with this BlockName
-     */
-    public String name() {
-        return name;
-    }
-
-    /**
-     * Returns the Color of this Block.
-     *
-     * @return  The Color
-     */
-    public Color color() {
-        return color;
-    }
-
-    /**
-     * Returns a new PositionList equal to the PositionList of this Block.
-     *
-     * @return  The PositionList of this Block
-     */
-    public PositionList positions() {
-        return new PositionList(positionList);
-    }
-
-    /**
-     * Returns the MovePattern of this Block.
-     *
-     * @return  The MovePattern
-     */
-    public MovePattern movePattern() {
-        return movePattern;
     }
 
     // -------------------------------------------------------------------------
@@ -142,7 +62,7 @@ public final class Block implements Comparable<Block> {
      *          Position, {@code false} otherwise.
      */
     public boolean contains(Position position) {
-        return positionList.contains(position);
+        return positions.contains(position);
     }
 
     /**
@@ -156,7 +76,7 @@ public final class Block implements Comparable<Block> {
             return;
         }
 
-        positionList.moveTowards(direction);
+        positions.moveTowards(direction);
 
         return;
     }
@@ -168,7 +88,7 @@ public final class Block implements Comparable<Block> {
     /* (non-Javadoc)
      * @see java.lang.Object#equals(java.lang.Object)
      *
-     * This method ignores the String BlockName and the Color.
+     * This method ignores the String name and the Color.
      */
     @Override
     public boolean equals(Object obj) {
@@ -184,9 +104,9 @@ public final class Block implements Comparable<Block> {
         final Block other = (Block) obj;
 
         return (isMainBlock == other.isMainBlock)
-            && ((positionList == other.positionList)
-                || ((positionList != null)
-                    && positionList.equals(other.positionList)))
+            && ((positions == other.positions)
+                || ((positions != null)
+                    && positions.equals(other.positions)))
             && ((movePattern == other.movePattern)
                 || ((movePattern != null)
                     && movePattern.equals(other.movePattern)));
@@ -195,7 +115,7 @@ public final class Block implements Comparable<Block> {
     /* (non-Javadoc)
      * @see java.lang.Object#hashCode()
      *
-     * This method ignores the String BlockName and the Color.
+     * This method ignores the String name and the Color.
      */
     @Override
     public int hashCode() {
@@ -203,36 +123,10 @@ public final class Block implements Comparable<Block> {
         int hash = 7;
 
         hash = PRIME * hash + Boolean.hashCode(isMainBlock);
-        hash = PRIME * hash + ((positionList == null) ? 0 : positionList.hashCode());
-        hash = PRIME * hash + (( movePattern == null) ? 0 :  movePattern.hashCode());
+        hash = PRIME * hash + ((  positions == null) ? 0 :   positions.hashCode());
+        hash = PRIME * hash + ((movePattern == null) ? 0 : movePattern.hashCode());
 
         return hash;
-    }
-
-    // -------------------------------------------------------------------------
-    // TO STRING
-    // -------------------------------------------------------------------------
-
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString() {
-        return """
-                Block [\
-                name=%s, \
-                color=%s, \
-                isMainBlock=%s, \
-                movePattern=%s, \
-                positionList=%s\
-                ]\
-                """.formatted(
-                    name,
-                    color,
-                    isMainBlock,
-                    movePattern,
-                    positionList
-                );
     }
 
     // -------------------------------------------------------------------------
@@ -247,7 +141,7 @@ public final class Block implements Comparable<Block> {
     public int compareTo(Block other) {
         return (isMainBlock != other.isMainBlock)
                 ? -Boolean.compare(isMainBlock, other.isMainBlock)
-                : positionList.compareTo(other.positionList);
+                : positions.compareTo(other.positions);
     }
 
 }
